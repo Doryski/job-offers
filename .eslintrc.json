@@ -1,0 +1,50 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 2021,
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+    "extends": [
+		"airbnb", 
+		"airbnb-typescript",
+		"airbnb/hooks",
+		"plugin:@typescript-eslint",
+		"plugin:jest",
+		"prettier", 
+		"prettier/react",
+		"prettier/@typescript-eslint",
+		"plugin:prettier"
+	],
+    "plugins": [
+		"prettier", 
+		"react", 
+		"@typescript-eslint", 
+		"jest"
+	],
+    "globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+    "rules": {
+        "prettier/prettier": [
+			"warn", 
+			{ 
+				"endOfLine": "auto" 
+				}
+			],
+        "no-unused-vars": "error",
+        "no-console": "warn",
+        "func-names": "warn",
+        "object-shorthand": "warn"
+    }
+}

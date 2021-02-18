@@ -1,0 +1,32 @@
+export default [
+	{
+		id: 'employer1',
+		email: 'perfectCompany@blax.com',
+		password: 'okayFine12',
+		companyName: 'perfect company',
+		companySize: 20,
+		street: 'Kreskowa 6',
+		city: 'Warszawa',
+		image: 'https://source.unsplash.com/700x500/?logo',
+	},
+	{
+		id: 'employer2',
+		email: 'someCompany@noice.com',
+		password: 'coolstuff52',
+		companyName: 'some company',
+		companySize: 50,
+		street: 'Chałupy 9',
+		city: 'Poznań',
+		image: 'https://source.unsplash.com/701x499/?logo',
+	},
+	{
+		id: 'employer1',
+		email: 'funCompany@kay.com',
+		password: 'superCool89',
+		companyName: 'fun company',
+		companySize: 500,
+		street: 'Wiśniowa 12',
+		city: 'Wrocław',
+		image: 'https://source.unsplash.com/702x501/?logo',
+	},
+]
