@@ -7,29 +7,13 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/client'
-import { DOMAIN } from '../../../helpers/utils'
 
 // const Login = ({ csrfToken }) => {
 const Login = () => {
 	const router = useRouter()
 	const [session] = useSession()
-
-	useEffect(() => {
-		if (session) {
-			router.push('/')
-		}
-	}, [session])
-
-	if (session) {
-		return (
-			<div>
-				{`You are getting redirected to homepage, 
-				as you are already signed in...`}
-			</div>
-		)
-	}
-
 	const { register, handleSubmit, errors, reset, setError } = useForm()
+
 	// return error message if wrong credentials were passed
 	useEffect(() => {
 		if (router.query.error) {
@@ -50,12 +34,21 @@ const Login = () => {
 		console.log('data:', data)
 		signIn('credentials', {
 			...data,
-			// page to redirect after login
-			callbackUrl: DOMAIN + '/user/profile',
 		})
 		reset()
+		router.push('/')
 		return
 	})
+
+	if (session) {
+		router.push('/')
+		return (
+			<div>
+				{`You are getting redirected to homepage, 
+				as you are already signed in...`}
+			</div>
+		)
+	}
 
 	return (
 		<FormWrapper>

@@ -37,9 +37,8 @@ const options = {
 					if (user.id) return Promise.resolve({ ...user, email })
 				} catch (err) {
 					console.log(err)
-					const errorMessage = err.response.data.message
 					// Redirecting to the login page with error messsage in the URL
-					throw new Error(errorMessage + '&email=' + email)
+					throw '/auth/login'
 				}
 			},
 		}),
@@ -60,13 +59,13 @@ const options = {
 	},
 	callbacks: {
 		signIn: async (user, account, profile) => {
-			console.log('SIGNIN Callback: ')
-			console.log('user', user)
-			console.log('account', account)
-			console.log('profile', profile)
+			// console.log('SIGNIN Callback: ')
+			// console.log('user', user)
+			// console.log('account', account)
+			// console.log('profile', profile)
 			if (user.id) return true
 			console.log('user does not exist')
-			return '/'
+			return '/auth/login'
 		},
 
 		// redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
@@ -78,10 +77,10 @@ const options = {
 			session.user.id = token.userId
 			session.user.email = token.email
 
-			console.log('encoded JWT:', encodedToken)
-			console.log('SESSION Callback:')
-			console.log('token', token)
-			console.log('session', session)
+			// console.log('encoded JWT:', encodedToken)
+			// console.log('SESSION Callback:')
+			// console.log('token', token)
+			// console.log('session', session)
 
 			// return session
 			return Promise.resolve(session)
@@ -95,9 +94,9 @@ const options = {
 				token.email = user.email
 			}
 
-			console.log('JWT Callback:')
-			console.log('user', user)
-			console.log('token', token)
+			// console.log('JWT Callback:')
+			// console.log('user', user)
+			// console.log('token', token)
 
 			// return token
 			return Promise.resolve(token)
@@ -105,7 +104,7 @@ const options = {
 	},
 	pages: {
 		signIn: '/auth/login',
-		newUser: '/',
+		newUser: '/user/profile',
 		error: '/auth/login',
 	},
 	jwt: {
