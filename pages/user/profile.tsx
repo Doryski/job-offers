@@ -26,7 +26,9 @@ const Profile = ({ profile }: { profile: EmployerType }) => {
 	if (loading) return <div>Loading page...</div>
 	console.log('profile', profile)
 
-	const buyPremium = () => {
+	const buyPremium = async () => {
+		const authorized = await fetch(getDomain() + '/api/payu/authorize')
+		console.log(authorized)
 		return
 	}
 	useEffect(() => {
