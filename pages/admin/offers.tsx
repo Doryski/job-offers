@@ -11,7 +11,7 @@ import { getSession } from 'next-auth/client'
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(process.env.NEXTAUTH_URL + '/api/admin/offers')
+	const res = await fetch('http://localhost:3000/api/admin/offers')
 	const { data }: { data: OfferType[] } = await res.json()
 	const fixed = (data || []).map((el) => ({
 		...el,

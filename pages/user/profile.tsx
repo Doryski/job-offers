@@ -9,9 +9,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	console.log('session serverSideProps', session)
 	if (!session) return { notFound: true }
-	const res = await fetch(
-		process.env.NEXTAUTH_URL + '/api/user/' + session.user.id
-	)
+	const res = await fetch('http://localhost:3000/api/user/' + session.user.id)
 	const { data }: { data: EmployerType } = await res.json()
 	return {
 		props: {

@@ -9,7 +9,7 @@ import { getSession } from 'next-auth/client'
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(process.env.NEXTAUTH_URL + '/api/admin/applicants')
+	const res = await fetch('http://localhost:3000/api/admin/applicants')
 	const { data }: { data: ApplicantType[] } = await res.json()
 	console.log('/api/admin/applicants data:', data)
 	return {
