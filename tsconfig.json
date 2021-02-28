@@ -18,7 +18,7 @@
 	"include": [
 		"next-env.d.ts",
 		"next-auth.d.ts",
-		"styled-components.d.ts",
+		"styled.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
 		"types.ts"

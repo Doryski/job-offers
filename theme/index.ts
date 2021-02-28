@@ -106,7 +106,6 @@ export const textColors = {
 	salary: 'salary',
 	span: 'span',
 	white: 'white',
-	admin: 'admin',
 }
 
 export const darkMode = { ...theme, ...darkModeProps }

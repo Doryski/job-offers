@@ -1,7 +1,7 @@
 import 'styled-components'
 
 declare module 'styled-components' {
-	export interface DefaultTheme extends DefaultTheme {
+	export interface DefaultTheme {
 		colors: {
 			text: string
 			title: string
@@ -20,7 +20,6 @@ declare module 'styled-components' {
 			white: string
 			shadow: string
 			admin: string
-			opacityAdmin: string
 		}
 		techColors: {
 			disabled: string
