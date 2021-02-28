@@ -1,17 +1,18 @@
 import { GetServerSideProps } from 'next'
 import { getSession, useSession } from 'next-auth/client'
+import { Router, useRouter } from 'next/router'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import ActionPanel from '../../components/ActionPanel'
 import Header from '../../components/Header'
+import { DOMAIN } from '../../helpers/utils'
 import { EmployerType } from '../../types'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	console.log('session serverSideProps', session)
 	if (!session) return { notFound: true }
-	const res = await fetch(
-		process.env.VERCEL_URL + '/api/user/' + session.user.id
-	)
+	const res = await fetch(DOMAIN + '/api/user/' + session.user.id)
 	const { data }: { data: EmployerType } = await res.json()
 	return {
 		props: {
@@ -21,6 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 const Profile = ({ profile }: { profile: EmployerType }) => {
+	const router = useRouter()
 	const [session, loading] = useSession()
 	if (loading) return <div>Loading page...</div>
 	console.log('profile', profile)
@@ -28,14 +30,19 @@ const Profile = ({ profile }: { profile: EmployerType }) => {
 	const buyPremium = () => {
 		return
 	}
+	useEffect(() => {
+		if (!session) {
+			router.push('/auth/login')
+		}
+	}, [session])
 
 	return (
 		<PageWrapper>
 			<Header />
 			<SubContainer>
 				<div>
-					Profile page of user {session.user.email} <br />
-					{session.user.admin && <span>Welcome Admin!</span>}
+					Profile page of user {session?.user.email} <br />
+					{session?.user.admin && <span>Welcome Admin!</span>}
 					<AccountData>
 						{Object.entries(profile).map(([key, value]) => (
 							<>

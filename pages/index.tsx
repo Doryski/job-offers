@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import ListHeader from '../components/OfferList/ListHeader'
 import Layout from '../components/Layout'
 import { OfferPageDataType } from '../types'
@@ -10,13 +10,26 @@ import OfferTechStack from '../components/OfferPage/OfferTechStack'
 import OfferDescription from '../components/OfferPage/OfferDescription'
 import OfferApplySection from '../components/OfferPage/OfferApplySection'
 import { useState } from 'react'
-import { DATE_FORMAT } from '../helpers/utils'
+import { DATE_FORMAT, DOMAIN } from '../helpers/utils'
 import moment from 'moment'
 import Filters from '../components/Filters'
+import { db } from '../mysqlSetup'
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const res = await fetch(process.env.VERCEL_URL + '/api/offers/employers')
-	const { data }: { data: OfferPageDataType[] } = await res.json()
+export const getStaticProps: GetStaticProps = async () => {
+	// const res = await fetch(DOMAIN + '/api/offers/employers')
+	// const { data }: { data: OfferPageDataType[] } = await res.json()
+	const sqlGet = `SELECT offers.uuid AS offerId, offers.title,
+    offers.tech, offers.empType, offers.expLvl,
+    offers.salaryFrom, offers.salaryTo, 
+    offers.technology, offers.description, offers.dateAdded, 
+    employers.companyName, employers.companySize,
+    employers.street, employers.city,
+    employers.uuid AS employerId 
+    FROM (offers
+    INNER JOIN employers ON offers.employerId = employers.uuid)`
+
+	const [data] = await db.promise().query(sqlGet)
+	// @ts-ignore
 	const fixed = (data || []).map((el) => ({
 		...el,
 		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),

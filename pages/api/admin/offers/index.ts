@@ -11,7 +11,6 @@ export default async function ApiMyOfferId(
 			errorMessage: 'Only GET method is available',
 		})
 	}
-	console.log('RAN')
 	const sqlGet = `SELECT * FROM offers`
 
 	const [data] = await db.promise().query(sqlGet)

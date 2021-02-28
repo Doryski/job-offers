@@ -30,14 +30,13 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 		if (!result[0]?.password) return res.status(400).json({ errorMessage })
 
 		const { uuid: userId, password, isAdmin } = result[0]
-		console.log(result[0])
+
 		compare(req.body.password, password, (err, isPasswordMatching) => {
 			if (err) return console.log(err)
-			console.log('is password the same', isPasswordMatching)
+			console.log('Is password the same: ', isPasswordMatching)
 			if (isPasswordMatching) {
 				console.log(`User ${req.body.email} logged in`)
-				console.log('admin: ', isAdmin)
-				console.log('is admin?: ', isAdmin === 1)
+				console.log('Is user admin: ', isAdmin === 1)
 				return res.status(200).json({
 					id: userId,
 					admin: isAdmin === 1,

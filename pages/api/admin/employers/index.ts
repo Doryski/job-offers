@@ -11,7 +11,6 @@ export default async function ApiAdminApplicants(
 			errorMessage: 'Only GET method is available',
 		})
 	}
-	console.log('RAN')
 	const sqlGet = `SELECT id, uuid, email, companyName, companySize,
 	street, city, isAdmin, accountType
 	FROM employers`

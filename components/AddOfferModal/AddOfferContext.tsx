@@ -5,6 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import moment from 'moment'
 import { OfferType } from '../../types'
 import Center from '../shared/Center'
+import CloseButton from '../shared/CloseButton'
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>
@@ -52,7 +53,7 @@ const AddOfferContextProvider = ({
 
 	const onSubmit = handleSubmit(async (data: FormData) => {
 		setLoading(true)
-		console.log('submitted offer: ', data)
+		console.log('submitted new offer: ', data)
 		let technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
 			technology.push({
@@ -84,6 +85,11 @@ const AddOfferContextProvider = ({
 		setSuccess(true)
 		return
 	})
+	const closeModal = () => {
+		setSuccess(false)
+		setError(false)
+		close()
+	}
 
 	return (
 		<AddOfferContext.Provider
@@ -96,14 +102,14 @@ const AddOfferContextProvider = ({
 				<Dialog
 					maxWidth='sm'
 					open={isDialogOpen}
-					onClose={() => {
-						setSuccess(false)
-						setError(false)
-						close()
-					}}
+					onClose={closeModal}
 					fullWidth
 					fullScreen={fullScreen}>
 					<Center height='50vh'>
+						<CloseButton
+							handleClick={closeModal}
+							absolute={{ right: '5px', top: '5px' }}
+						/>
 						{success && 'Offer was added successfully!'}
 						{error && "Couldn't add offer. Please try again"}
 					</Center>

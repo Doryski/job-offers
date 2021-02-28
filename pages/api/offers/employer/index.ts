@@ -8,7 +8,6 @@ export default async function ApiMyOffers(
 	res: NextApiResponse
 ) {
 	const session = await getSession({ req })
-	console.log(session)
 	if (!session)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 
@@ -20,17 +19,17 @@ export default async function ApiMyOffers(
 	}
 
 	// get offers of current user only
-	const sqlGet = `SELECT offers.uuid AS offerId, offers.title, 
-    offers.empType, offers.expLvl,
-    offers.salaryFrom, offers.salaryTo, 
-    offers.technology, offers.description, offers.dateAdded, 
-    FROM (offers
-    INNER JOIN employers ON offers.employerId = employers.uuid)
-    WHERE offers.employerId = ?
+	const sqlGet = `
+	SELECT offers.uuid AS offerId, offers.title, offers.empType, 
+	offers.expLvl, offers.salaryFrom, offers.salaryTo, 
+    offers.technology, offers.description, offers.dateAdded
+    FROM (offers INNER JOIN employers ON offers.employerId = employers.uuid)
+    WHERE offers.employerId = ?;
     `
+
 	db.query(sqlGet, [session.user.id], function (err, data) {
 		if (err) return res.json(err)
-		console.log('api/offers/myoffers', data)
+		console.log('api/offers/employer', data)
 		res.status(200).json({ method: req.method, data })
 	})
 }

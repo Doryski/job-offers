@@ -65,7 +65,7 @@ export default async function signup(
                 `
 			db.query(sql, [values], function (err, result) {
 				if (err) return console.log(err)
-				console.log('Added new employer')
+				console.log('New user was created:')
 				console.log('post api/auth/signup', result)
 				res.status(200).json({
 					method: req.method,

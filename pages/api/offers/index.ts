@@ -10,7 +10,6 @@ export default async function ApiOffers(
 	res: NextApiResponse
 ) {
 	const session = await getSession({ req })
-	console.log(session)
 	if (!session)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 

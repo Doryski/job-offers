@@ -1,3 +1,7 @@
+export const DOMAIN =
+	process.env.NODE_ENV === 'production'
+		? process.env.VERCEL_URL
+		: process.env.NEXTAUTH_URL
 export const DATE_FORMAT = 'DD.MM.YYYY'
 export const FIELD_REQUIRED_ERR = ' is a required field.'
 export const VAL_TOO_BIG_ERR = 'Value is too big.'

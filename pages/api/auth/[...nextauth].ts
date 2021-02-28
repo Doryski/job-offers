@@ -4,6 +4,7 @@ import NextAuth from 'next-auth'
 import { Session } from 'next-auth/client'
 import Providers from 'next-auth/providers'
 import login from '../../../helpers/login'
+import { DOMAIN } from '../../../helpers/utils'
 
 const options = {
 	providers: [
@@ -22,23 +23,20 @@ const options = {
 				password: { label: 'Password', type: 'password' },
 			},
 			authorize: async (credentials) => {
-				// console.log('credentials:', credentials)
+				console.log('credentials:', credentials)
 				const { email, password } = credentials
-				// console.log('email', email)
+				console.log(DOMAIN + '/api/auth/verification')
 				try {
 					// API call associated with authentification
 					// look up the user from the credentials supplied
-					const user = await login(
-						process.env.VERCEL_URL + '/api/auth/verification',
-						{
-							email,
-							password,
-						}
-					)
+					const user = await login(DOMAIN + '/api/auth/verification', {
+						email,
+						password,
+					})
 					// Any object returned will be saved in `user` property of the JWT
 					if (user.id) return Promise.resolve({ ...user, email })
 				} catch (err) {
-					// console.log(err.response.data.message)
+					console.log(err)
 					const errorMessage = err.response.data.message
 					// Redirecting to the login page with error messsage in the URL
 					throw new Error(errorMessage + '&email=' + email)
@@ -46,7 +44,7 @@ const options = {
 			},
 		}),
 	],
-	site: process.env.VERCEL_URL,
+	site: DOMAIN,
 	session: {
 		// Use JSON Web Tokens for session instead of database sessions.
 		// This option can be used with or without a database for users/accounts.
@@ -62,12 +60,12 @@ const options = {
 	},
 	callbacks: {
 		signIn: async (user, account, profile) => {
-			// console.log('SIGNIN Callback: ')
-			// console.log('user', user)
-			// console.log('account', account)
-			// console.log('profile', profile)
+			console.log('SIGNIN Callback: ')
+			console.log('user', user)
+			console.log('account', account)
+			console.log('profile', profile)
 			if (user.id) return true
-			// console.log('user does not exist')
+			console.log('user does not exist')
 			return '/'
 		},
 
@@ -75,28 +73,32 @@ const options = {
 		// session: async (session, user) => { return Promise.resolve(session) },
 		session: async (session, token) => {
 			const encodedToken = sign(token, process.env.JWT_SECRET)
-			// console.log('encoded JWT:', encodedToken)
-			// console.log('SESSION Callback:')
-			// console.log('token', token)
 			session.accessToken = encodedToken
 			session.user.admin = token.admin
 			session.user.id = token.userId
 			session.user.email = token.email
-			// console.log('session', session)
+
+			console.log('encoded JWT:', encodedToken)
+			console.log('SESSION Callback:')
+			console.log('token', token)
+			console.log('session', session)
+
 			// return session
 			return Promise.resolve(session)
 		},
 		// jwt: async (token, user, account, profile, isNewUser) => { return Promise.resolve(token) },
 		jwt: async (token, user) => {
-			// console.log('JWT Callback:')
-			// console.log('user', user)
 			if (user) {
 				token.accessToken = user.token
 				token.admin = user.admin
 				token.userId = user.id
 				token.email = user.email
 			}
-			// console.log('token', token)
+
+			console.log('JWT Callback:')
+			console.log('user', user)
+			console.log('token', token)
+
 			// return token
 			return Promise.resolve(token)
 		},

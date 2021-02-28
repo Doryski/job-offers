@@ -52,6 +52,7 @@ const Signup = () => {
             process your data in order to create account.`)
 			return
 		}
+		console.log(data)
 		setProcessDataError('')
 		let formData: {
 			[x: string]: any

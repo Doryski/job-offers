@@ -5,11 +5,12 @@ import AdminLayout from '../../components/AdminLayout'
 import useRefreshPage from '../../helpers/useRefreshPage'
 import { useRouter } from 'next/router'
 import { getSession } from 'next-auth/client'
+import { DOMAIN } from '../../helpers/utils'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(process.env.VERCEL_URL + '//api/admin/employers')
+	const res = await fetch(DOMAIN + '/api/admin/employers')
 	const { data }: { data: EmployerType[] } = await res.json()
 	console.log('/api/admin/employers data:', data)
 	return {

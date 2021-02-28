@@ -45,10 +45,10 @@ const Login = () => {
 	}, [])
 
 	const onSubmit = handleSubmit(async (data) => {
-		const { email, password } = data
+		console.log('login data:', data)
+		console.log('data:', data)
 		signIn('credentials', {
-			email,
-			password,
+			...data,
 			// page to redirect after login
 			// callbackUrl: window.location.origin,
 			callbackUrl: window.location.origin + '/user/profile',

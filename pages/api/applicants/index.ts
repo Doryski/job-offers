@@ -44,8 +44,8 @@ export default async function ApiApplicants(
 		]
 		db.query(sql, [values], function (err, result) {
 			if (err) return res.json(err)
-			console.log('1 record inserted')
-			console.log('post result api/applicants', result)
+			console.log('Someone just applied:')
+			console.log('post api/applicants', result)
 			res.status(200).json({ method: req.method, data: req.body })
 		})
 		return
