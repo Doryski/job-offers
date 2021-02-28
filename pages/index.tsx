@@ -15,7 +15,7 @@ import moment from 'moment'
 import Filters from '../components/Filters'
 
 export const getStaticProps: GetStaticProps = async () => {
-	const res = await fetch('http://localhost:3000/api/offers/employers')
+	const res = await fetch(process.env.VERCEL_URL + '/api/offers/employers')
 	const { data }: { data: OfferPageDataType[] } = await res.json()
 	const fixed = (data || []).map((el) => ({
 		...el,

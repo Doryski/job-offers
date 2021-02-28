@@ -9,7 +9,7 @@ import { getSession } from 'next-auth/client'
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch('http://localhost:3000//api/admin/employers')
+	const res = await fetch(process.env.VERCEL_URL + '//api/admin/employers')
 	const { data }: { data: EmployerType[] } = await res.json()
 	console.log('/api/admin/employers data:', data)
 	return {

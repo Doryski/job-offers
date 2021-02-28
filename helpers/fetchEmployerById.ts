@@ -6,7 +6,7 @@ export default function fetchEmployerById(id: string) {
 
 	useEffect(() => {
 		async function getEmployer() {
-			const res = await fetch('http://localhost:3000/api/employers' + id)
+			const res = await fetch(process.env.VERCEL_URL + '/api/employers' + id)
 			const data: EmployerType = await res.json()
 			setEmployer(data)
 		}
