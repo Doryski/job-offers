@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import ListHeader from '../components/OfferList/ListHeader'
 import Layout from '../components/Layout'
 import { OfferPageDataType } from '../types'
@@ -14,7 +14,7 @@ import { DATE_FORMAT } from '../helpers/utils'
 import moment from 'moment'
 import Filters from '../components/Filters'
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const res = await fetch(process.env.VERCEL_URL + '/api/offers/employers')
 	const { data }: { data: OfferPageDataType[] } = await res.json()
 	const fixed = (data || []).map((el) => ({
