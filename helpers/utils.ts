@@ -1,6 +1,6 @@
 export const DOMAIN =
 	process.env.NODE_ENV === 'production'
-		? process.env.VERCEL_URL
+		? process.env.NEXT_PUBLIC_VERCEL_URL
 		: process.env.NEXTAUTH_URL
 export const DATE_FORMAT = 'DD.MM.YYYY'
 export const FIELD_REQUIRED_ERR = ' is a required field.'
