@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/client'
+import { DOMAIN } from '../../../helpers/utils'
 
 // const Login = ({ csrfToken }) => {
 const Login = () => {
@@ -50,8 +51,7 @@ const Login = () => {
 		signIn('credentials', {
 			...data,
 			// page to redirect after login
-			// callbackUrl: window.location.origin,
-			callbackUrl: window.location.origin + '/user/profile',
+			callbackUrl: DOMAIN + '/user/profile',
 		})
 		reset()
 		return
