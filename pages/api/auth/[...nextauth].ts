@@ -67,8 +67,10 @@ const options = {
 			console.log('user does not exist')
 			return '/auth/login'
 		},
-
 		// redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
+		redirect: async (url, baseUrl) => {
+			return url.startsWith(baseUrl) ? url : baseUrl
+		},
 		// session: async (session, user) => { return Promise.resolve(session) },
 		session: async (session, token) => {
 			const encodedToken = sign(token, process.env.JWT_SECRET)
