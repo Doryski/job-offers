@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	if (!session?.user.admin) return { notFound: true }
 	const res = await fetch(getDomain() + '/api/admin/applicants')
 	const { data }: { data: ApplicantType[] } = await res.json()
-	console.log('/api/admin/applicants data:', data)
+	console.log('get /api/admin/applicants: ', data)
 	return {
 		props: {
 			data: data || [],

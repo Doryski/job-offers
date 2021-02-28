@@ -4,35 +4,40 @@ import { NAV_LINKS } from '../../helpers/utils'
 import theme, { textColors } from '../../theme'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/client'
 
 const Navigation = () => {
 	const router = useRouter()
 	const isActive = (linkPath: string, currentPath: string) =>
 		linkPath === currentPath
+	const [session] = useSession()
+
 	return (
 		<NavList>
-			<Link href={'/admin'}>
-				<a>
-					<NavItem>
-						<Typography
-							fWeight={theme.fontWeight[600]}
-							color={
-								isActive('/admin', router.pathname)
-									? textColors.pink
-									: textColors.span
-							}
-							margin='0 0.375em'
-							minWidth='64px'
-							hoverColor={
-								isActive('/admin', router.pathname)
-									? 'none'
-									: textColors.lightPink
-							}>
-							Admin panel
-						</Typography>
-					</NavItem>
-				</a>
-			</Link>
+			{session?.user.admin && (
+				<Link href={'/admin'}>
+					<a>
+						<NavItem>
+							<Typography
+								fWeight={theme.fontWeight[600]}
+								color={
+									isActive('/admin', router.pathname)
+										? textColors.pink
+										: textColors.span
+								}
+								margin='0 0.375em'
+								minWidth='64px'
+								hoverColor={
+									isActive('/admin', router.pathname)
+										? 'none'
+										: textColors.lightPink
+								}>
+								Admin panel
+							</Typography>
+						</NavItem>
+					</a>
+				</Link>
+			)}
 			{NAV_LINKS.map(({ title, path }) => {
 				return (
 					<Link href={path} key={title}>

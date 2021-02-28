@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import ListHeader from '../components/OfferList/ListHeader'
 import Layout from '../components/Layout'
 import { OfferPageDataType } from '../types'
@@ -9,30 +9,16 @@ import OfferHeader from '../components/OfferPage/OfferHeader'
 import OfferTechStack from '../components/OfferPage/OfferTechStack'
 import OfferDescription from '../components/OfferPage/OfferDescription'
 import OfferApplySection from '../components/OfferPage/OfferApplySection'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { DATE_FORMAT } from '../helpers/utils'
 import moment from 'moment'
 import Filters from '../components/Filters'
-import { db } from '../mysqlSetup'
-import { DATE_FORMAT } from '../helpers/utils'
 import getDomain from '../helpers/getDomain'
-import useRefreshPage from '../helpers/useRefreshPage'
-import { useRouter } from 'next/router'
 
-export const getStaticProps: GetStaticProps = async () => {
-	// const res = await fetch(getDomain() + '/api/offers/employers')
-	// const { data }: { data: OfferPageDataType[] } = await res.json()
-	const sqlGet = `SELECT offers.uuid AS offerId, offers.title,
-    offers.tech, offers.empType, offers.expLvl,
-    offers.salaryFrom, offers.salaryTo, 
-    offers.technology, offers.description, offers.dateAdded, 
-    employers.companyName, employers.companySize,
-    employers.street, employers.city,
-    employers.uuid AS employerId 
-    FROM (offers
-    INNER JOIN employers ON offers.employerId = employers.uuid)`
-
-	const [data] = await db.promise().query(sqlGet)
-	// @ts-ignore
+export const getServerSideProps: GetServerSideProps = async () => {
+	const res = await fetch(getDomain() + '/api/offers/employers')
+	const { data }: { data: OfferPageDataType[] } = await res.json()
+	console.log('get api/offers/employers: ', data)
 	const fixed = (data || []).map((el) => ({
 		...el,
 		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
@@ -46,12 +32,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const OfferList = ({ data }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
-	const router = useRouter()
-	const { refresh } = useRefreshPage(data, router)
-
-	useEffect(() => {
-		refresh()
-	}, [])
 
 	return (
 		<Layout>
