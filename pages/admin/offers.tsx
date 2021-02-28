@@ -1,34 +1,57 @@
-import OfferType from '../../types/OfferType';
-import { HOST_PATH } from '../../helpers/utils';
-import { GetStaticProps } from 'next'
+import { OfferType } from '../../types'
+import { DATE_FORMAT } from '../../helpers/utils'
+import { GetServerSideProps } from 'next'
+import AdminTable from '../../components/AdminTable'
+import AdminLayout from '../../components/AdminLayout'
+import useRefreshPage from '../../helpers/useRefreshPage'
+import { useRouter } from 'next/router'
+import moment from 'moment'
+import { getSession } from 'next-auth/client'
 
-
-export const getStaticProps: GetStaticProps = async () => {
-	const res = await fetch(HOST_PATH + '/api/offers', {
-		// headers: {
-		// 	'Content-Type': 'application/json'
-		// }
-	})
-	console.log(res)
-	// if (res.status === 500) { return console.log(res) }
-	const data = res.status === 200 ? await res.json() : 'Error'
-
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session?.user.admin) return { notFound: true }
+	const res = await fetch(process.env.NEXTAUTH_URL + '/api/admin/offers')
+	const { data }: { data: OfferType[] } = await res.json()
+	const fixed = (data || []).map((el) => ({
+		...el,
+		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
+	}))
 	return {
 		props: {
-			offers: data,
+			data: fixed,
 		},
 	}
 }
 
-const OfferList = ({ offers }) => {
-	return (<div>{JSON.stringify(offers)}</div>
+const OfferList = ({ data }: { data: OfferType[] }) => {
+	// TODO: Add multichoice select menu
+	// const headers = Object.keys(data[0])
+	const router = useRouter()
+	const { isRefreshing, refresh } = useRefreshPage(data, router)
+
+	const deleteRecord = async (id: string) => {
+		async function delOffer(url: string) {
+			const res = await fetch(url, {
+				method: 'DELETE',
+			})
+			return res.json()
+		}
+		await delOffer('/api/admin/offers/' + id)
+		refresh()
+	}
+	const headers = ['uuid', 'title', 'employerId', 'dateAdded']
+
+	return (
+		<AdminLayout>
+			<AdminTable
+				data={data}
+				headers={headers}
+				uniqueKey={'uuid'}
+				deleteRecord={deleteRecord}
+			/>
+		</AdminLayout>
 	)
 }
-// 'id','name','surname''email'
-// <ul>{offers.map((offer: OfferType) => {
-// 	return (
-// 		<li>{JSON.stringify(offer, null, 2)}</li>
-// 	)
-// })}</ul>
 
 export default OfferList

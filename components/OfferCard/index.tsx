@@ -4,27 +4,30 @@ import SmallLabel from '../shared/SmallLabel'
 import CustomLabel from '../shared/CustomLabel'
 import dateDiff from '../../helpers/dateDiff'
 import formatThous from '../../helpers/formatThous'
-import stringFormat from '../../helpers/stringFormat'
-import OfferType from '../../types/OfferType'
 import theme, { textColors } from '../../theme'
 import useDeviceDetect from '../../helpers/useDeviceDetect'
 import Link from 'next/link'
 import moment from 'moment'
+import { OfferPageDataType } from '../../types'
 
-const OfferCard = ({ offer, index }: { offer: OfferType, index: number }) => {
+const OfferCard = ({
+	offerInfo,
+	index,
+	setCurrentOffer,
+}: {
+	offerInfo: OfferPageDataType
+	index: number
+	setCurrentOffer
+}) => {
 	const {
-		id,
-		tech,
-		image,
-		offerTitle,
+		offerId,
+		title,
 		salaryFrom,
 		salaryTo,
 		dateAdded,
 		companyName,
 		city,
-		technology,
-	} = offer
-
+	} = offerInfo
 	const days = dateDiff(moment(), dateAdded)
 	const isNew = days < 1
 
@@ -47,9 +50,10 @@ const OfferCard = ({ offer, index }: { offer: OfferType, index: number }) => {
 			align='flex-start'
 			fontSize={theme.fontSize.large}
 			hide>
-			{offerTitle}
+			{title}
 		</Typography>
 	)
+
 	const salaryRange = (
 		<Typography
 			color={textColors.salary}
@@ -62,51 +66,42 @@ const OfferCard = ({ offer, index }: { offer: OfferType, index: number }) => {
 	)
 
 	return (
-		<Link href={'/offers/' + id} shallow>
-			<a>
-				<Container>
-					{/* @ts-ignore */}
-					<TechColor index={index}/>
-					<ImgWrapper>
-						<Img src={image} />
-					</ImgWrapper>
-					<InfoContainer>
-						{isMobile ? (
-							<>
-								<MobileWrapper>
-									{offerTitleC}
-									{dateLabel}
-								</MobileWrapper>
-								<MobileWrapper>
-									<SalaryWrapper>{salaryRange}</SalaryWrapper>
-									{companyInfo}
-								</MobileWrapper>
-							</>
-						) : (
-								<>
-									<TopWrapper>
-										<TitleWrapper>{offerTitleC}</TitleWrapper>
-										<SalaryWrapper>
-											{salaryRange}
-											{dateLabel}
-										</SalaryWrapper>
-									</TopWrapper>
-									<BottomWrapper>
-										{companyInfo}
-										<RequirementsWrapper>
-											{technology.slice(0, 3).map(({ tech }) => (
-												<SmallLabel isSpan key={tech}>
-													{tech.toLowerCase()}
-												</SmallLabel>
-											))}
-										</RequirementsWrapper>
-									</BottomWrapper>
-								</>
-							)}
-					</InfoContainer>
-				</Container>
-			</a>
-		</Link>
+		<Container onClick={() => setCurrentOffer(offerInfo)}>
+			<InfoContainer>
+				{isMobile ? (
+					<>
+						<MobileWrapper>
+							{offerTitleC}
+							{dateLabel}
+						</MobileWrapper>
+						<MobileWrapper>
+							<SalaryWrapper>{salaryRange}</SalaryWrapper>
+							{companyInfo}
+						</MobileWrapper>
+					</>
+				) : (
+					<>
+						<TopWrapper>
+							<TitleWrapper>{offerTitleC}</TitleWrapper>
+							<SalaryWrapper>
+								{salaryRange}
+								{dateLabel}
+							</SalaryWrapper>
+						</TopWrapper>
+						<BottomWrapper>
+							{companyInfo}
+							<RequirementsWrapper>
+								{/* {technology.slice(0, 3).map(({ tech }) => (
+											<SmallLabel isSpan key={tech}>
+												{tech.toLowerCase()}
+											</SmallLabel>
+										))} */}
+							</RequirementsWrapper>
+						</BottomWrapper>
+					</>
+				)}
+			</InfoContainer>
+		</Container>
 	)
 }
 export const Container = styled.div`
@@ -122,28 +117,16 @@ export const Container = styled.div`
 	&:hover {
 		box-shadow: ${({ theme }) => theme.shadows.cardHover};
 	}
-	`
-	export const TechColor = styled.div<{index: number}>`
-	background-color: ${({index}) => index % 2 ? 'blue' : 'orange'};
+`
+export const TechColor = styled.div<{ index: number }>`
+	background-color: ${({ index }) => (index % 2 ? 'blue' : 'orange')};
 	width: 5px;
-
-`
-export const ImgWrapper = styled.div`
-	height: 77px;
-	width: 125px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`
-export const Img = styled.img`
-	max-width: 100%;
-	max-height: 60%;
 `
 export const InfoContainer = styled.div`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	padding: 0.5em 0.25em 0.5em 0px;
+	padding: 0.5em 0.25em 0.5em 1em;
 	@media only screen and (max-width: 600px) {
 		/* padding: 0; */
 		display: flex;

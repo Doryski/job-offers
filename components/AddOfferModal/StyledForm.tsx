@@ -18,7 +18,9 @@ export const Wrapper = styled.div`
 	justify-content: center;
 `
 
-export const StyledInput = styled.input<{ padding?: string }>`
+export const StyledInput = styled.input<{
+	padding?: string
+}>`
 	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;
 
@@ -64,6 +66,5 @@ export const InputWrapper = styled.div`
 	margin: 0 0.1875em 0.625em 0.1875em;
 `
 export const Label = styled.label`
-	margin-left: 0.625em;
 	color: ${({ theme }) => theme.colors.text};
 `

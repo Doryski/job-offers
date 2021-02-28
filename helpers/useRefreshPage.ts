@@ -6,6 +6,7 @@ export default function useRefreshPage(data: any, router: NextRouter) {
 
 	const refresh = () => {
 		router.replace(router.asPath)
+		console.log('refreshing page')
 		setIsRefreshing(true)
 	}
 

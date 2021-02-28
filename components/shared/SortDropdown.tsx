@@ -13,7 +13,7 @@ import createQuery from '../../helpers/createQuery'
 
 const SortDropdown = () => {
 	const { query } = useRouter()
-	const listRef = useRef<HTMLDivElement>(null)
+	const listRef = useRef<HTMLDivElement>(null!)
 	const { close, toggle, isDialogOpen: isListOpen } = useDialogHandler(false)
 	useDetectOutsideClick(listRef, close)
 
@@ -21,8 +21,8 @@ const SortDropdown = () => {
 		query.sort === SORT_OPTIONS.salaryUp.id
 			? SORT_OPTIONS.salaryUp
 			: query.sort === SORT_OPTIONS.salaryDown.id
-				? SORT_OPTIONS.salaryDown
-				: SORT_OPTIONS.dateLatest
+			? SORT_OPTIONS.salaryDown
+			: SORT_OPTIONS.dateLatest
 	const salaryDownQuery = createQuery(
 		{
 			query: 'sort',

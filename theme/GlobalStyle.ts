@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+  @font-face {
+        font-family: 'Open Sans';
+        font-display: swap;
+        src: url('/fonts/Open_Sans/OpenSans-Regular.ttf');
+    }
+
   *,
   &:before,
   &:after {
@@ -16,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     max-height: 100vh;
   }

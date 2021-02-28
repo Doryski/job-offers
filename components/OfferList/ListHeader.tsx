@@ -2,10 +2,18 @@ import styled from 'styled-components'
 import Label from '../shared/Label'
 import SortDropdown from '../shared/SortDropdown'
 
+const ListHeader = () => (
+	<FiltersWrapper>
+		<SortFiltersWrapper>
+			<SortDropdown />
+		</SortFiltersWrapper>
+	</FiltersWrapper>
+)
+
 export const FiltersWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.primary};
 	display: flex;
-	margin-bottom: 0.5em;
+	margin: 0 0.5em 0.5em 0;
 `
 export const SalaryFiltersWrapper = styled.div`
 	padding-left: 1.5625em;
@@ -42,14 +50,4 @@ export const SortFiltersWrapper = styled.div`
 	justify-content: flex-end;
 	padding: 0.1875em;
 `
-
-const ListHeader = () => (
-	<FiltersWrapper>
-
-		<SortFiltersWrapper>
-			<SortDropdown />
-		</SortFiltersWrapper>
-	</FiltersWrapper>
-)
-
 export default ListHeader

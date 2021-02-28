@@ -1,59 +1,61 @@
-import ApplicantType from '../../types/ApplicantType'
-import { HOST_PATH } from '../../helpers/utils'
-import { GetStaticProps } from 'next'
-import { Dashboard } from '@material-ui/icons'
+import { ApplicantType } from '../../types'
+import { GetServerSideProps } from 'next'
+import AdminTable from '../../components/AdminTable'
+import AdminLayout from '../../components/AdminLayout'
+import useRefreshPage from '../../helpers/useRefreshPage'
+import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/client'
 
-export const getStaticProps: GetStaticProps = async () => {
-	const res = await fetch(HOST_PATH + '/api/applicants', {
-		// headers: {
-		// 	'Content-Type': 'application/json'
-		// }
-	})
-	console.log(res)
-	// if (res.status === 500) { return console.log(res) }
-	const data = res.status === 200 ? await res.json() : 'Error'
-
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session?.user.admin) return { notFound: true }
+	const res = await fetch(process.env.NEXTAUTH_URL + '/api/admin/applicants')
+	const { data }: { data: ApplicantType[] } = await res.json()
+	console.log('/api/admin/applicants data:', data)
 	return {
 		props: {
-			applicants: data,
+			data: data || [],
 		},
 	}
 }
 
-const ApplicantList = ({ applicants }) => {
-	const onSubmit = (e) => {
-		e.preventDefault()
-		async function postData(url = '', data = {}) {
-			const response = await fetch(url, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data),
+const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
+	// TODO: Add multichoice select menu
+	// const headers = Object.keys(data[0])
+	const headers = [
+		'id',
+		'uuid',
+		'name',
+		'email',
+		'processInFuture',
+		'offerId',
+		'employerId',
+	]
+
+	const router = useRouter()
+	const { refresh } = useRefreshPage(data, router)
+
+	const deleteRecord = async (id: string) => {
+		async function delApplicant(url: string) {
+			const res = await fetch(url, {
+				method: 'DELETE',
 			})
-			return response.json()
+			return res.json()
 		}
-		postData(HOST_PATH + '/api/applicants', {
-			name: 'Domin',
-			lastName: 'Rych',
-			email: 'dandnas@das.com',
-		})
+		await delApplicant('/api/applicants/' + id)
+		refresh()
 	}
 
 	return (
-		<>
-			<form onSubmit={onSubmit}>
-				<button type='submit'>Add applicant</button>
-			</form>
-			<div>{JSON.stringify(applicants)}</div>
-		</>
+		<AdminLayout>
+			<AdminTable
+				data={data}
+				headers={headers}
+				uniqueKey={'uuid'}
+				deleteRecord={deleteRecord}
+			/>
+		</AdminLayout>
 	)
 }
-// 'id','name','surname''email'
-// <ul>{applicants.map((applicant: ApplicantType) => {
-// 	return (
-// 		<li>{JSON.stringify(applicant, null, 2)}</li>
-// 	)
-// })}</ul>
 
 export default ApplicantList

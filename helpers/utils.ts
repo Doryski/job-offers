@@ -1,11 +1,14 @@
-export const HOST_PATH = 'http://localhost:3000'
 export const DATE_FORMAT = 'DD.MM.YYYY'
-export const FIELD_REQUIRED_ERR = 'This field is required.'
+export const FIELD_REQUIRED_ERR = ' is a required field.'
 export const VAL_TOO_BIG_ERR = 'Value is too big.'
 export const VAL_IS_ZERO_ERR = 'Value should be more than 0.'
 export const MAX_SLIDER_VALUE = 50000
 export const EMP_TYPE_OPTIONS = ['B2B', 'UoP', 'UZ', 'UoD']
 export const EXP_LVL_OPTIONS = ['Junior', 'Mid', 'Senior']
+export const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
+export const UNAUTHORIZED_ERROR =
+	'You need to be signed in to have access to this data.'
 
 export const INFO_LABELS = [
 	{
@@ -48,10 +51,10 @@ export const LOCATIONS = [
 	'Opole',
 	'Rzeszów',
 	'Szczecin',
-	'Others'
+	'Others',
 ]
 
-export const NAV_LINKS = [{ title: 'Offers', active: true }]
+export const NAV_LINKS = [{ title: 'Offers', path: '/' }]
 
 export const SORT_OPTIONS = {
 	salaryUp: {
@@ -97,6 +100,4 @@ export const TECHNOLOGIES = [
 	'Go',
 	'Support',
 	'Other',
-	// 'SAP',
-	// 'Scala',
 ]

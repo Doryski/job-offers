@@ -5,7 +5,7 @@ type SelectComponentProps = {
 	name: string
 	label: string
 	register: any
-	required: boolean
+	required?: boolean
 	options: { array: any[]; value?: string; label?: string }
 	errors: Record<string, any>
 }
@@ -26,7 +26,7 @@ const SelectComponent = ({
 			<StyledSelect
 				name={name}
 				ref={register({
-					required: required ? FIELD_REQUIRED_ERR : false,
+					required: required ? selectLabel + FIELD_REQUIRED_ERR : false,
 				})}>
 				<option value={undefined}></option>
 				{array.map((item) =>
@@ -41,15 +41,9 @@ const SelectComponent = ({
 					)
 				)}
 			</StyledSelect>
-			{name.includes('technology') || name.includes('techLvl') ? (
-				<ErrorMessage>
-					{errors[name] instanceof Array && errors[name][0].message}
-				</ErrorMessage>
-			) : (
-				errors[name] &&
-				errors[name].type === 'required' && (
-					<ErrorMessage>{errors[name].message}</ErrorMessage>
-				)
+
+			{errors[name]?.type && (
+				<ErrorMessage>{errors[name].message}</ErrorMessage>
 			)}
 		</InputWrapper>
 	)

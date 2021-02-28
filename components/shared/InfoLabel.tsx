@@ -82,6 +82,12 @@ export const Container = styled.div`
 	flex: 1 1 0%;
 	margin: 0 0.3125em;
 	padding: 1.25em 0.3125em;
+	&:first-of-type {
+		margin-left: 0;
+	}
+	&:last-of-type {
+		margin-right: 0;
+	}
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		box-shadow: none;
 		flex: 1 0 calc(50% - 2px);

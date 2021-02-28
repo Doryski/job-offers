@@ -3,16 +3,11 @@ import styled from 'styled-components'
 import Typography from '../shared/Typography'
 import theme, { textColors } from '../../theme'
 import { Wrapper } from './StyledComponents'
-import useSetInnerHTML from '../../helpers/useDescription'
+import useDescription from '../../helpers/useDescription'
 
-const OfferDescription = ({
-	description,
-}: {
-	description: string
-}) => {
+const OfferDescription = ({ description }: { description: string }) => {
 	const descriptionRef = useRef<HTMLDivElement>(null!)
-
-	useSetInnerHTML(descriptionRef, description)
+	useDescription(descriptionRef, description)
 
 	return (
 		<DescriptionContainer>
@@ -21,8 +16,7 @@ const OfferDescription = ({
 				fWeight={theme.fontWeight[500]}
 				fontSize={theme.fontSize.xl}
 				align='flex-start'
-				margin='0.625em 1.25em'
-			>
+				margin='0.625em 1.25em'>
 				Description
 			</Typography>
 
@@ -38,13 +32,11 @@ export const DescriptionContainer = styled.div`
 	box-shadow: ${({ theme }) => theme.colors.shadow};
 	background: ${({ theme }) => theme.colors.primary};
 	border-radius: 5px;
-	@media only screen and (max-width: ${({ theme }) =>
-			theme.breakpoints.md}) {
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		margin: 0.9375em 0;
 	}
 `
 export const DescriptionContent = styled.div`
-	padding: 0 0.9375em;
 	color: ${({ theme }) => theme.colors.title};
 `
 export default OfferDescription

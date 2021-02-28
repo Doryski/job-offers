@@ -9,54 +9,96 @@ import useDialogHandler from '../../helpers/useDialogHandler'
 import DrawerComponent from './DrawerComponent'
 import useDeviceDetect from '../../helpers/useDeviceDetect'
 import Link from 'next/link'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
-const Header = () => {
+const Header = ({ admin = false }: { admin?: boolean }) => {
 	const {
 		isDialogOpen: isSideBarOpen,
 		close: closeSideBar,
 		toggle: toggleSideBar,
 	} = useDialogHandler(false)
 	const isMobile = useDeviceDetect(1105)
+	const [session, loading] = useSession()
 
 	return (
-		<Container>
-			<Link href='/' shallow>
+		<Container admin={admin}>
+			<Link href='/'>
 				<a>
 					<LogoWrapper>Some logo</LogoWrapper>
 				</a>
 			</Link>
 			{!isMobile && <Navigation />}
 			<Wrapper>
-				<AddOffer />
-				<CustomButton
-					fWeight={theme.fontWeight[400]}
-					icon
-					pink
-					padding='0.375em 0.625em 0.375em 1.125em'
-					margin='0 0.9375em 0 0'>
-					Sign in
-				</CustomButton>
+				{!session && (
+					<>
+						<CustomButton
+							handleClick={signIn}
+							fWeight={theme.fontWeight[400]}
+							pink
+							margin='0 0.875em 0 0.375em'
+							padding='0.625em 1.125em'>
+							Log in
+						</CustomButton>
+						<Link href='/auth/signup'>
+							<a>
+								<CustomButton
+									fWeight={theme.fontWeight[400]}
+									margin='0 0.875em 0 0.375em'
+									padding='0.625em 1.125em'>
+									Sign up
+								</CustomButton>
+							</a>
+						</Link>
+					</>
+				)}
+				{session && (
+					<>
+						<AddOffer />
+						<Link href='/user/profile'>
+							<a>
+								<CustomButton
+									pink
+									fWeight={theme.fontWeight[400]}
+									margin='0 0.875em 0 0.375em'
+									padding='0.625em 1.125em'>
+									My Profile
+								</CustomButton>
+							</a>
+						</Link>
+						<CustomButton
+							// @ts-ignore
+							handleClick={() => signOut({ redirect: false })}
+							fWeight={theme.fontWeight[400]}
+							margin='0 0.875em 0 0.375em'
+							padding='0.625em 1.125em'>
+							Log out
+						</CustomButton>
+					</>
+				)}
 
-				<Wrapper>
+				{/* menu sidebar */}
+				{/* <Wrapper>
 					<IconButton onClick={toggleSideBar}>
 						<StyledMenuIcon />
 					</IconButton>
-				</Wrapper>
+				</Wrapper> */}
 			</Wrapper>
 
-			{isSideBarOpen && (
+			{/* {isSideBarOpen && (
 				<DrawerComponent handleClose={closeSideBar} isOpen={isSideBarOpen} />
-			)}
+			)} */}
 		</Container>
 	)
 }
-export const Container = styled.header`
+export const Container = styled.header<{ admin?: boolean }>`
 	min-height: 68px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background: ${({ theme }) => theme.colors.primary};
-	border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+	background: ${({ theme, admin }) =>
+		admin ? theme.colors.admin : theme.colors.primary};
+	border-bottom: 1px solid
+		${({ theme, admin }) => (admin ? theme.colors.admin : theme.colors.divider)};
 	width: 100%;
 `
 

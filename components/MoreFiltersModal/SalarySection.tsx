@@ -42,7 +42,7 @@ const SalarySection = ({
 							color={textColors.text}
 							fWeight={theme.fontWeight[400]}
 							align='flex-start'>
-							{`${formatThous(from)} PLN`}
+							{`${!from ? '0' : formatThous(from)} PLN`}
 						</Typography>
 					</AmountWrapper>
 					<Typography as='div' color={textColors.text} padding='0 0.375em'>

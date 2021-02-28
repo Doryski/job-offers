@@ -7,7 +7,7 @@ const dateDiff = (
 	format: string = DATE_FORMAT,
 	unit: moment.unitOfTime.Diff = 'days'
 ) => {
-	const convertToMoment = (date) =>
+	const convertToMoment = (date: Moment | string) =>
 		typeof date === 'string' ? moment(date, format) : date
 	const convertedD1 = convertToMoment(date1)
 	const convertedD2 = convertToMoment(date2)

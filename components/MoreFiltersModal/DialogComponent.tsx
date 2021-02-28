@@ -7,7 +7,7 @@ import SliderArea from './SliderArea'
 import DialogFooter from '../shared/DialogFooter'
 import createQuery from '../../helpers/createQuery'
 import { useRouter } from 'next/router'
-import Query from '../../types/Query'
+import { Query } from '../../types'
 import stringFormat from '../../helpers/stringFormat'
 import { MAX_SLIDER_VALUE } from '../../helpers/utils'
 import getValue from '../../helpers/getValue'
@@ -29,12 +29,12 @@ const DialogComponent = ({
 	const handleChange = (_: React.ChangeEvent<{}>, newValue: Value) =>
 		setValue(newValue as number[])
 
-	const [expLvl, setExpLvl] = useState(null)
+	const [expLvl, setExpLvl] = useState('')
 
 	const fromValue = getValue(value, 0)
-	const from = fromValue === 0 ? '' : fromValue.toString()
+	const from = !fromValue && fromValue !== 0 ? '' : fromValue.toString()
 	const toValue = getValue(value, 1)
-	const to = toValue === MAX_SLIDER_VALUE ? '' : toValue.toString()
+	const to = toValue === MAX_SLIDER_VALUE || !toValue ? '' : toValue.toString()
 	const moreFiltersData: Query[] = [
 		{ query: 'expLvl', value: stringFormat(expLvl) },
 		{ query: 'from', value: from },
@@ -58,7 +58,7 @@ const DialogComponent = ({
 				<SliderArea
 					handleChange={handleChange}
 					value={value}
-					expLvl={expLvl as string}
+					expLvl={expLvl}
 					setExpLvl={setExpLvl}
 				/>
 

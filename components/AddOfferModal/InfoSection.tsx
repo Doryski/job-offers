@@ -6,7 +6,6 @@ import { Wrapper, InputsContainer } from './StyledForm'
 import {
 	EXP_LVL_OPTIONS,
 	EMP_TYPE_OPTIONS,
-	LOCATIONS,
 	TECHNOLOGIES,
 } from '../../helpers/utils'
 import { AddOfferContext } from './AddOfferContext'
@@ -28,41 +27,8 @@ const InfoSection = () => {
 
 			<InputComponent
 				type='text'
-				name='offerTitle'
+				name='title'
 				label='Offer title'
-				register={register}
-				required
-				errors={errors}
-			/>
-			<InputComponent
-				type='text'
-				name='companyName'
-				label='Company name'
-				register={register}
-				required
-				errors={errors}
-			/>
-
-			<SelectComponent
-				name='city'
-				label='City'
-				register={register}
-				required
-				errors={errors}
-				options={{ array: LOCATIONS }}
-			/>
-			<InputComponent
-				type='text'
-				name='street'
-				label='Street'
-				register={register}
-				required
-				errors={errors}
-			/>
-			<InputComponent
-				type='number'
-				name='companySize'
-				label='Company Size'
 				register={register}
 				required
 				errors={errors}
@@ -72,7 +38,7 @@ const InfoSection = () => {
 				<InputComponent
 					type='number'
 					name='salaryFrom'
-					label='Salary From'
+					label='Salary from'
 					register={register}
 					required
 					errors={errors}
@@ -81,7 +47,7 @@ const InfoSection = () => {
 				<InputComponent
 					type='number'
 					name='salaryTo'
-					label='Salary To'
+					label='Salary to'
 					register={register}
 					required
 					errors={errors}
@@ -92,7 +58,7 @@ const InfoSection = () => {
 			<Wrapper>
 				<SelectComponent
 					name='empType'
-					label='EMP type'
+					label='Employment type'
 					register={register}
 					required
 					errors={errors}
@@ -101,7 +67,7 @@ const InfoSection = () => {
 
 				<SelectComponent
 					name='expLvl'
-					label='EXP level'
+					label='Experience'
 					register={register}
 					required
 					errors={errors}

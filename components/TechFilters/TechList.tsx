@@ -5,8 +5,8 @@ import stringFormat from '../../helpers/stringFormat'
 import TechIcon from '../shared/TechIcon'
 import createQuery from '../../helpers/createQuery'
 import { useRouter } from 'next/router'
-import Query from '../../types/Query'
-import CustomButton from '../shared/CustomButton';
+import { Query } from '../../types'
+import CustomButton from '../shared/CustomButton'
 
 type TechListProps = {
 	cutTechArray?: number
@@ -32,7 +32,6 @@ const TechList = ({ cutTechArray, close }: TechListProps) => {
 					<Link href={techQuery} key={tech} shallow>
 						<a onClick={close}>
 							<CustomButton>
-
 								<TechName>{tech}</TechName>
 							</CustomButton>
 						</a>

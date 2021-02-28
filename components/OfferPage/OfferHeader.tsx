@@ -1,61 +1,43 @@
 import styled from 'styled-components'
-import { Share, ArrowBack } from '@material-ui/icons'
 import InfoLabel from '../shared/InfoLabel'
 import Typography from '../shared/Typography'
 import formatThous from '../../helpers/formatThous'
 import { INFO_LABELS } from '../../helpers/utils'
 import theme, { textColors } from '../../theme'
-import OfferType from '../../types/OfferType'
-import stringFormat from '../../helpers/stringFormat'
-import Link from 'next/link'
+import { OfferPageDataType } from '../../types'
 
-const OfferHeader = ({ offer }: { offer: OfferType }) => {
-	const { tech, image, salaryFrom, salaryTo, offerTitle, street, city } = offer
+const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
+	const { salaryFrom, salaryTo, title, street, city } = offer
 
 	return (
 		<HeaderContainer>
-			{/* @ts-ignore */}
-			<HeaderInner tech={stringFormat(tech)}>
-				<Link href='/' shallow>
-					<a>
-						<HeaderActionIcon arrow>
-							<ArrowBack />
-						</HeaderActionIcon>
-					</a>
-				</Link>
-				<HeaderActionIcon>
-					<Share />
-				</HeaderActionIcon>
-
-				<HeaderWrapper>
-					<ImgBackground>
-						<Img src={image} />
-					</ImgBackground>
-					<MainInfoContainer>
-						<Typography
-							color={textColors.white}
-							align='flex-start'
-							margin='0.25em 0'
-							fWeight={theme.fontWeight[400]}>
-							{formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
-						</Typography>
-						<Typography
-							color={textColors.white}
-							align='flex-start'
-							fontSize={theme.fontSize.xl}
-							margin='0.25em 0'>
-							{offerTitle}
-						</Typography>
-						<Typography
-							color={textColors.white}
-							align='flex-start'
-							margin='0.25em 0'
-							fWeight={theme.fontWeight[400]}>
-							{street}, {city}
-						</Typography>
-					</MainInfoContainer>
-				</HeaderWrapper>
-			</HeaderInner>
+			<MainInfoContainer>
+				<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+					<Typography
+						color={textColors.title}
+						align='flex-start'
+						fontSize={theme.fontSize.xl}
+						margin='0.25em 0'>
+						{title}
+					</Typography>
+				</div>
+				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<Typography
+						color={textColors.text}
+						align='flex-start'
+						margin='0.25em 0'
+						fWeight={theme.fontWeight[400]}>
+						Salary: {formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
+					</Typography>
+					<Typography
+						color={textColors.text}
+						align='flex-start'
+						margin='0.25em 0'
+						fWeight={theme.fontWeight[400]}>
+						Address: {street}, {city}
+					</Typography>
+				</div>
+			</MainInfoContainer>
 			<InfoLabelsContainer>
 				{INFO_LABELS.map(({ id, title }: { id: number; title: string }) => (
 					<InfoLabel key={id} id={id} title={offer[title]} />
@@ -65,91 +47,28 @@ const OfferHeader = ({ offer }: { offer: OfferType }) => {
 	)
 }
 
-export const HeaderActionIcon = styled.button<{ arrow?: boolean }>`
-	position: absolute;
-	color: ${({ theme }) => theme.colors.white};
-	background: rgba(0, 0, 0, 0.2);
-	width: 28px;
-	height: 28px;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 10px;
-	left: ${({ arrow }) => (arrow ? '10px' : '')};
-	right: ${({ arrow }) => (arrow ? '' : '10px')};
-	padding: 2px;
-	border: none;
-	border-radius: 5px;
-	transition: all 300ms ease-out 0s;
-	&:hover {
-		background: rgba(0, 0, 0, 0.35);
-	}
-`
-
 export const HeaderContainer = styled.div`
-	height: 235px;
-	position: relative;
-	margin: 0 0 3.125em 0;
-`
-export const HeaderInner = styled.div<{ tech: keyof typeof theme.techColors }>`
-	background: ${({ theme, tech }) => theme.techColors[tech]};
-	height: 100%;
-	border-radius: 0px 0px 5px 5px;
-	padding: 2.5em 2.5em 2.5em;
 	position: relative;
 `
-export const HeaderWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	align-content: flex-start;
-	justify-content: center;
-`
-export const ImgBackground = styled.div`
-	background-color: ${({ theme }) => theme.colors.white};
-	width: 107px;
-	height: 107px;
-	display: flex;
-	position: relative;
-	border-radius: 50%;
-	align-items: center;
-	justify-content: center;
 
-	&:after,
-	&:before {
-		content: '';
-		position: absolute;
-		border-radius: 50%;
-		width: 100%;
-		height: 100%;
-	}
-	&:before {
-		background: rgba(255, 255, 255, 0.5);
-		transform: scale(1.2);
-	}
-	&:after {
-		background: rgba(255, 255, 255, 0.3);
-		transform: scale(1.4);
-	}
-`
-export const Img = styled.img`
-	max-width: 70px;
-	max-height: 45px;
-	z-index: 1;
-`
 export const MainInfoContainer = styled.div`
-	flex: 1;
-	margin: 0 0 0 2.5em;
+	margin: 1em 0 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+	justify-content: center;
+	padding: 0.3125em 1em;
+	box-shadow: ${({ theme }) => theme.colors.shadow};
+	background: ${({ theme }) => theme.colors.primary};
+	border-radius: 5px;
+	display: flex;
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-top: 10.625em;
+	}
 `
 export const InfoLabelsContainer = styled.div`
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: space-between;
-	transform: translateY(-50%);
 	width: 100%;
-	padding: 0 0.9375em;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		transform: translateY(-25%);
-	}
 `
 export default OfferHeader

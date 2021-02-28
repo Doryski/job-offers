@@ -2,6 +2,7 @@ import CustomButton from '../shared/CustomButton'
 import theme from '../../theme'
 import useDialogHandler from '../../helpers/useDialogHandler'
 import AddOfferModal from '.'
+import AddOfferContextProvider from './AddOfferContext'
 
 const AddOffer = () => {
 	const { open, isDialogOpen, close } = useDialogHandler(false)
@@ -16,7 +17,9 @@ const AddOffer = () => {
 				Post a Job
 			</CustomButton>
 			{isDialogOpen && (
-				<AddOfferModal isDialogOpen={isDialogOpen} close={close} />
+				<AddOfferContextProvider isDialogOpen={isDialogOpen} close={close}>
+					<AddOfferModal close={close} />
+				</AddOfferContextProvider>
 			)}
 		</>
 	)

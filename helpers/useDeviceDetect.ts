@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 export default function useDeviceDetect(windowWidth: number) {
-	let isM
+	let isM: boolean
 	if (typeof window !== 'undefined') {
 		const getWindowWidth = () =>
 			window.innerWidth ||
@@ -22,5 +22,5 @@ export default function useDeviceDetect(windowWidth: number) {
 		isM = isMobile
 		return
 	}
-	return null
+	return isM
 }

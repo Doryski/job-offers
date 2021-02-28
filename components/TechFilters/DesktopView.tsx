@@ -12,7 +12,7 @@ import TechList, { TechName, IconWrapper } from './TechList'
 import useDetectOutsideClick from '../../helpers/useDetectOutsideClick'
 import { useRouter } from 'next/router'
 import createQuery from '../../helpers/createQuery'
-import CustomButton from '../shared/CustomButton';
+import CustomButton from '../shared/CustomButton'
 
 type DesktopViewProps = {
 	toggle: VoidFunction
@@ -29,7 +29,7 @@ const DesktopView = ({
 	isListOpen,
 }: DesktopViewProps) => {
 	const { query } = useRouter()
-	const listRef = useRef<HTMLDivElement>(null)
+	const listRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(listRef, close)
 	// if clicked on tech filter -> screen changes from all filters to table of technologies 3x7
 
@@ -62,8 +62,6 @@ const DesktopView = ({
 								<a onClick={close}>
 									<DropdownListItem>
 										<CustomButton>
-
-
 											<Typography
 												fWeight={theme.fontWeight[400]}
 												margin='1em 0 0 0.3em'>

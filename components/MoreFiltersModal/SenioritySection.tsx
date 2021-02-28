@@ -8,8 +8,8 @@ const SenioritySection = ({
 	expLvl,
 	setExpLvl,
 }: {
-	expLvl?: string | null
-	setExpLvl: React.Dispatch<React.SetStateAction<string | null>>
+	expLvl?: string
+	setExpLvl: React.Dispatch<React.SetStateAction<string>>
 }) => {
 	return (
 		<>
@@ -22,7 +22,7 @@ const SenioritySection = ({
 			</Typography>
 			<Wrapper>
 				<CustomButton
-					handleClick={() => setExpLvl(null)}
+					handleClick={() => setExpLvl('')}
 					active={!expLvl}
 					padding='0.375em 2.5em'
 					margin='0.375em 0.375em 0.375em 0'>

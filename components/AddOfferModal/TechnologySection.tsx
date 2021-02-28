@@ -26,14 +26,12 @@ const TechnologySection = ({
 						name={`technology[${index}]`}
 						label='Technology'
 						register={register}
-						required
 						errors={errors}
 					/>
 					<SelectComponent
 						name={`techLvl[${index}]`}
 						label='Tech level'
 						register={register}
-						required
 						errors={errors}
 						options={{
 							array: TECH_LVL_OPTIONS,
@@ -62,7 +60,6 @@ const TechnologySection = ({
 }
 export const IconsWrapper = styled.div`
 	padding: 0.3125em 0.625em;
-	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;
 	display: flex;
 	align-items: center;

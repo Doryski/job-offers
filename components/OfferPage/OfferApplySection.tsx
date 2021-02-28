@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
 	PersonOutline,
@@ -6,6 +6,7 @@ import {
 	Create,
 	Send,
 	DeleteOutline,
+	SettingsApplicationsRounded,
 } from '@material-ui/icons'
 import Typography from '../shared/Typography'
 import { TextField, Checkbox } from '@material-ui/core'
@@ -17,8 +18,13 @@ import { Wrapper } from './StyledComponents'
 import useCheckbox from '../../helpers/useCheckbox'
 import useFileUpload from '../../helpers/useFileUpload'
 import { useForm } from 'react-hook-form'
+import { EMAIL_REGEX } from '../../helpers/utils'
+import { OfferPageDataType } from '../../types'
+import useRefreshPage from '../../helpers/useRefreshPage'
+import { useRouter } from 'next/router'
 
-const OfferApplySection = () => {
+const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
+	const { employerId, offerId, companyName } = offer
 	const { isChecked, handleChange } = useCheckbox(false)
 	const uploadRef = useRef<HTMLInputElement>(null!)
 	const {
@@ -28,16 +34,30 @@ const OfferApplySection = () => {
 		handleFileDelete,
 	} = useFileUpload(uploadRef)
 	const { register, handleSubmit, errors } = useForm()
+	const [loading, setLoading] = useState(false)
+	const [applied, setApplied] = useState(false)
+	const router = useRouter()
+	const { refresh } = useRefreshPage(offer, router)
 
-	const onSubmit = handleSubmit((data) => {
+	const onSubmit = handleSubmit(async (data) => {
+		setLoading(true)
 		let formData: {
 			[x: string]: any
-		} = { ...data, processInFuture: isChecked }
-		if (!!uploadRef.current.value) {
-			formData = { ...formData, file: fileName }
+		} = { ...data, processInFuture: isChecked ? 1 : 0, employerId, offerId }
+		async function postApplicant(url: string, data: typeof formData) {
+			const res = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			})
+			return res.json()
 		}
-
-		alert(JSON.stringify(formData))
+		await postApplicant('/api/applicants', formData)
+		refresh()
+		setLoading(false)
+		setApplied(true)
 	})
 
 	return (
@@ -52,139 +72,148 @@ const OfferApplySection = () => {
 			</Typography>
 
 			<Wrapper>
-				<Form onSubmit={onSubmit}>
-					<FormGrid>
-						<MyTextField
-							style={{ fontFamily: 'inherit' }}
-							error={!!errors.firstAndLastName}
-							id='firstAndLastName'
-							name='firstAndLastName'
-							label='First & Last Name'
-							helperText={
-								errors.firstAndLastName && (
-									<ErrorMessage>
-										{errors.firstAndLastName?.message}
-									</ErrorMessage>
-								)
-							}
-							variant='outlined'
-							InputProps={{
-								startAdornment: <InputIcon Icon={PersonOutline} />,
-							}}
-							inputRef={register({
-								required: 'First & last name is a required field',
-							})}
-						/>
-						<MyTextField
-							error={!!errors.email}
-							id='email'
-							name='email'
-							label='Email'
-							helperText={
-								errors.email && (
-									<ErrorMessage>{errors.email?.message}</ErrorMessage>
-								)
-							}
-							variant='outlined'
-							InputProps={{
-								startAdornment: <InputIcon Icon={Email} />,
-							}}
-							inputRef={register({
-								required: 'Email is a required field',
-								pattern: {
-									value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-									message: 'Email is not valid',
-								},
-							})}
-						/>
-						<MyTextField
-							id='introduction'
-							name='introduction'
-							label='Introduce yourself (linkedin/github links)'
-							variant='outlined'
-							InputProps={{
-								startAdornment: <InputIcon Icon={Create} />,
-							}}
-							inputRef={register}
-						/>
-						<UploadWrapper onClick={handleFileUpload}>
-							<input
-								ref={uploadRef}
-								disabled={!!fileName}
-								onChange={handleFileChange}
-								style={{ display: 'none' }}
-								accept='application/pdf'
-								type='file'
-								autoComplete='off'
-								name='cv'
-								tabIndex={-1}
+				{applied ? (
+					<div>
+						Thank you for your application. Your data was sent to the{' '}
+						{companyName}
+					</div>
+				) : (
+					<form style={{ width: '100%' }} onSubmit={onSubmit}>
+						<FormGrid>
+							<MyTextField
+								style={{ fontFamily: 'inherit' }}
+								error={!!errors.name}
+								id='name'
+								name='name'
+								label='First & Last Name'
+								helperText={
+									errors.name && (
+										<ErrorMessage>{errors.name?.message}</ErrorMessage>
+									)
+								}
+								variant='outlined'
+								InputProps={{
+									startAdornment: <InputIcon Icon={PersonOutline} />,
+								}}
+								inputRef={register({
+									required: 'First & last name is a required field',
+								})}
 							/>
-							{!!fileName ? (
-								<>
-									<div style={{ maxWidth: '210px' }}>
-										<Typography
-											color={textColors.pink}
-											fWeight={theme.fontWeight[500]}
-											fontSize={theme.fontSize.md}>
-											{fileName}
-										</Typography>
-									</div>
-									<DeleteFileBtn onClick={handleFileDelete}>
-										<Typography
-											color={textColors.span}
-											fWeight={theme.fontWeight[700]}>
-											Delete
-										</Typography>
-										<DeleteOutline />
-									</DeleteFileBtn>
-								</>
-							) : (
-								<>
-									<UploadIconWrapper>
-										<UploadCv />
-									</UploadIconWrapper>
-									<label htmlFor='cv' style={{ cursor: 'pointer' }}>
-										<Typography
-											color={textColors.span}
-											fWeight={theme.fontWeight[400]}
-											fontSize={theme.fontSize.large}
-											margin='0 0 0 .5em'>
-											Upload CV (.pdf)
-										</Typography>
-									</label>
-								</>
-							)}
-						</UploadWrapper>
-					</FormGrid>
-					<CheckboxWrapper>
-						<Checkbox
-							checked={isChecked}
-							onChange={handleChange}
-							inputProps={{
-								'aria-label': 'primary checkbox',
-							}}
-						/>
-						<Typography color={textColors.span} fWeight={theme.fontWeight[400]}>
-							Processing data in future recruitment
-						</Typography>
-					</CheckboxWrapper>
-					<ApplyButtonWrapper>
-						<CustomButton
-							pink
-							display='flex'
-							minWidth='142px'
-							padding='.3em 0 .3em 2em'
-							type='submit'>
-							Apply
+							<MyTextField
+								error={!!errors.email}
+								id='email'
+								name='email'
+								label='Email'
+								helperText={
+									errors.email && (
+										<ErrorMessage>{errors.email?.message}</ErrorMessage>
+									)
+								}
+								variant='outlined'
+								InputProps={{
+									startAdornment: <InputIcon Icon={Email} />,
+								}}
+								inputRef={register({
+									required: 'Email is a required field',
+									pattern: {
+										value: EMAIL_REGEX,
+										message: 'Email is not valid',
+									},
+								})}
+							/>
+							<MyTextField
+								id='introduction'
+								name='introduction'
+								label='Introduce yourself (linkedin/github links)'
+								variant='outlined'
+								InputProps={{
+									startAdornment: <InputIcon Icon={Create} />,
+								}}
+								inputRef={register}
+							/>
+							{/* <UploadWrapper onClick={handleFileUpload}> */}
+							<UploadWrapper
+								onClick={() => alert('This function is not available yet!')}>
+								<input
+									ref={uploadRef}
+									disabled={!!fileName}
+									onChange={handleFileChange}
+									style={{ display: 'none' }}
+									accept='application/pdf'
+									type='file'
+									autoComplete='off'
+									name='cv'
+									tabIndex={-1}
+								/>
+								{!!fileName ? (
+									<>
+										<div style={{ maxWidth: '210px' }}>
+											<Typography
+												color={textColors.pink}
+												fWeight={theme.fontWeight[500]}
+												fontSize={theme.fontSize.md}>
+												{fileName}
+											</Typography>
+										</div>
+										<DeleteFileBtn onClick={handleFileDelete}>
+											<Typography
+												color={textColors.span}
+												fWeight={theme.fontWeight[700]}>
+												Delete
+											</Typography>
+											<DeleteOutline />
+										</DeleteFileBtn>
+									</>
+								) : (
+									<>
+										<UploadIconWrapper>
+											<UploadCv />
+										</UploadIconWrapper>
+										<label htmlFor='cv' style={{ cursor: 'pointer' }}>
+											<Typography
+												color={textColors.span}
+												fWeight={theme.fontWeight[400]}
+												fontSize={theme.fontSize.large}
+												margin='0 0 0 .5em'>
+												Upload CV (.pdf)
+											</Typography>
+										</label>
+									</>
+								)}
+							</UploadWrapper>
+						</FormGrid>
+						<CheckboxWrapper>
+							<Checkbox checked={isChecked} onChange={handleChange} />
 							<Typography
-								display='block'
-								color={textColors.white}
-								padding='0 0.5em 0 1.5em'>
-								<Send />
+								color={textColors.span}
+								fWeight={theme.fontWeight[400]}>
+								Processing data in future recruitment
 							</Typography>
-						</CustomButton>
-					</ApplyButtonWrapper>
-				</Form>
+						</CheckboxWrapper>
+						<ApplyButtonWrapper>
+							<CustomButton
+								pink
+								display='flex'
+								minWidth='142px'
+								padding='.3em 0 .3em 2em'
+								type='submit'>
+								{loading ? (
+									<>Applying...</>
+								) : (
+									<>
+										Apply
+										<Typography
+											display='block'
+											color={textColors.white}
+											padding='0 0.5em 0 1.5em'>
+											<Send />
+										</Typography>
+									</>
+								)}
+							</CustomButton>
+						</ApplyButtonWrapper>
+					</form>
+				)}
 			</Wrapper>
 		</ApplyContainer>
 	)
@@ -199,9 +228,6 @@ export const ApplyContainer = styled.div`
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		margin: 0.9375em 0;
 	}
-`
-export const Form = styled.form`
-	width: 100%;
 `
 
 export const FormGrid = styled.div`
@@ -251,9 +277,9 @@ export const CheckboxWrapper = styled.div`
 	margin-top: 0.5em;
 	margin-left: -0.75em;
 `
-export const ApplyButtonWrapper = styled.div`
+export const ApplyButtonWrapper = styled.div<{ justify?: string }>`
 	display: flex;
-	justify-content: flex-end;
+	justify-content: ${({ justify }) => justify || 'flex-end'};
 `
 export const DeleteFileBtn = styled.button`
 	position: absolute;

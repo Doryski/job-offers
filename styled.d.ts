@@ -19,6 +19,8 @@ declare module 'styled-components' {
 			span: string
 			white: string
 			shadow: string
+			admin: string
+			opacityAdmin: string
 		}
 		techColors: {
 			disabled: string

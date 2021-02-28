@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import SenioritySection from './SenioritySection'
 import SalarySection from './SalarySection'
-import ParamsType from '../../types/ParamsType'
+import { ParamsType } from '../../types'
 import { Value } from './DialogComponent'
 import Slider from '@material-ui/core/Slider'
 import { MAX_SLIDER_VALUE } from '../../helpers/utils'

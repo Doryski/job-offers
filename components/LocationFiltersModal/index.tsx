@@ -18,7 +18,7 @@ import stringFormat from '../../helpers/stringFormat'
 const LocationFilters = () => {
 	const router = useRouter()
 	const { query } = router
-	const [location, setLocation] = useState<string | null>(null)
+	const [location, setLocation] = useState<string>('')
 	const fullScreen = useMediaQuery('(max-width:800px)')
 	const { isDialogOpen, open, close } = useDialogHandler(false)
 	const TOP_LOCATIONS_NUM = 6
@@ -33,7 +33,7 @@ const LocationFilters = () => {
 	)
 
 	const handleReset = () => {
-		setLocation(null)
+		setLocation('')
 		close()
 	}
 	const handleApplyFilter = () => {
@@ -51,9 +51,9 @@ const LocationFilters = () => {
 		fontSize: theme.fontSize.large,
 	}
 
-	// if location filters clicked 
+	// if location filters clicked
 	// -> switch all filters screen to locations table 3x7
-	
+
 	return (
 		<>
 			<CustomButton

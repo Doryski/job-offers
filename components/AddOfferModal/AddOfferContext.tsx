@@ -2,11 +2,9 @@ import React, { useState, createContext } from 'react'
 import { Dialog } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { DATE_FORMAT } from '../../helpers/utils'
 import moment from 'moment'
-import OfferType from '../../types/OfferType'
+import { OfferType } from '../../types'
 import Center from '../shared/Center'
-
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>
@@ -17,6 +15,7 @@ type FormData = {
 	id: OfferType['uuid']
 	tech: OfferType['tech']
 	title: OfferType['title']
+	description: OfferType['description']
 	technology: string[]
 	techLvl: number[]
 	empType: string
@@ -26,7 +25,7 @@ type FormData = {
 }
 
 const initialContext = {
-	register: () => { },
+	register: () => {},
 	errors: {},
 	loading: false,
 }
@@ -44,44 +43,46 @@ const AddOfferContextProvider = ({
 	isDialogOpen: boolean
 	close: VoidFunction
 }) => {
+	// test object for employer
 	const { handleSubmit, register, errors } = useForm()
 	const [loading, setLoading] = useState(false)
 	const [success, setSuccess] = useState(false)
 	const [error, setError] = useState(false)
 	const fullScreen = useMediaQuery('(max-width:800px)')
 
-	const onSubmit = handleSubmit((data: FormData) => {
-		let technology = []
+	const onSubmit = handleSubmit(async (data: FormData) => {
+		setLoading(true)
+		console.log('submitted offer: ', data)
+		let technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
 			technology.push({
 				tech: data.technology[i],
-				techLvl: +data.techLvl[i],
+				techLvl: data.techLvl[i],
 			})
 		}
 
-		let formData: OfferType & { techLvl?: number[] } = {
+		let formData: Partial<OfferType & { techLvl?: number[] }> = {
 			...data,
-			dateAdded: moment().format(DATE_FORMAT),
-			image: 'filename',
-			employerId: employer.uuid,
-			// description,
-			technology,
+			dateAdded: moment().format('x'),
+			technology: JSON.stringify(technology),
 		}
 		delete formData.techLvl
 		// // change to mysql database
-		// database
-		//     .ref('offers')
-		//     .push(formData)
-		//     .then(
-		//         () => {
-		//             setSuccess(true)
-		//             setLoading(false)
-		//         },
-		//         error => {
-		//             setError(true)
-		//             console.log('Error fetching data', error)
-		//         }
-		//     )
+		async function postOffer(url: string, data: typeof formData) {
+			const res = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			})
+			return res.json()
+		}
+		await postOffer('/api/offers', formData)
+
+		setLoading(false)
+		setSuccess(true)
+		return
 	})
 
 	return (
@@ -97,6 +98,7 @@ const AddOfferContextProvider = ({
 					open={isDialogOpen}
 					onClose={() => {
 						setSuccess(false)
+						setError(false)
 						close()
 					}}
 					fullWidth

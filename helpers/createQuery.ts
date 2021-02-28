@@ -1,7 +1,8 @@
 import { ParsedUrlQuery } from 'querystring'
-import Query from '../types/Query'
+import { Query } from '../types'
 import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
+
 export function reduceToQueryString(data: Array<any>) {
 	const reduced = data.reduce((acc, val, index) => {
 		const { query, value } = val

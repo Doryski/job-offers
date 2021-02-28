@@ -1,41 +1,37 @@
 import stringFormat from './stringFormat'
-import OfferType from '../types/OfferType'
 import { ParsedUrlQuery } from 'querystring'
-
-export const f = (
-	param: string | number,
-	filter: boolean,
-	nextParam: boolean = true
-) => (!!param ? filter && nextParam : nextParam)
+import { OfferPageDataType } from '../types'
+import f from './combineFilters'
 
 export default function filterOffers(
-	offers: OfferType[],
+	data: OfferPageDataType[],
 	query: ParsedUrlQuery
 ) {
+	if (!data) return []
 	const { location, tech, from, to, expLvl, search } = query
 	const searchParams = !!search ? stringFormat(search as string) : ''
 	const includesSearch = (text: string) =>
 		stringFormat(text).includes(searchParams)
-	return offers.filter((offer) => {
+	return data.filter((el) => {
 		const {
 			tech: offerTech,
-			offerTitle,
-			companyName,
-			city,
+			title,
 			expLvl: offerExplvl,
 			salaryFrom,
 			salaryTo,
 			technology,
-		} = offer
+			companyName,
+			city,
+		} = el
 		const searchFilter =
 			includesSearch(offerTech) ||
-			includesSearch(offerTitle) ||
+			includesSearch(title) ||
 			includesSearch(companyName) ||
 			includesSearch(city) ||
 			includesSearch(offerExplvl) ||
 			includesSearch(String(salaryFrom)) ||
 			includesSearch(String(salaryTo)) ||
-			technology.find(({ tech }) => includesSearch(tech))
+			JSON.parse(technology).find(({ tech }) => includesSearch(tech))
 
 		const locationFilter = location === stringFormat(city)
 		const techFilter = tech === offerTech

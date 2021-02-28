@@ -5,8 +5,8 @@ import stringFormat from '../../helpers/stringFormat'
 
 type LocationButtonProps = {
 	loc: string
-	setLocation: React.Dispatch<React.SetStateAction<string | null>>
-	location: string | null
+	setLocation: React.Dispatch<React.SetStateAction<string>>
+	location: string
 }
 
 const LocationButton = ({

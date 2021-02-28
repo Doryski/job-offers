@@ -1,43 +1,87 @@
 import styled from 'styled-components'
-import dynamic from 'next/dynamic'
 import { GetStaticProps } from 'next'
-import { CircularProgress } from '@material-ui/core'
 import ListHeader from '../components/OfferList/ListHeader'
-import Center from '../components/shared/Center'
 import Layout from '../components/Layout'
-import { HOST_PATH } from '../helpers/utils'
-import OfferType from '../types/OfferType'
+import { OfferPageDataType } from '../types'
+import List from '../components/OfferList/List'
+import Center from '../components/shared/Center'
+import OfferHeader from '../components/OfferPage/OfferHeader'
+import OfferTechStack from '../components/OfferPage/OfferTechStack'
+import OfferDescription from '../components/OfferPage/OfferDescription'
+import OfferApplySection from '../components/OfferPage/OfferApplySection'
+import { useState } from 'react'
+import { DATE_FORMAT } from '../helpers/utils'
+import moment from 'moment'
+import Filters from '../components/Filters'
 
-const List = dynamic(() => import('../components/OfferList/List'), {
-	loading: () => (
-		<Center>
-			<CircularProgress />
-		</Center>
-	),
-})
 export const getStaticProps: GetStaticProps = async () => {
-	const res = await fetch(HOST_PATH + '/api/offers')
-	const data: OfferType[] = await res.json()
-
+	const res = await fetch(process.env.NEXTAUTH_URL + '/api/offers/employers')
+	const { data }: { data: OfferPageDataType[] } = await res.json()
+	const fixed = (data || []).map((el) => ({
+		...el,
+		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
+	}))
 	return {
 		props: {
-			offers: data,
+			data: fixed,
 		},
 	}
 }
 
-const OfferList = ({ offers }) => {
+const OfferList = ({ data }) => {
+	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
+
 	return (
 		<Layout>
-			<Container>
-				<ListHeader />
-				<ContainerScroll>
-					<List offers={offers} />
-				</ContainerScroll>
-			</Container>
+			<Filters />
+			<SubContainer>
+				<ListContainer>
+					<ListContainerScroll>
+						<Container>
+							<ListHeader />
+							<ContainerScroll>
+								<List data={data} setCurrentOffer={setCurrentOffer} />
+							</ContainerScroll>
+						</Container>
+					</ListContainerScroll>
+				</ListContainer>
+				<OfferContainer>
+					<OfferContainerScroll>
+						{!currentOffer ? (
+							<Center>Click on offer card to show details.</Center>
+						) : (
+							<>
+								<OfferHeader offer={currentOffer} />
+								<OfferTechStack technology={currentOffer.technology} />
+								<OfferDescription description={currentOffer.description} />
+								<OfferApplySection offer={currentOffer} />
+							</>
+						)}
+					</OfferContainerScroll>
+				</OfferContainer>
+			</SubContainer>
 		</Layout>
 	)
 }
+export const SubContainer = styled.div`
+	display: flex;
+	flex: 1;
+`
+export const ListContainer = styled.div`
+	width: 55%;
+	height: 100%;
+	background: ${({ theme }) => theme.colors.secondary};
+	display: flex;
+	flex-direction: column;
+	@media (max-width: 1025px) {
+		width: 100%;
+	}
+`
+export const ListContainerScroll = styled.div`
+	display: flex;
+	position: relative;
+	flex: 1 1 0%;
+`
 
 export const Container = styled.div`
 	width: 100%;
@@ -56,6 +100,33 @@ export const InfoSpan = styled.span`
 	display: block;
 	color: ${({ theme }) => theme.colors.title};
 	font-size: 1.2rem;
+`
+export const OfferContainer = styled.div`
+	flex: 1;
+	background: ${({ theme }) => theme.colors.secondary};
+	display: flex;
+	flex-direction: column;
+	padding: 0 1.25em 0 0;
+	position: relative;
+	flex: 1 1 0%;
+`
+export const OfferContainerScroll = styled.div`
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	padding: 0 0.9375em 0 0;
+	overflow: auto;
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+		padding: 0 0.1875em;
+	}
+`
+
+export const ProgressWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	padding-top: 2.5em;
 `
 
 export default OfferList

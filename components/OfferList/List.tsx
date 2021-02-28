@@ -2,19 +2,32 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import filterOffers from '../../helpers/filterOffers'
 import sortOffers from '../../helpers/sortOffers'
-import OfferType from '../../types/OfferType'
+import { OfferPageDataType } from '../../types'
 import OfferCard from '../OfferCard'
 
-const List = ({ offers }: { offers: OfferType[] }) => {
+const List = ({
+	data,
+	setCurrentOffer,
+}: {
+	data: OfferPageDataType[]
+	setCurrentOffer
+}) => {
 	const { query } = useRouter()
-	const filteredOffers = filterOffers(offers, query)
+	const filteredOffers = filterOffers(data, query)
 	const sortedOffers = sortOffers(filteredOffers, query.sort as string)
 
 	return (
 		<ListContainer>
-			{sortedOffers.map((offer, index) => (
-				<OfferCard key={offer.uuid} offer={offer} index={index} />
-			))}
+			{sortedOffers.map((offerInfo, index) => {
+				return (
+					<OfferCard
+						setCurrentOffer={setCurrentOffer}
+						key={offerInfo.offerId}
+						offerInfo={offerInfo}
+						index={index}
+					/>
+				)
+			})}
 		</ListContainer>
 	)
 }
