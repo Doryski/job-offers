@@ -15,6 +15,8 @@ import Filters from '../components/Filters'
 import { db } from '../mysqlSetup'
 import { DATE_FORMAT } from '../helpers/utils'
 import getDomain from '../helpers/getDomain'
+import useRefreshPage from '../helpers/useRefreshPage'
+import { useRouter } from 'next/router'
 
 export const getStaticProps: GetStaticProps = async () => {
 	// const res = await fetch(getDomain() + '/api/offers/employers')
@@ -35,15 +37,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		...el,
 		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
 	}))
-	console.log(getDomain())
-	console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
-	console.log(process.env.NODE_ENV === 'production')
-	console.log(process.env.NEXTAUTH_URL)
-	console.log(
-		process.env.NODE_ENV === 'development'
-			? process.env.NEXTAUTH_URL
-			: process.env.NEXT_PUBLIC_VERCEL_URL
-	)
 	return {
 		props: {
 			data: fixed,
@@ -53,16 +46,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const OfferList = ({ data }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
+	const router = useRouter()
+	const { refresh } = useRefreshPage(data, router)
+
 	useEffect(() => {
-		console.log(getDomain())
-		console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
-		console.log(process.env.NODE_ENV === 'production')
-		console.log(process.env.NEXTAUTH_URL)
-		console.log(
-			process.env.NODE_ENV === 'production'
-				? process.env.NEXT_PUBLIC_VERCEL_URL
-				: process.env.NEXTAUTH_URL
-		)
+		refresh()
 	}, [])
 
 	return (

@@ -31,8 +31,6 @@ const Login = () => {
 	}, [])
 
 	const onSubmit = handleSubmit(async (data) => {
-		console.log('login data:', data)
-		console.log('data:', data)
 		const res = await signIn('credentials', {
 			...data,
 			redirect: false,
@@ -46,7 +44,7 @@ const Login = () => {
 	if (session) {
 		router.push('/')
 		return (
-			<Center>
+			<Center height={'100vh'}>
 				{`You are getting redirected to homepage, 
 				as you are already signed in...`}
 			</Center>
