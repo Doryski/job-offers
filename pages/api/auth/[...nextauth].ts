@@ -29,7 +29,7 @@ const options = {
 					// API call associated with authentification
 					// look up the user from the credentials supplied
 					const user = await login(
-						process.env.NEXTAUTH_URL + '/api/auth/verification',
+						process.env.VERCEL_URL + '/api/auth/verification',
 						{
 							email,
 							password,
@@ -46,7 +46,7 @@ const options = {
 			},
 		}),
 	],
-	site: process.env.NEXTAUTH_URL,
+	site: process.env.VERCEL_URL,
 	session: {
 		// Use JSON Web Tokens for session instead of database sessions.
 		// This option can be used with or without a database for users/accounts.
