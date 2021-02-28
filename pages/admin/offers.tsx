@@ -1,5 +1,4 @@
 import { OfferType } from '../../types'
-import { DATE_FORMAT, DOMAIN } from '../../helpers/utils'
 import { GetServerSideProps } from 'next'
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
@@ -7,11 +6,13 @@ import useRefreshPage from '../../helpers/useRefreshPage'
 import { useRouter } from 'next/router'
 import moment from 'moment'
 import { getSession } from 'next-auth/client'
+import { DATE_FORMAT } from '../../helpers/utils'
+import getDomain from '../../helpers/getDomain'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(DOMAIN + '/api/admin/offers')
+	const res = await fetch(getDomain() + '/api/admin/offers')
 	const { data }: { data: OfferType[] } = await res.json()
 	const fixed = (data || []).map((el) => ({
 		...el,

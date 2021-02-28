@@ -9,14 +9,15 @@ import OfferHeader from '../components/OfferPage/OfferHeader'
 import OfferTechStack from '../components/OfferPage/OfferTechStack'
 import OfferDescription from '../components/OfferPage/OfferDescription'
 import OfferApplySection from '../components/OfferPage/OfferApplySection'
-import { useState } from 'react'
-import { DATE_FORMAT, DOMAIN } from '../helpers/utils'
+import { useEffect, useState } from 'react'
 import moment from 'moment'
 import Filters from '../components/Filters'
 import { db } from '../mysqlSetup'
+import { DATE_FORMAT } from '../helpers/utils'
+import getDomain from '../helpers/getDomain'
 
 export const getStaticProps: GetStaticProps = async () => {
-	// const res = await fetch(DOMAIN + '/api/offers/employers')
+	// const res = await fetch(getDomain() + '/api/offers/employers')
 	// const { data }: { data: OfferPageDataType[] } = await res.json()
 	const sqlGet = `SELECT offers.uuid AS offerId, offers.title,
     offers.tech, offers.empType, offers.expLvl,
@@ -34,6 +35,15 @@ export const getStaticProps: GetStaticProps = async () => {
 		...el,
 		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
 	}))
+	console.log(getDomain())
+	console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
+	console.log(process.env.NODE_ENV === 'production')
+	console.log(process.env.NEXTAUTH_URL)
+	console.log(
+		process.env.NODE_ENV === 'development'
+			? process.env.NEXTAUTH_URL
+			: process.env.NEXT_PUBLIC_VERCEL_URL
+	)
 	return {
 		props: {
 			data: fixed,
@@ -43,6 +53,17 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const OfferList = ({ data }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
+	useEffect(() => {
+		console.log(getDomain())
+		console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
+		console.log(process.env.NODE_ENV === 'production')
+		console.log(process.env.NEXTAUTH_URL)
+		console.log(
+			process.env.NODE_ENV === 'production'
+				? process.env.NEXT_PUBLIC_VERCEL_URL
+				: process.env.NEXTAUTH_URL
+		)
+	}, [])
 
 	return (
 		<Layout>

@@ -1,10 +1,9 @@
 import { sign } from 'jsonwebtoken'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth from 'next-auth'
-import { Session } from 'next-auth/client'
 import Providers from 'next-auth/providers'
+import getDomain from '../../../helpers/getDomain'
 import login from '../../../helpers/login'
-import { DOMAIN } from '../../../helpers/utils'
 
 const options = {
 	providers: [
@@ -25,11 +24,11 @@ const options = {
 			authorize: async (credentials) => {
 				console.log('credentials:', credentials)
 				const { email, password } = credentials
-				console.log(DOMAIN + '/api/auth/verification')
+				console.log(getDomain() + '/api/auth/verification')
 				try {
 					// API call associated with authentification
 					// look up the user from the credentials supplied
-					const user = await login(DOMAIN + '/api/auth/verification', {
+					const user = await login(getDomain() + '/api/auth/verification', {
 						email,
 						password,
 					})
@@ -43,7 +42,6 @@ const options = {
 			},
 		}),
 	],
-	site: DOMAIN,
 	session: {
 		// Use JSON Web Tokens for session instead of database sessions.
 		// This option can be used with or without a database for users/accounts.
@@ -52,10 +50,6 @@ const options = {
 
 		// Seconds - How long until an idle session expires and is no longer valid.
 		maxAge: 60 * 60, // 1 hr
-
-		// Seconds - Throttle how frequently to write to database to extend a session.
-		// Use it to limit write operations. Set to 0 to always update the database.
-		// Note: This option is ignored if using JSON Web Tokens
 	},
 	callbacks: {
 		signIn: async (user, account, profile) => {
@@ -68,9 +62,13 @@ const options = {
 			return '/auth/login'
 		},
 		// redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
-		redirect: async (url, baseUrl) => {
-			return url.startsWith(baseUrl) ? url : baseUrl
-		},
+		// redirect: async (url, baseUrl) => {
+		// 	console.log('REDIRECT Callback: ')
+		// 	console.log('url', url)
+		// 	console.log('baseUrl', baseUrl)
+
+		// 	return url.startsWith(baseUrl) ? url : baseUrl
+		// },
 		// session: async (session, user) => { return Promise.resolve(session) },
 		session: async (session, token) => {
 			const encodedToken = sign(token, process.env.JWT_SECRET)
@@ -106,11 +104,14 @@ const options = {
 	},
 	pages: {
 		signIn: '/auth/login',
+		signOut: '/',
 		newUser: '/user/profile',
 		error: '/auth/login',
 	},
+	secret: process.env.JWT_SECRET,
 	jwt: {
 		secret: process.env.JWT_SECRET,
+		encryption: true,
 	},
 }
 export default (req: NextApiRequest, res: NextApiResponse) =>

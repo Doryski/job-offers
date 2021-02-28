@@ -1,18 +1,17 @@
 import { GetServerSideProps } from 'next'
 import { getSession, useSession } from 'next-auth/client'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import ActionPanel from '../../components/ActionPanel'
 import Header from '../../components/Header'
-import { DOMAIN } from '../../helpers/utils'
+import getDomain from '../../helpers/getDomain'
 import { EmployerType } from '../../types'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
 	console.log('session serverSideProps', session)
 	if (!session) return { notFound: true }
-	const res = await fetch(DOMAIN + '/api/user/' + session.user.id)
+	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
 	const { data }: { data: EmployerType } = await res.json()
 	return {
 		props: {

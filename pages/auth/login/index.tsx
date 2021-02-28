@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/client'
+import Center from '../../../components/shared/Center'
 
 // const Login = ({ csrfToken }) => {
 const Login = () => {
@@ -32,28 +33,29 @@ const Login = () => {
 	const onSubmit = handleSubmit(async (data) => {
 		console.log('login data:', data)
 		console.log('data:', data)
-		signIn('credentials', {
+		const res = await signIn('credentials', {
 			...data,
+			redirect: false,
+			callbackUrl: window.location.origin,
 		})
+		console.log(res)
 		reset()
-		router.push('/')
 		return
 	})
 
 	if (session) {
 		router.push('/')
 		return (
-			<div>
+			<Center>
 				{`You are getting redirected to homepage, 
 				as you are already signed in...`}
-			</div>
+			</Center>
 		)
 	}
 
 	return (
 		<FormWrapper>
 			<form onSubmit={onSubmit}>
-				{/* <input name='csrfToken' type='hidden' defaultValue={csrfToken} /> */}
 				<InputComponent
 					type='email'
 					name='email'
@@ -86,24 +88,5 @@ const Login = () => {
 		</FormWrapper>
 	)
 }
-
-// export async function getServerSideProps(context) {
-// 	const { req, res } = context
-// 	const session = await getSession({ req })
-
-// 	if (session && res && session.accessToken) {
-// 		res?.writeHead(302, {
-// 			Location: '/',
-// 		})
-// 		res?.end()
-// 		return
-// 	}
-// 	return {
-// 		props: {
-// 			session: null,
-// 			csrfToken: await csrfToken(context),
-// 		},
-// 	}
-// }
 
 export default Login
