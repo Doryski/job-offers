@@ -6,14 +6,12 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { useSession, signIn } from 'next-auth/client'
-import Center from '../../../components/shared/Center'
+import { signIn, useSession } from 'next-auth/client'
 
-// const Login = ({ csrfToken }) => {
 const Login = () => {
 	const router = useRouter()
-	const [session] = useSession()
 	const { register, handleSubmit, errors, reset, setError } = useForm()
+	const [session] = useSession()
 
 	// return error message if wrong credentials were passed
 	useEffect(() => {
@@ -30,6 +28,12 @@ const Login = () => {
 		router.prefetch('/')
 	}, [])
 
+	useEffect(() => {
+		if (session) {
+			router.push('/')
+		}
+	}, [session])
+
 	const onSubmit = handleSubmit(async (data) => {
 		await signIn('credentials', {
 			...data,
@@ -41,12 +45,11 @@ const Login = () => {
 	})
 
 	if (session) {
-		router.push('/')
 		return (
-			<Center height={'100vh'}>
+			<div>
 				{`You are getting redirected to homepage, 
 				as you are already signed in...`}
-			</Center>
+			</div>
 		)
 	}
 

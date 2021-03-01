@@ -16,7 +16,7 @@ export default async function signup(
 			.json({ message: `You are already signed in as ${session.user.email}.` })
 	}
 	if (req.method !== 'POST') {
-		return res.status(405).json({
+		return res.status(401).json({
 			method: req.method,
 			errorMessage: 'Only POST method is available',
 		})

@@ -7,13 +7,14 @@ export default async function ApiUserData(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	// const session = await  getSession({ req })
+	// const session = await getSession({ req })
 	// console.log('session', session)
-	// if (!session)
+	// if (!session) {
 	// 	return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
+	// }
 
 	if (req.method !== 'GET') {
-		return res.status(200).json({
+		return res.status(400).json({
 			method: req.method,
 			errorMessage: 'Only GET method is available',
 		})
@@ -25,7 +26,9 @@ export default async function ApiUserData(
         FROM employers
 		WHERE uuid = ?
 		`
+	console.log('rann')
 	const [result] = await db.promise().query(sqlGetUser, [req.query.id])
+	console.log(result[0])
 	return res.status(200).json({
 		method: req.method,
 		data: result[0],

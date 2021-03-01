@@ -1,14 +1,35 @@
-import { ApplicantType } from '../../types'
-import { GetStaticProps } from 'next'
+import { ApplicantType, EmployerType } from '../../types'
+import { GetServerSideProps } from 'next'
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
-import { db } from '../../mysqlSetup'
 import devlog from '../../helpers/devlog'
-import fixObject from '../../helpers/fixObject'
+import getDomain from '../../helpers/getDomain'
+import { useRouter } from 'next/router'
+import { getSession, useSession } from 'next-auth/client'
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session?.user.admin) return { notFound: true }
+	const res = await fetch(getDomain() + '/api/admin/applicants')
+	const { data }: { data: EmployerType } = await res.json()
+	devlog('select all applicants', data)
+	return {
+		props: {
+			data: data || [],
+		},
+	}
+}
 
 const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
-	// TODO: Add multichoice select menu
+	const router = useRouter()
+	const [session, loading] = useSession()
+	if (loading) return <div>Loading admin page...</div>
+	if (!session?.user?.admin) {
+		router.push('/')
+		return <div>You are not authorized to see this page.</div>
+	}
 
+	// TODO: Add multichoice select menu
 	const headers = [
 		'id',
 		'uuid',
@@ -41,16 +62,4 @@ const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-	const sqlGet = `SELECT * FROM applicants`
-	const result = await db.promise().query(sqlGet)
-	const data = fixObject(result[0])
-	devlog('select all applicants', data)
-	return {
-		props: {
-			data: data || [],
-		},
-		revalidate: 1,
-	}
-}
 export default ApplicantList

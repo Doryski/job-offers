@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { getSession, useSession } from 'next-auth/client'
+import { getSession, Session, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import styled from 'styled-components'
@@ -7,16 +7,30 @@ import Header from '../../components/Header'
 import getDomain from '../../helpers/getDomain'
 import { EmployerType } from '../../types'
 
-const Profile = ({ profile }: { profile: EmployerType }) => {
-	const router = useRouter()
-	const [session, loading] = useSession()
-	if (loading) return <div>Loading page...</div>
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session) return { notFound: true }
+	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
+	const { data }: { data: EmployerType } = await res.json()
+	console.log('get api/user/[id] res: ', data)
+	// console.log('get api/user/[id]: ', data)
+	return {
+		props: {
+			profile: data || {},
+			// session,
+		},
+	}
+}
 
-	useEffect(() => {
-		if (!session) {
-			router.push('/auth/login')
-		}
-	}, [session])
+const Profile = ({
+	profile,
+}: // session,
+{
+	profile: EmployerType
+	// session: Session
+}) => {
+	const router = useRouter()
+	const [session] = useSession()
 
 	return (
 		<PageWrapper>
@@ -43,19 +57,6 @@ const Profile = ({ profile }: { profile: EmployerType }) => {
 			</SubContainer>
 		</PageWrapper>
 	)
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	if (!session) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
-	const { data }: { data: EmployerType } = await res.json()
-	console.log('get api/user/[id]: ', data)
-	return {
-		props: {
-			profile: data || {},
-		},
-	}
 }
 
 export const PageWrapper = styled.div`

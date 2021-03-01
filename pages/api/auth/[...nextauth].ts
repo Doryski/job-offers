@@ -105,13 +105,13 @@ const options = {
 	pages: {
 		signIn: '/auth/login',
 		signOut: '/',
-		newUser: '/user/profile',
+		newUser: '/',
 		error: '/auth/login',
 	},
 	secret: process.env.JWT_SECRET,
 	jwt: {
 		secret: process.env.JWT_SECRET,
-		encryption: true,
+		// encryption: true,
 	},
 }
 export default (req: NextApiRequest, res: NextApiResponse) =>
