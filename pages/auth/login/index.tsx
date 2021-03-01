@@ -31,12 +31,11 @@ const Login = () => {
 	}, [])
 
 	const onSubmit = handleSubmit(async (data) => {
-		const res = await signIn('credentials', {
+		await signIn('credentials', {
 			...data,
 			redirect: false,
 			callbackUrl: window.location.origin,
 		})
-		console.log(res)
 		reset()
 		return
 	})

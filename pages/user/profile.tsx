@@ -47,7 +47,6 @@ const Profile = ({ profile }: { profile: EmployerType }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession(context)
-	console.log('session serverSideProps', session)
 	if (!session) return { notFound: true }
 	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
 	const { data }: { data: EmployerType } = await res.json()
