@@ -1,28 +1,13 @@
 import { ApplicantType } from '../../types'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
-import useRefreshPage from '../../helpers/useRefreshPage'
-import { useRouter } from 'next/router'
-import { getSession } from 'next-auth/client'
-import getDomain from '../../helpers/getDomain'
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/admin/applicants')
-	const { data }: { data: ApplicantType[] } = await res.json()
-	console.log('get /api/admin/applicants: ', data)
-	return {
-		props: {
-			data: data || [],
-		},
-	}
-}
+import { db } from '../../mysqlSetup'
+import devlog from '../../helpers/devlog'
 
 const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
 	// TODO: Add multichoice select menu
-	// const headers = Object.keys(data[0])
+
 	const headers = [
 		'id',
 		'uuid',
@@ -33,9 +18,6 @@ const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
 		'employerId',
 	]
 
-	const router = useRouter()
-	const { refresh } = useRefreshPage(data, router)
-
 	const deleteRecord = async (id: string) => {
 		async function delApplicant(url: string) {
 			const res = await fetch(url, {
@@ -44,7 +26,6 @@ const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
 			return res.json()
 		}
 		await delApplicant('/api/applicants/' + id)
-		refresh()
 	}
 
 	return (
@@ -59,4 +40,17 @@ const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
 	)
 }
 
+export const getStaticProps: GetStaticProps = async () => {
+	const sqlGet = `SELECT * FROM applicants`
+	const result = await db.promise().query(sqlGet)
+	const data = JSON.parse(JSON.stringify(result[0]))
+	devlog('select all applicants', data)
+	devlog(JSON.parse(JSON.stringify(data)))
+	return {
+		props: {
+			data: data || [],
+		},
+		revalidate: 1,
+	}
+}
 export default ApplicantList

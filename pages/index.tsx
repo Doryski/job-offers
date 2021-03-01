@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import ListHeader from '../components/OfferList/ListHeader'
 import Layout from '../components/Layout'
 import { OfferPageDataType } from '../types'
@@ -13,22 +13,7 @@ import { useState } from 'react'
 import { DATE_FORMAT } from '../helpers/utils'
 import moment from 'moment'
 import Filters from '../components/Filters'
-import getDomain from '../helpers/getDomain'
-
-export const getServerSideProps: GetServerSideProps = async () => {
-	const res = await fetch(getDomain() + '/api/offers/employers')
-	const { data }: { data: OfferPageDataType[] } = await res.json()
-	console.log('get api/offers/employers: ', data)
-	const fixed = (data || []).map((el) => ({
-		...el,
-		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
-	}))
-	return {
-		props: {
-			data: fixed,
-		},
-	}
-}
+import { db } from '../mysqlSetup'
 
 const OfferList = ({ data }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
@@ -65,6 +50,32 @@ const OfferList = ({ data }) => {
 		</Layout>
 	)
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+	const sqlGet = `SELECT offers.uuid AS offerId, offers.title,
+    offers.tech, offers.empType, offers.expLvl,
+    offers.salaryFrom, offers.salaryTo, 
+    offers.technology, offers.description, offers.dateAdded, 
+    employers.companyName, employers.companySize,
+    employers.street, employers.city,
+    employers.uuid AS employerId 
+    FROM (offers
+    INNER JOIN employers ON offers.employerId = employers.uuid)`
+
+	const result = await db.promise().query(sqlGet)
+	const data = JSON.parse(JSON.stringify(result[0]))
+	console.log('get api/offers/employers: ', data)
+	const fixed = (data || []).map((el) => ({
+		...el,
+		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
+	}))
+	return {
+		props: {
+			data: fixed,
+		},
+	}
+}
+
 export const SubContainer = styled.div`
 	display: flex;
 	flex: 1;

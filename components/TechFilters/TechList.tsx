@@ -2,10 +2,8 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { TECHNOLOGIES } from '../../helpers/utils'
 import stringFormat from '../../helpers/stringFormat'
-import TechIcon from '../shared/TechIcon'
 import createQuery from '../../helpers/createQuery'
 import { useRouter } from 'next/router'
-import { Query } from '../../types'
 import CustomButton from '../shared/CustomButton'
 
 type TechListProps = {

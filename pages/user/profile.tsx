@@ -7,30 +7,11 @@ import Header from '../../components/Header'
 import getDomain from '../../helpers/getDomain'
 import { EmployerType } from '../../types'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	console.log('session serverSideProps', session)
-	if (!session) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
-	const { data }: { data: EmployerType } = await res.json()
-	return {
-		props: {
-			profile: data || {},
-		},
-	}
-}
-
 const Profile = ({ profile }: { profile: EmployerType }) => {
 	const router = useRouter()
 	const [session, loading] = useSession()
 	if (loading) return <div>Loading page...</div>
-	console.log('profile', profile)
 
-	const buyPremium = async () => {
-		const authorized = await fetch(getDomain() + '/api/payu/authorize')
-		console.log(authorized)
-		return
-	}
 	useEffect(() => {
 		if (!session) {
 			router.push('/auth/login')
@@ -50,9 +31,9 @@ const Profile = ({ profile }: { profile: EmployerType }) => {
 								<h3>{key}</h3>
 								<span>
 									{value}
-									{key === 'accountType' && value === 'basic' && (
+									{/* {key === 'accountType' && value === 'basic' && (
 										<button onClick={buyPremium}>Buy premium</button>
-									)}
+									)} */}
 								</span>
 							</>
 						))}
@@ -64,15 +45,25 @@ const Profile = ({ profile }: { profile: EmployerType }) => {
 	)
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const session = await getSession(context)
+	console.log('session serverSideProps', session)
+	if (!session) return { notFound: true }
+	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
+	const { data }: { data: EmployerType } = await res.json()
+	console.log('get api/user/[id]: ', data)
+	return {
+		props: {
+			profile: data || {},
+		},
+	}
+}
+
 export const PageWrapper = styled.div`
 	height: 100vh;
 	width: 100vw;
 `
 export const SubContainer = styled.div`
-	/* display: grid;
-	grid-template-columns: 85vw 15vw; */
-	/* width: 100%;
-	height: 100%; */
 	display: flex;
 	flex-direction: column;
 `

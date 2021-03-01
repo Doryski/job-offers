@@ -2,19 +2,21 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 const LeftNav = () => {
+	const ADMIN_TABLES_LINKS = [
+		{ path: '/admin/offers', title: 'Offers' },
+		{ path: '/admin/employers', title: 'Employers' },
+		{ path: '/admin/applicants', title: 'Applicants' },
+	]
+
 	return (
 		<Wrapper>
 			<nav>
 				<TableList>
-					<Link href={'/admin/offers'}>
-						<ListItem>Offers</ListItem>
-					</Link>
-					<Link href={'/admin/employers'}>
-						<ListItem>Employers</ListItem>
-					</Link>
-					<Link href={'/admin/applicants'}>
-						<ListItem>Applicants</ListItem>
-					</Link>
+					{ADMIN_TABLES_LINKS.map(({ path, title }) => (
+						<Link href={path}>
+							<ListItem>{title}</ListItem>
+						</Link>
+					))}
 				</TableList>
 			</nav>
 		</Wrapper>

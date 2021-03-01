@@ -6,6 +6,7 @@ import moment from 'moment'
 import { OfferType } from '../../types'
 import Center from '../shared/Center'
 import CloseButton from '../shared/CloseButton'
+import devlog from '../../helpers/devlog'
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>
@@ -53,7 +54,7 @@ const AddOfferContextProvider = ({
 
 	const onSubmit = handleSubmit(async (data: FormData) => {
 		setLoading(true)
-		console.log('submitted new offer: ', data)
+		devlog('submitted new offer: ', data)
 		let technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
 			technology.push({

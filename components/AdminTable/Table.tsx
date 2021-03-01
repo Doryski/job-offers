@@ -15,11 +15,6 @@ const LoadingInfo = styled.h1`
 
 const Table = ({ headers, uniqueKey }) => {
 	const { currentRecords, sortAscending } = useContext(TableContext)
-
-	// if (loading) {
-	// 	return <LoadingInfo>Loading data...</LoadingInfo>
-	// }
-
 	// show cheveron depending on sort direction
 	const cheveron = sortAscending ? (
 		<CheveronUp size='20' />

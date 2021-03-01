@@ -1,40 +1,20 @@
 import { EmployerType } from '../../types'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
-import useRefreshPage from '../../helpers/useRefreshPage'
-import { useRouter } from 'next/router'
-import { getSession } from 'next-auth/client'
-import getDomain from '../../helpers/getDomain'
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/admin/employers')
-	const { data }: { data: EmployerType[] } = await res.json()
-	console.log('/api/admin/employers data:', data)
-	return {
-		props: {
-			data: data || [],
-		},
-	}
-}
+import { db } from '../../mysqlSetup'
+import devlog from '../../helpers/devlog'
 
 const EmployerList = ({ data }: { data: EmployerType[] }) => {
 	// TODO: Add multichoice select menu
-	// const headers = Object.keys(data[0])
-
-	const router = useRouter()
-	const { refresh } = useRefreshPage(data, router)
-	const deleteRecord = (id: string) => {
+	const deleteRecord = async (id: string) => {
 		async function delEmployer(url: string) {
 			const res = await fetch(url, {
 				method: 'DELETE',
 			})
-			refresh()
-			return await res.json()
+			return res.json()
 		}
-		delEmployer('/api/employers/' + id)
+		await delEmployer('/api/employers/' + id)
 	}
 
 	const headers = [
@@ -57,6 +37,21 @@ const EmployerList = ({ data }: { data: EmployerType[] }) => {
 			/>
 		</AdminLayout>
 	)
+}
+export const getStaticProps: GetStaticProps = async () => {
+	const sqlGet = `SELECT id, uuid, email, companyName, 
+	companySize, street, city, isAdmin, accountType
+	FROM employers`
+	const result = await db.promise().query(sqlGet)
+	const data = JSON.parse(JSON.stringify(result[0]))
+	devlog('select all employers', data)
+	devlog(JSON.parse(JSON.stringify(data)))
+	return {
+		props: {
+			data: data || [],
+		},
+		revalidate: 1,
+	}
 }
 
 export default EmployerList

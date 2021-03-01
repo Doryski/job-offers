@@ -7,25 +7,24 @@ type TableContextType = {
 	recordsToShow: number
 	indexOfFirstRecord: number
 	indexOfLastRecord: number
-	sortKey
+	sortKey: string
 	sortAscending: boolean
 	setSortAscending
 	handleColumnHeaderClick: Function
-	search
+	search: string
 	setSearch
 	data
 	handleFilterChange
-	currentPage
-	currentRecords
-	recordsPerPage
+	currentPage: number
+	currentRecords: Array<any>
+	recordsPerPage: number
 	setRecordsPerPage
 	setCurrentPage
-	uniqueKey
+	uniqueKey: string
 	deleteRecord?: Function
 	editRecord?: Function
 }
-// @ts-ignore
-export const TableContext = createContext<TableContextType>({})
+export const TableContext = createContext<Partial<TableContextType>>({})
 
 const AdminTable = ({
 	data,
@@ -40,12 +39,6 @@ const AdminTable = ({
 	deleteRecord?: Function
 	editRecord?: Function
 }) => {
-	console.log('OFFERS TABLE:')
-	console.log('data:', data)
-	console.log('headers:', headers)
-	console.log('uniqueKey:', uniqueKey)
-	console.log('deleteRecord', deleteRecord)
-
 	// sorting
 	const [sortKey, setSortKey] = useState<string>('')
 	const [sortAscending, setSortAscending] = useState<boolean>(true)

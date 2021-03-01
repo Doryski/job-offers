@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
-import TechIcon from '../shared/TechIcon'
 import { TECHNOLOGIES } from '../../helpers/utils'
 import Link from 'next/link'
 import { DropdownList, DropdownListItem } from '../shared/DropdownList'
@@ -21,7 +20,6 @@ type DesktopViewProps = {
 	isListOpen: boolean
 }
 
-const ALL_TECH_NAME = 'All'
 const DesktopView = ({
 	toggle,
 	close,
@@ -31,6 +29,7 @@ const DesktopView = ({
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(listRef, close)
+	const ALL_TECH_NAME = 'All'
 	// if clicked on tech filter -> screen changes from all filters to table of technologies 3x7
 
 	return (

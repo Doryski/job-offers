@@ -1,14 +1,10 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import Typography from '../shared/Typography'
 import theme, { textColors } from '../../theme'
 import { Wrapper } from './StyledComponents'
-import useDescription from '../../helpers/useDescription'
 
 const OfferDescription = ({ description }: { description: string }) => {
-	const descriptionRef = useRef<HTMLDivElement>(null!)
-	useDescription(descriptionRef, description)
-
 	return (
 		<DescriptionContainer>
 			<Typography
@@ -21,7 +17,7 @@ const OfferDescription = ({ description }: { description: string }) => {
 			</Typography>
 
 			<Wrapper>
-				<DescriptionContent ref={descriptionRef} />
+				<DescriptionContent>{description}</DescriptionContent>
 			</Wrapper>
 		</DescriptionContainer>
 	)
