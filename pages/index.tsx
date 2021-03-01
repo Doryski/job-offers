@@ -14,6 +14,7 @@ import { DATE_FORMAT } from '../helpers/utils'
 import moment from 'moment'
 import Filters from '../components/Filters'
 import { db } from '../mysqlSetup'
+import fixObject from '../helpers/fixObject'
 
 const OfferList = ({ data }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
@@ -63,7 +64,7 @@ export const getStaticProps: GetStaticProps = async () => {
     INNER JOIN employers ON offers.employerId = employers.uuid)`
 
 	const result = await db.promise().query(sqlGet)
-	const data = JSON.parse(JSON.stringify(result[0]))
+	const data = fixObject(result[0])
 	console.log('get api/offers/employers: ', data)
 	const fixed = (data || []).map((el) => ({
 		...el,
@@ -73,6 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			data: fixed,
 		},
+		revalidate: 5,
 	}
 }
 

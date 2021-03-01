@@ -4,6 +4,7 @@ import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
 import { db } from '../../mysqlSetup'
 import devlog from '../../helpers/devlog'
+import fixObject from '../../helpers/fixObject'
 
 const OfferList = ({ data }: { data: OfferType[] }) => {
 	// TODO: Add multichoice select menu
@@ -32,9 +33,8 @@ const OfferList = ({ data }: { data: OfferType[] }) => {
 export const getStaticProps: GetStaticProps = async () => {
 	const sqlGet = `SELECT * FROM offers`
 	const result = await db.promise().query(sqlGet)
-	const data = JSON.parse(JSON.stringify(result[0]))
+	const data = fixObject(result[0])
 	devlog('select all offers', data)
-	devlog(JSON.parse(JSON.stringify(data)))
 	return {
 		props: {
 			data: data || [],
