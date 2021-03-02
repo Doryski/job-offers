@@ -66,7 +66,7 @@ export const SORT_OPTIONS = {
 		name: 'highest salary',
 	},
 	dateLatest: {
-		id: null,
+		id: '',
 		name: 'latest',
 	},
 }

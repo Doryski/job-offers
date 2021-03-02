@@ -5,7 +5,7 @@ import Providers from 'next-auth/providers'
 import getDomain from '../../../helpers/getDomain'
 import login from '../../../helpers/login'
 
-const options = {
+export const options = {
 	providers: [
 		Providers.Credentials({
 			// The name to display on the sign in form (e.g. 'Sign in with...')

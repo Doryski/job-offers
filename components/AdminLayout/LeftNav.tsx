@@ -13,7 +13,7 @@ const LeftNav = () => {
 			<nav>
 				<TableList>
 					{ADMIN_TABLES_LINKS.map(({ path, title }) => (
-						<Link href={path}>
+						<Link href={path} key={title}>
 							<ListItem>{title}</ListItem>
 						</Link>
 					))}

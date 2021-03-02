@@ -1,37 +1,16 @@
-import { GetServerSideProps } from 'next'
-import { getSession, Session, useSession } from 'next-auth/client'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
 import Header from '../../components/Header'
-import getDomain from '../../helpers/getDomain'
-import { EmployerType } from '../../types'
+import Center from '../../components/shared/Center'
+import devlog from '../../helpers/devlog'
+import useApi from '../../hooks/useApi'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	if (!session) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/user/' + session.user.id)
-	const { data }: { data: EmployerType } = await res.json()
-	console.log('get api/user/[id] res: ', data)
-	// console.log('get api/user/[id]: ', data)
-	return {
-		props: {
-			profile: data || {},
-			// session,
-		},
-	}
-}
-
-const Profile = ({
-	profile,
-}: // session,
-{
-	profile: EmployerType
-	// session: Session
-}) => {
-	const router = useRouter()
+const Profile = () => {
 	const [session] = useSession()
-
+	const { data, error, dataLoading } = useApi(
+		session ? `/api/user/${session.user.id}` : null
+	)
+	devlog(data)
 	return (
 		<PageWrapper>
 			<Header />
@@ -39,19 +18,23 @@ const Profile = ({
 				<div>
 					Profile page of user {session?.user.email} <br />
 					{session?.user.admin && <span>Welcome Admin!</span>}
-					<AccountData>
-						{Object.entries(profile).map(([key, value]) => (
-							<>
-								<h3>{key}</h3>
-								<span>
-									{value}
-									{/* {key === 'accountType' && value === 'basic' && (
+					{error && <Center>Failed to load.</Center>}
+					{dataLoading && <Center>Loading...</Center>}
+					{data && (
+						<AccountData>
+							{Object.entries(data?.data).map(([key, value]) => (
+								<>
+									<h3>{key}</h3>
+									<span>
+										{value}
+										{/* {key === 'accountType' && value === 'basic' && (
 										<button onClick={buyPremium}>Buy premium</button>
 									)} */}
-								</span>
-							</>
-						))}
-					</AccountData>
+									</span>
+								</>
+							))}
+						</AccountData>
+					)}
 				</div>
 				{/* <ActionPanel /> */}
 			</SubContainer>

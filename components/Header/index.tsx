@@ -1,22 +1,14 @@
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
-import { IconButton } from '@material-ui/core'
 import AddOffer from '../AddOfferModal/AddOffer'
 import CustomButton from '../shared/CustomButton'
 import Navigation from './Navigation'
 import theme from '../../theme'
-import useDialogHandler from '../../helpers/useDialogHandler'
-import DrawerComponent from './DrawerComponent'
-import useDeviceDetect from '../../helpers/useDeviceDetect'
+import useDeviceDetect from '../../hooks/useDeviceDetect'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
 const Header = ({ admin = false }: { admin?: boolean }) => {
-	const {
-		isDialogOpen: isSideBarOpen,
-		close: closeSideBar,
-		toggle: toggleSideBar,
-	} = useDialogHandler(false)
 	const isMobile = useDeviceDetect(1105)
 	const [session, loading] = useSession()
 
@@ -24,7 +16,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 		<Container admin={admin}>
 			<Link href='/'>
 				<a>
-					<LogoWrapper>Some logo</LogoWrapper>
+					<LogoWrapper>Job offers</LogoWrapper>
 				</a>
 			</Link>
 			{!isMobile && <Navigation />}
@@ -75,18 +67,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 						</CustomButton>
 					</>
 				)}
-
-				{/* menu sidebar */}
-				{/* <Wrapper>
-					<IconButton onClick={toggleSideBar}>
-						<StyledMenuIcon />
-					</IconButton>
-				</Wrapper> */}
 			</Wrapper>
-
-			{/* {isSideBarOpen && (
-				<DrawerComponent handleClose={closeSideBar} isOpen={isSideBarOpen} />
-			)} */}
 		</Container>
 	)
 }
@@ -105,7 +86,9 @@ export const Container = styled.header<{ admin?: boolean }>`
 export const LogoWrapper = styled.div`
 	width: 120px;
 	float: left;
-	margin: 7px 15px 0px 25px;
+	margin-left: 1em;
+	color: ${({ theme }) => theme.colors.title};
+	font-size: 1.25rem;
 `
 export const Wrapper = styled.div`
 	display: flex;

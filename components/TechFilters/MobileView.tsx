@@ -2,7 +2,7 @@ import CustomButton from '../shared/CustomButton'
 import styled from 'styled-components'
 import TechList from './TechList'
 import Dialog from '@material-ui/core/Dialog'
-import useDeviceDetect from '../../helpers/useDeviceDetect'
+import useDeviceDetect from '../../hooks/useDeviceDetect'
 import { useRouter } from 'next/router'
 
 type MobileViewProps = {

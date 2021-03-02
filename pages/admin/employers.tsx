@@ -1,38 +1,25 @@
-import { EmployerType } from '../../types'
-import { GetServerSideProps } from 'next'
+// HAS TO BE MADE REUSABLE
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
 import devlog from '../../helpers/devlog'
-import getDomain from '../../helpers/getDomain'
 import { useRouter } from 'next/router'
-import useRefreshPage from '../../helpers/useRefreshPage'
-import { getSession, useSession } from 'next-auth/client'
+import useRefreshPage from '../../hooks/useRefreshPage'
+import { useSession } from 'next-auth/client'
+import useApi from '../../hooks/useApi'
+import Center from '../../components/shared/Center'
+import { Link } from '@material-ui/core'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/admin/employers')
-	const { data }: { data: EmployerType } = await res.json()
-	devlog('select all employers', data)
-	return {
-		props: {
-			data: data || [],
-		},
-	}
-}
-
-const EmployerList = ({ data }: { data: EmployerType[] }) => {
+const EmployerList = () => {
 	// TODO: Add multichoice select menu
 	const router = useRouter()
 	const [session, loading] = useSession()
-	if (loading) return <div>Loading admin page...</div>
-	if (!session?.user?.admin) {
-		router.push('/')
-		return <div>You are not authorized to see this page.</div>
-	}
-
+	const { data, error, dataLoading } = useApi(
+		session ? '/api/admin/employers' : null
+	)
+	devlog(data)
 	const { refresh } = useRefreshPage(data, router)
 
+	devlog('select all employers')
 	const deleteRecord = async (id: string) => {
 		async function delEmployer(url: string) {
 			const res = await fetch(url, {
@@ -53,15 +40,29 @@ const EmployerList = ({ data }: { data: EmployerType[] }) => {
 		'city',
 		'accountType',
 	]
+	if (!session?.user?.admin) {
+		return (
+			<Center height='100vh'>
+				You are not authorized to see this page. Go back to{' '}
+				<Link href='/'>
+					<a>homepage</a>
+				</Link>
+			</Center>
+		)
+	}
 
 	return (
 		<AdminLayout>
-			<AdminTable
-				data={data}
-				headers={headers}
-				uniqueKey={'uuid'}
-				deleteRecord={deleteRecord}
-			/>
+			{error && <Center>Failed to load.</Center>}
+			{(dataLoading || loading) && <Center>Loading...</Center>}
+			{data && (
+				<AdminTable
+					data={data.data}
+					headers={headers}
+					uniqueKey={'uuid'}
+					deleteRecord={deleteRecord}
+				/>
+			)}
 		</AdminLayout>
 	)
 }

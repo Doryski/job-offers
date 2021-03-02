@@ -1,6 +1,6 @@
 import CustomButton from '../shared/CustomButton'
 import theme from '../../theme'
-import useDialogHandler from '../../helpers/useDialogHandler'
+import useDialogHandler from '../../hooks/useDialogHandler'
 import AddOfferModal from '.'
 import AddOfferContextProvider from './AddOfferContext'
 

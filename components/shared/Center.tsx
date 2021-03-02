@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 
-const Center = styled.div<{ width?: string; height?: string }>`
+const Center = styled.div<{
+	width?: string
+	height?: string
+	direction?: string
+}>`
 	display: flex;
+	flex-direction: ${({ direction }) => direction || 'row'};
 	justify-content: center;
 	align-items: center;
 	width: ${({ width }) => width || '100%'};

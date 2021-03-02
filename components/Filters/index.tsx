@@ -3,7 +3,7 @@ import LocationFilters from '../LocationFiltersModal'
 import MoreFilters from '../MoreFiltersModal/MoreFilters'
 import TechFilters from '../TechFilters'
 import InputFilter from '../shared/InputFilter'
-import useDeviceDetect from '../../helpers/useDeviceDetect'
+import useDeviceDetect from '../../hooks/useDeviceDetect'
 
 const Filters = () => {
 	const isMobile = useDeviceDetect(1025)

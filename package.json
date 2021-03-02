@@ -6,14 +6,12 @@
 		"db": "node mysqlSetup.js",
 		"dev": "next dev",
 		"build": "next build",
+		"build-static": "next export",
 		"start": "next start",
-		"format": "prettier --write src/**/*.ts{,x}",
-		"lint": "tsc --noEmit && eslint src/**/*.ts{,x}"
+		"format": "prettier --write **/*.ts{,x}",
+		"lint": "tsc --noEmit && eslint **/*.ts{,x}"
 	},
 	"dependencies": {
-		"@ckeditor/ckeditor5-build-classic": "^19.0.2",
-		"@ckeditor/ckeditor5-build-decoupled-document": "^19.0.2",
-		"@ckeditor/ckeditor5-react": "^2.1.0",
 		"@material-ui/core": "^4.10.2",
 		"@material-ui/icons": "^4.9.1",
 		"@styled-icons/zondicons": "^10.18.0",
@@ -28,7 +26,8 @@
 		"react-dom": "17.0.1",
 		"react-hook-form": "^6.1.2",
 		"react-uuid": "^1.0.2",
-		"styled-components": "^5.1.1"
+		"styled-components": "^5.1.1",
+		"swr": "^0.4.2"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^5.11.9",

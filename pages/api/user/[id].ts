@@ -7,11 +7,11 @@ export default async function ApiUserData(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	// const session = await getSession({ req })
-	// console.log('session', session)
-	// if (!session) {
-	// 	return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
-	// }
+	const session = await getSession({ req })
+	console.log('session', session)
+	if (!session) {
+		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
+	}
 
 	if (req.method !== 'GET') {
 		return res.status(400).json({

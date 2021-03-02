@@ -8,7 +8,7 @@ import {
 	CheckboxWrapper,
 } from '../../../components/OfferPage/OfferApplySection'
 import { LOCATIONS } from '../../../helpers/utils'
-import useCheckbox from '../../../helpers/useCheckbox'
+import useCheckbox from '../../../hooks/useCheckbox'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import InputComponent from '../../../components/AddOfferModal/CustomInput'
@@ -19,6 +19,7 @@ import postEmployer from '../../../helpers/postEmployer'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
+import Center from '../../../components/shared/Center'
 
 const Signup = () => {
 	const { isChecked, handleChange, setIsChecked } = useCheckbox(false)
@@ -26,17 +27,15 @@ const Signup = () => {
 	const [processDataError, setProcessDataError] = useState('')
 	const [session] = useSession()
 	const router = useRouter()
-	useEffect(() => {
-		if (session) {
-			router.push('/')
-		}
-	}, [session])
+
 	if (session) {
 		return (
-			<div>
-				{`You are getting redirected to homepage, 
-				as you are already signed in...`}
-			</div>
+			<Center height='100vh'>
+				You are already signed in... Go to{' '}
+				<Link href='/'>
+					<a>homepage</a>
+				</Link>
+			</Center>
 		)
 	}
 

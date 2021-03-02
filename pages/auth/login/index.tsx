@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
+import Center from '../../../components/shared/Center'
 
 const Login = () => {
 	const router = useRouter()
@@ -28,12 +29,6 @@ const Login = () => {
 		router.prefetch('/')
 	}, [])
 
-	useEffect(() => {
-		if (session) {
-			router.push('/')
-		}
-	}, [session])
-
 	const onSubmit = handleSubmit(async (data) => {
 		await signIn('credentials', {
 			...data,
@@ -46,10 +41,12 @@ const Login = () => {
 
 	if (session) {
 		return (
-			<div>
-				{`You are getting redirected to homepage, 
-				as you are already signed in...`}
-			</div>
+			<Center height='100vh'>
+				You are already signed in... Go to{' '}
+				<Link href='/'>
+					<a>homepage</a>
+				</Link>
+			</Center>
 		)
 	}
 

@@ -1,35 +1,23 @@
-import { ApplicantType, EmployerType } from '../../types'
-import { GetServerSideProps } from 'next'
+// HAS TO BE MADE REUSABLE
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
 import devlog from '../../helpers/devlog'
-import getDomain from '../../helpers/getDomain'
 import { useRouter } from 'next/router'
-import { getSession, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
+import Center from '../../components/shared/Center'
+import useApi from '../../hooks/useApi'
+import useRefreshPage from '../../hooks/useRefreshPage'
+import { Link } from '@material-ui/core'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await getSession(context)
-	if (!session?.user.admin) return { notFound: true }
-	const res = await fetch(getDomain() + '/api/admin/applicants')
-	const { data }: { data: EmployerType } = await res.json()
-	devlog('select all applicants', data)
-	return {
-		props: {
-			data: data || [],
-		},
-	}
-}
-
-const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
+const ApplicantList = () => {
+	// TODO: Add multichoice select menu
 	const router = useRouter()
 	const [session, loading] = useSession()
-	if (loading) return <div>Loading admin page...</div>
-	if (!session?.user?.admin) {
-		router.push('/')
-		return <div>You are not authorized to see this page.</div>
-	}
-
-	// TODO: Add multichoice select menu
+	const { data, error, dataLoading } = useApi(
+		session ? '/api/admin/applicants' : null
+	)
+	devlog(data)
+	const { refresh } = useRefreshPage(data, router)
 	const headers = [
 		'id',
 		'uuid',
@@ -40,24 +28,39 @@ const ApplicantList = ({ data }: { data: ApplicantType[] }) => {
 		'employerId',
 	]
 
-	const deleteRecord = async (id: string) => {
-		async function delApplicant(url: string) {
-			const res = await fetch(url, {
+	const deleteRecord = async (url: string, id: string) => {
+		async function delApplicant(apiUrl) {
+			const res = await fetch(apiUrl, {
 				method: 'DELETE',
 			})
 			return res.json()
 		}
-		await delApplicant('/api/applicants/' + id)
+		await delApplicant(url + id)
+		refresh()
 	}
 
+	if (!session?.user?.admin) {
+		return (
+			<Center height='100vh'>
+				You are not authorized to see this page. Go back to{' '}
+				<Link href='/'>
+					<a>homepage</a>
+				</Link>
+			</Center>
+		)
+	}
 	return (
 		<AdminLayout>
-			<AdminTable
-				data={data}
-				headers={headers}
-				uniqueKey={'uuid'}
-				deleteRecord={deleteRecord}
-			/>
+			{error && <Center>Failed to load.</Center>}
+			{(dataLoading || loading) && <Center>Loading...</Center>}
+			{data && (
+				<AdminTable
+					data={data.data}
+					headers={headers}
+					uniqueKey={'uuid'}
+					deleteRecord={deleteRecord}
+				/>
+			)}
 		</AdminLayout>
 	)
 }

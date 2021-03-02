@@ -1,7 +1,7 @@
 import MobileView from './MobileView'
 import DesktopView from './DesktopView'
-import useDialogHandler from '../../helpers/useDialogHandler'
-import useDeviceDetect from '../../helpers/useDeviceDetect'
+import useDialogHandler from '../../hooks/useDialogHandler'
+import useDeviceDetect from '../../hooks/useDeviceDetect'
 
 const TechFilters = () => {
 	const { close, toggle, open, isDialogOpen } = useDialogHandler(false)

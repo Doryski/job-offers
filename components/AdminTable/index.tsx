@@ -88,8 +88,8 @@ const AdminTable = ({
 				indexOfFirstRecord,
 				indexOfLastRecord,
 				uniqueKey,
-				deleteRecord: deleteRecord ?? deleteRecord,
-				editRecord: editRecord ?? editRecord,
+				deleteRecord,
+				editRecord,
 			}}>
 			<TableWrapper>
 				<TopSection />

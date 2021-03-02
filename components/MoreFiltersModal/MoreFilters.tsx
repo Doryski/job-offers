@@ -3,9 +3,9 @@ import { Tune } from '@material-ui/icons'
 import Typography from '../shared/Typography'
 import styled from 'styled-components'
 import { textColors } from '../../theme'
-import useDialogHandler from '../../helpers/useDialogHandler'
+import useDialogHandler from '../../hooks/useDialogHandler'
 import DialogComponent from './DialogComponent'
-import useDeviceDetect from '../../helpers/useDeviceDetect'
+import useDeviceDetect from '../../hooks/useDeviceDetect'
 import { useRouter } from 'next/router'
 
 const MoreFilters = () => {
