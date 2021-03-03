@@ -4,15 +4,18 @@ import CustomButton from '../../../components/shared/CustomButton'
 import { FormWrapper } from '../signup'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
 import Center from '../../../components/shared/Center'
+import styled from 'styled-components'
 
 const Login = () => {
 	const router = useRouter()
 	const { register, handleSubmit, errors, reset, setError } = useForm()
 	const [session] = useSession()
+	const [firstLogIn, setFirstLogIn] = useState(false)
+	const [isLoggingIn, setIsLoggingIn] = useState(false)
 
 	// return error message if wrong credentials were passed
 	useEffect(() => {
@@ -30,24 +33,28 @@ const Login = () => {
 	}, [])
 
 	const onSubmit = handleSubmit(async (data) => {
+		setFirstLogIn(true)
+		setIsLoggingIn(true)
+		reset()
 		await signIn('credentials', {
 			...data,
-			redirect: false,
-			callbackUrl: window.location.origin,
+			callbackUrl: `${window.location.origin}/user/profile`,
 		})
-		reset()
 		return
 	})
 
-	if (session) {
+	if (session && !firstLogIn) {
 		return (
 			<Center height='100vh'>
-				You are already signed in... Go to{' '}
+				<span>You are already signed in... Go to&nbsp;</span>
 				<Link href='/'>
-					<a>homepage</a>
+					<HomepageLink>homepage</HomepageLink>
 				</Link>
 			</Center>
 		)
+	}
+	if (isLoggingIn) {
+		return <Center height='100vh'>Logging in...</Center>
 	}
 
 	return (
@@ -86,4 +93,10 @@ const Login = () => {
 	)
 }
 
+export const HomepageLink = styled.a`
+	text-decoration: underline;
+	&:hover {
+		text-decoration: none;
+	}
+`
 export default Login

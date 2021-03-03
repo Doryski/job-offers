@@ -14,12 +14,12 @@ export const options = {
 			// You can specify whatever fields you are expecting to be submitted.
 			// e.g. domain, username, password, 2FA token, etc.
 			credentials: {
-				email: {
-					label: 'Email',
-					type: 'text',
-					placeholder: 'email@example.com',
-				},
-				password: { label: 'Password', type: 'password' },
+				// email: {
+				// 	label: 'Email',
+				// 	type: 'text',
+				// 	placeholder: 'email@example.com',
+				// },
+				// password: { label: 'Password', type: 'password' },
 			},
 			authorize: async (credentials) => {
 				console.log('credentials:', credentials)
@@ -32,24 +32,19 @@ export const options = {
 						email,
 						password,
 					})
+					console.log('user checked: ', user)
 					// Any object returned will be saved in `user` property of the JWT
 					if (user.id) return Promise.resolve({ ...user, email })
 				} catch (err) {
 					console.log(err)
-					// Redirecting to the login page with error messsage in the URL
-					throw '/auth/login'
+					throw new Error()
 				}
 			},
 		}),
 	],
 	session: {
-		// Use JSON Web Tokens for session instead of database sessions.
-		// This option can be used with or without a database for users/accounts.
-		// Note: `jwt` is automatically set to `true` if no database is specified.
 		jwt: true,
-
-		// Seconds - How long until an idle session expires and is no longer valid.
-		maxAge: 60 * 60, // 1 hr
+		maxAge: 60 * 60, // In seconds
 	},
 	callbacks: {
 		signIn: async (user, account, profile) => {
@@ -82,7 +77,6 @@ export const options = {
 			// console.log('token', token)
 			// console.log('session', session)
 
-			// return session
 			return Promise.resolve(session)
 		},
 		// jwt: async (token, user, account, profile, isNewUser) => { return Promise.resolve(token) },
@@ -98,13 +92,11 @@ export const options = {
 			// console.log('user', user)
 			// console.log('token', token)
 
-			// return token
 			return Promise.resolve(token)
 		},
 	},
 	pages: {
 		signIn: '/auth/login',
-		signOut: '/',
 		newUser: '/',
 		error: '/auth/login',
 	},

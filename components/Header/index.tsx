@@ -7,10 +7,32 @@ import theme from '../../theme'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
+import devlog from '../../helpers/devlog'
 
 const Header = ({ admin = false }: { admin?: boolean }) => {
 	const isMobile = useDeviceDetect(1105)
 	const [session, loading] = useSession()
+	const router = useRouter()
+	devlog(router.pathname)
+
+	const handleSignOut = async () => {
+		devlog(router.pathname)
+		const isProfilePage = router.pathname === '/user/profile'
+		const config = isProfilePage
+			? {
+					redirect: false,
+					callbackUrl: '/',
+			  }
+			: {
+					redirect: false,
+			  }
+		const data = await signOut(config)
+		if (isProfilePage) {
+			// @ts-ignore
+			router.push(data.url)
+		}
+	}
 
 	return (
 		<Container admin={admin}>
@@ -58,8 +80,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 							</a>
 						</Link>
 						<CustomButton
-							// @ts-ignore
-							handleClick={() => signOut({ redirect: false })}
+							handleClick={handleSignOut}
 							fWeight={theme.fontWeight[400]}
 							margin='0 0.875em 0 0.375em'
 							padding='0.625em 1.125em'>
