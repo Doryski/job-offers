@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import theme from '../../theme'
 
 type DialogFooterProps = {
-	handleReset: Function
-	handleApplyFilter: Function
+	handleReset: (e: any) => void
+	handleApplyFilter: (e: any) => void
 }
 
 const DialogFooter = ({
@@ -13,10 +13,10 @@ const DialogFooter = ({
 }: DialogFooterProps) => {
 	return (
 		<BottomWrapper>
-			<a onClick={() => handleReset}>
+			<a onClick={handleReset}>
 				<CustomButton padding='0.5em 1.875em'>Clear filters</CustomButton>
 			</a>
-			<a onClick={() => handleApplyFilter}>
+			<a onClick={handleApplyFilter}>
 				<CustomButton
 					padding='0.5em 1.125em'
 					pink

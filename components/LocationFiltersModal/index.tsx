@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import CustomButton from '../shared/CustomButton'
 import styled from 'styled-components'
 import DialogHeader from '../shared/DialogHeader'
@@ -23,14 +23,18 @@ const LocationFilters = () => {
 	const { isDialogOpen, open, close } = useDialogHandler(false)
 	const TOP_LOCATIONS_NUM = 6
 	const isMobile = useDeviceDetect(1025)
+	const [locQuery, setLocQuery] = useState('')
 
-	const locQuery = createQuery(
-		{
-			query: 'location',
-			value: stringFormat(location),
-		},
-		query
-	)
+	useEffect(() => {
+		const path = createQuery(
+			{
+				query: 'location',
+				value: stringFormat(location),
+			},
+			query
+		)
+		setLocQuery(path)
+	}, [location])
 
 	const handleReset = () => {
 		setLocation('')
@@ -40,19 +44,13 @@ const LocationFilters = () => {
 		router.push(locQuery, undefined, { shallow: true })
 		close()
 	}
-	const locProps = {
-		setLocation: setLocation,
-		location: location,
-	}
+	const locProps = { setLocation, location }
 	const headingProps = {
 		display: 'flex',
 		color: textColors.text,
 		fWeight: theme.fontWeight[700],
 		fontSize: theme.fontSize.large,
 	}
-
-	// if location filters clicked
-	// -> switch all filters screen to locations table 3x7
 
 	return (
 		<>

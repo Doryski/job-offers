@@ -10,7 +10,6 @@ const Profile = () => {
 	const { data, error, dataLoading } = useApi(
 		session ? `/api/user/${session.user.id}` : null
 	)
-	devlog(data)
 	return (
 		<PageWrapper>
 			<Header />

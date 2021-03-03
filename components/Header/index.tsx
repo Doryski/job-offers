@@ -14,10 +14,8 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 	const isMobile = useDeviceDetect(1105)
 	const [session, loading] = useSession()
 	const router = useRouter()
-	devlog(router.pathname)
 
 	const handleSignOut = async () => {
-		devlog(router.pathname)
 		const isProfilePage = router.pathname === '/user/profile'
 		const config = isProfilePage
 			? {

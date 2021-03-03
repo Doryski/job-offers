@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Dialog } from '@material-ui/core'
 import DialogHeader from '../shared/DialogHeader'
@@ -11,6 +11,7 @@ import { Query } from '../../types'
 import stringFormat from '../../helpers/stringFormat'
 import { MAX_SLIDER_VALUE } from '../../helpers/utils'
 import getValue from '../../helpers/getValue'
+import devlog from '../../helpers/devlog'
 
 export type Value = number | number[]
 
@@ -25,24 +26,27 @@ const DialogComponent = ({
 	const { query } = router
 	const [value, setValue] = useState<Value>([0, 50000])
 	const fullScreen = useMediaQuery('(max-width:800px)')
-
+	const [expLvl, setExpLvl] = useState('')
+	const [mfQuery, setMfQuery] = useState('')
 	const handleChange = (_: React.ChangeEvent<{}>, newValue: Value) =>
 		setValue(newValue as number[])
 
-	const [expLvl, setExpLvl] = useState('')
-
 	const fromValue = getValue(value, 0)
-	const from = !fromValue && fromValue !== 0 ? '' : fromValue.toString()
+	const from = !fromValue ? '' : fromValue.toString()
 	const toValue = getValue(value, 1)
 	const to = toValue === MAX_SLIDER_VALUE || !toValue ? '' : toValue.toString()
-	const moreFiltersData: Query[] = [
-		{ query: 'expLvl', value: stringFormat(expLvl) },
-		{ query: 'from', value: from },
-		{ query: 'to', value: to },
-	]
-	const moreFiltersQuery = createQuery(moreFiltersData, query)
+	useEffect(() => {
+		const moreFiltersData: Query[] = [
+			{ query: 'expLvl', value: stringFormat(expLvl) },
+			{ query: 'from', value: from },
+			{ query: 'to', value: to },
+		]
+		const path = createQuery(moreFiltersData, query)
+		setMfQuery(path)
+	}, [from, to, expLvl])
 	const handleApplyFilter = () => {
-		router.push(moreFiltersQuery, undefined, { shallow: true })
+		devlog(mfQuery)
+		router.push(mfQuery, undefined, { shallow: true })
 		close()
 	}
 	return (
