@@ -14,6 +14,7 @@ import useDeviceDetect from '../../hooks/useDeviceDetect'
 import { useRouter } from 'next/router'
 import createQuery from '../../helpers/createQuery'
 import stringFormat from '../../helpers/stringFormat'
+import devlog from '../../helpers/devlog'
 
 const LocationFilters = () => {
 	const router = useRouter()
@@ -36,8 +37,20 @@ const LocationFilters = () => {
 		setLocQuery(path)
 	}, [location])
 
+	useEffect(() => {
+		setLocation(query.location ? location : '')
+	}, [query.location])
+
 	const handleReset = () => {
-		setLocation('')
+		const resetQuery = [
+			'location',
+			'expLvl',
+			'from',
+			'to',
+			'tech',
+		].map((el) => ({ query: el, value: '' }))
+
+		router.push(createQuery(resetQuery, query), undefined, { shallow: true })
 		close()
 	}
 	const handleApplyFilter = () => {
@@ -62,7 +75,7 @@ const LocationFilters = () => {
 				minWidth={isMobile ? '105px' : '148px'}
 				isOpen={isDialogOpen}
 				padding='0.425em 0.75em 0.425em 1em'>
-				{query.location && location ? location : 'Location'}
+				{query.location ? location : 'Location'}
 			</CustomButton>
 			{isDialogOpen && (
 				<Dialog

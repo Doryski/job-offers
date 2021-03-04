@@ -8,7 +8,6 @@ import useDeviceDetect from '../../hooks/useDeviceDetect'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
-import devlog from '../../helpers/devlog'
 
 const Header = ({ admin = false }: { admin?: boolean }) => {
 	const isMobile = useDeviceDetect(1105)

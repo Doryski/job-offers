@@ -45,7 +45,7 @@ const DialogComponent = ({
 		setMfQuery(path)
 	}, [from, to, expLvl])
 	const handleApplyFilter = () => {
-		devlog(mfQuery)
+		// devlog(mfQuery)
 		router.push(mfQuery, undefined, { shallow: true })
 		close()
 	}
