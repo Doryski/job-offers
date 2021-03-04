@@ -3,6 +3,7 @@ import CustomButton from '../shared/CustomButton'
 import { EXP_LVL_OPTIONS } from '../../helpers/utils'
 import { Wrapper } from './StyledComponents'
 import theme, { textColors } from '../../theme'
+import stringFormat from '../../helpers/stringFormat'
 
 const SenioritySection = ({
 	expLvl,
@@ -30,8 +31,8 @@ const SenioritySection = ({
 				</CustomButton>
 				{EXP_LVL_OPTIONS.map((lvl) => (
 					<CustomButton
-						handleClick={() => setExpLvl(lvl)}
-						active={lvl === expLvl}
+						handleClick={() => setExpLvl(stringFormat(lvl))}
+						active={stringFormat(lvl) === expLvl}
 						padding='0.375em 2.5em'
 						margin='0.375em'
 						key={lvl}>

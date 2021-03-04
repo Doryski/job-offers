@@ -74,16 +74,16 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			data: fixed,
 		},
-		revalidate: 5,
+		revalidate: 1,
 	}
 }
 
 export const SubContainer = styled.div`
-	display: flex;
-	flex: 1;
+	display: grid;
+	grid-template-columns: 55% auto;
+	height: 100%;
 `
 export const ListContainer = styled.div`
-	width: 55%;
 	height: 100%;
 	background: ${({ theme }) => theme.colors.secondary};
 	display: flex;
@@ -117,13 +117,11 @@ export const InfoSpan = styled.span`
 	font-size: 1.2rem;
 `
 export const OfferContainer = styled.div`
-	flex: 1;
 	background: ${({ theme }) => theme.colors.secondary};
 	display: flex;
 	flex-direction: column;
 	padding: 0 1.25em 0 0;
 	position: relative;
-	flex: 1 1 0%;
 `
 export const OfferContainerScroll = styled.div`
 	position: absolute;

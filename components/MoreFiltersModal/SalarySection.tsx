@@ -3,9 +3,9 @@ import formatThous from '../../helpers/formatThous'
 import { Wrapper } from './StyledComponents'
 import styled from 'styled-components'
 import theme, { textColors } from '../../theme'
-import { Value } from './DialogComponent'
 import { MAX_SLIDER_VALUE } from '../../helpers/utils'
 import getValue from '../../helpers/getValue'
+import { Value } from './MoreFilters'
 
 const SalarySection = ({
 	value,

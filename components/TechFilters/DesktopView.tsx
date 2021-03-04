@@ -3,9 +3,7 @@ import styled from 'styled-components'
 import { TECHNOLOGIES } from '../../helpers/utils'
 import Link from 'next/link'
 import { DropdownList, DropdownListItem } from '../shared/DropdownList'
-import Typography from '../shared/Typography'
 import stringFormat from '../../helpers/stringFormat'
-import theme from '../../theme'
 import { MoreHoriz } from '@material-ui/icons'
 import TechList, { TechName, IconWrapper } from './TechList'
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick'
@@ -30,13 +28,15 @@ const DesktopView = ({
 	const listRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(listRef, close)
 	const ALL_TECH_NAME = 'All'
-	// if clicked on tech filter -> screen changes from all filters to table of technologies 3x7
 
 	return (
 		<Container>
 			<Link href={'/'} shallow>
 				<LinkBtn>
-					<CustomButton>
+					<CustomButton
+						padding='.7em .75em'
+						minWidth='60px'
+						active={!query.tech}>
 						<TechName all>{ALL_TECH_NAME}</TechName>
 					</CustomButton>
 				</LinkBtn>
@@ -60,12 +60,11 @@ const DesktopView = ({
 							<Link href={techQuery} key={tech} shallow>
 								<a onClick={close}>
 									<DropdownListItem>
-										<CustomButton>
-											<Typography
-												fWeight={theme.fontWeight[400]}
-												margin='1em 0 0 0.3em'>
-												{tech}
-											</Typography>
+										<CustomButton
+											active={query.tech === stringFormat(tech)}
+											padding='.7em .75em'
+											minWidth='100%'>
+											{tech}
 										</CustomButton>
 									</DropdownListItem>
 								</a>
@@ -113,7 +112,6 @@ export const LinkBtn = styled.a`
 	flex-direction: column;
 	justify-content: center;
 	align-items: stretch;
-	margin-right: 0.3125em;
 	height: 64px;
 	text-align: center;
 `

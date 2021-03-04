@@ -1,5 +1,4 @@
 import CustomButton from '../shared/CustomButton'
-import { Tune } from '@material-ui/icons'
 import Typography from '../shared/Typography'
 import styled from 'styled-components'
 import { textColors } from '../../theme'
@@ -7,21 +6,34 @@ import useDialogHandler from '../../hooks/useDialogHandler'
 import DialogComponent from './DialogComponent'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+export type Value = number | number[]
 
 const MoreFilters = () => {
 	const { query } = useRouter()
-	const { expLvl, from, to } = query
-	const isActive = !!expLvl || !!from || !!to
-	const bothFiltersApplied = !!expLvl && (!!from || !!to)
-	const filtersApplied = isActive && bothFiltersApplied ? 2 : 1
+	const [expLvl, setExpLvl] = useState('')
+	const [value, setValue] = useState<Value>([0, 50000])
 
+	const isActive = !!query.expLvl || !!query.from || !!query.to
 	const { isDialogOpen, open, close } = useDialogHandler(false)
 	const isMobile = useDeviceDetect(600)
-
+	const handleOpen = () => {
+		setExpLvl(query.expLvl as string)
+		setValue([+query.from, +query.to])
+		open()
+	}
+	const dialogProps = {
+		isDialogOpen,
+		close,
+		expLvl,
+		value,
+		setExpLvl,
+		setValue,
+	}
 	return (
 		<>
 			<CustomButton
-				handleClick={open}
+				handleClick={handleOpen}
 				active={isActive}
 				icon
 				isOpen={isDialogOpen}
@@ -31,16 +43,10 @@ const MoreFilters = () => {
 				margin={
 					isMobile
 						? '-0.25em 0 0.3125em 0.25em'
-						: '-0.75em 0.3125em 0.3125em 0.625em'
+						: '0.3 0.3125em 0.3125em 0.625em'
 				}
 				minWidth={isMobile ? '119px' : '158px'}
 				display='flex'>
-				{!isMobile &&
-					(isActive ? (
-						<Number>{filtersApplied}</Number>
-					) : (
-						<Tune fontSize='small' />
-					))}
 				<Typography
 					color={isActive ? textColors.pink : textColors.text}
 					fontSize='inherit'
@@ -49,9 +55,7 @@ const MoreFilters = () => {
 					More filters
 				</Typography>
 			</CustomButton>
-			{isDialogOpen && (
-				<DialogComponent isDialogOpen={isDialogOpen} close={close} />
-			)}
+			{isDialogOpen && <DialogComponent {...dialogProps} />}
 		</>
 	)
 }

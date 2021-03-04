@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import SenioritySection from './SenioritySection'
 import SalarySection from './SalarySection'
 import { ParamsType } from '../../types'
-import { Value } from './DialogComponent'
 import Slider from '@material-ui/core/Slider'
 import { MAX_SLIDER_VALUE } from '../../helpers/utils'
+import { Value } from './MoreFilters'
 
 type SliderAreaPropsTypes = {
 	handleChange?: (event: React.ChangeEvent<{}>, value: Value) => void

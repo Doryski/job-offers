@@ -14,7 +14,7 @@ import useDeviceDetect from '../../hooks/useDeviceDetect'
 import { useRouter } from 'next/router'
 import createQuery from '../../helpers/createQuery'
 import stringFormat from '../../helpers/stringFormat'
-import devlog from '../../helpers/devlog'
+import resetFilters from '../../helpers/resetFilters'
 
 const LocationFilters = () => {
 	const router = useRouter()
@@ -42,21 +42,14 @@ const LocationFilters = () => {
 	}, [query.location])
 
 	const handleReset = () => {
-		const resetQuery = [
-			'location',
-			'expLvl',
-			'from',
-			'to',
-			'tech',
-		].map((el) => ({ query: el, value: '' }))
-
-		router.push(createQuery(resetQuery, query), undefined, { shallow: true })
+		resetFilters(query, router)
 		close()
 	}
 	const handleApplyFilter = () => {
 		router.push(locQuery, undefined, { shallow: true })
 		close()
 	}
+
 	const locProps = { setLocation, location }
 	const headingProps = {
 		display: 'flex',
@@ -69,7 +62,7 @@ const LocationFilters = () => {
 		<>
 			<CustomButton
 				handleClick={open}
-				margin={isMobile ? '-0.625em 0 0 0.25em' : '0.375em 1.25em 0 0.3125em'}
+				margin={isMobile ? '-0.625em 0 0 0.25em' : '0.7em 1.25em 0 0.3125em'}
 				active={!!query.location}
 				icon
 				minWidth={isMobile ? '105px' : '148px'}

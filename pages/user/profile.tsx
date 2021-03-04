@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
 import Header from '../../components/Header'
 import Center from '../../components/shared/Center'
-import devlog from '../../helpers/devlog'
+import devlog from '../../debug/devlog'
 import useApi from '../../hooks/useApi'
 
 const Profile = () => {

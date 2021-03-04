@@ -1,4 +1,4 @@
-import devlog from './devlog'
+import devlog from '../debug/devlog'
 
 const mergeArrays = (prevArr: Array<any>, newArr: Array<any>, by: string) => {
 	// devlog('merging arrays...')

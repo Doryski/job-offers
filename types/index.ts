@@ -62,3 +62,4 @@ export type Query = {
 	query: string
 	value: string
 }
+export type Filter = { param: string | number; op: boolean }

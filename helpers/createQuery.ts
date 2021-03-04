@@ -1,6 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
 import { Query } from '../types'
-import devlog from './devlog'
 import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
 
@@ -21,9 +20,6 @@ export function reduceToQueryString(data: Array<any>) {
 }
 
 const createQuery = (data: Query[] | Query, prevQuery?: ParsedUrlQuery) => {
-	// devlog('creating query...')
-	// devlog('data:', data)
-	// devlog('prevQuery:', prevQuery)
 	const transformed = transformQuery(prevQuery)
 	let merged: Query[] = []
 	if (!data) merged = transformed
@@ -33,7 +29,6 @@ const createQuery = (data: Query[] | Query, prevQuery?: ParsedUrlQuery) => {
 	if (data instanceof Object && !(data instanceof Array)) {
 		merged = mergeArrays(transformed, [data], 'query')
 	}
-	// devlog('arrays merged:', merged)
 	const reduced = reduceToQueryString(merged)
 	return reduced
 }

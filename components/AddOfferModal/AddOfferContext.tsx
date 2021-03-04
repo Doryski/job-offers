@@ -6,7 +6,7 @@ import moment from 'moment'
 import { OfferType } from '../../types'
 import Center from '../shared/Center'
 import CloseButton from '../shared/CloseButton'
-import devlog from '../../helpers/devlog'
+import devlog from '../../debug/devlog'
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>

@@ -29,7 +29,10 @@ const TechList = ({ cutTechArray, close }: TechListProps) => {
 				return (
 					<Link href={techQuery} key={tech} shallow>
 						<a onClick={close}>
-							<CustomButton>
+							<CustomButton
+								active={query.tech === stringFormat(tech)}
+								minWidth='60px'
+								padding='.7em .75em'>
 								<TechName>{tech}</TechName>
 							</CustomButton>
 						</a>
@@ -41,7 +44,6 @@ const TechList = ({ cutTechArray, close }: TechListProps) => {
 }
 export const TechName = styled.span<{ all?: boolean }>`
 	font-size: 0.6875rem;
-	color: ${({ theme }) => theme.colors.text};
 	line-height: 15px;
 	text-align: center;
 	margin-top: ${({ all }) => (all ? '.1em' : '-5px')};
@@ -53,5 +55,6 @@ export const IconWrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	margin-top: 8px;
 `
 export default TechList

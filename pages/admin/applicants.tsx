@@ -1,7 +1,7 @@
 // HAS TO BE MADE REUSABLE
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
-import devlog from '../../helpers/devlog'
+import devlog from '../../debug/devlog'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import Center from '../../components/shared/Center'

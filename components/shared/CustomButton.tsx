@@ -88,7 +88,7 @@ export const Button = styled.button<StyledButtonProps>`
 			: theme.colors.buttonBackground};
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: ${({ icon }) => (icon ? 'space-between' : 'center')};
 	width: ${({ minWidth }) => minWidth || 'auto'};
 	min-width: ${({ minWidth }) => minWidth || 'none'};
 	transition: all 0.4s;

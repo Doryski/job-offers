@@ -11,22 +11,28 @@ import { Query } from '../../types'
 import stringFormat from '../../helpers/stringFormat'
 import { MAX_SLIDER_VALUE } from '../../helpers/utils'
 import getValue from '../../helpers/getValue'
-import devlog from '../../helpers/devlog'
-
-export type Value = number | number[]
+import resetFilters from '../../helpers/resetFilters'
+import useChangeDetect from '../../debug/useChangeDetect'
+import { Value } from './MoreFilters'
 
 const DialogComponent = ({
 	close,
 	isDialogOpen,
+	setValue,
+	value,
+	setExpLvl,
+	expLvl,
 }: {
 	close: VoidFunction
 	isDialogOpen: boolean
+	setValue
+	value
+	setExpLvl
+	expLvl
 }) => {
 	const router = useRouter()
 	const { query } = router
-	const [value, setValue] = useState<Value>([0, 50000])
 	const fullScreen = useMediaQuery('(max-width:800px)')
-	const [expLvl, setExpLvl] = useState('')
 	const [mfQuery, setMfQuery] = useState('')
 	const handleChange = (_: React.ChangeEvent<{}>, newValue: Value) =>
 		setValue(newValue as number[])
@@ -44,8 +50,17 @@ const DialogComponent = ({
 		const path = createQuery(moreFiltersData, query)
 		setMfQuery(path)
 	}, [from, to, expLvl])
+	useEffect(() => {
+		const fromVal = query.from ? from : 0
+		const toVal = query.to ? to : 50000
+		setValue([+fromVal, +toVal])
+	}, [query.from, query.to])
+	const handleReset = () => {
+		resetFilters(query, router)
+		close()
+	}
+
 	const handleApplyFilter = () => {
-		// devlog(mfQuery)
 		router.push(mfQuery, undefined, { shallow: true })
 		close()
 	}
@@ -67,7 +82,7 @@ const DialogComponent = ({
 				/>
 
 				<DialogFooter
-					handleReset={close}
+					handleReset={handleReset}
 					handleApplyFilter={handleApplyFilter}
 				/>
 			</Container>
