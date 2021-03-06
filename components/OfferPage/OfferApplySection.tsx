@@ -6,7 +6,6 @@ import {
 	Create,
 	Send,
 	DeleteOutline,
-	SettingsApplicationsRounded,
 } from '@material-ui/icons'
 import Typography from '../shared/Typography'
 import { TextField, Checkbox } from '@material-ui/core'
@@ -22,7 +21,15 @@ import { EMAIL_REGEX } from '../../helpers/utils'
 import { OfferPageDataType } from '../../types'
 import useRefreshPage from '../../hooks/useRefreshPage'
 import { useRouter } from 'next/router'
-
+import post from '../../helpers/post'
+type FormDataType = {
+	name: string
+	email: string
+	introduction?: string
+	processInFuture: 1 | 0
+	employerId: string
+	offerId: string
+}
 const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 	const { employerId, offerId, companyName } = offer
 	const { isChecked, handleChange } = useCheckbox(false)
@@ -39,22 +46,15 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 	const router = useRouter()
 	const { refresh } = useRefreshPage(offer, router)
 
-	const onSubmit = handleSubmit(async (data) => {
+	const onSubmit = handleSubmit(async (data: FormDataType) => {
 		setLoading(true)
-		let formData: {
-			[x: string]: any
-		} = { ...data, processInFuture: isChecked ? 1 : 0, employerId, offerId }
-		async function postApplicant(url: string, data: typeof formData) {
-			const res = await fetch(url, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data),
-			})
-			return res.json()
+		let formData: FormDataType = {
+			...data,
+			processInFuture: isChecked ? 1 : 0,
+			employerId,
+			offerId,
 		}
-		await postApplicant('/api/applicants', formData)
+		await post('/api/applicants', formData)
 		refresh()
 		setLoading(false)
 		setApplied(true)
@@ -85,7 +85,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								error={!!errors.name}
 								id='name'
 								name='name'
-								label='First & Last Name'
+								label='Name'
 								helperText={
 									errors.name && (
 										<ErrorMessage>{errors.name?.message}</ErrorMessage>
@@ -96,7 +96,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 									startAdornment: <InputIcon Icon={PersonOutline} />,
 								}}
 								inputRef={register({
-									required: 'First & last name is a required field',
+									required: 'Name is a required field',
 								})}
 							/>
 							<MyTextField

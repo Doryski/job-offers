@@ -15,11 +15,11 @@ import InputComponent from '../../../components/AddOfferModal/CustomInput'
 import SelectComponent from '../../../components/AddOfferModal/CustomSelect'
 import ClientOnly from '../../../components/shared/ClientOnly'
 import { ErrorMessage } from '../../../components/AddOfferModal/StyledForm'
-import postEmployer from '../../../helpers/postEmployer'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 import Center from '../../../components/shared/Center'
+import post from '../../../helpers/post'
 
 const Signup = () => {
 	const { isChecked, handleChange, setIsChecked } = useCheckbox(false)
@@ -58,11 +58,12 @@ const Signup = () => {
 		} = { ...data, processData: isChecked }
 
 		// post employer to db
-		const emailError = await postEmployer('/api/auth/signup', formData)
-		if (emailError) {
+		const res = await post('/api/auth/signup', formData)
+		const { errorMessage } = res
+		if (errorMessage) {
 			setError('email', {
 				type: 'manual',
-				message: emailError,
+				message: errorMessage,
 			})
 			return
 		}

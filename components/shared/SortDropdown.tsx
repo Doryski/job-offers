@@ -17,73 +17,37 @@ const SortDropdown = () => {
 	const { close, toggle, isDialogOpen: isListOpen } = useDialogHandler(false)
 	useDetectOutsideClick(listRef, close)
 
-	const getCurrentSortOption =
-		query.sort === SORT_OPTIONS.salaryUp.id
-			? SORT_OPTIONS.salaryUp
-			: query.sort === SORT_OPTIONS.salaryDown.id
-			? SORT_OPTIONS.salaryDown
-			: SORT_OPTIONS.dateLatest
-	const salaryDownQuery = createQuery(
-		{
-			query: 'sort',
-			value: SORT_OPTIONS.salaryDown.id,
-		},
-		query
-	)
-
-	const salaryUpQuery = createQuery(
-		{
-			query: 'sort',
-			value: SORT_OPTIONS.salaryUp.id,
-		},
-		query
-	)
-
+	const getCurrentSortOption = SORT_OPTIONS.find(({ id }) => id === query.sort)
 	return (
 		<ButtonWrapper ref={listRef} onClick={toggle}>
 			<Typography color={textColors.span}>Sort by:</Typography>
 			<Typography color={textColors.span} margin='0 .25em 0 .5em'>
-				{getCurrentSortOption.name}
+				{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
 			</Typography>
 			<StyledExpandMoreIcon isOpen={isListOpen} />
 
-			<DropdownList ref={listRef} width='126px' isOpen={isListOpen}>
-				<Link href={createQuery({ query: 'sort', value: '' }, query)} shallow>
-					<a onClick={close}>
-						<DropdownListItem>
-							<Typography
-								color={textColors.text}
-								align='left'
-								padding='0.5em 0.7em'>
-								{SORT_OPTIONS.dateLatest.name}
-							</Typography>
-						</DropdownListItem>
-					</a>
-				</Link>
-				<Link href={salaryDownQuery} shallow>
-					<a onClick={close}>
-						<DropdownListItem>
-							<Typography
-								color={textColors.text}
-								align='left'
-								padding='0.5em 0.7em'>
-								{SORT_OPTIONS.salaryDown.name}
-							</Typography>
-						</DropdownListItem>
-					</a>
-				</Link>
-				<Link href={salaryUpQuery} shallow>
-					<a onClick={close}>
-						<DropdownListItem>
-							<Typography
-								color={textColors.text}
-								align='left'
-								padding='0.5em 0.7em'>
-								{SORT_OPTIONS.salaryUp.name}
-							</Typography>
-						</DropdownListItem>
-					</a>
-				</Link>
+			<DropdownList
+				ref={listRef}
+				width='126px'
+				isOpen={isListOpen}
+				position={{ right: '0' }}>
+				{SORT_OPTIONS.map(({ id, name }) => (
+					<Link
+						key={id}
+						href={createQuery({ query: 'sort', value: id }, query)}
+						shallow>
+						<a onClick={close}>
+							<DropdownListItem>
+								<Typography
+									color={textColors.text}
+									align='left'
+									padding='0.5em 0.7em'>
+									{name}
+								</Typography>
+							</DropdownListItem>
+						</a>
+					</Link>
+				))}
 			</DropdownList>
 		</ButtonWrapper>
 	)

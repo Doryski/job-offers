@@ -1,19 +1,41 @@
 import { useRouter } from 'next/router'
+import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
+import devlog from '../../debug/devlog'
+import timeit from '../../debug/timeit'
 import filterOffers from '../../helpers/filterOffers'
-import sortOffers from '../../helpers/sortOffers'
+import sortOffers, { sortOffers2 } from '../../helpers/sortOffers'
 import { OfferPageDataType } from '../../types'
 import OfferCard from '../OfferCard'
+import Center from '../shared/Center'
 
 const List = ({
 	data,
 	setCurrentOffer,
 }: {
-	data: OfferPageDataType[]
-	setCurrentOffer
+	data: OfferPageDataType[] | string
+	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
 }) => {
 	const { query } = useRouter()
+	if (typeof data === 'string') {
+		return (
+			<ListContainer>
+				<Center>{data}</Center>
+			</ListContainer>
+		)
+	}
 	const filteredOffers = filterOffers(data, query)
+	devlog('sortOffers: ')
+	const d1 = timeit(
+		() => sortOffers(filteredOffers, query.sort as string),
+		true
+	)
+	devlog('sortOffers2: ')
+	const d2 = timeit(
+		() => sortOffers2(filteredOffers, query.sort as string),
+		true
+	)
+	devlog('winner: ', d2 < d1 ? 'sortOffers2' : 'sortOffers')
 	const sortedOffers = sortOffers(filteredOffers, query.sort as string)
 
 	return (

@@ -8,8 +8,8 @@ import { MoreHoriz } from '@material-ui/icons'
 import TechList, { TechName, IconWrapper } from './TechList'
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick'
 import { useRouter } from 'next/router'
-import createQuery from '../../helpers/createQuery'
 import CustomButton from '../shared/CustomButton'
+import createTechQuery from '../../helpers/createTechQuery'
 
 type DesktopViewProps = {
 	toggle: VoidFunction
@@ -27,7 +27,6 @@ const DesktopView = ({
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(listRef, close)
-	const ALL_TECH_NAME = 'All'
 
 	return (
 		<Container>
@@ -37,7 +36,7 @@ const DesktopView = ({
 						padding='.7em .75em'
 						minWidth='60px'
 						active={!query.tech}>
-						<TechName all>{ALL_TECH_NAME}</TechName>
+						<TechName all>All</TechName>
 					</CustomButton>
 				</LinkBtn>
 			</Link>
@@ -45,32 +44,20 @@ const DesktopView = ({
 			<IconWrapper ref={listRef}>
 				<StyledMoreHorizIcon onClick={toggle} />
 				<DropdownList isOpen={isListOpen} ref={listRef}>
-					{TECHNOLOGIES.slice(cutTechArray).map((tech: string) => {
-						let techQuery: string
-						if (query.tech === stringFormat(tech)) {
-							techQuery = createQuery({ query: 'tech', value: '' }, query)
-						} else {
-							techQuery = createQuery(
-								{ query: 'tech', value: stringFormat(tech) },
-								query
-							)
-						}
-
-						return (
-							<Link href={techQuery} key={tech} shallow>
-								<a onClick={close}>
-									<DropdownListItem>
-										<CustomButton
-											active={query.tech === stringFormat(tech)}
-											padding='.7em .75em'
-											minWidth='100%'>
-											{tech}
-										</CustomButton>
-									</DropdownListItem>
-								</a>
-							</Link>
-						)
-					})}
+					{TECHNOLOGIES.slice(cutTechArray).map((tech: string) => (
+						<Link href={createTechQuery(tech, query)} key={tech} shallow>
+							<a onClick={close}>
+								<DropdownListItem>
+									<CustomButton
+										active={query.tech === stringFormat(tech)}
+										padding='.7em .75em'
+										minWidth='100%'>
+										{tech}
+									</CustomButton>
+								</DropdownListItem>
+							</a>
+						</Link>
+					))}
 				</DropdownList>
 			</IconWrapper>
 		</Container>
