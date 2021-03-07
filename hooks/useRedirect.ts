@@ -1,5 +1,6 @@
 import { NextRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import usePrefetch from './usePrefetch'
 type Options = {
 	/**
 	 * Defaults to '/'
@@ -26,10 +27,8 @@ export default function useRedirect(
 			router.push(redirectUrl)
 		}
 	}, [countdown])
-	useEffect(() => {
-		if (prefetch) {
-			router.prefetch(redirectUrl)
-		}
-	}, [])
+	if (prefetch) {
+		usePrefetch(redirectUrl)
+	}
 	return { isRedirecting, countdown }
 }

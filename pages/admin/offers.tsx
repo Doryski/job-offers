@@ -8,6 +8,7 @@ import useApi from '../../hooks/useApi'
 import Center from '../../components/shared/Center'
 import useRefreshPage from '../../hooks/useRefreshPage'
 import { Link } from '@material-ui/core'
+import del from '../../helpers/delete'
 
 const OfferList = () => {
 	// TODO: Add multichoice select menu
@@ -19,13 +20,7 @@ const OfferList = () => {
 	devlog(data)
 	const { refresh } = useRefreshPage(data, router)
 	const deleteRecord = async (id: string) => {
-		async function delOffer(url: string) {
-			const res = await fetch(url, {
-				method: 'DELETE',
-			})
-			return res.json()
-		}
-		await delOffer('/api/admin/offers/' + id)
+		await del('/api/admin/offers/' + id)
 		refresh()
 	}
 	const headers = ['uuid', 'title', 'employerId', 'dateAdded']

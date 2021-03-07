@@ -20,6 +20,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 import Center from '../../../components/shared/Center'
 import post from '../../../helpers/post'
+import usePrefetch from '../../../hooks/usePrefetch'
 
 const Signup = () => {
 	const { isChecked, handleChange, setIsChecked } = useCheckbox(false)
@@ -40,9 +41,7 @@ const Signup = () => {
 	}
 
 	// prefetch login page for newly created user
-	useEffect(() => {
-		router.prefetch('/auth/login')
-	}, [])
+	usePrefetch('/auth/login')
 
 	const onSubmit = handleSubmit(async (data) => {
 		if (!isChecked) {

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import getDomain from '../../../helpers/getDomain'
-import login from '../../../helpers/login'
+import post from '../../../helpers/post'
 
 export const options = {
 	providers: [
@@ -28,10 +28,11 @@ export const options = {
 				try {
 					// API call associated with authentification
 					// look up the user from the credentials supplied
-					const user = await login(getDomain() + '/api/auth/verification', {
+					const user = await post(getDomain() + '/api/auth/verification', {
 						email,
 						password,
 					})
+
 					console.log('user checked: ', user)
 					// Any object returned will be saved in `user` property of the JWT
 					if (user.id) return Promise.resolve({ ...user, email })
