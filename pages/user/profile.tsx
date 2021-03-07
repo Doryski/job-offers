@@ -14,28 +14,26 @@ const Profile = () => {
 		<PageWrapper>
 			<Header />
 			<SubContainer>
-				<div>
-					Profile page of user {session?.user.email} <br />
-					{session?.user.admin && <span>Welcome Admin!</span>}
-					{error && <Center>Failed to load.</Center>}
-					{dataLoading && <Center>Loading...</Center>}
-					{data && (
-						<AccountData>
-							{Object.entries(data?.data).map(([key, value]) => (
-								<>
-									<h3>{key}</h3>
-									<span>
-										{value}
-										{/* {key === 'accountType' && value === 'basic' && (
-										<button onClick={buyPremium}>Buy premium</button>
-									)} */}
-									</span>
-								</>
-							))}
-						</AccountData>
-					)}
-				</div>
-				{/* <ActionPanel /> */}
+				{!session ? (
+					<Center height='100%'>Log in to see this page</Center>
+				) : (
+					<Center>
+						Profile page of user {session?.user.email} <br />
+						{session?.user.admin && <span>Welcome Admin!</span>}
+						{error && <Center>Failed to load.</Center>}
+						{dataLoading && <Center>Loading...</Center>}
+						{data && (
+							<AccountData>
+								{Object.entries(data?.data).map(([key, value]) => (
+									<>
+										<h3>{key}</h3>
+										<span>{value}</span>
+									</>
+								))}
+							</AccountData>
+						)}
+					</Center>
+				)}
 			</SubContainer>
 		</PageWrapper>
 	)
