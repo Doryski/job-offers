@@ -23,7 +23,7 @@ export default function useRedirect(
 		}, 1000)
 		if (countdown <= 0) {
 			setIsRedirecting(true)
-			router.push('/')
+			router.push(redirectUrl)
 		}
 	}, [countdown])
 	useEffect(() => {
