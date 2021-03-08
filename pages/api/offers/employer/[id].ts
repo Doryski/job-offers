@@ -22,7 +22,7 @@ export default async function ApiMyOfferId(
 	const sqlGet = `SELECT offers.uuid AS offerId, offers.title, 
     offers.empType, offers.expLvl,
     offers.salaryFrom, offers.salaryTo, 
-    offers.technology, offers.description, offers.dateAdded, 
+    offers.technology, offers.description, offers.dateAdded
     FROM (offers
     INNER JOIN employers ON offers.employerId = employers.uuid)
     WHERE offers.employerId = ? AND offers.uuid = ?

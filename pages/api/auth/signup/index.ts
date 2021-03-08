@@ -36,7 +36,6 @@ export default async function signup(
 					street,
 					city,
 					hash,
-					JSON.stringify([]),
 					0,
 					moment().format('x'),
 				],
@@ -60,7 +59,7 @@ export default async function signup(
 			const sql = `
                 INSERT INTO employers (
                 uuid, companyName, companySize, email, street, 
-				city, password, offerId, isAdmin, dateAdded) 
+				city, password, isAdmin, dateAdded) 
                 VALUES ?
                 `
 			db.query(sql, [values], function (err, result) {

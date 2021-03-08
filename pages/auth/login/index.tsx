@@ -26,12 +26,6 @@ const Login = () => {
 			})
 		}
 	}, [router])
-
-	// prefetch homepage for newly logged in user
-	useEffect(() => {
-		router.prefetch('/')
-	}, [])
-
 	const onSubmit = handleSubmit(async (data) => {
 		setFirstLogIn(true)
 		setIsLoggingIn(true)
