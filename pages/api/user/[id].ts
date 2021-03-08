@@ -26,7 +26,6 @@ export default async function ApiUserData(
         FROM employers
 		WHERE uuid = ?
 		`
-	console.log('rann')
 	const [result] = await db.promise().query(sqlGetUser, [req.query.id])
 	console.log(result[0])
 	return res.status(200).json({

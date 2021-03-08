@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 
 const Header = ({ admin = false }: { admin?: boolean }) => {
 	const isMobile = useDeviceDetect(1105)
-	const [session, loading] = useSession()
+	const [session] = useSession()
 	const router = useRouter()
 
 	const handleSignOut = async () => {
@@ -90,7 +90,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 	)
 }
 export const Container = styled.header<{ admin?: boolean }>`
-	min-height: 68px;
+	min-height: 10vh;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

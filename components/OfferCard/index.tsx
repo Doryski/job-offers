@@ -6,7 +6,6 @@ import dateDiff from '../../helpers/dateDiff'
 import formatThous from '../../helpers/formatThous'
 import theme, { textColors } from '../../theme'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
-import Link from 'next/link'
 import moment from 'moment'
 import { OfferPageDataType } from '../../types'
 
@@ -20,7 +19,6 @@ const OfferCard = ({
 	setCurrentOffer
 }) => {
 	const {
-		offerId,
 		title,
 		salaryFrom,
 		salaryTo,
