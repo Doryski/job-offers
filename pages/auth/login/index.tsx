@@ -25,7 +25,7 @@ const Login = () => {
 				message: 'Ups, something went wrong!',
 			})
 		}
-	}, [router])
+	}, [router.query])
 	const onSubmit = handleSubmit(async (data) => {
 		setFirstLogIn(true)
 		setIsLoggingIn(true)
