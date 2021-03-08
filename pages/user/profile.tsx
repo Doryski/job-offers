@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/client'
 import Link from 'next/link'
+import { Fragment } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/Header'
 import Layout from '../../components/Layout'
@@ -28,10 +29,10 @@ const Profile = () => {
 							<>
 								<AccountData>
 									{Object.entries(data?.data).map(([key, value]) => (
-										<>
+										<Fragment key={key}>
 											<h3>{key}</h3>
 											<span>{value}</span>
-										</>
+										</Fragment>
 									))}
 								</AccountData>
 								<Link href='/user/offers'>

@@ -29,15 +29,16 @@ export default async function signup(
 
 			const values = [
 				[
-					uuid(),
+					uuid(), // default
 					companyName,
 					companySize,
 					email,
 					street,
 					city,
-					hash,
-					0,
-					moment().format('x'),
+					hash, // password
+					0, // isAdmin default
+					moment().format('x'), // dateAdded default
+					'basic', // accountType default
 				],
 			]
 			const [
@@ -59,7 +60,7 @@ export default async function signup(
 			const sql = `
                 INSERT INTO employers (
                 uuid, companyName, companySize, email, street, 
-				city, password, isAdmin, dateAdded) 
+				city, password, isAdmin, dateAdded, accountType) 
                 VALUES ?
                 `
 			db.query(sql, [values], function (err, result) {

@@ -8,33 +8,19 @@ import post from '../../../helpers/post'
 export const options = {
 	providers: [
 		Providers.Credentials({
-			// The name to display on the sign in form (e.g. 'Sign in with...')
 			name: 'Sign in',
-			// The credentials is used to generate a suitable form on the sign in page.
-			// You can specify whatever fields you are expecting to be submitted.
-			// e.g. domain, username, password, 2FA token, etc.
-			credentials: {
-				// email: {
-				// 	label: 'Email',
-				// 	type: 'text',
-				// 	placeholder: 'email@example.com',
-				// },
-				// password: { label: 'Password', type: 'password' },
-			},
+			credentials: {},
 			authorize: async (credentials) => {
 				console.log('credentials:', credentials)
 				const { email, password } = credentials
 				console.log(getDomain() + '/api/auth/verification')
 				try {
-					// API call associated with authentification
-					// look up the user from the credentials supplied
 					const user = await post(getDomain() + '/api/auth/verification', {
 						email,
 						password,
 					})
 
 					console.log('user checked: ', user)
-					// Any object returned will be saved in `user` property of the JWT
 					if (user.id) return Promise.resolve({ ...user, email })
 				} catch (err) {
 					console.log(err)
@@ -97,7 +83,7 @@ export const options = {
 		},
 	},
 	pages: {
-		// signIn: '/auth/login',
+		signIn: '/auth/login',
 		signOut: '/',
 		newUser: '/',
 		error: '/auth/login',

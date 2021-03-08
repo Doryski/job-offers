@@ -30,11 +30,10 @@ const Login = () => {
 		setFirstLogIn(true)
 		setIsLoggingIn(true)
 		reset()
-		await signIn('credentials', {
+		return await signIn('credentials', {
 			...data,
 			callbackUrl: `${window.location.origin}/user/profile`,
 		})
-		return
 	})
 
 	if (session && !firstLogIn) {
