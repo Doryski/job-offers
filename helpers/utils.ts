@@ -56,20 +56,20 @@ export const LOCATIONS = [
 
 export const NAV_LINKS = [{ title: 'Offers', path: '/' }]
 
-export const SORT_OPTIONS = {
-	salaryUp: {
+export const SORT_OPTIONS = [
+	{
 		id: 'sal-up',
 		name: 'lowest salary',
 	},
-	salaryDown: {
+	{
 		id: 'sal-down',
 		name: 'highest salary',
 	},
-	dateLatest: {
+	{
 		id: '',
 		name: 'latest',
 	},
-}
+]
 
 export const TECH_LVL_OPTIONS = [
 	{ id: 1, title: 'Nice to have' },

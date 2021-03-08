@@ -15,8 +15,9 @@ import moment from 'moment'
 import Filters from '../components/Filters'
 import { db } from '../mysqlSetup'
 import fixObject from '../helpers/fixObject'
+import devlog from '../debug/devlog'
 
-const OfferList = ({ data }) => {
+const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
 
 	return (
@@ -62,19 +63,24 @@ export const getStaticProps: GetStaticProps = async () => {
     employers.uuid AS employerId 
     FROM (offers
     INNER JOIN employers ON offers.employerId = employers.uuid)`
-
-	const result = await db.promise().query(sqlGet)
-	const data = fixObject(result[0])
-	console.log('get api/offers/employers: ', data)
-	const fixed = (data || []).map((el) => ({
-		...el,
-		dateAdded: moment(el.dateAdded).format(DATE_FORMAT),
-	}))
-	return {
-		props: {
-			data: fixed,
-		},
-		revalidate: 1,
+	try {
+		const result = await db.promise().query(sqlGet)
+		const data = fixObject(result[0])
+		console.log('get api/offers/employers: ', data)
+		if (!data) return { props: { data: 'No offers found.' }, revalidate: 1 }
+		const fixed = (data ?? []).map((el: OfferPageDataType) => ({
+			...el,
+			dateAdded: moment(+el.dateAdded).format(DATE_FORMAT),
+		}))
+		return {
+			props: {
+				data: fixed,
+			},
+			revalidate: 1,
+		}
+	} catch (error) {
+		devlog(error)
+		return { props: { data: 'Failed to load.' }, revalidate: 1 }
 	}
 }
 

@@ -5,6 +5,8 @@ import stringFormat from '../../helpers/stringFormat'
 import createQuery from '../../helpers/createQuery'
 import { useRouter } from 'next/router'
 import CustomButton from '../shared/CustomButton'
+import { ParsedUrlQuery } from 'querystring'
+import createTechQuery from '../../helpers/createTechQuery'
 
 type TechListProps = {
 	cutTechArray?: number
@@ -13,21 +15,12 @@ type TechListProps = {
 
 const TechList = ({ cutTechArray, close }: TechListProps) => {
 	const { query } = useRouter()
+
 	return (
 		<>
 			{TECHNOLOGIES.slice(0, cutTechArray).map((tech) => {
-				let techQuery: string
-				if (query.tech === stringFormat(tech)) {
-					techQuery = createQuery({ query: 'tech', value: '' }, query)
-				} else {
-					techQuery = createQuery(
-						{ query: 'tech', value: stringFormat(tech) },
-						query
-					)
-				}
-
 				return (
-					<Link href={techQuery} key={tech} shallow>
+					<Link href={createTechQuery(tech, query)} key={tech} shallow>
 						<a onClick={close}>
 							<CustomButton
 								active={query.tech === stringFormat(tech)}

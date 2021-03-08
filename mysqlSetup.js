@@ -1,13 +1,12 @@
 // @ts-ignore
 const mysql = require('mysql2')
-
+const isEnvProd = process.env.NODE_ENV === 'production'
 const db = mysql.createConnection({
-	host: process.env.MYSQL_HOST,
-	port: process.env.MYSQL_PORT,
-	database: process.env.MYSQL_DATABASE,
-	user: process.env.MYSQL_USER,
-	password: process.env.MYSQL_PASSWORD,
-	// socketPath: '/cloudsql/' + process.env.CLOUD_SQL_CONNECTION_NAME,
+	host: isEnvProd ?  process.env.MYSQL_HOST : process.env.MYSQL_LOCAL_HOST,
+	port: isEnvProd ?  process.env.MYSQL_PORT : process.env.MYSQL_LOCAL_PORT,
+	database: isEnvProd ?  process.env.MYSQL_DATABASE : process.env.MYSQL_LOCAL_DATABASE,
+	user: isEnvProd ?  process.env.MYSQL_USER : process.env.MYSQL_LOCAL_USER,
+	password: isEnvProd ?  process.env.MYSQL_PASSWORD : process.env.MYSQL_LOCAL_PASSWORD,
 })
 
 db.connect(function (err) {

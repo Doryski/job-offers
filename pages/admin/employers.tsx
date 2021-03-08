@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/client'
 import useApi from '../../hooks/useApi'
 import Center from '../../components/shared/Center'
 import { Link } from '@material-ui/core'
+import del from '../../helpers/delete'
 
 const EmployerList = () => {
 	// TODO: Add multichoice select menu
@@ -21,13 +22,7 @@ const EmployerList = () => {
 
 	devlog('select all employers')
 	const deleteRecord = async (id: string) => {
-		async function delEmployer(url: string) {
-			const res = await fetch(url, {
-				method: 'DELETE',
-			})
-			return res.json()
-		}
-		await delEmployer('/api/employers/' + id)
+		await del('/api/employers/' + id)
 		refresh()
 	}
 

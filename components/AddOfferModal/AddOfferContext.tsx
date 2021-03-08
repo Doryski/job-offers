@@ -7,6 +7,7 @@ import { OfferType } from '../../types'
 import Center from '../shared/Center'
 import CloseButton from '../shared/CloseButton'
 import devlog from '../../debug/devlog'
+import post from '../../helpers/post'
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>
@@ -14,17 +15,17 @@ type AddOfferContextType = {
 }
 
 type FormData = {
-	id: OfferType['uuid']
 	tech: OfferType['tech']
 	title: OfferType['title']
 	description: OfferType['description']
 	technology: string[]
 	techLvl: number[]
-	empType: string
-	expLvl: string
-	salaryFrom: number
-	salaryTo: number
+	empType: OfferType['empType']
+	expLvl: OfferType['expLvl']
+	salaryFrom: OfferType['salaryFrom']
+	salaryTo: OfferType['salaryTo']
 }
+export type AddOfferData = Partial<OfferType & { techLvl?: number[] }>
 
 const initialContext = {
 	register: () => {},
@@ -45,8 +46,8 @@ const AddOfferContextProvider = ({
 	isDialogOpen: boolean
 	close: VoidFunction
 }) => {
-	// test object for employer
 	const { handleSubmit, register, errors } = useForm()
+
 	const [loading, setLoading] = useState(false)
 	const [success, setSuccess] = useState(false)
 	const [error, setError] = useState(false)
@@ -63,24 +64,14 @@ const AddOfferContextProvider = ({
 			})
 		}
 
-		let formData: Partial<OfferType & { techLvl?: number[] }> = {
+		let formData: AddOfferData = {
 			...data,
 			dateAdded: moment().format('x'),
 			technology: JSON.stringify(technology),
 		}
 		delete formData.techLvl
-		// // change to mysql database
-		async function postOffer(url: string, data: typeof formData) {
-			const res = await fetch(url, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data),
-			})
-			return res.json()
-		}
-		await postOffer('/api/offers', formData)
+
+		await post('/api/offers', formData)
 
 		setLoading(false)
 		setSuccess(true)

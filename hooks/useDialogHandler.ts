@@ -6,7 +6,7 @@ export default function useDialogHandler(initialState: boolean) {
 	return {
 		open: () => setIsDialogOpen(true),
 		close: () => setIsDialogOpen(false),
-		toggle: () => setIsDialogOpen((prevIsDialogOpen) => !prevIsDialogOpen),
+		toggle: () => setIsDialogOpen((prev) => !prev),
 		isDialogOpen,
 	}
 }

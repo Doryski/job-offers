@@ -3,10 +3,19 @@ import styled from 'styled-components'
 export const DropdownList = styled.div<{
 	isOpen: boolean
 	width?: string
+	position?: {
+		top?: string
+		right?: string
+		bottom?: string
+		left?: string
+	}
 }>`
 	display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 	position: absolute;
-	top: 35px;
+	top: ${({ position }) => position?.top ?? '30px'};
+	right: ${({ position }) => position?.right ?? 'unset'};
+	bottom: ${({ position }) => position?.bottom ?? 'unset'};
+	left: ${({ position }) => position?.left ?? 'unset'};
 	cursor: pointer;
 	list-style-type: none;
 	background: ${({ theme }) => theme.colors.buttonBackground};
