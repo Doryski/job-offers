@@ -30,12 +30,14 @@ const Login = () => {
 		setFirstLogIn(true)
 		setIsLoggingIn(true)
 		reset()
-		return await signIn('credentials', {
+		await signIn('credentials', {
 			...data,
 			redirect: false,
-			callbackUrl: window.location.origin,
+			// callbackUrl: window.location.origin,
 			// callbackUrl: `${window.location.origin}/user/profile`,
 		})
+		router.push('/user/profile')
+		return
 	})
 
 	if (session && !firstLogIn) {
