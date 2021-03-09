@@ -32,7 +32,9 @@ const Login = () => {
 		reset()
 		return await signIn('credentials', {
 			...data,
-			callbackUrl: `${window.location.origin}/user/profile`,
+			redirect: false,
+			callbackUrl: window.location.origin,
+			// callbackUrl: `${window.location.origin}/user/profile`,
 		})
 	})
 
