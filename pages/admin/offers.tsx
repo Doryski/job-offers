@@ -9,6 +9,7 @@ import Center from '../../components/shared/Center'
 import useRefreshPage from '../../hooks/useRefreshPage'
 import { Link } from '@material-ui/core'
 import del from '../../helpers/delete'
+import NotAuthorized from '../../components/AdminLayout/NotAuthorized'
 
 const OfferList = () => {
 	// TODO: Add multichoice select menu
@@ -25,14 +26,7 @@ const OfferList = () => {
 	}
 	const headers = ['uuid', 'title', 'employerId', 'dateAdded']
 	if (!session?.user?.admin) {
-		return (
-			<Center height='100vh'>
-				You are not authorized to see this page. Go back to{' '}
-				<Link href='/'>
-					<a>homepage</a>
-				</Link>
-			</Center>
-		)
+		return <NotAuthorized />
 	}
 
 	return (

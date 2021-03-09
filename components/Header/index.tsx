@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 
 const Header = ({ admin = false }: { admin?: boolean }) => {
 	const isMobile = useDeviceDetect(1105)
-	const [session] = useSession()
+	const [session, loading] = useSession()
 	const router = useRouter()
 
 	const handleSignOut = async () => {
@@ -40,7 +40,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 			</Link>
 			{!isMobile && <Navigation />}
 			<Wrapper>
-				{!session && (
+				{!session && !loading && (
 					<>
 						<CustomButton
 							handleClick={signIn}

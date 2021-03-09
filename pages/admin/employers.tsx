@@ -9,6 +9,7 @@ import useApi from '../../hooks/useApi'
 import Center from '../../components/shared/Center'
 import { Link } from '@material-ui/core'
 import del from '../../helpers/delete'
+import NotAuthorized from '../../components/AdminLayout/NotAuthorized'
 
 const EmployerList = () => {
 	// TODO: Add multichoice select menu
@@ -36,14 +37,7 @@ const EmployerList = () => {
 		'accountType',
 	]
 	if (!session?.user?.admin) {
-		return (
-			<Center height='100vh'>
-				You are not authorized to see this page. Go back to{' '}
-				<Link href='/'>
-					<a>homepage</a>
-				</Link>
-			</Center>
-		)
+		return <NotAuthorized />
 	}
 
 	return (
