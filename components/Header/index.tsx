@@ -104,7 +104,7 @@ export const Container = styled.header<{ admin?: boolean }>`
 export const LogoWrapper = styled.div`
 	width: 120px;
 	float: left;
-	margin-left: 1em;
+	margin-left: 1.5em;
 	color: ${({ theme }) => theme.colors.title};
 	font-size: 1.25rem;
 `
