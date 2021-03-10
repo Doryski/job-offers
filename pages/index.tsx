@@ -12,7 +12,6 @@ import OfferApplySection from '../components/OfferPage/OfferApplySection'
 import { useState } from 'react'
 import { DATE_FORMAT } from '../helpers/utils'
 import moment from 'moment'
-import Filters from '../components/Filters'
 import { db } from '../mysqlSetup'
 import fixObject from '../helpers/fixObject'
 import devlog from '../debug/devlog'
@@ -22,7 +21,6 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 
 	return (
 		<Layout>
-			<Filters />
 			<SubContainer>
 				<ListContainer>
 					<ListContainerScroll>
@@ -35,18 +33,16 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 					</ListContainerScroll>
 				</ListContainer>
 				<OfferContainer>
-					<OfferContainerScroll>
-						{!currentOffer ? (
-							<Center>Click on offer card to show details.</Center>
-						) : (
-							<>
-								<OfferHeader offer={currentOffer} />
-								<OfferTechStack technology={currentOffer.technology} />
-								<OfferDescription description={currentOffer.description} />
-								<OfferApplySection offer={currentOffer} />
-							</>
-						)}
-					</OfferContainerScroll>
+					{!currentOffer ? (
+						<Center>Click on offer card to show details.</Center>
+					) : (
+						<>
+							<OfferHeader offer={currentOffer} />
+							<OfferTechStack technology={currentOffer.technology} />
+							<OfferDescription description={currentOffer.description} />
+							<OfferApplySection offer={currentOffer} />
+						</>
+					)}
 				</OfferContainer>
 			</SubContainer>
 		</Layout>
@@ -126,16 +122,7 @@ export const OfferContainer = styled.div`
 	background: ${({ theme }) => theme.colors.secondary};
 	display: flex;
 	flex-direction: column;
-	padding: 0 1.25em 0 0;
-	position: relative;
-`
-export const OfferContainerScroll = styled.div`
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
-	padding: 0 0.9375em 0 0;
+	padding: 0 1em 0 0;
 	overflow: auto;
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		padding: 0 0.1875em;

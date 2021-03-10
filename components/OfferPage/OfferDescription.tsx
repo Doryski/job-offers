@@ -23,7 +23,7 @@ const OfferDescription = ({ description }: { description: string }) => {
 	)
 }
 export const DescriptionContainer = styled.div`
-	margin: 1.875em 0;
+	margin-top: 1.875em;
 	padding: 0.3125em 0;
 	box-shadow: ${({ theme }) => theme.colors.shadow};
 	background: ${({ theme }) => theme.colors.primary};

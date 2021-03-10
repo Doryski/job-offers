@@ -4,11 +4,18 @@ import { TECH_LVL_OPTIONS } from '../../helpers/utils'
 import theme, { textColors } from '../../theme'
 
 const TechRange = ({ range, tech }: { range: number; tech: string }) => {
+	const rangeColor =
+		range < 2
+			? 'rgb(92, 207, 92)'
+			: range > 3
+			? 'rgb(240, 175, 56)'
+			: 'rgb(240, 240, 38)'
+
 	return (
 		<Container>
 			<RangeContainer>
 				{[...Array(range)].map((v, index) => (
-					<RangePoint key={index} />
+					<RangePoint key={index} color={rangeColor} />
 				))}
 				{[...Array(5 - range)].map((v, index) => (
 					<RangePoint key={index} disabled />
@@ -39,7 +46,6 @@ export const Container = styled.div`
 	flex-direction: column;
 	max-width: 20%;
 	flex: 0 0 20%;
-	margin: 0 0 2em;
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		max-width: 50%;
 		flex: 1 0 50%;
@@ -50,14 +56,15 @@ export const RangeContainer = styled.div`
 `
 export const RangePoint = styled.span<{
 	disabled?: boolean
+	color?: string
 }>`
-	background-color: ${({ disabled, theme }) =>
-		disabled ? 'rgb(191, 197, 210)' : theme.colors.pink};
+	background-color: ${({ disabled, color }) =>
+		disabled ? 'rgb(191, 197, 210)' : color};
 	display: block;
-	width: 10px;
+	width: 15px;
 	height: 10px;
-	border-radius: 50%;
-	margin: 0 0.625em 0 0;
+	border-radius: 1px;
+	margin: 0 0.05em 0 0;
 `
 
 export default TechRange

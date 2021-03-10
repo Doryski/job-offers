@@ -47,8 +47,8 @@ export const Button = styled.button`
 `
 export const InputWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.buttonBackgroundHover};
-	padding: 0.2em 0.625em;
-	margin: -0.35em 0.625em 0 0;
+	padding: 0 0.5em;
+	margin-left: 0.5em;
 	border-radius: 5px;
 	min-width: 150px;
 	cursor: text;

@@ -4,6 +4,7 @@ import Typography from '../shared/Typography'
 import theme, { textColors } from '../../theme'
 import { Wrapper } from './StyledComponents'
 import { OfferType } from '../../types'
+import devlog from '../../debug/devlog'
 
 const OfferTechStack = ({
 	technology,
@@ -12,7 +13,7 @@ const OfferTechStack = ({
 }) => {
 	const techArray =
 		!technology || technology.indexOf('[') !== 0 ? [] : JSON.parse(technology)
-
+	devlog(techArray)
 	return (
 		<TechStackContainer>
 			<Typography
@@ -25,7 +26,7 @@ const OfferTechStack = ({
 			</Typography>
 			<Wrapper>
 				{techArray.map(({ tech, techLvl }) => (
-					<TechRange key={tech} range={techLvl} tech={tech} />
+					<TechRange key={tech} range={+techLvl} tech={tech} />
 				))}
 			</Wrapper>
 		</TechStackContainer>

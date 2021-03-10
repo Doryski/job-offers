@@ -54,6 +54,8 @@ export const ButtonWrapper = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	cursor: pointer;
+	border-right: 1px solid ${({ theme }) => theme.colors.divider};
+	padding: 0.25em 0.5em 0.25em 0;
 `
 
 export default SortDropdown
