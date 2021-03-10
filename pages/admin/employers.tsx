@@ -1,13 +1,10 @@
-// HAS TO BE MADE REUSABLE
 import AdminTable from '../../components/AdminTable'
 import AdminLayout from '../../components/AdminLayout'
-import devlog from '../../debug/devlog'
 import { useRouter } from 'next/router'
 import useRefreshPage from '../../hooks/useRefreshPage'
 import { useSession } from 'next-auth/client'
 import useApi from '../../hooks/useApi'
 import Center from '../../components/shared/Center'
-import { Link } from '@material-ui/core'
 import del from '../../helpers/delete'
 import NotAuthorized from '../../components/AdminLayout/NotAuthorized'
 
@@ -18,10 +15,8 @@ const EmployerList = () => {
 	const { data, error, dataLoading } = useApi(
 		session ? '/api/admin/employers' : null
 	)
-	devlog(data)
 	const { refresh } = useRefreshPage(data, router)
 
-	devlog('select all employers')
 	const deleteRecord = async (id: string) => {
 		await del('/api/employers/' + id)
 		refresh()

@@ -2,11 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../../../mysqlSetup'
 import { compare } from 'bcrypt'
 import { getSession } from 'next-auth/client'
-import { getToken } from 'next-auth/jwt'
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
 	const session = await getSession({ req })
-	const token = await getToken({ req, secret: process.env.JWT_SECRET })
 	console.log('api/auth/login session:', session)
 	if (session) {
 		return res

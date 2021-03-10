@@ -10,6 +10,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
 			title='Job offers | IT sector'
 			description='A platform with job offers for IT sector.'
 		/>
+		{/* next-auth provider */}
 		<Provider session={pageProps.session}>
 			<ThemeStyleProvider>
 				<Component {...pageProps} />
