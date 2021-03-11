@@ -3,13 +3,13 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Typography from './Typography'
 import { SORT_OPTIONS } from '../../helpers/utils'
-import { StyledExpandMoreIcon } from './CustomButton'
 import { DropdownList, DropdownListItem } from './DropdownList'
 import { textColors } from '../../theme'
 import useDialogHandler from '../../hooks/useDialogHandler'
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick'
 import { useRouter } from 'next/router'
 import createQuery from '../../helpers/createQuery'
+import { StyledExpandMoreIcon } from './ExpandMoreIcon'
 
 const SortDropdown = () => {
 	const { query } = useRouter()
@@ -53,13 +53,13 @@ const SortDropdown = () => {
 	)
 }
 export const ButtonWrapper = styled.div`
-	margin-left: 1.5em;
+	margin-left: 1em;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	cursor: pointer;
 	border-right: 1px solid ${({ theme }) => theme.colors.divider};
-	padding: 0.25em 0.5em 0.25em 0;
+	padding: 0.5em;
 	position: relative;
 `
 

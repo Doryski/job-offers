@@ -43,8 +43,6 @@ export const LOCATIONS = [
 	'Białystok',
 	'Bielsko-Biała',
 	'Bydgoszcz',
-	'Częstochowa',
-	'Kielce',
 	'Lublin',
 	'Łódź',
 	'Olsztyn',

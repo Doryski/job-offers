@@ -4,39 +4,49 @@ import TechList from './TechList'
 import Dialog from '@material-ui/core/Dialog'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
 import { useRouter } from 'next/router'
+import ExpandMoreIcon from '../shared/ExpandMoreIcon'
 
-type MobileViewProps = {
-	isDialogOpen: boolean
-	open: VoidFunction
-	close: VoidFunction
-}
+// type MobileViewProps = {
+// 	isDialogOpen: boolean
+// 	open: VoidFunction
+// 	close: VoidFunction
+// }
 
-const MobileView = ({ isDialogOpen, open, close }: MobileViewProps) => {
-	const { query } = useRouter()
-	const isMobile = useDeviceDetect(1025)
+const MobileView = () =>
+	// { isDialogOpen, open, close }: MobileViewProps
+	{
+		const { query } = useRouter()
+		const isMobile = useDeviceDetect(1025)
 
-	return (
-		<>
-			<ButtonWrapper>
-				<CustomButton
-					padding={isMobile ? '.35em .5em .35em .8em' : undefined}
-					handleClick={open}
-					active={!!query.tech}
-					icon
-					isOpen={isDialogOpen}>
-					Tech
-				</CustomButton>
-			</ButtonWrapper>
-			{isDialogOpen && (
-				<Dialog maxWidth='md' open={isDialogOpen} onClose={close} fullWidth>
+		return (
+			<>
+				<ButtonWrapper>
+					<CustomButton
+						padding={isMobile ? '.35em .5em .35em .8em' : undefined}
+						handleClick={open}
+						active={!!query.tech}
+						// icon={<ExpandMoreIcon
+						// isOpen={isDialogOpen}
+						//  pink={!!query.tech} active={!!query.tech}
+						//  />}
+					>
+						Tech
+					</CustomButton>
+				</ButtonWrapper>
+				{/* {isDialogOpen && (
+				<Dialog maxWidth='md' open={isDialogOpen} 
+				onClose={close}
+				 fullWidth>
 					<Container>
-						<TechList close={close} />
+						<TechList 
+						close={close}
+						 />
 					</Container>
 				</Dialog>
-			)}
-		</>
-	)
-}
+			)} */}
+			</>
+		)
+	}
 export const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(5, auto);

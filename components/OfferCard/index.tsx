@@ -8,15 +8,16 @@ import theme, { textColors } from '../../theme'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
 import moment from 'moment'
 import { OfferPageDataType } from '../../types'
+import { Dispatch, SetStateAction } from 'react'
 
 const OfferCard = ({
 	offerInfo,
-	index,
 	setCurrentOffer,
+	setShowFilters,
 }: {
 	offerInfo: OfferPageDataType
-	index: number
-	setCurrentOffer
+	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
+	setShowFilters: Dispatch<SetStateAction<boolean>>
 }) => {
 	const {
 		title,
@@ -64,7 +65,11 @@ const OfferCard = ({
 	)
 
 	return (
-		<Container onClick={() => setCurrentOffer(offerInfo)}>
+		<Container
+			onClick={() => {
+				setCurrentOffer(offerInfo)
+				setShowFilters(false)
+			}}>
 			<InfoContainer>
 				{isMobile ? (
 					<>

@@ -12,18 +12,15 @@ import CustomButton from '../shared/CustomButton'
 import createTechQuery from '../../helpers/createTechQuery'
 
 type DesktopViewProps = {
-	toggle: VoidFunction
-	close: VoidFunction
-	cutTechArray?: number
-	isListOpen: boolean
+	// toggle: VoidFunction
+	// close: VoidFunction
+	// isListOpen: boolean
 }
 
-const DesktopView = ({
-	toggle,
-	close,
-	cutTechArray,
-	isListOpen,
-}: DesktopViewProps) => {
+const DesktopView = ({}: // toggle,
+// close,
+// isListOpen,
+DesktopViewProps) => {
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(listRef, close)
@@ -40,11 +37,13 @@ const DesktopView = ({
 					</CustomButton>
 				</LinkBtn>
 			</Link>
-			<TechList cutTechArray={14} close={close} />
-			<IconWrapper ref={listRef}>
+			<TechList
+			// close={close}
+			/>
+			{/* <IconWrapper ref={listRef}>
 				<StyledMoreHorizIcon onClick={toggle} />
 				<DropdownList isOpen={isListOpen} ref={listRef}>
-					{TECHNOLOGIES.slice(cutTechArray).map((tech: string) => (
+					{TECHNOLOGIES.map((tech: string) => (
 						<Link href={createTechQuery(tech, query)} key={tech} shallow>
 							<a onClick={close}>
 								<DropdownListItem>
@@ -59,15 +58,14 @@ const DesktopView = ({
 						</Link>
 					))}
 				</DropdownList>
-			</IconWrapper>
+			</IconWrapper> */}
 		</Container>
 	)
 }
 export const Container = styled.div`
-	display: flex;
-	align-items: center;
-	margin: -0.15em 0 0 0;
-	flex: 1;
+	display: grid;
+	grid-template-columns: repeat(7, auto);
+	width: 100%;
 
 	@media (max-width: 1025px) {
 		padding: 1.875em;
@@ -98,8 +96,7 @@ export const LinkBtn = styled.a`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: stretch;
-	height: 64px;
+	align-items: center;
 	text-align: center;
 `
 export const StyledMoreHorizIcon = styled(MoreHoriz)`

@@ -9,34 +9,42 @@ import OfferHeader from '../components/OfferPage/OfferHeader'
 import OfferTechStack from '../components/OfferPage/OfferTechStack'
 import OfferDescription from '../components/OfferPage/OfferDescription'
 import OfferApplySection from '../components/OfferPage/OfferApplySection'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DATE_FORMAT } from '../helpers/utils'
 import moment from 'moment'
 import { db } from '../mysqlSetup'
 import fixObject from '../helpers/fixObject'
 import devlog from '../debug/devlog'
+import Filters from '../components/Filters'
 
 const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
-
+	const [showFilters, setShowFilters] = useState(false)
+	useEffect(() => {
+		setShowFilters(true)
+	}, [])
+	const listProps = { data, setCurrentOffer, setShowFilters }
+	const listHeaderProps = { showFilters, setShowFilters }
 	return (
 		<Layout>
 			<SubContainer>
 				<ListContainer>
 					<Container>
-						<ListHeader />
-						<List data={data} setCurrentOffer={setCurrentOffer} />
+						<ListHeader {...listHeaderProps} />
+						<List {...listProps} />
 					</Container>
 				</ListContainer>
-				{!currentOffer ? (
-					<Center>Click on offer card to show details.</Center>
-				) : (
+				{showFilters && <Filters />}
+				{currentOffer && !showFilters && (
 					<OfferContainer>
 						<OfferHeader offer={currentOffer} />
 						<OfferTechStack technology={currentOffer.technology} />
 						<OfferDescription description={currentOffer.description} />
 						<OfferApplySection offer={currentOffer} />
 					</OfferContainer>
+				)}
+				{!currentOffer && !showFilters && (
+					<Center>Click on offer card to show details.</Center>
 				)}
 			</SubContainer>
 		</Layout>

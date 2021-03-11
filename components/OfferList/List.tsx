@@ -12,9 +12,11 @@ import Center from '../shared/Center'
 const List = ({
 	data,
 	setCurrentOffer,
+	setShowFilters,
 }: {
 	data: OfferPageDataType[] | string
 	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
+	setShowFilters: Dispatch<SetStateAction<boolean>>
 }) => {
 	const { query } = useRouter()
 	if (typeof data === 'string') {
@@ -40,13 +42,13 @@ const List = ({
 
 	return (
 		<ListContainer>
-			{sortedOffers.map((offerInfo, index) => {
+			{sortedOffers.map((offerInfo) => {
 				return (
 					<OfferCard
 						setCurrentOffer={setCurrentOffer}
+						setShowFilters={setShowFilters}
 						key={offerInfo.offerId}
 						offerInfo={offerInfo}
-						index={index}
 					/>
 				)
 			})}

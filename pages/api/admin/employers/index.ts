@@ -14,7 +14,7 @@ export default async function ApiAdminEmployers(
 	if (req.method !== 'GET') {
 		return res.json({
 			method: req.method,
-			errorMessage: 'Only GET methods are available',
+			errorMessage: 'Only GET method is available',
 		})
 	}
 
