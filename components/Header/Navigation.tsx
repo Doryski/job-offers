@@ -8,9 +8,13 @@ import { useSession } from 'next-auth/client'
 
 const Navigation = () => {
 	const router = useRouter()
-	const isActive = (linkPath: string, currentPath: string) =>
-		linkPath === currentPath
+	const isActive = (
+		linkPath: string,
+		currentPath: string,
+		matchAll: boolean = false
+	) => (matchAll ? currentPath.startsWith(linkPath) : linkPath === currentPath)
 	const [session] = useSession()
+	const isAdminPanel = isActive('/admin', router.pathname, true)
 
 	return (
 		<NavList>
@@ -20,18 +24,10 @@ const Navigation = () => {
 						<NavItem>
 							<Typography
 								fWeight={theme.fontWeight[600]}
-								color={
-									isActive('/admin', router.pathname)
-										? textColors.pink
-										: textColors.span
-								}
+								color={isAdminPanel ? textColors.pink : textColors.span}
 								margin='0 0.375em'
 								minWidth='64px'
-								hoverColor={
-									isActive('/admin', router.pathname)
-										? 'none'
-										: textColors.lightPink
-								}>
+								hoverColor={isAdminPanel ? 'none' : textColors.lightPink}>
 								Admin panel
 							</Typography>
 						</NavItem>
