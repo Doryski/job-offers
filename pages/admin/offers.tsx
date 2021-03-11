@@ -18,7 +18,7 @@ const OfferList = () => {
 
 	const { refresh } = useRefreshPage(data, router)
 	const deleteRecord = async (id: string) => {
-		await del('/api/offers/' + id)
+		await del('/api/admin/offers/' + id)
 		refresh()
 	}
 	const headers = ['uuid', 'title', 'employerId', 'dateAdded']

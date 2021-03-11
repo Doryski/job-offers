@@ -28,7 +28,7 @@ const ApplicantList = () => {
 	]
 
 	const deleteRecord = async (id: string) => {
-		await del('/api/applicants/' + id)
+		await del('/api/admin/applicants/' + id)
 		refresh()
 	}
 

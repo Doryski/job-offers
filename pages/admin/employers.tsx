@@ -18,7 +18,7 @@ const EmployerList = () => {
 	const { refresh } = useRefreshPage(data, router)
 
 	const deleteRecord = async (id: string) => {
-		await del('/api/employers/' + id)
+		await del('/api/admin/employers/' + id)
 		refresh()
 	}
 

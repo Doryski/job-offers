@@ -11,13 +11,12 @@ export default async function ApiAdminOffers(
 	if (!session?.user.admin)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 
-	// if (req.method !== 'GET') {
-	// 	return res.status(200).json({
-	// 		method: req.method,
-	// 		errorMessage: 'Only GET method is available',
-	// 	})
-	// }
-
+	if (req.method !== 'DELETE') {
+		return res.status(200).json({
+			method: req.method,
+			errorMessage: 'Only DELETE method is available',
+		})
+	}
 	if (req.method === 'DELETE') {
 		const sqlDelOffer = `
 		DELETE FROM employers 
