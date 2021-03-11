@@ -103,7 +103,7 @@ const OfferCard = ({
 	)
 }
 export const Container = styled.div`
-	margin: 0 0.625em 0.75em;
+	margin: 0 0.5em 0.75em 0.75em;
 	border-radius: 5px;
 	box-shadow: ${({ theme }) => theme.shadows.card};
 	background: ${({ theme }) => theme.colors.primary};
@@ -111,6 +111,7 @@ export const Container = styled.div`
 	overflow: hidden;
 	transition: box-shadow 0.13s;
 	cursor: pointer;
+	min-height: 77px;
 	height: 77px;
 	&:hover {
 		box-shadow: ${({ theme }) => theme.shadows.cardHover};
@@ -121,12 +122,11 @@ export const TechColor = styled.div<{ index: number }>`
 	width: 5px;
 `
 export const InfoContainer = styled.div`
-	flex: 1;
 	display: flex;
+	width: 100%;
 	flex-direction: column;
 	padding: 0.5em 0.25em 0.5em 1em;
 	@media only screen and (max-width: 600px) {
-		/* padding: 0; */
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;

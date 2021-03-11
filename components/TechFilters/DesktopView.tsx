@@ -30,7 +30,7 @@ const DesktopView = ({
 
 	return (
 		<Container>
-			<Link href={'/'} shallow>
+			<Link href='/' shallow>
 				<LinkBtn>
 					<CustomButton
 						padding='.7em .75em'

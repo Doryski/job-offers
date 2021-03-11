@@ -23,27 +23,21 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 		<Layout>
 			<SubContainer>
 				<ListContainer>
-					<ListContainerScroll>
-						<Container>
-							<ListHeader />
-							<ContainerScroll>
-								<List data={data} setCurrentOffer={setCurrentOffer} />
-							</ContainerScroll>
-						</Container>
-					</ListContainerScroll>
+					<Container>
+						<ListHeader />
+						<List data={data} setCurrentOffer={setCurrentOffer} />
+					</Container>
 				</ListContainer>
-				<OfferContainer>
-					{!currentOffer ? (
-						<Center>Click on offer card to show details.</Center>
-					) : (
-						<>
-							<OfferHeader offer={currentOffer} />
-							<OfferTechStack technology={currentOffer.technology} />
-							<OfferDescription description={currentOffer.description} />
-							<OfferApplySection offer={currentOffer} />
-						</>
-					)}
-				</OfferContainer>
+				{!currentOffer ? (
+					<Center>Click on offer card to show details.</Center>
+				) : (
+					<OfferContainer>
+						<OfferHeader offer={currentOffer} />
+						<OfferTechStack technology={currentOffer.technology} />
+						<OfferDescription description={currentOffer.description} />
+						<OfferApplySection offer={currentOffer} />
+					</OfferContainer>
+				)}
 			</SubContainer>
 		</Layout>
 	)
@@ -83,36 +77,24 @@ export const getStaticProps: GetStaticProps = async () => {
 export const SubContainer = styled.div`
 	display: grid;
 	grid-template-columns: 55% auto;
-	height: 100%;
+	height: 92vh;
+	background: ${({ theme }) => theme.colors.secondary};
 `
 export const ListContainer = styled.div`
 	height: 100%;
-	background: ${({ theme }) => theme.colors.secondary};
 	display: flex;
 	flex-direction: column;
 	@media (max-width: 1025px) {
 		width: 100%;
 	}
 `
-export const ListContainerScroll = styled.div`
-	display: flex;
-	position: relative;
-	flex: 1 1 0%;
-`
-
 export const Container = styled.div`
 	width: 100%;
-	height: 100%;
+	height: 92vh;
 	background: ${({ theme }) => theme.colors.secondary};
 	display: flex;
 	flex-direction: column;
 `
-export const ContainerScroll = styled.div`
-	display: flex;
-	position: relative;
-	flex: 1 1 0%;
-`
-
 export const InfoSpan = styled.span`
 	display: block;
 	color: ${({ theme }) => theme.colors.title};

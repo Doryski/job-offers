@@ -26,7 +26,11 @@ const SortDropdown = () => {
 			</Typography>
 			<StyledExpandMoreIcon isOpen={isListOpen} />
 
-			<DropdownList ref={listRef} width='126px' isOpen={isListOpen}>
+			<DropdownList
+				ref={listRef}
+				width='126px'
+				isOpen={isListOpen}
+				position={{ right: '0' }}>
 				{SORT_OPTIONS.map(({ id, name }) => (
 					<Link
 						key={id}
@@ -56,6 +60,7 @@ export const ButtonWrapper = styled.div`
 	cursor: pointer;
 	border-right: 1px solid ${({ theme }) => theme.colors.divider};
 	padding: 0.25em 0.5em 0.25em 0;
+	position: relative;
 `
 
 export default SortDropdown

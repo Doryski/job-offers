@@ -54,12 +54,17 @@ const List = ({
 	)
 }
 export const ListContainer = styled.div`
-	position: absolute;
+	display: flex;
+	/* position: absolute;
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
-	left: 0px;
-	overflow: auto;
+	left: 0px; */
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	flex-direction: column;
+	margin-right: 0.5em;
 
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		padding: 0;

@@ -52,6 +52,7 @@ const Profile = () => {
 export const SubContainer = styled.div`
 	display: flex;
 	flex-direction: column;
+	height: 92vh;
 `
 
 export const AccountData = styled.section`

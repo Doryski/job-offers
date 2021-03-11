@@ -30,11 +30,11 @@ const OfferList = () => {
 		<AdminLayout>
 			{error && <Center>Failed to load.</Center>}
 			{(dataLoading || loading) && <Center>Loading...</Center>}
-			{data && (
+			{data?.data && (
 				<AdminTable
 					data={data.data}
 					headers={headers}
-					uniqueKey={'uuid'}
+					uniqueKey='uuid'
 					deleteRecord={deleteRecord}
 				/>
 			)}

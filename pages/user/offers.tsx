@@ -29,7 +29,7 @@ const UserOffers = () => {
 	const headers = ['Title', 'Exp. lvl', 'Date created']
 	return (
 		<Layout>
-			<Center height='90vh'>
+			<Center height='92vh'>
 				{!session ? (
 					'Log in to see this page.'
 				) : (

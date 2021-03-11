@@ -20,7 +20,7 @@ export default async function ApiAdminEmployers(
 
 	// get employers - for user employer
 	const sqlGet = `SELECT uuid, email, companyName, companySize, 
-	dateAdded, street, city, offerId, isAdmin, accountType 
+	dateAdded, street, city, isAdmin, accountType 
 	FROM employers`
 
 	db.query(sqlGet, function (err, data) {

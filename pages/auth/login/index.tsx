@@ -74,7 +74,7 @@ const Login = () => {
 					errors={errors}
 				/>
 				<ApplyButtonWrapper justify='space-between'>
-					<Link href={'/'}>
+					<Link href='/'>
 						<a>
 							<CustomButton display='flex' padding='.5em 1em' type='button'>
 								Cancel

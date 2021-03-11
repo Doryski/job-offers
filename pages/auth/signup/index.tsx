@@ -133,7 +133,7 @@ const Signup = () => {
 				</ClientOnly>
 				<ErrorMessage>{processDataError}</ErrorMessage>
 				<ApplyButtonWrapper justify='space-between'>
-					<Link href={'/'}>
+					<Link href='/'>
 						<a>
 							<CustomButton display='flex' padding='.7em 1em' type='button'>
 								Cancel

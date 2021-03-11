@@ -90,7 +90,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 	)
 }
 export const Container = styled.header<{ admin?: boolean }>`
-	min-height: 10vh;
+	min-height: 8vh;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

@@ -15,7 +15,7 @@ const Navigation = () => {
 	return (
 		<NavList>
 			{session?.user.admin && (
-				<Link href={'/admin'}>
+				<Link href='/admin'>
 					<a>
 						<NavItem>
 							<Typography
