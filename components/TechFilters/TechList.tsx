@@ -6,39 +6,32 @@ import { useRouter } from 'next/router'
 import CustomButton from '../shared/CustomButton'
 import createTechQuery from '../../helpers/createTechQuery'
 
-// type TechListProps = {
-// 	close: VoidFunction
-// }
+const TechList = () => {
+	const { query } = useRouter()
 
-const TechList = () =>
-	// { close }: TechListProps
-	{
-		const { query } = useRouter()
-
-		return (
-			<>
-				{TECHNOLOGIES.map((tech) => {
-					return (
-						<Link href={createTechQuery(tech, query)} key={tech} shallow>
-							<a
-							// onClick={close}
-							>
-								<CustomButton
-									active={query.tech === stringFormat(tech)}
-									minWidth='60px'
-									padding='.7em .75em'
-									margin='0 auto'>
-									<TechName>{tech}</TechName>
-								</CustomButton>
-							</a>
-						</Link>
-					)
-				})}
-			</>
-		)
-	}
+	return (
+		<>
+			{TECHNOLOGIES.map((tech) => {
+				return (
+					<Link href={createTechQuery(tech, query)} key={tech} shallow>
+						<a>
+							<CustomButton
+								active={query.tech === stringFormat(tech)}
+								minWidth='60px'
+								padding='.7em 3.15em'
+								margin='.25em 0'
+								fWeight={query.tech === stringFormat(tech) ? 600 : 400}>
+								<TechName>{tech}</TechName>
+							</CustomButton>
+						</a>
+					</Link>
+				)
+			})}
+		</>
+	)
+}
 export const TechName = styled.span<{ all?: boolean }>`
-	font-size: 0.6875rem;
+	font-size: 0.875rem;
 	line-height: 15px;
 	text-align: center;
 	margin-top: ${({ all }) => (all ? '.1em' : '-5px')};

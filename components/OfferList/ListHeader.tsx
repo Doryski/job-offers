@@ -1,31 +1,44 @@
 import { ExpandLess } from '@material-ui/icons'
 import styled from 'styled-components'
-import { textColors } from '../../theme'
 import SortDropdown from '../shared/SortDropdown'
 import Typography from '../shared/Typography'
 import { ICON_SIZE } from '../shared/InfoLabel'
 import InputFilter from '../shared/InputFilter'
+import { Dispatch, SetStateAction } from 'react'
+import { useRouter } from 'next/router'
+import resetFilters from '../../helpers/resetFilters'
 
 const ListHeader = ({
 	showFilters,
 	setShowFilters,
 }: {
 	showFilters: boolean
-	setShowFilters
-}) => (
-	<OptionsHeader>
-		<SortFiltersWrapper>
-			<InputFilter />
-			<Wrapper>
-				<SortDropdown />
-				<FiltersWrapper onClick={() => setShowFilters((prev) => !prev)}>
-					<Typography color={textColors.span}>Filters</Typography>
-					<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={showFilters} />
-				</FiltersWrapper>
-			</Wrapper>
-		</SortFiltersWrapper>
-	</OptionsHeader>
-)
+	setShowFilters: Dispatch<SetStateAction<boolean>>
+}) => {
+	const router = useRouter()
+	const { query } = router
+	const filtersCount = Object.keys(query).filter((key) => key !== 'sort').length
+
+	return (
+		<OptionsHeader>
+			<SortFiltersWrapper>
+				<InputFilter />
+				<Wrapper>
+					<SortDropdown />
+					{filtersCount > 0 && (
+						<FiltersWrapper onClick={() => resetFilters(router)}>
+							<Typography color='span'>Clear {filtersCount}</Typography>
+						</FiltersWrapper>
+					)}
+					<FiltersWrapper onClick={() => setShowFilters((prev) => !prev)}>
+						<Typography color='span'>Filters</Typography>
+						<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={showFilters} />
+					</FiltersWrapper>
+				</Wrapper>
+			</SortFiltersWrapper>
+		</OptionsHeader>
+	)
+}
 
 export const OptionsHeader = styled.div`
 	background: ${({ theme }) => theme.colors.primary};
@@ -42,8 +55,8 @@ export const SortFiltersWrapper = styled.div`
 `
 
 export const ShowFiltersIcon = styled(({ isOpen, fontSize, ...props }) => (
-	<ExpandLess {...props} fontSize={fontSize} isOpen={isOpen} />
-))`
+	<ExpandLess {...props} fontSize={fontSize} />
+))<{ isOpen: boolean }>`
 	color: ${({ theme }) => theme.colors.text};
 	transform: rotate(${({ isOpen }) => (isOpen ? '-90deg' : '90deg')});
 `
@@ -55,9 +68,12 @@ export const Wrapper = styled.div`
 
 export const FiltersWrapper = styled.div`
 	display: flex;
-	margin-left: 0.75em;
 	cursor: pointer;
-	padding: 0.5em 0;
+	padding: 0.25em 0.75em 0.25em 0.75em;
+	border-left: 1px solid ${({ theme }) => theme.colors.divider};
+	&:last-of-type {
+		margin-top: 0.1em;
+	}
 `
 
 export default ListHeader

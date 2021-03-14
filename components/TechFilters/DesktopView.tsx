@@ -1,26 +1,13 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
-import { TECHNOLOGIES } from '../../helpers/utils'
 import Link from 'next/link'
-import { DropdownList, DropdownListItem } from '../shared/DropdownList'
-import stringFormat from '../../helpers/stringFormat'
 import { MoreHoriz } from '@material-ui/icons'
-import TechList, { TechName, IconWrapper } from './TechList'
+import TechList, { TechName } from './TechList'
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick'
 import { useRouter } from 'next/router'
 import CustomButton from '../shared/CustomButton'
-import createTechQuery from '../../helpers/createTechQuery'
 
-type DesktopViewProps = {
-	// toggle: VoidFunction
-	// close: VoidFunction
-	// isListOpen: boolean
-}
-
-const DesktopView = ({}: // toggle,
-// close,
-// isListOpen,
-DesktopViewProps) => {
+const DesktopView = () => {
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(listRef, close)
@@ -30,35 +17,16 @@ DesktopViewProps) => {
 			<Link href='/' shallow>
 				<LinkBtn>
 					<CustomButton
-						padding='.7em .75em'
+						padding='.7em 3.15em'
 						minWidth='60px'
-						active={!query.tech}>
+						margin='.25em 0'
+						active={!query.tech}
+						fWeight={!query.tech ? 600 : 400}>
 						<TechName all>All</TechName>
 					</CustomButton>
 				</LinkBtn>
 			</Link>
-			<TechList
-			// close={close}
-			/>
-			{/* <IconWrapper ref={listRef}>
-				<StyledMoreHorizIcon onClick={toggle} />
-				<DropdownList isOpen={isListOpen} ref={listRef}>
-					{TECHNOLOGIES.map((tech: string) => (
-						<Link href={createTechQuery(tech, query)} key={tech} shallow>
-							<a onClick={close}>
-								<DropdownListItem>
-									<CustomButton
-										active={query.tech === stringFormat(tech)}
-										padding='.7em .75em'
-										minWidth='100%'>
-										{tech}
-									</CustomButton>
-								</DropdownListItem>
-							</a>
-						</Link>
-					))}
-				</DropdownList>
-			</IconWrapper> */}
+			<TechList />
 		</Container>
 	)
 }
@@ -96,7 +64,7 @@ export const LinkBtn = styled.a`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	text-align: center;
 `
 export const StyledMoreHorizIcon = styled(MoreHoriz)`

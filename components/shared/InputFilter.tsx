@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { Search } from '@material-ui/icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const InputFilter = () => {
 	const router = useRouter()
 	const [search, setSearch] = useState('')
+	const inputRef = useRef<HTMLInputElement>(null!)
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value)
 	}
@@ -16,11 +17,12 @@ const InputFilter = () => {
 	}, [search])
 
 	return (
-		<InputWrapper>
+		<InputWrapper onClick={() => inputRef?.current?.focus()}>
 			<Button>
 				<Search />
 			</Button>
 			<Input
+				ref={inputRef}
 				type='text'
 				placeholder='Search'
 				value={search}

@@ -63,3 +63,5 @@ export type Query = {
 	value: string
 }
 export type Filter = { param: string | number; op: boolean }
+
+export type SliderType = [number, number]

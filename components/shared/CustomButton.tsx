@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Typography from './Typography'
-import { textColors } from '../../theme'
 
 type CustomButtonProps = {
 	children: React.ReactNode
@@ -10,11 +9,12 @@ type CustomButtonProps = {
 	padding?: string
 	margin?: string
 	pink?: boolean
-	fWeight?: string
+	fWeight?: number
 	minWidth?: string
 	display?: string
 	type?: 'button' | 'submit' | 'reset'
-	icon?: JSX.Element | false
+	icon?: { icon?: JSX.Element; color?: string; margin?: string } | false
+	hoverColor?: string
 }
 
 type StyledButtonProps = {
@@ -39,6 +39,7 @@ const CustomButton = ({
 	minWidth,
 	display,
 	type,
+	hoverColor,
 }: CustomButtonProps) => (
 	<Button
 		active={active}
@@ -50,15 +51,18 @@ const CustomButton = ({
 		minWidth={minWidth}
 		type={type}>
 		<Typography
-			color={
-				active ? textColors.pink : pink ? textColors.white : textColors.text
-			}
+			color={active ? 'pink' : pink ? 'white' : 'text'}
 			fontSize={fontSize}
 			fWeight={fWeight}
-			display={display}>
+			display={display}
+			hoverColor={hoverColor}>
 			{children}
 		</Typography>
-		{icon && <IconWrapper>{icon}</IconWrapper>}
+		{icon && (
+			<IconWrapper color={icon?.color} margin={icon?.margin}>
+				{icon?.icon}
+			</IconWrapper>
+		)}
 	</Button>
 )
 
@@ -91,9 +95,10 @@ export const Button = styled.button<StyledButtonProps>`
 			pink ? theme.colors.opacityPink : theme.colors.buttonBorder};
 	}
 `
-export const IconWrapper = styled.div`
-	margin-top: 0.1875em;
+export const IconWrapper = styled.div<{ color?: string; margin?: string }>`
+	margin: ${({ margin }) => margin || 'unset'};
 	transition: all 0.4s;
+	color: ${({ color, theme }) => theme.colors[color] || 'inherit'};
 `
 
 export default CustomButton

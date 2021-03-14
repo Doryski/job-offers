@@ -20,8 +20,8 @@ const SortDropdown = () => {
 	const getCurrentSortOption = SORT_OPTIONS.find(({ id }) => id === query.sort)
 	return (
 		<ButtonWrapper ref={listRef} onClick={toggle}>
-			<Typography color={textColors.span}>Sort by:</Typography>
-			<Typography color={textColors.span} margin='0 .25em 0 .5em'>
+			<Typography color='span'>Sort by:</Typography>
+			<Typography color='span' margin='0 .25em 0 .5em'>
 				{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
 			</Typography>
 			<StyledExpandMoreIcon isOpen={isListOpen} />
@@ -38,10 +38,7 @@ const SortDropdown = () => {
 						shallow>
 						<a onClick={close}>
 							<DropdownListItem>
-								<Typography
-									color={textColors.text}
-									align='left'
-									padding='0.5em 0.7em'>
+								<Typography color='text' align='left' padding='0.5em 0.7em'>
 									{name}
 								</Typography>
 							</DropdownListItem>
@@ -58,8 +55,7 @@ export const ButtonWrapper = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	cursor: pointer;
-	border-right: 1px solid ${({ theme }) => theme.colors.divider};
-	padding: 0.5em;
+	padding: 0.25em 0.5em;
 	position: relative;
 `
 

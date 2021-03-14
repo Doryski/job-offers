@@ -1,36 +1,33 @@
 import CustomButton from '../shared/CustomButton'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import stringFormat from '../../helpers/stringFormat'
+import createQuery from '../../helpers/createQuery'
 
-type LocationButtonProps = {
-	loc: string
-	setLocation: React.Dispatch<React.SetStateAction<string>>
-	location: string
-}
-
-const LocationButton = ({
-	loc,
-	setLocation,
-	location,
-}: LocationButtonProps) => {
-	const { query } = useRouter()
+const LocationButton = ({ location }: { location: string }) => {
+	const { query, push } = useRouter()
+	const locQuery = (location: string) =>
+		createQuery(
+			{
+				query: 'location',
+				value: stringFormat(location),
+			},
+			query
+		)
+	const isLocInQuery = query.location === stringFormat(location)
 	return (
-		<ItemWrapper key={loc}>
-			<CustomButton
-				handleClick={() => setLocation(loc)}
-				active={
-					location ? loc === location : stringFormat(loc) === query.location
-				}
-				padding='0.5em 1.875em'>
-				{loc}
-			</CustomButton>
-		</ItemWrapper>
+		<CustomButton
+			handleClick={() => {
+				push(isLocInQuery ? locQuery('') : locQuery(location), undefined, {
+					shallow: true,
+				})
+			}}
+			active={query.location && isLocInQuery}
+			padding='0.5em 1.875em'
+			margin='.25em .5em .25em 0'
+			fWeight={query.location && isLocInQuery ? 600 : 400}>
+			{location}
+		</CustomButton>
 	)
 }
-
-export const ItemWrapper = styled.div`
-	margin: 0.3125em;
-`
 
 export default LocationButton
