@@ -44,7 +44,7 @@ export type OfferType = {
 	expLvl: string
 	salaryFrom: number
 	salaryTo: number
-	technology: string
+	technology: { tech: string; techLvl: number }[]
 	dateAdded: string
 	description: string
 	employerId: string

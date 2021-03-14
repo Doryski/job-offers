@@ -25,6 +25,7 @@ const OfferCard = ({
 		dateAdded,
 		companyName,
 		city,
+		technology,
 	} = offerInfo
 	const days = dateDiff(moment(), dateAdded)
 	const isNew = days < 1
@@ -43,7 +44,7 @@ const OfferCard = ({
 		</InfoWrapper>
 	)
 	const offerTitleC = (
-		<Typography color={'title'} align='left' fontSize='large' hide>
+		<Typography color='title' align='left' fontSize='large' hide>
 			{title}
 		</Typography>
 	)
@@ -89,11 +90,11 @@ const OfferCard = ({
 						<BottomWrapper>
 							{companyInfo}
 							<RequirementsWrapper>
-								{/* {technology.slice(0, 3).map(({ tech }) => (
-											<SmallLabel isSpan key={tech}>
-												{tech.toLowerCase()}
-											</SmallLabel>
-										))} */}
+								{technology.slice(0, 3).map(({ tech }) => (
+									<SmallLabel isSpan key={tech}>
+										{tech.toLowerCase()}
+									</SmallLabel>
+								))}
 							</RequirementsWrapper>
 						</BottomWrapper>
 					</>

@@ -66,10 +66,13 @@ export const getStaticProps: GetStaticProps = async () => {
 		const data = fixObject(result[0])
 		console.log('get api/offers/employers: ', data)
 		if (!data) return { props: { data: 'No offers found.' }, revalidate: 1 }
-		const fixed = (data ?? []).map((el: OfferPageDataType) => ({
-			...el,
-			dateAdded: moment(+el.dateAdded).format(DATE_FORMAT),
-		}))
+		const fixed = (data ?? []).map(
+			(el: OfferPageDataType & { technology: string }) => ({
+				...el,
+				dateAdded: moment(+el.dateAdded).format(DATE_FORMAT),
+				technology: JSON.parse(el.technology),
+			})
+		)
 		return {
 			props: {
 				data: fixed,
