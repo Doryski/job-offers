@@ -1,7 +1,6 @@
 import Typography from '../../../components/shared/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import CustomButton from '../../../components/shared/CustomButton'
-import theme, { textColors } from '../../../theme'
 import { useForm } from 'react-hook-form'
 import {
 	ApplyButtonWrapper,
@@ -9,7 +8,7 @@ import {
 } from '../../../components/OfferPage/OfferApplySection'
 import { LOCATIONS } from '../../../helpers/utils'
 import useCheckbox from '../../../hooks/useCheckbox'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import InputComponent from '../../../components/AddOfferModal/CustomInput'
 import SelectComponent from '../../../components/AddOfferModal/CustomSelect'
@@ -126,7 +125,7 @@ const Signup = () => {
 				<ClientOnly>
 					<CheckboxWrapper>
 						<Checkbox checked={isChecked} onChange={handleChange} />
-						<Typography color={textColors.span} fWeight={theme.fontWeight[400]}>
+						<Typography color='span' fWeight={400}>
 							I agree to process my data
 						</Typography>
 					</CheckboxWrapper>
@@ -245,16 +244,16 @@ export default Signup
 						<>
 							<div style={{ maxWidth: '210px' }}>
 								<Typography
-									color={textColors.pink}
-									fWeight={theme.fontWeight[500]}
-									fontSize={theme.fontSize.md}>
+									color={'pink'}
+									fWeight={500}
+									fontSize='md'}>
 									{fileName}
 								</Typography>
 							</div>
 							<DeleteFileBtn onClick={handleFileDelete}>
 								<Typography
-									color={textColors.span}
-									fWeight={theme.fontWeight[700]}>
+									color='span'
+									fWeight={700}>
 									Delete
 								</Typography>
 								<DeleteOutline />
@@ -267,9 +266,9 @@ export default Signup
 							</UploadIconWrapper>
 							<label htmlFor='cv' style={{ cursor: 'pointer' }}>
 								<Typography
-									color={textColors.span}
-									fWeight={theme.fontWeight[400]}
-									fontSize={theme.fontSize.large}
+									color='span'
+									fWeight={400}
+									fontSize='large'
 									margin='0 0 0 .5em'>
 									Upload company logo (.jpg)
 								</Typography>

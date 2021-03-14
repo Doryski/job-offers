@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
-import { textColors } from '../../theme'
 
 type TypographyProps = {
-	fWeight?: string
+	fWeight?: number
 	family?: string
 	fontSize?: string
 	hide?: boolean
@@ -28,11 +27,9 @@ export const Wrapper = styled.h4<WrapperProps>`
 		${minWidth && `min-width: ${minWidth}`};
 	`}
 `
-const Typography = styled(Wrapper).attrs(
-	({ as }: { as: string }) => ({
-		as: !!as ? as : 'span',
-	})
-)`
+const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
+	as: !!as ? as : 'span',
+}))`
 	${({
 		fWeight,
 		family,
@@ -42,39 +39,24 @@ const Typography = styled(Wrapper).attrs(
 		hoverColor,
 	}: TypographyProps) => css`
 		font-weight: ${({ theme }) =>
-			fWeight || theme.fontWeight[600]};
+			theme.fontWeight[fWeight] || theme.fontWeight[600]};
 		font-family: ${family || "'Open Sans', sans-serif"};
-		font-size: ${({ theme }) => fontSize || theme.fontSize.md};
-		${hide &&
-		`
+		font-size: ${({ theme }) =>
+			fontSize in theme.fontSize
+				? theme.fontSize[fontSize]
+				: fontSize || theme.fontSize.md};
+		transition: color 0.3s;
+		${
+			hide &&
+			`
         overflow: hidden;
 		text-overflow: ellipsis;
-		`}
-		color: ${({ theme }) => {
-			switch (color) {
-				case 'primary':
-					return theme.colors.primary
-				case 'text':
-					return theme.colors.text
-				case 'pink':
-					return theme.colors.pink
-				case 'title':
-					return theme.colors.title
-				case 'salary':
-					return theme.colors.salary
-				case 'span':
-					return theme.colors.span
-				case 'white':
-					return theme.colors.white
-				default:
-					return theme.colors.title
-			}
-		}};
+		`
+		}
+		color: ${({ theme }) => theme.colors[color] || theme.colors.title}};
 		&:hover {
 			color: ${({ theme }) =>
-				hoverColor === textColors.lightPink
-					? theme.colors.lightPink
-					: hoverColor};
+				hoverColor === 'lightPink' ? theme.colors.lightPink : hoverColor};
 		}
 	`}
 `

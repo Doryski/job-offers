@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import TechRange from '../shared/TechRange'
 import Typography from '../shared/Typography'
-import theme, { textColors } from '../../theme'
 import { Wrapper } from './StyledComponents'
 import { OfferType } from '../../types'
 import devlog from '../../debug/devlog'
@@ -17,10 +16,10 @@ const OfferTechStack = ({
 	return (
 		<TechStackContainer>
 			<Typography
-				color={textColors.title}
-				fWeight={theme.fontWeight[500]}
-				fontSize={theme.fontSize.xl}
-				align='flex-start'
+				color={'title'}
+				fWeight={500}
+				fontSize='xl'
+				align='left'
 				margin='0.625em 1.25em'>
 				Tech stack
 			</Typography>

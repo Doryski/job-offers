@@ -12,7 +12,6 @@ import { TextField, Checkbox } from '@material-ui/core'
 import CustomButton from '../shared/CustomButton'
 import UploadCv from '../shared/UploadCv'
 import InputIcon from './InputIcon'
-import theme, { textColors } from '../../theme'
 import { Wrapper } from './StyledComponents'
 import useCheckbox from '../../hooks/useCheckbox'
 import useFileUpload from '../../hooks/useFileUpload'
@@ -63,10 +62,10 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 	return (
 		<ApplyContainer>
 			<Typography
-				color={textColors.title}
-				fWeight={theme.fontWeight[500]}
-				fontSize={theme.fontSize.xl}
-				align='flex-start'
+				color={'title'}
+				fWeight={500}
+				fontSize='xl'
+				align='left'
 				margin='0.625em 1.25em'>
 				Apply for this job
 			</Typography>
@@ -148,17 +147,12 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								{!!fileName ? (
 									<>
 										<div style={{ maxWidth: '210px' }}>
-											<Typography
-												color={textColors.pink}
-												fWeight={theme.fontWeight[500]}
-												fontSize={theme.fontSize.md}>
+											<Typography color={'pink'} fWeight={500} fontSize='md'>
 												{fileName}
 											</Typography>
 										</div>
 										<DeleteFileBtn onClick={handleFileDelete}>
-											<Typography
-												color={textColors.span}
-												fWeight={theme.fontWeight[700]}>
+											<Typography color='span' fWeight={700}>
 												Delete
 											</Typography>
 											<DeleteOutline />
@@ -171,9 +165,9 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 										</UploadIconWrapper>
 										<label htmlFor='cv' style={{ cursor: 'pointer' }}>
 											<Typography
-												color={textColors.span}
-												fWeight={theme.fontWeight[400]}
-												fontSize={theme.fontSize.large}
+												color='span'
+												fWeight={400}
+												fontSize='large'
 												margin='0 0 0 .5em'>
 												Upload CV (.pdf)
 											</Typography>
@@ -184,9 +178,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 						</FormGrid>
 						<CheckboxWrapper>
 							<Checkbox checked={isChecked} onChange={handleChange} />
-							<Typography
-								color={textColors.span}
-								fWeight={theme.fontWeight[400]}>
+							<Typography color='span' fWeight={400}>
 								Processing data in future recruitment
 							</Typography>
 						</CheckboxWrapper>
@@ -204,7 +196,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 										Apply
 										<Typography
 											display='block'
-											color={textColors.white}
+											color='white'
 											padding='0 0.5em 0 1.5em'>
 											<Send />
 										</Typography>

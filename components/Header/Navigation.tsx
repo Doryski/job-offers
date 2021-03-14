@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import Typography from '../shared/Typography'
 import { NAV_LINKS } from '../../helpers/utils'
-import theme, { textColors } from '../../theme'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
@@ -23,11 +22,11 @@ const Navigation = () => {
 					<a>
 						<NavItem>
 							<Typography
-								fWeight={theme.fontWeight[600]}
-								color={isAdminPanel ? textColors.pink : textColors.span}
+								fWeight={600}
+								color={isAdminPanel ? 'pink' : 'span'}
 								margin='0 0.375em'
 								minWidth='64px'
-								hoverColor={isAdminPanel ? 'none' : textColors.lightPink}>
+								hoverColor={isAdminPanel ? 'none' : 'lightPink'}>
 								Admin panel
 							</Typography>
 						</NavItem>
@@ -40,18 +39,12 @@ const Navigation = () => {
 						<a>
 							<NavItem>
 								<Typography
-									fWeight={theme.fontWeight[600]}
-									color={
-										isActive(path, router.pathname)
-											? textColors.pink
-											: textColors.span
-									}
+									fWeight={600}
+									color={isActive(path, router.pathname) ? 'pink' : 'span'}
 									margin='0 0.375em'
 									minWidth='64px'
 									hoverColor={
-										isActive(path, router.pathname)
-											? 'none'
-											: textColors.lightPink
+										isActive(path, router.pathname) ? 'none' : 'lightPink'
 									}>
 									{title}
 								</Typography>

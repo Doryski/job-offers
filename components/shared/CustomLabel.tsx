@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Typography from './Typography'
 import BusinessIcon from '@material-ui/icons/Business'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
-import theme, { textColors } from '../../theme'
 import PeopleIcon from '@material-ui/icons/People'
 
 const CustomLabel = ({
@@ -24,11 +23,7 @@ const CustomLabel = ({
 					<PeopleIcon />
 				)}
 			</IconWrapper>
-			<Typography
-				color={textColors.span}
-				fontSize={theme.fontSize.small}
-				fWeight={theme.fontWeight[400]}
-			>
+			<Typography color='span' fontSize='small' fWeight={400}>
 				{label}
 			</Typography>
 		</Wrapper>

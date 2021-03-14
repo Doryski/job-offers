@@ -1,5 +1,4 @@
 import CustomButton from '../shared/CustomButton'
-import theme from '../../theme'
 import useDialogHandler from '../../hooks/useDialogHandler'
 import AddOfferModal from '.'
 import AddOfferContextProvider from './AddOfferContext'
@@ -10,7 +9,7 @@ const AddOffer = () => {
 	return (
 		<>
 			<CustomButton
-				fWeight={theme.fontWeight[400]}
+				fWeight={400}
 				handleClick={open}
 				margin='0 0.875em 0 0.375em'
 				padding='0.625em 1.125em'>

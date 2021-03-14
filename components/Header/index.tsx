@@ -3,7 +3,6 @@ import MenuIcon from '@material-ui/icons/Menu'
 import AddOffer from '../AddOfferModal/AddOffer'
 import CustomButton from '../shared/CustomButton'
 import Navigation from './Navigation'
-import theme from '../../theme'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
@@ -44,7 +43,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 					<>
 						<CustomButton
 							handleClick={signIn}
-							fWeight={theme.fontWeight[400]}
+							fWeight={400}
 							pink
 							margin='0 0.875em 0 0.375em'
 							padding='0.625em 1.125em'>
@@ -53,8 +52,8 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 						<Link href='/auth/signup'>
 							<a>
 								<CustomButton
-									fWeight={theme.fontWeight[400]}
-									margin='0 0.875em 0 0.375em'
+									fWeight={400}
+									margin='0 0 0 0.375em'
 									padding='0.625em 1.125em'>
 									Sign up
 								</CustomButton>
@@ -69,7 +68,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 							<a>
 								<CustomButton
 									pink
-									fWeight={theme.fontWeight[400]}
+									fWeight={400}
 									margin='0 0.875em 0 0.375em'
 									padding='0.625em 1.125em'>
 									My Profile
@@ -78,8 +77,8 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 						</Link>
 						<CustomButton
 							handleClick={handleSignOut}
-							fWeight={theme.fontWeight[400]}
-							margin='0 0.875em 0 0.375em'
+							fWeight={400}
+							margin='0 0 0 0.375em'
 							padding='0.625em 1.125em'>
 							Log out
 						</CustomButton>
@@ -89,6 +88,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 		</Container>
 	)
 }
+
 export const Container = styled.header<{ admin?: boolean }>`
 	min-height: 8vh;
 	display: flex;
@@ -111,7 +111,7 @@ export const LogoWrapper = styled.div`
 export const Wrapper = styled.div`
 	display: flex;
 	height: 38px;
-	margin-right: 0.75em;
+	margin-right: 1.5em;
 	align-items: center;
 	@media (max-width: 600px) {
 		margin: 0;

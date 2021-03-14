@@ -1,17 +1,16 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Typography from '../shared/Typography'
-import theme, { textColors } from '../../theme'
 import { Wrapper } from './StyledComponents'
 
 const OfferDescription = ({ description }: { description: string }) => {
 	return (
 		<DescriptionContainer>
 			<Typography
-				color={textColors.title}
-				fWeight={theme.fontWeight[500]}
-				fontSize={theme.fontSize.xl}
-				align='flex-start'
+				color={'title'}
+				fWeight={500}
+				fontSize='xl'
+				align='left'
 				margin='0.625em 1.25em'>
 				Description
 			</Typography>

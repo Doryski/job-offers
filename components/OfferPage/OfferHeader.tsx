@@ -3,7 +3,6 @@ import InfoLabel from '../shared/InfoLabel'
 import Typography from '../shared/Typography'
 import formatThous from '../../helpers/formatThous'
 import { INFO_LABELS } from '../../helpers/utils'
-import theme, { textColors } from '../../theme'
 import { OfferPageDataType } from '../../types'
 
 const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
@@ -14,26 +13,18 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 			<MainInfoContainer>
 				<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
 					<Typography
-						color={textColors.title}
-						align='flex-start'
-						fontSize={theme.fontSize.xl}
+						color={'title'}
+						align='left'
+						fontSize='xl'
 						margin='0.25em 0'>
 						{title}
 					</Typography>
 				</div>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<Typography
-						color={textColors.text}
-						align='flex-start'
-						margin='0.25em 0'
-						fWeight={theme.fontWeight[400]}>
+					<Typography color='text' align='left' margin='0.25em 0' fWeight={400}>
 						Salary: {formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
 					</Typography>
-					<Typography
-						color={textColors.text}
-						align='flex-start'
-						margin='0.25em 0'
-						fWeight={theme.fontWeight[400]}>
+					<Typography color='text' align='left' margin='0.25em 0' fWeight={400}>
 						Address: {street}, {city}
 					</Typography>
 				</div>

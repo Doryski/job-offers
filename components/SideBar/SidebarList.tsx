@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Typography from '../shared/Typography'
-import theme from '../../theme'
 
 const sideBarItems = ['There', 'will', 'be', 'some', 'menu', 'list']
 
@@ -11,7 +10,7 @@ const SidebarList = () => {
 				<ListItem key={item}>
 					{/* <IconWrapper>{item.icon}</IconWrapper> */}
 					<TitleWrapper>
-						<Typography fWeight={theme.fontWeight[400]}>{item}</Typography>
+						<Typography fWeight={400}>{item}</Typography>
 					</TitleWrapper>
 				</ListItem>
 			))}

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import Typography from './Typography'
 import { TECH_LVL_OPTIONS } from '../../helpers/utils'
-import theme, { textColors } from '../../theme'
 
 const TechRange = ({ range, tech }: { range: number; tech: string }) => {
 	const rangeColor =
@@ -14,10 +13,10 @@ const TechRange = ({ range, tech }: { range: number; tech: string }) => {
 	return (
 		<Container>
 			<Typography
-				color={textColors.title}
-				fWeight={theme.fontWeight[600]}
+				color={'title'}
+				fWeight={600}
 				fontSize='1.1rem'
-				align='flex-start'
+				align='left'
 				hide>
 				{tech}
 			</Typography>
@@ -29,11 +28,7 @@ const TechRange = ({ range, tech }: { range: number; tech: string }) => {
 					<RangePoint key={index} disabled />
 				))}
 			</RangeContainer>
-			<Typography
-				color={textColors.span}
-				fWeight={theme.fontWeight[400]}
-				align='flex-start'
-				margin='0'>
+			<Typography color='span' fWeight={400} align='left' margin='0'>
 				{TECH_LVL_OPTIONS[range - 1].title.toLowerCase()}
 			</Typography>
 		</Container>

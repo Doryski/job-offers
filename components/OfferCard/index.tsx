@@ -4,7 +4,6 @@ import SmallLabel from '../shared/SmallLabel'
 import CustomLabel from '../shared/CustomLabel'
 import dateDiff from '../../helpers/dateDiff'
 import formatThous from '../../helpers/formatThous'
-import theme, { textColors } from '../../theme'
 import useDeviceDetect from '../../hooks/useDeviceDetect'
 import moment from 'moment'
 import { OfferPageDataType } from '../../types'
@@ -44,21 +43,17 @@ const OfferCard = ({
 		</InfoWrapper>
 	)
 	const offerTitleC = (
-		<Typography
-			color={textColors.title}
-			align='flex-start'
-			fontSize={theme.fontSize.large}
-			hide>
+		<Typography color={'title'} align='left' fontSize='large' hide>
 			{title}
 		</Typography>
 	)
 
 	const salaryRange = (
 		<Typography
-			color={textColors.salary}
-			align='flex-start'
-			fWeight={theme.fontWeight[400]}
-			fontSize={isMobile ? theme.fontSize.md : theme.fontSize.large}
+			color='salary'
+			align='left'
+			fWeight={400}
+			fontSize={isMobile ? 'md' : 'large'}
 			margin='0 .1em 0 0'>
 			{formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
 		</Typography>

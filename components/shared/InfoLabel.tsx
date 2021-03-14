@@ -7,7 +7,6 @@ import {
 	ShowChart,
 	Timelapse,
 } from '@material-ui/icons'
-import theme, { textColors } from '../../theme'
 
 export const BusinessIcon = styled(Business)`
 	color: rgb(255, 82, 82);
@@ -56,13 +55,13 @@ const InfoLabel = ({ id, title }: { id: number; title: string | number }) => {
 	return (
 		<Container>
 			<IconWrapper>{icons[id].icon}</IconWrapper>
-			<Typography color={textColors.title} fWeight={theme.fontWeight[400]}>
+			<Typography color={'title'} fWeight={400}>
 				{title}
 			</Typography>
 			<Typography
-				color={textColors.span}
-				fontSize={theme.fontSize.small}
-				fWeight={theme.fontWeight[400]}
+				color='span'
+				fontSize='small'
+				fWeight={400}
 				margin='0.1875em 0'>
 				{icons[id].title}
 			</Typography>

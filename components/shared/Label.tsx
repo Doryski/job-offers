@@ -10,7 +10,7 @@ const Label = ({
 	active: boolean
 }) => (
 	<Container active={active}>
-		<Typography color={textColors.text}>{children}</Typography>
+		<Typography color='text'>{children}</Typography>
 	</Container>
 )
 

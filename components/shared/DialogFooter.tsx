@@ -1,6 +1,5 @@
 import CustomButton from './CustomButton'
 import styled from 'styled-components'
-import theme from '../../theme'
 
 type DialogFooterProps = {
 	handleReset: (e: any) => void
@@ -20,7 +19,7 @@ const DialogFooter = ({
 				<CustomButton
 					padding='0.5em 1.125em'
 					pink
-					fWeight={theme.fontWeight[600]}
+					fWeight={600}
 					margin='0 0.625em'>
 					Show offers
 				</CustomButton>

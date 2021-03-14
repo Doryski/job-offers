@@ -84,7 +84,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export const SubContainer = styled.div`
 	display: grid;
-	grid-template-columns: 55% auto;
+	grid-template-columns: 50% auto;
 	height: 92vh;
 	background: ${({ theme }) => theme.colors.secondary};
 `
