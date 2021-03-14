@@ -244,7 +244,7 @@ export default Signup
 						<>
 							<div style={{ maxWidth: '210px' }}>
 								<Typography
-									color={'pink'}
+									color='pink'
 									fWeight={500}
 									fontSize='md'}>
 									{fileName}

@@ -13,7 +13,7 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 			<MainInfoContainer>
 				<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
 					<Typography
-						color={'title'}
+						color='title'
 						align='left'
 						fontSize='xl'
 						margin='0.25em 0'>
@@ -22,10 +22,16 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 				</div>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<Typography color='text' align='left' margin='0.25em 0' fWeight={400}>
-						Salary: {formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
+						Salary:{' '}
+						<strong>
+							{formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
+						</strong>
 					</Typography>
 					<Typography color='text' align='left' margin='0.25em 0' fWeight={400}>
-						Address: {street}, {city}
+						Address:{' '}
+						<strong>
+							{street}, {city}
+						</strong>
 					</Typography>
 				</div>
 			</MainInfoContainer>

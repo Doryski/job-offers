@@ -62,7 +62,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 	return (
 		<ApplyContainer>
 			<Typography
-				color={'title'}
+				color='title'
 				fWeight={500}
 				fontSize='xl'
 				align='left'
@@ -147,7 +147,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								{!!fileName ? (
 									<>
 										<div style={{ maxWidth: '210px' }}>
-											<Typography color={'pink'} fWeight={500} fontSize='md'>
+											<Typography color='pink' fWeight={500} fontSize='md'>
 												{fileName}
 											</Typography>
 										</div>

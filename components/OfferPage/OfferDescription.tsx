@@ -7,7 +7,7 @@ const OfferDescription = ({ description }: { description: string }) => {
 	return (
 		<DescriptionContainer>
 			<Typography
-				color={'title'}
+				color='title'
 				fWeight={500}
 				fontSize='xl'
 				align='left'

@@ -55,7 +55,7 @@ const InfoLabel = ({ id, title }: { id: number; title: string | number }) => {
 	return (
 		<Container>
 			<IconWrapper>{icons[id].icon}</IconWrapper>
-			<Typography color={'title'} fWeight={400}>
+			<Typography color='title' fWeight={400}>
 				{title}
 			</Typography>
 			<Typography

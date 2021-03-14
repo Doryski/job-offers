@@ -13,7 +13,7 @@ const TechRange = ({ range, tech }: { range: number; tech: string }) => {
 	return (
 		<Container>
 			<Typography
-				color={'title'}
+				color='title'
 				fWeight={600}
 				fontSize='1.1rem'
 				align='left'
@@ -54,7 +54,7 @@ export const RangePoint = styled.span<{
 	color?: string
 }>`
 	background-color: ${({ disabled, color }) =>
-		disabled ? 'rgb(191, 197, 210)' : color};
+		disabled ? 'rgb(245, 245, 245)' : color};
 	display: block;
 	width: 15px;
 	height: 10px;
