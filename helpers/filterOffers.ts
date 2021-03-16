@@ -31,7 +31,7 @@ export default function filterOffers(
 			includesSearch(offerExplvl) ||
 			includesSearch(String(salaryFrom)) ||
 			includesSearch(String(salaryTo)) ||
-			JSON.parse(technology).find(({ tech }) => includesSearch(tech))
+			technology.find(({ tech }) => includesSearch(tech))
 
 		const locationFilter = location === stringFormat(city)
 		const techFilter = tech === stringFormat(offerTech)

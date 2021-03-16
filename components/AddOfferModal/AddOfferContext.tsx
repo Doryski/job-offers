@@ -25,7 +25,6 @@ type FormData = {
 	salaryFrom: OfferType['salaryFrom']
 	salaryTo: OfferType['salaryTo']
 }
-export type AddOfferData = Partial<OfferType & { techLvl?: number[] }>
 
 const initialContext = {
 	register: () => {},
@@ -64,7 +63,7 @@ const AddOfferContextProvider = ({
 			})
 		}
 
-		let formData: AddOfferData = {
+		let formData = {
 			...data,
 			dateAdded: moment().format('x'),
 			technology: JSON.stringify(technology),
