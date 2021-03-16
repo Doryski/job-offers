@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import { TECHNOLOGIES } from '../../helpers/utils'
-import stringFormat from '../../helpers/stringFormat'
+import { TECHNOLOGIES } from '@/helpers/utils'
+import stringFormat from '@/helpers/stringFormat'
 import { useRouter } from 'next/router'
-import CustomButton from '../shared/CustomButton'
-import createTechQuery from '../../helpers/createTechQuery'
+import CustomButton from '@/components/shared/CustomButton'
+import createTechQuery from '@/helpers/createTechQuery'
 
 const TechList = () => {
 	const { query } = useRouter()

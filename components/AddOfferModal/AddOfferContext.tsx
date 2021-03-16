@@ -3,11 +3,11 @@ import { Dialog } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import moment from 'moment'
-import { OfferType } from '../../types'
-import Center from '../shared/Center'
-import CloseButton from '../shared/CloseButton'
-import devlog from '../../debug/devlog'
-import post from '../../helpers/post'
+import { OfferType } from '@/types'
+import Center from '@/components/shared/Center'
+import CloseButton from '@/components/shared/CloseButton'
+import devlog from '@/debug/devlog'
+import post from '@/helpers/post'
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>

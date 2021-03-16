@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import DialogHeader from '../shared/DialogHeader'
+import DialogHeader from '@/components/shared/DialogHeader'
 import InfoSection from './InfoSection'
 import TechnologySection from './TechnologySection'
 import styled from 'styled-components'
 import { Wrapper } from './StyledForm'
-import CustomButton from '../shared/CustomButton'
+import CustomButton from '@/components/shared/CustomButton'
 import { AddOfferContext } from './AddOfferContext'
 import InputComponent from './CustomInput'
 

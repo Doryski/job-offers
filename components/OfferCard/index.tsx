@@ -1,22 +1,24 @@
-import Typography from '../shared/Typography'
+import Typography from '@/components/shared/Typography'
 import styled from 'styled-components'
-import SmallLabel from '../shared/SmallLabel'
-import CustomLabel from '../shared/CustomLabel'
-import dateDiff from '../../helpers/dateDiff'
-import formatThous from '../../helpers/formatThous'
-import useDeviceDetect from '../../hooks/useDeviceDetect'
+import SmallLabel from '@/components/shared/SmallLabel'
+import CustomLabel from '@/components/shared/CustomLabel'
+import dateDiff from '@/helpers/dateDiff'
+import formatThous from '@/helpers/formatThous'
+import useDeviceDetect from '@/hooks/useDeviceDetect'
 import moment from 'moment'
-import { OfferPageDataType } from '../../types'
+import { OfferPageDataType } from '@/types'
 import { Dispatch, SetStateAction } from 'react'
 
 const OfferCard = ({
 	offerInfo,
 	setCurrentOffer,
 	setShowFilters,
+	index,
 }: {
 	offerInfo: OfferPageDataType
 	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
 	setShowFilters: Dispatch<SetStateAction<boolean>>
+	index: number
 }) => {
 	const {
 		title,
@@ -34,13 +36,14 @@ const OfferCard = ({
 
 	const dateLabel = (
 		<SmallLabel isNew={isNew} margin='0 0.3125em 0 0.625em'>
-			{isNew ? 'New' : `${days}d ago`}
+			{isNew ? 'New' : `${days} day${days !== 1 && 's'} ago`}
 		</SmallLabel>
 	)
 	const companyInfo = (
 		<InfoWrapper>
 			<CustomLabel type='business' label={companyName} />
 			<CustomLabel type='location' label={city} />
+			{dateLabel}
 		</InfoWrapper>
 	)
 	const offerTitleC = (
@@ -51,11 +54,10 @@ const OfferCard = ({
 
 	const salaryRange = (
 		<Typography
-			color='salary'
+			color='text'
 			align='left'
 			fWeight={400}
-			fontSize={isMobile ? 'md' : 'large'}
-			margin='0 .1em 0 0'>
+			fontSize={isMobile ? 'md' : 'large'}>
 			{formatThous(salaryFrom)} - {formatThous(salaryTo)} PLN
 		</Typography>
 	)
@@ -66,6 +68,7 @@ const OfferCard = ({
 				setCurrentOffer(offerInfo)
 				setShowFilters(false)
 			}}>
+			<TechColor index={index} />
 			<InfoContainer>
 				{isMobile ? (
 					<>
@@ -82,20 +85,20 @@ const OfferCard = ({
 					<>
 						<TopWrapper>
 							<TitleWrapper>{offerTitleC}</TitleWrapper>
-							<SalaryWrapper>
-								{salaryRange}
-								{dateLabel}
-							</SalaryWrapper>
+							<RequirementsWrapper>
+								{technology
+									.slice(0, 3)
+									.sort((a, b) => (a.techLvl < b.techLvl ? 1 : -1))
+									.map(({ tech }) => (
+										<SmallLabel isSpan key={tech}>
+											{tech.toLowerCase()}
+										</SmallLabel>
+									))}
+							</RequirementsWrapper>
 						</TopWrapper>
 						<BottomWrapper>
+							<SalaryWrapper>{salaryRange}</SalaryWrapper>
 							{companyInfo}
-							<RequirementsWrapper>
-								{technology.slice(0, 3).map(({ tech }) => (
-									<SmallLabel isSpan key={tech}>
-										{tech.toLowerCase()}
-									</SmallLabel>
-								))}
-							</RequirementsWrapper>
 						</BottomWrapper>
 					</>
 				)}
@@ -136,19 +139,15 @@ export const InfoContainer = styled.div`
 export const TopWrapper = styled.div`
 	display: flex;
 	padding: 0.35em 0 0.45em;
-	flex-wrap: wrap;
-	@media only screen and (max-width: 600px) {
-		/* padding: 0; */
-	}
+	justify-content: space-between;
 `
 
 export const BottomWrapper = styled.div`
 	display: flex;
+	justify-content: space-between;
 `
 
-export const TitleWrapper = styled.div`
-	flex: 1;
-`
+export const TitleWrapper = styled.div``
 
 export const SalaryWrapper = styled.div`
 	display: flex;
@@ -161,7 +160,6 @@ export const SalaryWrapper = styled.div`
 `
 
 export const InfoWrapper = styled.div`
-	flex: 1;
 	display: flex;
 	@media only screen and (max-width: 600px) {
 		align-items: flex-end;
@@ -171,7 +169,6 @@ export const InfoWrapper = styled.div`
 
 export const RequirementsWrapper = styled.div`
 	display: flex;
-	margin-right: 0.875em;
 
 	@media only screen and (max-width: 600px) {
 		display: none;

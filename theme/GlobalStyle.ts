@@ -8,8 +8,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
   *,
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     margin: 0;
     padding: 0;
     box-sizing: inherit;

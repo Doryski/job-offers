@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
-import AddOffer from '../AddOfferModal/AddOffer'
-import CustomButton from '../shared/CustomButton'
+import AddOffer from '@/components/AddOfferModal/AddOffer'
+import CustomButton from '@/components/shared/CustomButton'
 import Navigation from './Navigation'
-import useDeviceDetect from '../../hooks/useDeviceDetect'
+import useDeviceDetect from '@/hooks/useDeviceDetect'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
@@ -108,7 +108,7 @@ export const LogoWrapper = styled.div`
 	color: ${({ theme }) => theme.colors.title};
 	font-size: 1.25rem;
 `
-export const Wrapper = styled.div`
+export const Wrapper = styled.nav`
 	display: flex;
 	height: 38px;
 	margin-right: 1.5em;
@@ -116,9 +116,6 @@ export const Wrapper = styled.div`
 	@media (max-width: 600px) {
 		margin: 0;
 	}
-`
-const StyledMenuIcon = styled(MenuIcon)`
-	color: ${({ theme }) => theme.colors.span};
 `
 
 export default Header

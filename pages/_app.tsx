@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-import ThemeStyleProvider from '../theme/ThemeStyleProvider'
+import ThemeStyleProvider from '@/theme/ThemeStyleProvider'
 import { Provider } from 'next-auth/client'
 import { NextSeo } from 'next-seo'
 

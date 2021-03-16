@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
-import devlog from '../../debug/devlog'
-import timeit from '../../debug/timeit'
-import filterOffers from '../../helpers/filterOffers'
-import sortOffers, { sortOffers2 } from '../../helpers/sortOffers'
-import { OfferPageDataType } from '../../types'
+import devlog from '@/debug/devlog'
+import timeit from '@/debug/timeit'
+import filterOffers from '@/helpers/filterOffers'
+import sortOffers, { sortOffers2 } from '@/helpers/sortOffers'
+import { OfferPageDataType } from '@/types'
+import Center from '@/components/shared/Center'
 import OfferCard from '../OfferCard'
-import Center from '../shared/Center'
 
 const List = ({
 	data,
@@ -42,9 +42,10 @@ const List = ({
 
 	return (
 		<ListContainer>
-			{sortedOffers.map((offerInfo) => {
+			{sortedOffers.map((offerInfo, index) => {
 				return (
 					<OfferCard
+						index={index}
 						setCurrentOffer={setCurrentOffer}
 						setShowFilters={setShowFilters}
 						key={offerInfo.offerId}
@@ -57,11 +58,6 @@ const List = ({
 }
 export const ListContainer = styled.div`
 	display: flex;
-	/* position: absolute;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px; */
 	height: 100%;
 	overflow-y: auto;
 	overflow-x: hidden;

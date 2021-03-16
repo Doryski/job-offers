@@ -1,5 +1,16 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/components/*": ["./components/*"],
+			"@/hooks/*": ["./hooks/*"],
+			"@/debug/*": ["./debug/*"],
+			"@/helpers/*": ["./helpers/*"],
+			"@/pages/*": ["./pages/*"],
+			"@/theme/*": ["./theme/*"],
+			"@/types": ["./types"],
+			"@/mysqlSetup": ["./mysqlSetup"]
+		},
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
@@ -18,10 +29,9 @@
 	"exclude": ["node_modules", ".next", "dumpster", "build", "**/*.js"],
 	"include": [
 		"next-env.d.ts",
-		"next-auth.d.ts",
+		"nextauth.d.ts",
 		"styled.d.ts",
 		"**/*.ts",
-		"**/*.tsx",
-		"types.ts"
+		"**/*.tsx"
 	]
 }

@@ -1,4 +1,4 @@
-import { Filter } from '../types'
+import { Filter } from '@/types'
 const combine = (filters: Filter[]) =>
 	filters.reduce((acc, val) => {
 		if (val.param) {

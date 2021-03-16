@@ -1,10 +1,9 @@
 import moment from 'moment'
 import { useSession } from 'next-auth/client'
-import Layout from '../../components/Layout'
-import Center from '../../components/shared/Center'
-import devlog from '../../debug/devlog'
-import { DATE_FORMAT } from '../../helpers/utils'
-import useApi from '../../hooks/useApi'
+import Layout from '@/components/Layout'
+import Center from '@/components/shared/Center'
+import { DATE_FORMAT } from '@/helpers/utils'
+import useApi from '@/hooks/useApi'
 type OfferType = {
 	offerId: string
 	title: string
@@ -25,7 +24,7 @@ const UserOffers = () => {
 		dateAdded: moment(+offer.dateAdded).format(DATE_FORMAT),
 		technology: JSON.parse(offer.technology),
 	}))
-	// const headers = Object.keys(offers[0])
+
 	const headers = ['Title', 'Exp. lvl', 'Date created']
 	return (
 		<Layout>

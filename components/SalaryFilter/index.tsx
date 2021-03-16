@@ -1,11 +1,11 @@
 import { Slider } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import createQuery from '../../helpers/createQuery'
-import formatThous from '../../helpers/formatThous'
-import { MAX_SLIDER_VALUE } from '../../helpers/utils'
-import { SliderType } from '../../types'
-import Typography from '../shared/Typography'
+import createQuery from '@/helpers/createQuery'
+import formatThous from '@/helpers/formatThous'
+import { MAX_SLIDER_VALUE } from '@/helpers/utils'
+import { SliderType } from '@/types'
+import Typography from '@/components/shared/Typography'
 
 const SalaryFilter = () => {
 	const router = useRouter()
@@ -81,7 +81,7 @@ export const Wrapper = styled.div`
 	}
 `
 
-export const SalaryWrapper = styled.div`
+export const SalaryWrapper = styled.section`
 	width: 100%;
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
 		padding: 0.625em;
@@ -94,7 +94,7 @@ export const AmountContainer = styled.div`
 	display: flex;
 	align-items: center;
 `
-export const AmountWrapper = styled.div`
+export const AmountWrapper = styled.section`
 	width: 20%;
 	display: flex;
 	flex-direction: column;
@@ -110,7 +110,7 @@ export const AmountWrapper = styled.div`
 	}
 `
 
-export const SliderWrapper = styled.div`
+export const SliderWrapper = styled.section`
 	width: 50%;
 	margin: 0 auto;
 `

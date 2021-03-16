@@ -1,6 +1,6 @@
 import stringFormat from './stringFormat'
 import { ParsedUrlQuery } from 'querystring'
-import { OfferPageDataType } from '../types'
+import { OfferPageDataType } from '@/types'
 import combine from './combineFilters'
 
 export default function filterOffers(

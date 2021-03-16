@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import TechRange from '../shared/TechRange'
-import Typography from '../shared/Typography'
+import TechRange from '@/components/shared/TechRange'
+import Typography from '@/components/shared/Typography'
 import { Wrapper } from './StyledComponents'
-import { OfferType } from '../../types'
+import { OfferType } from '@/types'
 
 const OfferTechStack = ({
 	technology,
@@ -20,14 +20,16 @@ const OfferTechStack = ({
 				Tech stack
 			</Typography>
 			<Wrapper>
-				{technology.map(({ tech, techLvl }) => (
-					<TechRange key={tech} range={+techLvl} tech={tech} />
-				))}
+				{technology
+					.sort((a, b) => (a.techLvl < b.techLvl ? 1 : -1))
+					.map(({ tech, techLvl }) => (
+						<TechRange key={tech} range={+techLvl} tech={tech} />
+					))}
 			</Wrapper>
 		</TechStackContainer>
 	)
 }
-export const TechStackContainer = styled.div`
+export const TechStackContainer = styled.section`
 	margin-top: 1em;
 	padding: 0.3125em 0;
 	box-shadow: ${({ theme }) => theme.colors.shadow};

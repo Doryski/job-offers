@@ -1,25 +1,25 @@
-import Typography from '../../../components/shared/Typography'
+import Typography from '@/components/shared/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
-import CustomButton from '../../../components/shared/CustomButton'
+import CustomButton from '@/components/shared/CustomButton'
 import { useForm } from 'react-hook-form'
 import {
 	ApplyButtonWrapper,
 	CheckboxWrapper,
-} from '../../../components/OfferPage/OfferApplySection'
-import { LOCATIONS } from '../../../helpers/utils'
-import useCheckbox from '../../../hooks/useCheckbox'
+} from '@/components/OfferPage/OfferApplySection'
+import { LOCATIONS } from '@/helpers/utils'
+import useCheckbox from '@/hooks/useCheckbox'
 import { useState } from 'react'
 import styled from 'styled-components'
-import InputComponent from '../../../components/AddOfferModal/CustomInput'
-import SelectComponent from '../../../components/AddOfferModal/CustomSelect'
-import ClientOnly from '../../../components/shared/ClientOnly'
-import { ErrorMessage } from '../../../components/AddOfferModal/StyledForm'
+import InputComponent from '@/components/AddOfferModal/CustomInput'
+import SelectComponent from '@/components/AddOfferModal/CustomSelect'
+import ClientOnly from '@/components/shared/ClientOnly'
+import { ErrorMessage } from '@/components/AddOfferModal/StyledForm'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
-import Center from '../../../components/shared/Center'
-import post from '../../../helpers/post'
-import usePrefetch from '../../../hooks/usePrefetch'
+import Center from '@/components/shared/Center'
+import post from '@/helpers/post'
+import usePrefetch from '@/hooks/usePrefetch'
 
 const Signup = () => {
 	const { isChecked, handleChange, setIsChecked } = useCheckbox(false)
@@ -147,7 +147,7 @@ const Signup = () => {
 		</FormWrapper>
 	)
 }
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.section`
 	width: 50vw;
 	height: 100vh;
 	margin: auto;
@@ -155,10 +155,6 @@ export const FormWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-`
-const FormGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
 `
 export const UploadWrapper = styled.div`
 	display: flex;
@@ -178,102 +174,3 @@ export const UploadWrapper = styled.div`
 	}
 `
 export default Signup
-
-// <FormGrid>
-
-// <MyTextField
-//     style={{ fontFamily: 'inherit' }}
-//     error={!!errors.companyName}
-//     id='companyName'
-//     name='companyName'
-//     label='Company Name'
-//     helperText={
-//         errors.companyName && (
-//             <ErrorMessage>{errors.companyName?.message}</ErrorMessage>
-//             )
-//         }
-//         variant='outlined'
-//         InputProps={{
-//             startAdornment: <InputIcon Icon={PersonOutline} />,
-//         }}
-//         inputRef={register({
-//             required: 'Company name is a required field',
-//         })}
-//         />
-// <MyTextField
-//     error={!!errors.email}
-//     id='email'
-//     name='email'
-//     label='Email'
-//     helperText={
-//         errors.email && <ErrorMessage>{errors.email?.message}</ErrorMessage>
-//     }
-//     variant='outlined'
-//     InputProps={{
-//         startAdornment: <InputIcon Icon={Email} />,
-//     }}
-//     inputRef={}
-//     />
-// <MyTextField
-//     id='introduction'
-//     name='introduction'
-//     label='Introduce yourself (linkedin/github links)'
-//     variant='outlined'
-//     InputProps={{
-//         startAdornment: <InputIcon Icon={Create} />,
-//     }}
-//     inputRef={register}
-//     />
-//
-// </FormGrid>
-
-{
-	/* <UploadWrapper onClick={handleFileUpload}>
-					<input
-						ref={uploadRef}
-						disabled={!!fileName}
-						onChange={handleFileChange}
-						style={{ display: 'none' }}
-						accept='application/jpg'
-						type='file'
-						autoComplete='off'
-						name='cv'
-						tabIndex={-1}
-					/>
-					{!!fileName ? (
-						<>
-							<div style={{ maxWidth: '210px' }}>
-								<Typography
-									color='pink'
-									fWeight={500}
-									fontSize='md'}>
-									{fileName}
-								</Typography>
-							</div>
-							<DeleteFileBtn onClick={handleFileDelete}>
-								<Typography
-									color='span'
-									fWeight={700}>
-									Delete
-								</Typography>
-								<DeleteOutline />
-							</DeleteFileBtn>
-						</>
-					) : (
-						<>
-							<UploadIconWrapper>
-								<UploadCv />
-							</UploadIconWrapper>
-							<label htmlFor='cv' style={{ cursor: 'pointer' }}>
-								<Typography
-									color='span'
-									fWeight={400}
-									fontSize='large'
-									margin='0 0 0 .5em'>
-									Upload company logo (.jpg)
-								</Typography>
-							</label>
-						</>
-					)}
-				</UploadWrapper> */
-}

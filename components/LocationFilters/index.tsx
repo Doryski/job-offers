@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { LOCATIONS } from '../../helpers/utils'
+import { LOCATIONS } from '@/helpers/utils'
 import LocationButton from './LocationButton'
 
 const LocationFilters = () => {

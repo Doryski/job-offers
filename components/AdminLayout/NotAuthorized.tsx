@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Center from '../shared/Center'
+import Center from '@/components/shared/Center'
 
 const NotAuthorized = () => {
 	return (

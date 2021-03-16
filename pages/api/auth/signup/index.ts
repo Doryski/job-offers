@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { db } from '../../../../mysqlSetup'
+import { db } from '@/mysqlSetup'
 import uuid from 'react-uuid'
 import { hash } from 'bcrypt'
 import { getSession } from 'next-auth/client'

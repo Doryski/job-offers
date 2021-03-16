@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
-import { Query } from '../types'
+import { Query } from '@/types'
 import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
 

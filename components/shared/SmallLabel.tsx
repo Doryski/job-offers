@@ -21,9 +21,9 @@ const SmallLabel = ({ children, isSpan, margin, isNew }: SmallLabelProps) => (
 export const Container = styled.div<ContainerProps>`
 	padding: 0.1875em 0.4375em;
 	margin: ${({ margin }) => margin || '0 0.125em'};
-	border: 1px solid rgb(217, 221, 252);
+	/* border: 1px solid rgb(217, 221, 252); */
 	background: ${({ theme, isNew }) =>
-		isNew ? 'rgb(217, 221, 252)' : theme.colors.primary};
+		isNew ? 'rgb(217, 221, 252)' : theme.colors.divider};
 	border-radius: 5px;
 	display: flex;
 	align-items: center;

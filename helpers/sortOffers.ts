@@ -1,5 +1,5 @@
 import { SORT_OPTIONS } from './utils'
-import { ParamsType, OfferPageDataType } from '../types'
+import { ParamsType, OfferPageDataType } from '@/types'
 import quickSort from './quickSort'
 
 export default function sortOffers(

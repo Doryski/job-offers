@@ -2,8 +2,8 @@ import { sign } from 'jsonwebtoken'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
-import getDomain from '../../../helpers/getDomain'
-import post from '../../../helpers/post'
+import getDomain from '@/helpers/getDomain'
+import post from '@/helpers/post'
 
 export const options = {
 	providers: [

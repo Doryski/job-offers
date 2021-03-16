@@ -1,7 +1,7 @@
 import 'next-auth'
 
 declare module 'next-auth' {
-	export interface User {
+	export interface User extends User {
 		id: string
 		admin: boolean
 		email: string

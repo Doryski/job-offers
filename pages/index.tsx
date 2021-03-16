@@ -1,21 +1,21 @@
 import styled from 'styled-components'
 import { GetStaticProps } from 'next'
-import ListHeader from '../components/OfferList/ListHeader'
-import Layout from '../components/Layout'
-import { OfferPageDataType } from '../types'
-import List from '../components/OfferList/List'
-import Center from '../components/shared/Center'
-import OfferHeader from '../components/OfferPage/OfferHeader'
-import OfferTechStack from '../components/OfferPage/OfferTechStack'
-import OfferDescription from '../components/OfferPage/OfferDescription'
-import OfferApplySection from '../components/OfferPage/OfferApplySection'
+import ListHeader from '@/components/OfferList/ListHeader'
+import Layout from '@/components/Layout'
+import { OfferPageDataType } from '@/types'
+import List from '@/components/OfferList/List'
+import Center from '@/components/shared/Center'
 import { useEffect, useState } from 'react'
-import { DATE_FORMAT } from '../helpers/utils'
+import { DATE_FORMAT } from '@/helpers/utils'
 import moment from 'moment'
-import { db } from '../mysqlSetup'
-import fixObject from '../helpers/fixObject'
-import devlog from '../debug/devlog'
-import Filters from '../components/Filters'
+import { db } from '@/mysqlSetup'
+import fixObject from '@/helpers/fixObject'
+import devlog from '@/debug/devlog'
+import Filters from '@/components/Filters'
+import dynamic from 'next/dynamic'
+const OfferPage = dynamic(() => import('@/components/OfferPage'), {
+	loading: () => <Center>Loading...</Center>,
+})
 
 const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>()
@@ -25,6 +25,7 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 	}, [])
 	const listProps = { data, setCurrentOffer, setShowFilters }
 	const listHeaderProps = { showFilters, setShowFilters }
+
 	return (
 		<Layout>
 			<SubContainer>
@@ -35,14 +36,7 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 					</Container>
 				</ListContainer>
 				{showFilters && <Filters />}
-				{currentOffer && !showFilters && (
-					<OfferContainer>
-						<OfferHeader offer={currentOffer} />
-						<OfferTechStack technology={currentOffer.technology} />
-						<OfferDescription description={currentOffer.description} />
-						<OfferApplySection offer={currentOffer} />
-					</OfferContainer>
-				)}
+				{currentOffer && !showFilters && <OfferPage offer={currentOffer} />}
 				{!currentOffer && !showFilters && (
 					<Center>Click on offer card to show details.</Center>
 				)}
@@ -91,7 +85,7 @@ export const SubContainer = styled.div`
 	height: 92vh;
 	background: ${({ theme }) => theme.colors.secondary};
 `
-export const ListContainer = styled.div`
+export const ListContainer = styled.section`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -110,16 +104,6 @@ export const InfoSpan = styled.span`
 	display: block;
 	color: ${({ theme }) => theme.colors.title};
 	font-size: 1.2rem;
-`
-export const OfferContainer = styled.div`
-	background: ${({ theme }) => theme.colors.secondary};
-	display: flex;
-	flex-direction: column;
-	padding: 0 1em 0 0;
-	overflow: auto;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		padding: 0 0.1875em;
-	}
 `
 
 export const ProgressWrapper = styled.div`

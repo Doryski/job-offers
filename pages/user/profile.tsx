@@ -2,12 +2,10 @@ import { useSession } from 'next-auth/client'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import styled from 'styled-components'
-import Header from '../../components/Header'
-import Layout from '../../components/Layout'
-import Center from '../../components/shared/Center'
-import CustomButton from '../../components/shared/CustomButton'
-import devlog from '../../debug/devlog'
-import useApi from '../../hooks/useApi'
+import Layout from '@/components/Layout'
+import Center from '@/components/shared/Center'
+import CustomButton from '@/components/shared/CustomButton'
+import useApi from '@/hooks/useApi'
 
 const Profile = () => {
 	const [session] = useSession()

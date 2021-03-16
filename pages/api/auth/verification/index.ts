@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { db } from '../../../../mysqlSetup'
+import { db } from '@/mysqlSetup'
 import { compare } from 'bcrypt'
 import { getSession } from 'next-auth/client'
 

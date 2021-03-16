@@ -1,4 +1,4 @@
-import Typography from '../shared/Typography'
+import Typography from '@/components/shared/Typography'
 
 const FilterHeading = ({ children }) => (
 	<Typography

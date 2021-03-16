@@ -7,7 +7,7 @@ import {
 	EXP_LVL_OPTIONS,
 	EMP_TYPE_OPTIONS,
 	TECHNOLOGIES,
-} from '../../helpers/utils'
+} from '@/helpers/utils'
 import { AddOfferContext } from './AddOfferContext'
 
 const InfoSection = () => {

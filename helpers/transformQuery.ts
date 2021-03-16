@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
-import { Query } from '../types'
+import { Query } from '@/types'
 
 const transformQuery = (query: ParsedUrlQuery) => {
 	const transformed: Query[] = []

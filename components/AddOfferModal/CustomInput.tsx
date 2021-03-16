@@ -5,7 +5,7 @@ import {
 	FIELD_REQUIRED_ERR,
 	EMAIL_REGEX,
 	PASSWORD_REGEX,
-} from '../../helpers/utils'
+} from '@/helpers/utils'
 
 type InputComponentProps = {
 	name: string

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InputsContainer = styled.div`
+export const InputsContainer = styled.section`
 	padding: 1.25em;
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
 		padding: 0.3125em;

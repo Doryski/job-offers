@@ -1,14 +1,14 @@
 import { Close } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import resetFilters from '../../helpers/resetFilters'
-import ExpLvlFilter from '../ExpLvlFilter'
+import resetFilters from '@/helpers/resetFilters'
+import { ICON_SIZE } from '@/helpers/utils'
+import CustomButton from '@/components/shared/CustomButton'
+import Typography from '@/components/shared/Typography'
+import TechFilters from '../TechFilters'
 import LocationFilters from '../LocationFilters'
 import SalaryFilter from '../SalaryFilter'
-import CustomButton from '../shared/CustomButton'
-import { ICON_SIZE } from '../shared/InfoLabel'
-import Typography from '../shared/Typography'
-import TechFilters from '../TechFilters'
+import ExpLvlFilter from '../ExpLvlFilter'
 
 const Filters = () => {
 	const router = useRouter()
@@ -88,7 +88,7 @@ const Filters = () => {
 	)
 }
 
-export const FilterContainer = styled.div`
+export const FilterContainer = styled.section`
 	margin-bottom: 1em;
 	width: 100%;
 `
@@ -101,13 +101,13 @@ export const Container = styled.div`
 	justify-content: flex-start;
 	border-left: 1px solid ${({ theme }) => theme.colors.divider};
 `
-export const SubContainer = styled.section`
+export const SubContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 0.5em 1.25em;
 `
 
-export const FiltersHeader = styled.div`
+export const FiltersHeader = styled.section`
 	width: 100%;
 	display: flex;
 	align-items: center;

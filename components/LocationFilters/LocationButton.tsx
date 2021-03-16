@@ -1,7 +1,7 @@
-import CustomButton from '../shared/CustomButton'
+import CustomButton from '@/components/shared/CustomButton'
 import { useRouter } from 'next/router'
-import stringFormat from '../../helpers/stringFormat'
-import createQuery from '../../helpers/createQuery'
+import stringFormat from '@/helpers/stringFormat'
+import createQuery from '@/helpers/createQuery'
 
 const LocationButton = ({ location }: { location: string }) => {
 	const { query, push } = useRouter()

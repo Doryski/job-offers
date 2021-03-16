@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Typography from './Typography'
-import { TECH_LVL_OPTIONS } from '../../helpers/utils'
+import { TECH_LVL_OPTIONS } from '@/helpers/utils'
 
 const TechRange = ({ range, tech }: { range: number; tech: string }) => {
 	const rangeColor =

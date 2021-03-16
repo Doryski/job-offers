@@ -1,12 +1,12 @@
 import { ExpandLess } from '@material-ui/icons'
 import styled from 'styled-components'
-import SortDropdown from '../shared/SortDropdown'
-import Typography from '../shared/Typography'
-import { ICON_SIZE } from '../shared/InfoLabel'
-import InputFilter from '../shared/InputFilter'
+import SortDropdown from '@/components/shared/SortDropdown'
+import Typography from '@/components/shared/Typography'
+import InputFilter from '@/components/shared/InputFilter'
 import { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
-import resetFilters from '../../helpers/resetFilters'
+import resetFilters from '@/helpers/resetFilters'
+import { ICON_SIZE } from '@/helpers/utils'
 
 const ListHeader = ({
 	showFilters,

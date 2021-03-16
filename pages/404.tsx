@@ -1,6 +1,6 @@
+import Center from '@/components/shared/Center'
 import { useRouter } from 'next/router'
-import Center from '../components/shared/Center'
-import useRedirect from '../hooks/useRedirect'
+import useRedirect from '@/hooks/useRedirect'
 
 const NotFound = () => {
 	const router = useRouter()
@@ -9,9 +9,8 @@ const NotFound = () => {
 	})
 	return (
 		<Center height='100vh' direction='column'>
-			<div></div>
-			<h1>Oops...</h1>
-			<h2>That page cannot be found.</h2>
+			<h2>Oops...</h2>
+			<h3>That page cannot be found.</h3>
 			{isRedirecting ? (
 				<p>Redirecting to homepage...</p>
 			) : (

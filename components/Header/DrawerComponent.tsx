@@ -1,6 +1,5 @@
 import Drawer from '@material-ui/core/Drawer'
 import SideBar from '../SideBar'
-
 type HandleCloseFunction = (
 	event: {},
 	reason: 'backdropClick' | 'escapeKeyDown'

@@ -1,5 +1,5 @@
 import { InputWrapper, Label, StyledSelect, ErrorMessage } from './StyledForm'
-import { FIELD_REQUIRED_ERR } from '../../helpers/utils'
+import { FIELD_REQUIRED_ERR } from '@/helpers/utils'
 
 type SelectComponentProps = {
 	name: string

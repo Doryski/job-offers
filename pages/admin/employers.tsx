@@ -1,12 +1,12 @@
-import AdminTable from '../../components/AdminTable'
-import AdminLayout from '../../components/AdminLayout'
+import AdminTable from '@/components/AdminTable'
+import AdminLayout from '@/components/AdminLayout'
 import { useRouter } from 'next/router'
-import useRefreshPage from '../../hooks/useRefreshPage'
+import useRefreshPage from '@/hooks/useRefreshPage'
 import { useSession } from 'next-auth/client'
-import useApi from '../../hooks/useApi'
-import Center from '../../components/shared/Center'
-import del from '../../helpers/delete'
-import NotAuthorized from '../../components/AdminLayout/NotAuthorized'
+import useApi from '@/hooks/useApi'
+import Center from '@/components/shared/Center'
+import del from '@/helpers/delete'
+import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
 
 const EmployerList = () => {
 	// TODO: Add multichoice select menu

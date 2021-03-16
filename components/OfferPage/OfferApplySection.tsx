@@ -7,20 +7,20 @@ import {
 	Send,
 	DeleteOutline,
 } from '@material-ui/icons'
-import Typography from '../shared/Typography'
+import Typography from '@/components/shared/Typography'
 import { TextField, Checkbox } from '@material-ui/core'
-import CustomButton from '../shared/CustomButton'
-import UploadCv from '../shared/UploadCv'
+import CustomButton from '@/components/shared/CustomButton'
+import UploadCv from '@/components/shared/UploadCv'
 import InputIcon from './InputIcon'
 import { Wrapper } from './StyledComponents'
-import useCheckbox from '../../hooks/useCheckbox'
-import useFileUpload from '../../hooks/useFileUpload'
+import useCheckbox from '@/hooks/useCheckbox'
+import useFileUpload from '@/hooks/useFileUpload'
 import { useForm } from 'react-hook-form'
-import { EMAIL_REGEX } from '../../helpers/utils'
-import { OfferPageDataType } from '../../types'
-import useRefreshPage from '../../hooks/useRefreshPage'
+import { EMAIL_REGEX } from '@/helpers/utils'
+import { OfferPageDataType } from '@/types'
+import useRefreshPage from '@/hooks/useRefreshPage'
 import { useRouter } from 'next/router'
-import post from '../../helpers/post'
+import post from '@/helpers/post'
 type FormDataType = {
 	name: string
 	email: string
@@ -211,7 +211,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 	)
 }
 
-export const ApplyContainer = styled.div`
+export const ApplyContainer = styled.section`
 	margin: 1.875em 0;
 	padding: 0.3125em 0;
 	box-shadow: ${({ theme }) => theme.colors.shadow};

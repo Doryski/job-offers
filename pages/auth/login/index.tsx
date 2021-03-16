@@ -1,14 +1,14 @@
-import InputComponent from '../../../components/AddOfferModal/CustomInput'
-import { ApplyButtonWrapper } from '../../../components/OfferPage/OfferApplySection'
-import CustomButton from '../../../components/shared/CustomButton'
-import { FormWrapper } from '../signup'
+import InputComponent from '@/components/AddOfferModal/CustomInput'
+import { ApplyButtonWrapper } from '@/components/OfferPage/OfferApplySection'
+import CustomButton from '@/components/shared/CustomButton'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
-import Center from '../../../components/shared/Center'
+import Center from '@/components/shared/Center'
 import styled from 'styled-components'
+import { FormWrapper } from '../signup'
 
 const Login = () => {
 	const router = useRouter()
@@ -17,7 +17,6 @@ const Login = () => {
 	const [firstLogIn, setFirstLogIn] = useState(false)
 	const [isLoggingIn, setIsLoggingIn] = useState(false)
 
-	// return error message if wrong credentials were passed
 	useEffect(() => {
 		if (router.query.error) {
 			setError('password', {
@@ -33,8 +32,6 @@ const Login = () => {
 		await signIn('credentials', {
 			...data,
 			redirect: false,
-			// callbackUrl: window.location.origin,
-			// callbackUrl: `${window.location.origin}/user/profile`,
 		})
 		router.push('/user/profile')
 		return

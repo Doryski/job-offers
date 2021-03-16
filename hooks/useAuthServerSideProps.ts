@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next'
 import { getSession, Session } from 'next-auth/client'
-import { options as authOptions } from '../pages/api/auth/[...nextauth]'
+import { options as authOptions } from '@/pages/api/auth/[...nextauth]'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AsyncReturnType<T extends (...args: any) => any> = T extends (
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

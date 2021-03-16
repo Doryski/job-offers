@@ -9,29 +9,7 @@ export const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
 export const UNAUTHORIZED_ERROR =
 	'You need to be signed in to have access to this data.'
-
-export const INFO_LABELS = [
-	{
-		id: 1,
-		title: 'companyName',
-	},
-	{
-		id: 2,
-		title: 'companySize',
-	},
-	{
-		id: 3,
-		title: 'empType',
-	},
-	{
-		id: 4,
-		title: 'expLvl',
-	},
-	{
-		id: 5,
-		title: 'dateAdded',
-	},
-]
+export const ICON_SIZE = 'small'
 
 export const LOCATIONS = [
 	'Warszawa',

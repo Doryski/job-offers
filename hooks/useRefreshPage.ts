@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import devlog from '../debug/devlog'
+import devlog from '@/debug/devlog'
 
 export default function useRefreshPage(data: any, router: NextRouter) {
 	const [isRefreshing, setIsRefreshing] = useState(false)

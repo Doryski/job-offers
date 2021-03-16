@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Typography from '../shared/Typography'
+import Typography from '@/components/shared/Typography'
 import { Wrapper } from './StyledComponents'
 
 const OfferDescription = ({ description }: { description: string }) => {
@@ -21,7 +21,7 @@ const OfferDescription = ({ description }: { description: string }) => {
 		</DescriptionContainer>
 	)
 }
-export const DescriptionContainer = styled.div`
+export const DescriptionContainer = styled.section`
 	margin-top: 1.875em;
 	padding: 0.3125em 0;
 	box-shadow: ${({ theme }) => theme.colors.shadow};

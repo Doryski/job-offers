@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Typography from './Typography'
-import { textColors } from '../../theme'
 
 const Label = ({
 	children,

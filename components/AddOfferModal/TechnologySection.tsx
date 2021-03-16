@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { TECH_LVL_OPTIONS } from '../../helpers/utils'
+import { TECH_LVL_OPTIONS } from '@/helpers/utils'
 import SelectComponent from './CustomSelect'
 import InputComponent from './CustomInput'
 import styled from 'styled-components'

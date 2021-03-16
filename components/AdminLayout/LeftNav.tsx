@@ -22,7 +22,7 @@ const LeftNav = () => {
 		</Wrapper>
 	)
 }
-const Wrapper = styled.div`
+const Wrapper = styled.aside`
 	background-color: lightgray;
 `
 

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
-import { UNAUTHORIZED_ERROR } from '../../../../helpers/utils'
-import { db } from '../../../../mysqlSetup'
+import { UNAUTHORIZED_ERROR } from '@/helpers/utils'
+import { db } from '@/mysqlSetup'
 
 export default async function ApiAdminApplicants(
 	req: NextApiRequest,

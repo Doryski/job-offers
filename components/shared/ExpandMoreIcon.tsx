@@ -1,6 +1,6 @@
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import styled from 'styled-components'
-import { ICON_SIZE } from './InfoLabel'
+import { ICON_SIZE } from '@/helpers/utils'
 
 const ExpandMoreIcon = ({
 	isOpen,
