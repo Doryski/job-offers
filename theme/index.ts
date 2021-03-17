@@ -78,13 +78,17 @@ const lightModeProps = {
 const darkModeProps = {
 	colors: {
 		text: 'rgba(255, 255, 255, 0.8)',
-		title: 'rgba(255, 255, 255, 0.8)',
-		primary: 'rgb(44, 44, 44)',
-		secondary: 'rgb(33, 33, 33)',
+		// title: 'rgba(255, 255, 255, 0.8)',
+		dark: 'rgb(44, 44, 44)',
+		// primary: 'rgb(63, 81, 181)',
+		darker: 'rgb(33, 33, 33)',
+		// secondary: 'rgb(33, 33, 33)',
 		divider: 'rgba(0, 0, 0, 0.12)',
-		pink: 'rgb(255, 103, 156)',
-		lightPink: 'rgb(244, 143, 177)',
-		opacityPink: 'rgba(240, 98, 146, 0.05)',
+		primary: 'rgb(255, 103, 156)',
+		// lightPink: 'rgb(244, 143, 177)',
+		primaryLight: 'rgb(244, 143, 177)',
+		// opacityPink: 'rgba(240, 98, 146, 0.05)',
+		primaryOpacity: 'rgba(240, 98, 146, 0.05)',
 		buttonBackground: 'rgb(57, 57, 57)',
 		buttonBackgroundHover: 'rgba(0, 0, 0, 0.04)',
 		buttonBackgroundActive: 'rgba(240, 98, 146, 0.05)',
@@ -95,17 +99,6 @@ const darkModeProps = {
 		admin: 'rgb(42, 16, 16)',
 		shadow: 'rgba(10, 10, 10, 0.1) 0px 2px 18px 10px',
 	},
-}
-
-export const textColors = {
-	primary: 'primary',
-	text: 'text',
-	pink: 'pink',
-	lightPink: 'lightPink',
-	title: 'title',
-	salary: 'salary',
-	span: 'span',
-	white: 'white',
 }
 
 export const darkMode = { ...theme, ...darkModeProps }

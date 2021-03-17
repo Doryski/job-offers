@@ -18,7 +18,6 @@ export default async function ApiAdminOffers(
 		})
 	}
 
-	// get offers - for user employer
 	const sqlGet = `SELECT * FROM offers`
 
 	db.query(sqlGet, function (err, data) {

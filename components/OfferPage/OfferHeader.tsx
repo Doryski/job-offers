@@ -7,25 +7,28 @@ import {
 	Business,
 	People,
 	Note,
-	ShowChart,
-	Timelapse,
+	AccessTime,
+	TrendingUp,
 } from '@material-ui/icons'
 import { ICON_SIZE } from '@/helpers/utils'
 
 export const BusinessIcon = styled(Business)`
-	color: rgb(255, 82, 82);
+	color: rgb(124, 44, 44);
+	/* rgb(255, 82, 82); */
 `
-export const ShowChartIcon = styled(ShowChart)`
+export const TrendingUpIcon = styled(TrendingUp)`
 	color: rgb(102, 187, 106);
 `
 export const PeopleIcon = styled(People)`
-	color: rgb(251, 140, 0);
+	color: rgb(181, 151, 0);
+	/* rgb(251, 140, 0); */
 `
 export const NoteIcon = styled(Note)`
-	color: rgb(171, 71, 188);
+	color: rgb(0 134 110);
+	/* rgb(171, 71, 188); */
 	transform: rotate(-90deg);
 `
-export const TimelapseIcon = styled(Timelapse)`
+export const AccessTimeIcon = styled(AccessTime)`
 	color: rgb(68, 138, 255);
 `
 const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
@@ -49,7 +52,7 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 				value: companyName,
 			},
 			{
-				icon: <ShowChartIcon fontSize={ICON_SIZE} />,
+				icon: <TrendingUpIcon fontSize={ICON_SIZE} />,
 				feature: 'EXP. lvl',
 				value: expLvl,
 			},
@@ -66,7 +69,7 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 				value: empType,
 			},
 			{
-				icon: <TimelapseIcon fontSize={ICON_SIZE} />,
+				icon: <AccessTimeIcon fontSize={ICON_SIZE} />,
 				feature: 'Added',
 				value: dateAdded,
 			},

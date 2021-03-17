@@ -18,7 +18,6 @@ export default async function ApiMyOfferId(
 		})
 	}
 
-	// get offer by id of current user only
 	const sqlGet = `SELECT offers.uuid AS offerId, offers.title, 
     offers.empType, offers.expLvl,
     offers.salaryFrom, offers.salaryTo, 

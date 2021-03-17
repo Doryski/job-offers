@@ -9,7 +9,6 @@ import del from '@/helpers/delete'
 import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
 
 const ApplicantList = () => {
-	// TODO: Add multichoice select menu
 	const router = useRouter()
 	const [session, loading] = useSession()
 	const { data, error, dataLoading } = useApi(

@@ -21,7 +21,7 @@ export default async function signup(
 			errorMessage: 'Only POST method is available',
 		})
 	}
-	// works
+
 	if (req.method === 'POST') {
 		const { companyName, companySize, email, street, city, password } = req.body
 		hash(password, 10, async function (err, hash) {

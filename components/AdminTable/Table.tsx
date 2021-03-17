@@ -6,13 +6,6 @@ import TableHead from './TableHead'
 import { CheveronUp, CheveronDown } from '@styled-icons/zondicons'
 import TableSortMobile from './TableSortMobile'
 
-const LoadingInfo = styled.h1`
-	height: 50vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`
-
 const Table = ({ headers, uniqueKey }) => {
 	const { currentRecords, sortAscending } = useContext(TableContext)
 	// show cheveron depending on sort direction

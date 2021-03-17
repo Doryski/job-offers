@@ -39,7 +39,6 @@ const Signup = () => {
 		)
 	}
 
-	// prefetch login page for newly created user
 	usePrefetch('/auth/login')
 
 	const onSubmit = handleSubmit(async (data) => {
@@ -55,7 +54,6 @@ const Signup = () => {
 			[x: string]: any
 		} = { ...data, processData: isChecked }
 
-		// post employer to db
 		const res = await post('/api/auth/signup', formData)
 		const { errorMessage } = res
 		if (errorMessage) {

@@ -11,7 +11,6 @@ const Pagination = () => {
 		currentPage,
 	} = useContext(TableContext)
 
-	// create array of page numbers, so it's possible to map through pages
 	const pageNums = []
 	const getPageNumbers = () => {
 		for (let i = 1; i <= Math.ceil(recordsToShow / recordsPerPage); i++) {
@@ -111,7 +110,7 @@ const CheveronLink = styled(Link)`
 	padding: 0.45em 0.45em;
 `
 
-// special style for Links with double cheveron
+// style for Links with double cheveron
 const EdgeLink = styled(Link)`
 	display: flex;
 	padding: 0.45em 0.75em;

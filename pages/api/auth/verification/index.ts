@@ -18,7 +18,6 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 		})
 	}
 
-	// works
 	const errorMessage = 'Ups, something went wrong!'
 	if (req.method === 'POST') {
 		const sqlGetPassword = `SELECT uuid, password, isAdmin 

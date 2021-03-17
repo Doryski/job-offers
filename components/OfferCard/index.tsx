@@ -35,7 +35,7 @@ const OfferCard = ({
 	const isMobile = useDeviceDetect(600)
 
 	const dateLabel = (
-		<SmallLabel isNew={isNew} margin='0 0.3125em 0 0.625em'>
+		<SmallLabel isNew={isNew} margin='0 0.125em 0 0.625em'>
 			{isNew ? 'New' : `${days} day${days !== 1 && 's'} ago`}
 		</SmallLabel>
 	)
@@ -83,7 +83,7 @@ const OfferCard = ({
 					</>
 				) : (
 					<>
-						<TopWrapper>
+						<Wrapper>
 							<TitleWrapper>{offerTitleC}</TitleWrapper>
 							<RequirementsWrapper>
 								{technology
@@ -95,11 +95,11 @@ const OfferCard = ({
 										</SmallLabel>
 									))}
 							</RequirementsWrapper>
-						</TopWrapper>
-						<BottomWrapper>
+						</Wrapper>
+						<Wrapper>
 							<SalaryWrapper>{salaryRange}</SalaryWrapper>
 							{companyInfo}
-						</BottomWrapper>
+						</Wrapper>
 					</>
 				)}
 			</InfoContainer>
@@ -129,20 +129,15 @@ export const InfoContainer = styled.div`
 	display: flex;
 	width: 100%;
 	flex-direction: column;
-	padding: 0.5em 0.25em 0.5em 1em;
+	justify-content: space-around;
+	padding: 0.5em 1em;
 	@media only screen and (max-width: 600px) {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 	}
 `
-export const TopWrapper = styled.div`
-	display: flex;
-	padding: 0.35em 0 0.45em;
-	justify-content: space-between;
-`
-
-export const BottomWrapper = styled.div`
+export const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 `

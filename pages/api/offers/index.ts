@@ -23,7 +23,6 @@ export default async function ApiOffers(
 	if (req.method === 'POST') {
 		const offerId = uuid()
 
-		// add offer to offers
 		const sqlAddOffer = `
         INSERT INTO offers (
 			employerId, tech, title, empType, expLvl, 
@@ -69,7 +68,7 @@ export default async function ApiOffers(
 	}
 	if (!session.user.admin)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
-	// get all offers for admin only
+
 	const sqlGet = `
 		SELECT uuid, tech, title, empType, expLvl, 
 		salaryFrom, salaryTo, technology, 

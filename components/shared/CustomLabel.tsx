@@ -15,13 +15,8 @@ const CustomLabel = ({
 	return (
 		<Wrapper>
 			<IconWrapper>
-				{type === 'business' ? (
-					<BusinessIcon />
-				) : type === 'location' ? (
-					<LocationOnIcon />
-				) : (
-					<PeopleIcon />
-				)}
+				{type === 'business' && <BusinessIcon />}
+				{type === 'location' && <LocationOnIcon />}
 			</IconWrapper>
 			<Typography color='span' fontSize='small' fWeight={400}>
 				{label}
@@ -37,8 +32,10 @@ export const Wrapper = styled.div`
 `
 
 export const IconWrapper = styled.div`
+	display: flex;
 	color: ${({ theme }) => theme.colors.span};
 	margin-right: 0.25em;
+	margin-top: -0.1em;
 	svg {
 		font-size: 0.9rem;
 	}

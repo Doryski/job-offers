@@ -186,22 +186,10 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 							<CustomButton
 								pink
 								display='flex'
-								minWidth='142px'
-								padding='.3em 0 .3em 2em'
-								type='submit'>
-								{loading ? (
-									<>Applying...</>
-								) : (
-									<>
-										Apply
-										<Typography
-											display='block'
-											color='white'
-											padding='0 0.5em 0 1.5em'>
-											<Send />
-										</Typography>
-									</>
-								)}
+								padding='.5em 1.5em'
+								type='submit'
+								fontSize='1rem'>
+								{loading ? 'Applying...' : 'Apply'}
 							</CustomButton>
 						</ApplyButtonWrapper>
 					</form>
