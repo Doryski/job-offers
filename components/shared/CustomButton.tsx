@@ -8,7 +8,7 @@ type CustomButtonProps = {
 	handleClick?: VoidFunction
 	padding?: string
 	margin?: string
-	pink?: boolean
+	primary?: boolean
 	fWeight?: number
 	minWidth?: string
 	display?: string
@@ -18,7 +18,7 @@ type CustomButtonProps = {
 }
 
 type StyledButtonProps = {
-	pink?: boolean
+	primary?: boolean
 	active?: boolean
 	padding?: string
 	margin?: string
@@ -34,7 +34,7 @@ const CustomButton = ({
 	handleClick,
 	padding,
 	margin,
-	pink = false,
+	primary = false,
 	fWeight,
 	minWidth,
 	display,
@@ -46,12 +46,12 @@ const CustomButton = ({
 		onClick={handleClick}
 		padding={padding}
 		margin={margin}
-		pink={pink}
+		primary={primary}
 		icon={!!icon}
 		minWidth={minWidth}
 		type={type}>
 		<Typography
-			color={active ? 'pink' : pink ? 'white' : 'text'}
+			color={active ? 'primary' : primary ? 'white' : 'text'}
 			fontSize={fontSize}
 			fWeight={fWeight}
 			display={display}
@@ -68,19 +68,19 @@ const CustomButton = ({
 
 export const Button = styled.button<StyledButtonProps>`
 	border: 1px solid
-		${({ theme, active, pink }) =>
-			active || pink ? theme.colors.pink : theme.colors.buttonBorder};
+		${({ theme, active, primary }) =>
+			active || primary ? theme.colors.primary : theme.colors.buttonBorder};
 	border-radius: 5px;
 	padding: ${({ padding, icon }) =>
 		icon
 			? padding || '0.125em 0.5em 0.125em 0.75em'
 			: padding || '0.125em 0.75em'};
 	margin: ${({ margin }) => margin || '0'};
-	background: ${({ theme, active, pink }) =>
+	background: ${({ theme, active, primary }) =>
 		active
 			? theme.colors.buttonBackgroundActive
-			: pink
-			? theme.colors.pink
+			: primary
+			? theme.colors.primary
 			: theme.colors.buttonBackground};
 	display: flex;
 	align-items: center;
@@ -89,10 +89,12 @@ export const Button = styled.button<StyledButtonProps>`
 	min-width: ${({ minWidth }) => minWidth || 'none'};
 	transition: all 0.4s;
 	&:hover {
-		background: ${({ theme, pink }) =>
-			pink ? theme.colors.opacityPink : theme.colors.buttonBackgroundHover};
-		border-color: ${({ theme, pink }) =>
-			pink ? theme.colors.opacityPink : theme.colors.buttonBorder};
+		background: ${({ theme, primary }) =>
+			primary
+				? theme.colors.primaryOpacity
+				: theme.colors.buttonBackgroundHover};
+		border-color: ${({ theme, primary }) =>
+			primary ? theme.colors.primaryOpacity : theme.colors.buttonBorder};
 	}
 `
 export const IconWrapper = styled.div<{ color?: string; margin?: string }>`

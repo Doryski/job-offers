@@ -41,7 +41,7 @@ const ListHeader = ({
 }
 
 export const OptionsHeader = styled.div`
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	display: flex;
 	margin: 0 0.5em 0.5em 0;
 	height: 42px;

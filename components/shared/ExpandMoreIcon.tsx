@@ -4,24 +4,26 @@ import { ICON_SIZE } from '@/helpers/utils'
 
 const ExpandMoreIcon = ({
 	isOpen,
-	pink,
+	primary,
 	active,
 }: {
 	isOpen: boolean
-	pink: boolean
+	primary: boolean
 	active: boolean
 }) => {
-	return <StyledExpandMoreIcon pink={pink} active={active} isOpen={isOpen} />
+	return (
+		<StyledExpandMoreIcon primary={primary} active={active} isOpen={isOpen} />
+	)
 }
 export const StyledExpandMoreIcon = styled(
 	({
 		active,
-		pink,
+		primary,
 		isOpen,
 		...props
 	}: {
 		active?: boolean
-		pink?: boolean
+		primary?: boolean
 		isOpen?: boolean
 	}) =>
 		isOpen ? (
@@ -30,7 +32,11 @@ export const StyledExpandMoreIcon = styled(
 			<ExpandMore {...props} fontSize={ICON_SIZE} />
 		)
 )`
-	color: ${({ theme, active, pink }) =>
-		active ? theme.colors.pink : pink ? theme.colors.white : theme.colors.text};
+	color: ${({ theme, active, primary }) =>
+		active
+			? theme.colors.primary
+			: primary
+			? theme.colors.white
+			: theme.colors.text};
 `
 export default ExpandMoreIcon

@@ -78,7 +78,7 @@ const Login = () => {
 							</CustomButton>
 						</a>
 					</Link>
-					<CustomButton pink display='flex' padding='.5em 1em' type='submit'>
+					<CustomButton primary display='flex' padding='.5em 1em' type='submit'>
 						Log in
 					</CustomButton>
 				</ApplyButtonWrapper>

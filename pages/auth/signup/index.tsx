@@ -137,7 +137,7 @@ const Signup = () => {
 							</CustomButton>
 						</a>
 					</Link>
-					<CustomButton pink display='flex' padding='.7em 1em' type='submit'>
+					<CustomButton primary display='flex' padding='.7em 1em' type='submit'>
 						Create account
 					</CustomButton>
 				</ApplyButtonWrapper>
@@ -168,7 +168,7 @@ export const UploadWrapper = styled.div`
 	cursor: pointer;
 	min-height: 100px;
 	&:hover {
-		border-color: ${({ theme }) => theme.colors.pink};
+		border-color: ${({ theme }) => theme.colors.primary};
 	}
 `
 export default Signup

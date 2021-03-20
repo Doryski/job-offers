@@ -110,7 +110,7 @@ export const Container = styled.div`
 	margin: 0 0.5em 0.75em 0.75em;
 	border-radius: 5px;
 	box-shadow: ${({ theme }) => theme.shadows.card};
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	display: flex;
 	overflow: hidden;
 	transition: box-shadow 0.13s;

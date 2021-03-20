@@ -83,7 +83,7 @@ export const SubContainer = styled.div`
 	display: grid;
 	grid-template-columns: 50% auto;
 	height: 92vh;
-	background: ${({ theme }) => theme.colors.secondary};
+	background: ${({ theme }) => theme.colors.dark};
 `
 export const ListContainer = styled.section`
 	height: 100%;
@@ -96,7 +96,7 @@ export const ListContainer = styled.section`
 export const Container = styled.div`
 	width: 100%;
 	height: 92vh;
-	background: ${({ theme }) => theme.colors.secondary};
+	background: ${({ theme }) => theme.colors.dark};
 	display: flex;
 	flex-direction: column;
 `

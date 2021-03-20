@@ -147,7 +147,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								{!!fileName ? (
 									<>
 										<div style={{ maxWidth: '210px' }}>
-											<Typography color='pink' fWeight={500} fontSize='md'>
+											<Typography color='primary' fWeight={500} fontSize='md'>
 												{fileName}
 											</Typography>
 										</div>
@@ -184,7 +184,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 						</CheckboxWrapper>
 						<ApplyButtonWrapper>
 							<CustomButton
-								pink
+								primary
 								display='flex'
 								padding='.5em 1.5em'
 								type='submit'
@@ -203,7 +203,7 @@ export const ApplyContainer = styled.section`
 	margin: 1.875em 0;
 	padding: 0.3125em 0;
 	box-shadow: ${({ theme }) => theme.colors.shadow};
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	border-radius: 5px;
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		margin: 0.9375em 0;
@@ -242,7 +242,7 @@ export const UploadWrapper = styled.div`
 	cursor: pointer;
 	min-height: 100px;
 	&:hover {
-		border-color: ${({ theme }) => theme.colors.pink};
+		border-color: ${({ theme }) => theme.colors.primary};
 	}
 `
 export const UploadIconWrapper = styled.div`
@@ -282,7 +282,7 @@ export const MyTextField = styled(TextField)`
 		transition: border-color 300ms ease 0s;
 	}
 	div:hover > fieldset {
-		border-color: ${({ theme }) => theme.colors.pink} !important;
+		border-color: ${({ theme }) => theme.colors.primary} !important;
 	}
 `
 

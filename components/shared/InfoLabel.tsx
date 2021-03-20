@@ -16,7 +16,7 @@ const InfoLabel = ({ label }) => {
 }
 export const Container = styled.div`
 	align-items: center;
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 2px 0px,
 		rgba(0, 0, 0, 0.06) 0px 1px 5px 0px;
 	display: flex;
@@ -42,7 +42,7 @@ export const IconWrapper = styled.div`
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	padding: 0.5em;
 `
 export default InfoLabel

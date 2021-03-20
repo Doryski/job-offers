@@ -18,7 +18,7 @@ const DialogFooter = ({
 			<a onClick={handleApplyFilter}>
 				<CustomButton
 					padding='0.5em 1.125em'
-					pink
+					primary
 					fWeight={600}
 					margin='0 0.625em'>
 					Show offers

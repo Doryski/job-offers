@@ -23,10 +23,10 @@ const Navigation = () => {
 						<NavItem>
 							<Typography
 								fWeight={600}
-								color={isAdminPanel ? 'pink' : 'span'}
+								color={isAdminPanel ? 'primary' : 'span'}
 								margin='0 0.375em'
 								minWidth='64px'
-								hoverColor={isAdminPanel ? 'none' : 'lightPink'}>
+								hoverColor={isAdminPanel ? 'none' : 'primaryLight'}>
 								Admin panel
 							</Typography>
 						</NavItem>
@@ -40,11 +40,11 @@ const Navigation = () => {
 							<NavItem>
 								<Typography
 									fWeight={600}
-									color={isActive(path, router.pathname) ? 'pink' : 'span'}
+									color={isActive(path, router.pathname) ? 'primary' : 'span'}
 									margin='0 0.375em'
 									minWidth='64px'
 									hoverColor={
-										isActive(path, router.pathname) ? 'none' : 'lightPink'
+										isActive(path, router.pathname) ? 'none' : 'primaryLight'
 									}>
 									{title}
 								</Typography>

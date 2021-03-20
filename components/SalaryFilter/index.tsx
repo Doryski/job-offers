@@ -99,7 +99,7 @@ export const AmountWrapper = styled.section`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	padding: 0.375em 1em;
 	border-radius: 5px;
 	border-width: 1px;

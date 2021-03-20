@@ -16,7 +16,7 @@ const OfferPage = ({ offer }) => {
 }
 
 export const OfferContainer = styled.div`
-	background: ${({ theme }) => theme.colors.secondary};
+	background: ${({ theme }) => theme.colors.dark};
 	display: flex;
 	flex-direction: column;
 	padding: 0 1em 0 0;

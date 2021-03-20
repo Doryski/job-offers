@@ -32,7 +32,7 @@ const AddOfferModal = ({ close }: { close: VoidFunction }) => {
 				errors={errors}
 			/>
 			<Wrapper>
-				<CustomButton type='submit' padding='0.5em 1.125em' pink>
+				<CustomButton type='submit' padding='0.5em 1.125em' primary>
 					{loading ? (
 						<StyledCircularProgress size='10px' color='secondary' />
 					) : (
@@ -47,7 +47,7 @@ const AddOfferModal = ({ close }: { close: VoidFunction }) => {
 export const Container = styled.div`
 	height: 100%;
 	width: 100%;
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	padding-bottom: 0.625em;
 `
 export const StyledCircularProgress = styled(CircularProgress)`

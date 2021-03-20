@@ -44,7 +44,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 						<CustomButton
 							handleClick={signIn}
 							fWeight={400}
-							pink
+							primary
 							margin='0 0.875em 0 0.375em'
 							padding='0.625em 1.125em'>
 							Log in
@@ -67,7 +67,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 						<Link href='/user/profile'>
 							<a>
 								<CustomButton
-									pink
+									primary
 									fWeight={400}
 									margin='0 0.875em 0 0.375em'
 									padding='0.625em 1.125em'>
@@ -95,7 +95,7 @@ export const Container = styled.header<{ admin?: boolean }>`
 	align-items: center;
 	justify-content: space-between;
 	background: ${({ theme, admin }) =>
-		admin ? theme.colors.admin : theme.colors.primary};
+		admin ? theme.colors.admin : theme.colors.white};
 	border-bottom: 1px solid
 		${({ theme, admin }) => (admin ? theme.colors.admin : theme.colors.divider)};
 	width: 100%;

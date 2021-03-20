@@ -56,7 +56,7 @@ const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 		color: ${({ theme }) => theme.colors[color] || theme.colors.title}};
 		&:hover {
 			color: ${({ theme }) =>
-				hoverColor === 'lightPink' ? theme.colors.lightPink : hoverColor};
+				hoverColor === 'primaryLight' ? theme.colors.primaryLight : hoverColor};
 		}
 	`}
 `

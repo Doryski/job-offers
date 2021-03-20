@@ -136,7 +136,7 @@ export const MainInfoContainer = styled.section`
 	justify-content: center;
 	padding: 0.3125em 1em;
 	box-shadow: ${({ theme }) => theme.colors.shadow};
-	background: ${({ theme }) => theme.colors.primary};
+	background: ${({ theme }) => theme.colors.white};
 	border-radius: 5px;
 	display: flex;
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {

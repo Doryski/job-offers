@@ -6,11 +6,11 @@ declare module 'styled-components' {
 			text: string
 			title: string
 			primary: string
-			secondary: string
+			dark: string
 			divider: string
-			pink: string
-			lightPink: string
-			opacityPink: string
+			dark: string
+			primaryLight: string
+			primaryOpacity: string
 			buttonBackground: string
 			buttonBackgroundHover: string
 			buttonBackgroundActive: string

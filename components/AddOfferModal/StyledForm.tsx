@@ -9,7 +9,7 @@ export const InputsContainer = styled.section`
 
 export const ErrorMessage = styled.span<{ isSpan?: boolean }>`
 	color: ${({ isSpan, theme }) =>
-		isSpan ? theme.colors.span : theme.colors.pink};
+		isSpan ? theme.colors.span : theme.colors.primary};
 	font-size: ${({ theme }) => theme.fontSize.small};
 	margin-left: 0.625em;
 `
