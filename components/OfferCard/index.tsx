@@ -84,7 +84,7 @@ const OfferCard = ({
 				) : (
 					<>
 						<Wrapper>
-							<TitleWrapper>{offerTitleC}</TitleWrapper>
+							<section>{offerTitleC}</section>
 							<RequirementsWrapper>
 								{technology
 									.slice(0, 3)
@@ -142,9 +142,7 @@ export const Wrapper = styled.div`
 	justify-content: space-between;
 `
 
-export const TitleWrapper = styled.div``
-
-export const SalaryWrapper = styled.div`
+export const SalaryWrapper = styled.section`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -154,7 +152,7 @@ export const SalaryWrapper = styled.div`
 	}
 `
 
-export const InfoWrapper = styled.div`
+export const InfoWrapper = styled.section`
 	display: flex;
 	@media only screen and (max-width: 600px) {
 		align-items: flex-end;
@@ -162,7 +160,7 @@ export const InfoWrapper = styled.div`
 	}
 `
 
-export const RequirementsWrapper = styled.div`
+export const RequirementsWrapper = styled.section`
 	display: flex;
 
 	@media only screen and (max-width: 600px) {

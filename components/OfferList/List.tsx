@@ -45,7 +45,7 @@ const List = ({
 		</ListContainer>
 	)
 }
-export const ListContainer = styled.div`
+export const ListContainer = styled.section`
 	display: flex;
 	height: 100%;
 	overflow-y: auto;
