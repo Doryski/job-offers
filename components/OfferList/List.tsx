@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import devlog from '@/debug/devlog'
 import timeit from '@/debug/timeit'
 import filterOffers from '@/helpers/filterOffers'
-import sortOffers, { sortOffers2 } from '@/helpers/sortOffers'
+import sortOffers from '@/helpers/sortOffers'
 import { OfferPageDataType } from '@/types'
 import Center from '@/components/shared/Center'
 import OfferCard from '../OfferCard'
@@ -27,17 +27,6 @@ const List = ({
 		)
 	}
 	const filteredOffers = filterOffers(data, query)
-	devlog('sortOffers: ')
-	const d1 = timeit(
-		() => sortOffers(filteredOffers, query.sort as string),
-		true
-	)
-	devlog('sortOffers2: ')
-	const d2 = timeit(
-		() => sortOffers2(filteredOffers, query.sort as string),
-		true
-	)
-	devlog('winner: ', d2 < d1 ? 'sortOffers2' : 'sortOffers')
 	const sortedOffers = sortOffers(filteredOffers, query.sort as string)
 
 	return (
