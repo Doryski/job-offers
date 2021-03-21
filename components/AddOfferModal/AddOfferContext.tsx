@@ -32,7 +32,7 @@ const initialContext = {
 	loading: false,
 }
 
-export const AddOfferContext = createContext<AddOfferContextType>(
+export const AddOfferContext = createContext<typeof initialContext>(
 	initialContext
 )
 
