@@ -2,7 +2,7 @@
 	"singleQuote": true,
 	"endOfLine": "lf",
 	"useTabs": true,
-	"arrowParens": "always",
+	"arrowParens": "avoid",
 	"jsxBracketSameLine": true,
 	"jsxSingleQuote": true,
 	"printWidth": 80,

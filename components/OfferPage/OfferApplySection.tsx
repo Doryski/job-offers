@@ -1,12 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useReducer, useRef } from 'react'
 import styled from 'styled-components'
-import {
-	PersonOutline,
-	Email,
-	Create,
-	Send,
-	DeleteOutline,
-} from '@material-ui/icons'
+import { PersonOutline, Email, Create, DeleteOutline } from '@material-ui/icons'
 import Typography from '@/components/shared/Typography'
 import { TextField, Checkbox } from '@material-ui/core'
 import CustomButton from '@/components/shared/CustomButton'
@@ -21,6 +15,8 @@ import { OfferPageDataType } from '@/types'
 import useRefreshPage from '@/hooks/useRefreshPage'
 import { useRouter } from 'next/router'
 import post from '@/helpers/post'
+import { initialSubmit, reducer } from '@/helpers/submitReducer'
+
 type FormDataType = {
 	name: string
 	email: string
@@ -40,23 +36,27 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 		handleFileDelete,
 	} = useFileUpload(uploadRef)
 	const { register, handleSubmit, errors } = useForm()
-	const [loading, setLoading] = useState(false)
-	const [applied, setApplied] = useState(false)
+	const [submit, dispatch] = useReducer(reducer, initialSubmit)
+	const { success, loading } = submit
 	const router = useRouter()
 	const { refresh } = useRefreshPage(offer, router)
 
 	const onSubmit = handleSubmit(async (data: FormDataType) => {
-		setLoading(true)
+		dispatch({ type: 'LOADING', payload: true })
 		let formData: FormDataType = {
 			...data,
 			processInFuture: isChecked ? 1 : 0,
 			employerId,
 			offerId,
 		}
-		await post('/api/applicants', formData)
-		refresh()
-		setLoading(false)
-		setApplied(true)
+		try {
+			await post('/api/applicants', formData)
+			refresh()
+			dispatch({ type: 'SUCCESS', payload: true })
+			dispatch({ type: 'LOADING', payload: false })
+		} catch (err) {
+			dispatch({ type: 'FAILURE', payload: true })
+		}
 	})
 
 	return (
@@ -71,7 +71,7 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 			</Typography>
 
 			<Wrapper>
-				{applied ? (
+				{success ? (
 					<div>
 						Thank you for your application. Your data was sent to the{' '}
 						{companyName}

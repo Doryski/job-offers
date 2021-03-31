@@ -1,26 +1,36 @@
-import { useState, useEffect } from 'react'
+import { isClient } from '@/helpers/utils'
+import { useState, useEffect, useRef } from 'react'
+import useWindowSize from './useWindowSize'
 
-export default function useDeviceDetect(windowWidth: number) {
-	let isM: boolean
-	if (typeof window !== 'undefined') {
-		const getWindowWidth = () =>
-			window.innerWidth ||
-			document.documentElement.clientWidth ||
-			document.body.clientWidth
-		const isMobileWidth = () => getWindowWidth() <= windowWidth
+/**
+ *
+ * @param mobileBreakpoint defaults to 760
+ * @param desktopBreakpoint defaults to 900
+ */
+export default function useDeviceDetect(
+	mobileBreakpoint: number = 760,
+	desktopBreakpoint: number = 900
+) {
+	const { width } = useWindowSize()
+	const isMobileWidth = width <= mobileBreakpoint
+	const isDesktopWidth = width >= desktopBreakpoint
 
-		const [isMobile, setIsMobile] = useState(() => isMobileWidth())
-		useEffect(() => {
-			const resizeListener = () => setIsMobile(() => isMobileWidth())
+	const [isMobile, setIsMobile] = useState(isMobileWidth)
+	const [isDesktop, setIsDesktop] = useState(isDesktopWidth)
+	const resizeListener = useRef(() => {})
 
-			window.addEventListener('resize', resizeListener)
-
-			return () => {
-				window.removeEventListener('resize', resizeListener)
-			}
-		}, [])
-		isM = isMobile
-		return
+	resizeListener.current = () => {
+		if (isClient) {
+			setIsMobile(isMobileWidth)
+			setIsDesktop(isDesktopWidth)
+		}
 	}
-	return isM
+	useEffect(() => {
+		window.addEventListener('resize', resizeListener.current)
+
+		return () => {
+			window.removeEventListener('resize', resizeListener.current)
+		}
+	})
+	return { isMobile, isDesktop, isTablet: !isMobile && !isDesktop }
 }

@@ -1,18 +1,19 @@
 import moment, { Moment } from 'moment'
 import { DATE_FORMAT } from './utils'
 
-const dateDiff = (
+export const convertToMoment = (
+	date: Moment | string,
+	format: string
+): moment.Moment => (typeof date === 'string' ? moment(date, format) : date)
+
+export default function dateDiff(
 	date1: string | Moment,
 	date2: string | Moment,
 	format: string = DATE_FORMAT,
 	unit: moment.unitOfTime.Diff = 'days'
-) => {
-	const convertToMoment = (date: Moment | string) =>
-		typeof date === 'string' ? moment(date, format) : date
-	const convertedD1 = convertToMoment(date1)
-	const convertedD2 = convertToMoment(date2)
+) {
+	const convertedDate1 = convertToMoment(date1, format)
+	const convertedDate2 = convertToMoment(date2, format)
 
-	return convertedD1.diff(convertedD2, unit)
+	return convertedDate1.diff(convertedDate2, unit)
 }
-
-export default dateDiff

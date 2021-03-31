@@ -7,15 +7,12 @@ import { Wrapper, InputsContainer } from './StyledForm'
 import RemoveIcon from '@material-ui/icons/Remove'
 import AddIcon from '@material-ui/icons/Add'
 import { AddOfferContext } from './AddOfferContext'
+import useTechSize from '@/hooks/useTechSize'
 
-const TechnologySection = ({
-	techSize,
-	handleTechSize,
-}: {
-	techSize: number
-	handleTechSize: { add: VoidFunction; remove: VoidFunction }
-}) => {
+const TechnologySection = () => {
 	const { register, errors } = useContext(AddOfferContext)
+	const { techSize, handleTechSize } = useTechSize()
+
 	return (
 		<InputsContainer>
 			{[...Array(techSize)].map((v, index) => (

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 const AddOfferModal = dynamic(() => import('@/components/AddOfferModal'))
 
 const AddOffer = () => {
-	const { open, isDialogOpen, close } = useDialogHandler(false)
+	const { open, isOpen, close } = useDialogHandler(false)
 
 	return (
 		<>
@@ -16,8 +16,8 @@ const AddOffer = () => {
 				padding='0.625em 1.125em'>
 				Post a Job
 			</CustomButton>
-			{isDialogOpen && (
-				<AddOfferContextProvider isDialogOpen={isDialogOpen} close={close}>
+			{isOpen && (
+				<AddOfferContextProvider isOpen={isOpen} close={close}>
 					<AddOfferModal close={close} />
 				</AddOfferContextProvider>
 			)}

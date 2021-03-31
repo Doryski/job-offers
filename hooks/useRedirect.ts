@@ -14,21 +14,26 @@ export default function useRedirect(
 	router: NextRouter,
 	options: Options
 ) {
-	const opts = { redirectUrl: '/', prefetch: false, ...options }
-	const { redirectUrl, prefetch } = opts
+	const { redirectUrl, prefetch } = {
+		redirectUrl: '/',
+		prefetch: false,
+		...options,
+	}
 	const [countdown, setCountdown] = useState(seconds)
 	const [isRedirecting, setIsRedirecting] = useState(false)
+	if (prefetch) {
+		usePrefetch(redirectUrl, router)
+	}
+
 	useEffect(() => {
 		setTimeout(() => {
-			setCountdown((prev) => prev - 1)
+			setCountdown(prev => prev - 1)
 		}, 1000)
 		if (countdown <= 0) {
 			setIsRedirecting(true)
 			router.push(redirectUrl)
 		}
 	}, [countdown])
-	if (prefetch) {
-		usePrefetch(redirectUrl)
-	}
+
 	return { isRedirecting, countdown }
 }

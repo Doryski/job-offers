@@ -4,13 +4,22 @@ import { useEffect } from 'react'
 // useDetectOutsideClick(modalRef, closeModal)
 // useDetectOutsideClick(modalRef, () => setIsModalOpen(false))
 export default function useDetectOutsideClick(
-	ref: React.RefObject<any>,
-	closeHandler: VoidFunction
+	ref: React.RefObject<any> | React.RefObject<any>[],
+	closeFn: VoidFunction
 ): void {
-	const listener = (event: MouseEvent) => {
-		if (!ref.current || ref.current.contains(event.target)) return
+	const detector = (ref: React.RefObject<any>, event: MouseEvent): boolean =>
+		ref?.current?.contains(event.target)
 
-		closeHandler()
+	const listener = (event: MouseEvent) => {
+		if (ref instanceof Array) {
+			for (let el of ref) {
+				if (detector(el, event)) return
+			}
+			closeFn()
+			return
+		}
+		if (detector(ref, event)) return
+		closeFn()
 	}
 	useEffect(() => {
 		document.addEventListener('mousedown', listener)

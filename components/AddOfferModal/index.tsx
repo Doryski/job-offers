@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import DialogHeader from '@/components/shared/DialogHeader'
 import InfoSection from './InfoSection'
@@ -11,18 +11,13 @@ import InputComponent from './CustomInput'
 
 const AddOfferModal = ({ close }: { close: VoidFunction }) => {
 	const { register, errors, loading } = useContext(AddOfferContext)
-	const [techSize, setTechSize] = useState(1)
-	const handleTechSize = {
-		add: () => setTechSize((prevTechSize) => prevTechSize + 1),
-		remove: () => setTechSize((prevTechSize) => prevTechSize - 1),
-	}
 
 	return (
 		<Container>
 			<DialogHeader close={close}>Add offer</DialogHeader>
 			<InfoSection />
 			<DialogHeader>Technology</DialogHeader>
-			<TechnologySection techSize={techSize} handleTechSize={handleTechSize} />
+			<TechnologySection />
 			<InputComponent
 				type='text'
 				name='description'

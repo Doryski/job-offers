@@ -32,7 +32,7 @@ const OfferCard = ({
 	const days = dateDiff(moment(), dateAdded)
 	const isNew = days < 1
 
-	const isMobile = useDeviceDetect(600)
+	const { isMobile } = useDeviceDetect(600)
 
 	const dateLabel = (
 		<SmallLabel isNew={isNew} margin='0 0.125em 0 0.625em'>

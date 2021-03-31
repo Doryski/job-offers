@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
-import devlog from '@/debug/devlog'
-import timeit from '@/debug/timeit'
 import filterOffers from '@/helpers/filterOffers'
 import sortOffers from '@/helpers/sortOffers'
 import { OfferPageDataType } from '@/types'

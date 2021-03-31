@@ -10,6 +10,8 @@ export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@
 export const UNAUTHORIZED_ERROR =
 	'You need to be signed in to have access to this data.'
 export const ICON_SIZE = 'small'
+export const FILTER_NAMES = ['location', 'expLvl', 'from', 'to', 'tech']
+export const isClient = typeof window !== 'undefined'
 
 export const LOCATIONS = [
 	'Warszawa',
