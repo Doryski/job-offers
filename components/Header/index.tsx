@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import MenuIcon from '@material-ui/icons/Menu'
 import AddOffer from '@/components/AddOfferModal/AddOffer'
 import CustomButton from '@/components/shared/CustomButton'
 import Navigation from './Navigation'
@@ -9,7 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 
 const Header = ({ admin = false }: { admin?: boolean }) => {
-	const isMobile = useDeviceDetect(1105)
+	const { isDesktop } = useDeviceDetect(760, 1105)
 	const [session, loading] = useSession()
 	const router = useRouter()
 
@@ -37,7 +36,7 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 					<LogoWrapper>Job offers</LogoWrapper>
 				</a>
 			</Link>
-			{!isMobile && <Navigation />}
+			{isDesktop && <Navigation />}
 			<Wrapper>
 				{!session && !loading && (
 					<>

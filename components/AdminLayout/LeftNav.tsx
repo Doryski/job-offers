@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import styled from 'styled-components'
 
-const LeftNav = () => {
-	const ADMIN_TABLES_LINKS = [
-		{ path: '/admin/offers', title: 'Offers' },
-		{ path: '/admin/employers', title: 'Employers' },
-		{ path: '/admin/applicants', title: 'Applicants' },
-	]
+const ADMIN_TABLES_LINKS = [
+	{ path: '/admin/offers', title: 'Offers' },
+	{ path: '/admin/employers', title: 'Employers' },
+	{ path: '/admin/applicants', title: 'Applicants' },
+]
 
+const LeftNav = () => {
 	return (
 		<Wrapper>
 			<nav>

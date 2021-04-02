@@ -27,6 +27,7 @@ const Signup = () => {
 	const [processDataError, setProcessDataError] = useState('')
 	const [session] = useSession()
 	const router = useRouter()
+	usePrefetch('/auth/login', router)
 
 	if (session) {
 		return (
@@ -39,9 +40,7 @@ const Signup = () => {
 		)
 	}
 
-	usePrefetch('/auth/login')
-
-	const onSubmit = handleSubmit(async (data) => {
+	const onSubmit = handleSubmit(async data => {
 		if (!isChecked) {
 			setProcessDataError(`
             You have to agree to 

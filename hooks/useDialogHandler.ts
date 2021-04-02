@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
 export default function useDialogHandler(initialState: boolean) {
-	const [isDialogOpen, setIsDialogOpen] = useState(initialState)
+	const [isOpen, setIsOpen] = useState(initialState)
 
 	return {
-		open: () => setIsDialogOpen(true),
-		close: () => setIsDialogOpen(false),
-		toggle: () => setIsDialogOpen((prev) => !prev),
-		isDialogOpen,
+		open: () => setIsOpen(true),
+		close: () => setIsOpen(false),
+		toggle: () => setIsOpen(prev => !prev),
+		isOpen,
 	}
 }

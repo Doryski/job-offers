@@ -1,6 +1,6 @@
-import stringFormat from './stringFormat'
 import { ParsedUrlQuery } from 'querystring'
 import { OfferPageDataType } from '@/types'
+import stringFormat from './stringFormat'
 import combine from './combineFilters'
 
 export default function filterOffers(
@@ -40,11 +40,11 @@ export default function filterOffers(
 		const expLvlFilter = expLvl === stringFormat(offerExplvl)
 
 		const filters = [
-			{ param: location as string, op: locationFilter },
-			{ param: tech as string, op: techFilter },
-			{ param: from as string, op: fromFilter },
-			{ param: to as string, op: toFilter },
-			{ param: expLvl as string, op: expLvlFilter },
+			{ param: location as string, operation: locationFilter },
+			{ param: tech as string, operation: techFilter },
+			{ param: from as string, operation: fromFilter },
+			{ param: to as string, operation: toFilter },
+			{ param: expLvl as string, operation: expLvlFilter },
 		]
 
 		const applyFilter = !!search ? searchFilter : combine(filters)
