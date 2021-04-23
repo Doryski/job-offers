@@ -3,7 +3,7 @@ import { Query } from '@/types'
 import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
 
-export function reduceToQueryString(data: Query[]) {
+export function reduceToQueryString(data: Query[]): string {
 	const init = '/?'
 	const reduced = data.reduce((acc, { query, value }, index, array) => {
 		const queryInstance = query + '=' + value
@@ -19,7 +19,10 @@ export function reduceToQueryString(data: Query[]) {
 	return reduced
 }
 
-const createQuery = (data: Query[] | Query, prevQuery?: ParsedUrlQuery) => {
+export default function createQuery(
+	data: Query[] | Query,
+	prevQuery?: ParsedUrlQuery
+): string {
 	const transformed = transformQuery(prevQuery)
 	let merged: Query[] = []
 	if (!data) merged = transformed
@@ -32,5 +35,3 @@ const createQuery = (data: Query[] | Query, prevQuery?: ParsedUrlQuery) => {
 	const reduced = reduceToQueryString(merged)
 	return reduced
 }
-
-export default createQuery

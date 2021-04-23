@@ -4,7 +4,7 @@ import { ParamsType, OfferPageDataType } from '@/types'
 export default function sortOffers(
 	data: OfferPageDataType[],
 	sortParam: ParamsType['sort']
-) {
+): OfferPageDataType[] {
 	if (!data) return []
 	if (data.length < 2) return data
 

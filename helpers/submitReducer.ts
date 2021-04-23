@@ -13,7 +13,7 @@ export const initialSubmit: SubmitType = {
 export const reducer = (
 	state: typeof initialSubmit,
 	action: SubmitActionType
-) => {
+): SubmitType => {
 	switch (action.type) {
 		case 'LOADING':
 			return { ...state, loading: action.payload }
