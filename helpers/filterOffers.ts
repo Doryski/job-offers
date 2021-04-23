@@ -6,13 +6,13 @@ import combine from './combineFilters'
 export default function filterOffers(
 	data: OfferPageDataType[],
 	query: ParsedUrlQuery
-) {
+): OfferPageDataType[] {
 	if (!data) return []
 	const { location, tech, from, to, expLvl, search } = query
 	const searchParams = !!search ? stringFormat(search as string) : ''
 	const includesSearch = (text: string) =>
 		stringFormat(text).includes(searchParams)
-	return data.filter((el) => {
+	return data.filter(el => {
 		const {
 			tech: offerTech,
 			title,
@@ -31,7 +31,7 @@ export default function filterOffers(
 			includesSearch(offerExplvl) ||
 			includesSearch(String(salaryFrom)) ||
 			includesSearch(String(salaryTo)) ||
-			technology.find(({ tech }) => includesSearch(tech))
+			!!technology.find(({ tech }) => includesSearch(tech))
 
 		const locationFilter = location === stringFormat(city)
 		const techFilter = tech === stringFormat(offerTech)

@@ -63,7 +63,10 @@ const InputComponent = React.memo(
 			},
 		})
 		const passRef = () => {
+<<<<<<< HEAD
 			devlog('passRef ran')
+=======
+>>>>>>> exp-new
 			if (type === 'number') return registerNumber
 			if (type === 'email') return registerEmail
 			if (type === 'password') return registerPassword

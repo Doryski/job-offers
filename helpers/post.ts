@@ -1,4 +1,4 @@
-export default async function post(url: string, data: any) {
+export default async function post(url: string, data: any): Promise<any> {
 	const res = await fetch(url, {
 		method: 'POST',
 		headers: {
