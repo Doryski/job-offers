@@ -9,6 +9,6 @@ export default function fixObject(
 		| ResultSetHeader
 		| Object
 		| Array<any>
-): Object | Array<any> {
+): Array<any> {
 	return JSON.parse(JSON.stringify(object))
 }
