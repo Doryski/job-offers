@@ -3,27 +3,16 @@ import { Query } from '@/types'
 import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
 
-<<<<<<< HEAD
-export function reduceToQueryString(data: Query[]) {
-	const INIT = '/?'
-=======
 export function reduceToQueryString(data: Query[]): string {
 	const init = '/?'
->>>>>>> exp-new
 	const reduced = data.reduce((acc, { query, value }, index, array) => {
 		const queryInstance = query + '=' + value
 		if (!value) return acc
 		if (index + 1 === array.length) return (acc += queryInstance)
 		if (index + 1 < array.length) return (acc += queryInstance + '&')
-<<<<<<< HEAD
-	}, INIT)
-
-	if (reduced === INIT) return ''
-=======
 	}, init)
 
 	if (reduced === init) return ''
->>>>>>> exp-new
 	if (reduced[reduced.length - 1] === '&')
 		return reduced.slice(0, reduced.length - 1)
 

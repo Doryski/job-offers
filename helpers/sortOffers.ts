@@ -8,11 +8,7 @@ export default function sortOffers(
 	if (!data) return []
 	if (data.length < 2) return data
 
-<<<<<<< HEAD
-	return [...data].sort((a, b) => {
-=======
 	const sorted = [...data].sort((a, b) => {
->>>>>>> exp-new
 		if (sortParam === SORT_OPTIONS[0].id)
 			return a.salaryFrom > b.salaryFrom ? 1 : -1
 		if (sortParam === SORT_OPTIONS[1].id)

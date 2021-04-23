@@ -13,11 +13,7 @@ export const initialSubmit: SubmitType = {
 export const reducer = (
 	state: typeof initialSubmit,
 	action: SubmitActionType
-<<<<<<< HEAD
-) => {
-=======
 ): SubmitType => {
->>>>>>> exp-new
 	switch (action.type) {
 		case 'LOADING':
 			return { ...state, loading: action.payload }

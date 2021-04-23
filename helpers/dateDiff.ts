@@ -11,11 +11,7 @@ export default function dateDiff(
 	date2: string | Moment,
 	format: string = DATE_FORMAT,
 	unit: moment.unitOfTime.Diff = 'days'
-<<<<<<< HEAD
-) {
-=======
 ): number {
->>>>>>> exp-new
 	const convertedDate1 = convertToMoment(date1, format)
 	const convertedDate2 = convertToMoment(date2, format)
 
