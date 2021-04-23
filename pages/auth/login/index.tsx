@@ -25,7 +25,7 @@ const Login = () => {
 			})
 		}
 	}, [router.query])
-	const onSubmit = handleSubmit(async (data) => {
+	const onSubmit = handleSubmit(async data => {
 		setFirstLogIn(true)
 		setIsLoggingIn(true)
 		reset()

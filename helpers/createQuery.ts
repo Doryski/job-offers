@@ -4,15 +4,15 @@ import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
 
 export function reduceToQueryString(data: Query[]) {
-	const reduced = data.reduce((acc, val, index) => {
-		const { query, value } = val
+	const INIT = '/?'
+	const reduced = data.reduce((acc, { query, value }, index, array) => {
 		const queryInstance = query + '=' + value
 		if (!value) return acc
-		if (index + 1 === data.length) return (acc += queryInstance)
-		if (index + 1 < data.length) return (acc += queryInstance + '&')
-	}, '/?')
+		if (index + 1 === array.length) return (acc += queryInstance)
+		if (index + 1 < array.length) return (acc += queryInstance + '&')
+	}, INIT)
 
-	if (reduced === '/?') return ''
+	if (reduced === INIT) return ''
 	if (reduced[reduced.length - 1] === '&')
 		return reduced.slice(0, reduced.length - 1)
 

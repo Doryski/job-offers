@@ -5,15 +5,15 @@ import Typography from './Typography'
 import { SORT_OPTIONS } from '@/helpers/utils'
 import { DropdownList, DropdownListItem } from './DropdownList'
 import useDialogHandler from '@/hooks/useDialogHandler'
-import useDetectOutsideClick from '@/hooks/useDetectOutsideClick'
 import { useRouter } from 'next/router'
 import createQuery from '@/helpers/createQuery'
 import { StyledExpandMoreIcon } from './ExpandMoreIcon'
+import useDetectOutsideClick from '@/hooks/useDetectOutsideClick'
 
 const SortDropdown = () => {
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
-	const { close, toggle, isDialogOpen: isListOpen } = useDialogHandler(false)
+	const { close, toggle, isOpen } = useDialogHandler(false)
 	useDetectOutsideClick(listRef, close)
 
 	const getCurrentSortOption = SORT_OPTIONS.find(({ id }) => id === query.sort)
@@ -23,12 +23,12 @@ const SortDropdown = () => {
 			<Typography color='span' margin='0 .25em 0 .5em'>
 				{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
 			</Typography>
-			<StyledExpandMoreIcon isOpen={isListOpen} />
+			<StyledExpandMoreIcon isOpen={isOpen} />
 
 			<DropdownList
 				ref={listRef}
 				width='126px'
-				isOpen={isListOpen}
+				isOpen={isOpen}
 				position={{ right: '0' }}>
 				{SORT_OPTIONS.map(({ id, name }) => (
 					<Link

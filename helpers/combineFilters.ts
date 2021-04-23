@@ -1,9 +1,10 @@
 import { Filter } from '@/types'
-const combine = (filters: Filter[]) =>
-	filters.reduce((acc, val) => {
-		if (val.param) {
-			acc = acc && val.op
+
+export default function combine(filters: Filter[]) {
+	return filters.reduce((acc, { param, operation }) => {
+		if (param) {
+			acc = acc && operation
 		}
 		return acc
 	}, true)
-export default combine
+}

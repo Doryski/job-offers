@@ -1,14 +1,13 @@
 import { NextRouter } from 'next/router'
 import createQuery from './createQuery'
+import { FILTER_NAMES } from './utils'
 
 const resetFilters = (router: NextRouter) => {
-	const resetQuery = ['location', 'expLvl', 'from', 'to', 'tech'].map((el) => ({
+	const resetQuery = FILTER_NAMES.map(el => ({
 		query: el,
 		value: '',
 	}))
-
-	router.push(createQuery(resetQuery, router.query), undefined, {
-		shallow: true,
-	})
+	const newUrl = createQuery(resetQuery, router.query)
+	router.push(newUrl, undefined, { shallow: true })
 }
 export default resetFilters

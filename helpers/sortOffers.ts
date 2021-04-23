@@ -6,9 +6,8 @@ export default function sortOffers(
 	sortParam: ParamsType['sort']
 ) {
 	if (!data) return []
-	if (data.length < 2) {
-		return data
-	}
+	if (data.length < 2) return data
+
 	return [...data].sort((a, b) => {
 		if (sortParam === SORT_OPTIONS[0].id)
 			return a.salaryFrom > b.salaryFrom ? 1 : -1

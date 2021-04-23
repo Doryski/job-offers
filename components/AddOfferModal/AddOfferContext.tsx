@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useReducer } from 'react'
 import { Dialog } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -8,6 +8,7 @@ import Center from '@/components/shared/Center'
 import CloseButton from '@/components/shared/CloseButton'
 import devlog from '@/debug/devlog'
 import post from '@/helpers/post'
+import { initialSubmit, reducer } from '@/helpers/submitReducer'
 type AddOfferContextType = {
 	register: Function
 	errors: Record<string, any>
@@ -32,28 +33,27 @@ const initialContext = {
 	loading: false,
 }
 
-export const AddOfferContext = createContext<typeof initialContext>(
+export const AddOfferContext = createContext<AddOfferContextType>(
 	initialContext
 )
 
 const AddOfferContextProvider = ({
 	children,
-	isDialogOpen,
+	isOpen,
 	close,
 }: {
 	children: React.ReactNode
-	isDialogOpen: boolean
+	isOpen: boolean
 	close: VoidFunction
 }) => {
 	const { handleSubmit, register, errors } = useForm()
 
-	const [loading, setLoading] = useState(false)
-	const [success, setSuccess] = useState(false)
-	const [error, setError] = useState(false)
+	const [submit, dispatch] = useReducer(reducer, initialSubmit)
+	const { failure: error, success, loading } = submit
 	const fullScreen = useMediaQuery('(max-width:800px)')
 
 	const onSubmit = handleSubmit(async (data: FormData) => {
-		setLoading(true)
+		dispatch({ type: 'LOADING', payload: true })
 		devlog('submitted new offer: ', data)
 		let technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
@@ -72,13 +72,13 @@ const AddOfferContextProvider = ({
 
 		await post('/api/offers', formData)
 
-		setLoading(false)
-		setSuccess(true)
+		dispatch({ type: 'LOADING', payload: false })
+		dispatch({ type: 'SUCCESS', payload: true })
 		return
 	})
 	const closeModal = () => {
-		setSuccess(false)
-		setError(false)
+		dispatch({ type: 'SUCCESS', payload: false })
+		dispatch({ type: 'FAILURE', payload: false })
 		close()
 	}
 
@@ -92,7 +92,7 @@ const AddOfferContextProvider = ({
 			{(success || error) && (
 				<Dialog
 					maxWidth='sm'
-					open={isDialogOpen}
+					open={isOpen}
 					onClose={closeModal}
 					fullWidth
 					fullScreen={fullScreen}>
@@ -109,7 +109,7 @@ const AddOfferContextProvider = ({
 			{!success && !error && (
 				<Dialog
 					maxWidth='md'
-					open={isDialogOpen}
+					open={isOpen}
 					onClose={close}
 					fullWidth
 					fullScreen={fullScreen}>
