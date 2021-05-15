@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 import { UNAUTHORIZED_ERROR } from '@/helpers/utils'
 import { db } from '@/mysqlSetup'
+import fixObject from '@/helpers/fixObject'
 
 export default async function ApiUserData(
 	req: NextApiRequest,
@@ -27,9 +28,9 @@ export default async function ApiUserData(
 		WHERE uuid = ?
 		`
 	const [result] = await db.promise().query(sqlGetUser, [req.query.id])
-	console.log(result[0])
+	console.log(result)
 	return res.status(200).json({
 		method: req.method,
-		data: result[0],
+		data: fixObject(result)[0],
 	})
 }

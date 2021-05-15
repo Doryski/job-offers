@@ -1,17 +1,18 @@
-import React, { useState, createContext, useReducer } from 'react'
+import React, { createContext, useReducer } from 'react'
 import { Dialog } from '@material-ui/core'
-import { useForm } from 'react-hook-form'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import moment from 'moment'
-import { OfferType } from '@/types'
+import { FormErrors, OfferType } from '@/types'
 import Center from '@/components/shared/Center'
 import CloseButton from '@/components/shared/CloseButton'
 import devlog from '@/debug/devlog'
 import post from '@/helpers/post'
 import { initialSubmit, reducer } from '@/helpers/submitReducer'
+import { FieldValues, useForm, UseFormRegister } from 'react-hook-form'
+
 type AddOfferContextType = {
-	register: Function
-	errors: Record<string, any>
+	register: UseFormRegister<FieldValues>
+	errors: FormErrors
 	loading: boolean
 }
 
@@ -20,21 +21,15 @@ type FormData = {
 	title: OfferType['title']
 	description: OfferType['description']
 	technology: string[]
-	techLvl: number[]
+	techLvl?: number[]
 	empType: OfferType['empType']
 	expLvl: OfferType['expLvl']
 	salaryFrom: OfferType['salaryFrom']
 	salaryTo: OfferType['salaryTo']
 }
 
-const initialContext = {
-	register: () => {},
-	errors: {},
-	loading: false,
-}
-
 export const AddOfferContext = createContext<AddOfferContextType>(
-	initialContext
+	{} as AddOfferContextType
 )
 
 const AddOfferContextProvider = ({
@@ -46,7 +41,11 @@ const AddOfferContextProvider = ({
 	isOpen: boolean
 	close: VoidFunction
 }) => {
-	const { handleSubmit, register, errors } = useForm()
+	const {
+		handleSubmit,
+		register,
+		formState: { errors },
+	} = useForm()
 
 	const [submit, dispatch] = useReducer(reducer, initialSubmit)
 	const { failure: error, success, loading } = submit
@@ -55,15 +54,15 @@ const AddOfferContextProvider = ({
 	const onSubmit = handleSubmit(async (data: FormData) => {
 		dispatch({ type: 'LOADING', payload: true })
 		devlog('submitted new offer: ', data)
-		let technology: { tech: string; techLvl: number }[] = []
+		const technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
 			technology.push({
 				tech: data.technology[i],
-				techLvl: data.techLvl[i],
+				techLvl: data.techLvl![i],
 			})
 		}
 
-		let formData = {
+		const formData = {
 			...data,
 			dateAdded: moment().format('x'),
 			technology: JSON.stringify(technology),
@@ -74,7 +73,6 @@ const AddOfferContextProvider = ({
 
 		dispatch({ type: 'LOADING', payload: false })
 		dispatch({ type: 'SUCCESS', payload: true })
-		return
 	})
 	const closeModal = () => {
 		dispatch({ type: 'SUCCESS', payload: false })
@@ -106,6 +104,7 @@ const AddOfferContextProvider = ({
 					</Center>
 				</Dialog>
 			)}
+
 			{!success && !error && (
 				<Dialog
 					maxWidth='md'

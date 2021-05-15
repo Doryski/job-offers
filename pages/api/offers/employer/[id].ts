@@ -27,9 +27,9 @@ export default async function ApiMyOfferId(
     WHERE offers.employerId = ? AND offers.uuid = ?
     `
 
-	db.query(sqlGet, [session.user.id, req.query.id], function (err, data) {
+	db.query(sqlGet, [session?.user?.id, req.query.id], (err, data) => {
 		if (err) return res.json(err)
 		console.log('api/offers/myoffers', data)
-		res.status(200).json({ method: req.method, data })
+		return res.status(200).json({ method: req.method, data })
 	})
 }

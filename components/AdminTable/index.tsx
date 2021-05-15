@@ -1,30 +1,38 @@
-import { createContext, useState } from 'react'
+import { createContext, Dispatch, SetStateAction, useState } from 'react'
 import styled from 'styled-components'
 import BottomSection from './BottomSection'
 import Table from './Table'
 import TopSection from './TopSection'
-type TableContextType = {
+
+export type TableContextType = {
 	recordsToShow: number
 	indexOfFirstRecord: number
 	indexOfLastRecord: number
 	sortKey: string
 	sortAscending: boolean
-	setSortAscending
-	handleColumnHeaderClick: Function
+	setSortAscending: Dispatch<SetStateAction<boolean>>
+	handleColumnHeaderClick: (key: string) => void
 	search: string
-	setSearch
-	data
-	handleFilterChange
+	setSearch: Dispatch<SetStateAction<string>>
+	data: any[]
+	handleFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	currentPage: number
-	currentRecords: Array<any>
+	currentRecords: any[]
 	recordsPerPage: number
-	setRecordsPerPage
-	setCurrentPage
+	setRecordsPerPage: Dispatch<SetStateAction<number>>
+	setCurrentPage: Dispatch<SetStateAction<number>>
 	uniqueKey: string
 	deleteRecord?: Function
 	editRecord?: Function
 }
-export const TableContext = createContext<Partial<TableContextType>>({})
+export const TableContext = createContext<TableContextType>(
+	{} as TableContextType
+)
+
+const TableWrapper = styled.section`
+	width: 100%;
+	margin: auto;
+`
 
 const AdminTable = ({
 	data,
@@ -33,8 +41,8 @@ const AdminTable = ({
 	deleteRecord,
 	editRecord,
 }: {
-	data: Array<any>
-	headers: Array<string>
+	data: any[]
+	headers: string[]
 	uniqueKey: string
 	deleteRecord?: Function
 	editRecord?: Function
@@ -45,24 +53,23 @@ const AdminTable = ({
 
 	const handleColumnHeaderClick = (key: string) => {
 		if (key === sortKey) {
-			setSortAscending((prevDirection) => !prevDirection)
+			setSortAscending(prevDirection => !prevDirection)
 		} else {
 			setSortAscending(true)
 		}
 		setSortKey(key)
 	}
 
-	// filtering
+	// filtering + pagination
+	const [currentPage, setCurrentPage] = useState(1)
 	const [search, setSearch] = useState('')
 
-	const handleFilterChange = (e) => {
+	const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value || ''
 		setSearch(value)
 		setCurrentPage(1)
 	}
 
-	// pagination
-	const [currentPage, setCurrentPage] = useState(1)
 	const [recordsPerPage, setRecordsPerPage] = useState(10)
 	const indexOfLastRecord = currentPage * recordsPerPage
 	const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
@@ -100,8 +107,8 @@ const AdminTable = ({
 	)
 }
 
-const TableWrapper = styled.section`
-	width: 100%;
-	margin: auto;
-`
+AdminTable.defaultProps = {
+	deleteRecord: () => {},
+	editRecord: () => {},
+}
 export default AdminTable

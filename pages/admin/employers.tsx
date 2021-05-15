@@ -11,13 +11,13 @@ import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
 const EmployerList = () => {
 	const router = useRouter()
 	const [session, loading] = useSession()
-	const { data, error, dataLoading } = useApi(
+	const { data, error, loading: dataLoading } = useApi(
 		session ? '/api/admin/employers' : null
 	)
 	const { refresh } = useRefreshPage(data, router)
 
 	const deleteRecord = async (id: string) => {
-		await del('/api/admin/employers/' + id)
+		await del(`/api/admin/employers/${id}`)
 		refresh()
 	}
 

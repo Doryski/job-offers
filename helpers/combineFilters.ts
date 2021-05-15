@@ -1,7 +1,7 @@
 import { Filter } from '@/types'
 
-export default function combine(filters: Filter[]) {
-	return filters.reduce((acc, { param, operation }) => {
+export default function combine(filters: Filter[]): boolean {
+	return filters.reduce<boolean>((acc, { param, operation }) => {
 		if (param) {
 			acc = acc && operation
 		}

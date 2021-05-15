@@ -2,19 +2,6 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import styled from 'styled-components'
 import { ICON_SIZE } from '@/helpers/utils'
 
-const ExpandMoreIcon = ({
-	isOpen,
-	primary,
-	active,
-}: {
-	isOpen: boolean
-	primary: boolean
-	active: boolean
-}) => {
-	return (
-		<StyledExpandMoreIcon primary={primary} active={active} isOpen={isOpen} />
-	)
-}
 export const StyledExpandMoreIcon = styled(
 	({
 		active,
@@ -39,4 +26,15 @@ export const StyledExpandMoreIcon = styled(
 			? theme.colors.white
 			: theme.colors.text};
 `
+
+const ExpandMoreIcon = ({
+	isOpen,
+	primary,
+	active,
+}: {
+	isOpen: boolean
+	primary: boolean
+	active: boolean
+}) => <StyledExpandMoreIcon primary={primary} active={active} isOpen={isOpen} />
+
 export default ExpandMoreIcon

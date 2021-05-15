@@ -3,21 +3,6 @@ import Typography from '@/components/shared/Typography'
 
 const sideBarItems = ['There', 'will', 'be', 'some', 'menu', 'list']
 
-const SidebarList = () => {
-	return (
-		<List>
-			{sideBarItems.map((item) => (
-				<ListItem key={item}>
-					{/* <IconWrapper>{item.icon}</IconWrapper> */}
-					<TitleWrapper>
-						<Typography fWeight={400}>{item}</Typography>
-					</TitleWrapper>
-				</ListItem>
-			))}
-		</List>
-	)
-}
-
 export const List = styled.ul`
 	width: 100%;
 	padding-bottom: 0.625em;
@@ -42,5 +27,18 @@ export const IconWrapper = styled.div`
 export const TitleWrapper = styled.div`
 	margin: auto 0 auto 2em;
 `
+
+const SidebarList = () => (
+	<List>
+		{sideBarItems.map(item => (
+			<ListItem key={item}>
+				{/* <IconWrapper>{item.icon}</IconWrapper> */}
+				<TitleWrapper>
+					<Typography fWeight={400}>{item}</Typography>
+				</TitleWrapper>
+			</ListItem>
+		))}
+	</List>
+)
 
 export default SidebarList

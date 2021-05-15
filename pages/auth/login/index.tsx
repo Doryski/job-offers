@@ -7,12 +7,27 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
 import Center from '@/components/shared/Center'
+import inputProps from '@/helpers/inputProps'
 import styled from 'styled-components'
+import devlog from '@/debug/devlog'
 import { FormWrapper } from '../signup'
+
+export const HomepageLink = styled.a`
+	text-decoration: underline;
+	&:hover {
+		text-decoration: none;
+	}
+`
 
 const Login = () => {
 	const router = useRouter()
-	const { register, handleSubmit, errors, reset, setError } = useForm()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+		setError,
+	} = useForm()
 	const [session] = useSession()
 	const [firstLogIn, setFirstLogIn] = useState(false)
 	const [isLoggingIn, setIsLoggingIn] = useState(false)
@@ -25,16 +40,19 @@ const Login = () => {
 			})
 		}
 	}, [router.query])
+
 	const onSubmit = handleSubmit(async data => {
+		devlog('ran1')
 		setFirstLogIn(true)
+		devlog('ran2')
 		setIsLoggingIn(true)
+		devlog('ran3')
 		reset()
 		await signIn('credentials', {
 			...data,
 			redirect: false,
 		})
 		router.push('/user/profile')
-		return
 	})
 
 	if (session && !firstLogIn) {
@@ -51,24 +69,16 @@ const Login = () => {
 		return <Center height='100vh'>Logging in...</Center>
 	}
 
+	const formProps = { register, errors }
+
 	return (
 		<FormWrapper>
 			<form onSubmit={onSubmit}>
-				<InputComponent
-					type='email'
-					name='email'
-					label='Email'
-					register={register}
-					required
-					errors={errors}
-				/>
+				<InputComponent type='email' {...inputProps('Email')} {...formProps} />
 				<InputComponent
 					type='password'
-					name='password'
-					label='Password'
-					register={register}
-					required
-					errors={errors}
+					{...inputProps('Password')}
+					{...formProps}
 				/>
 				<ApplyButtonWrapper justify='space-between'>
 					<Link href='/'>
@@ -87,10 +97,4 @@ const Login = () => {
 	)
 }
 
-export const HomepageLink = styled.a`
-	text-decoration: underline;
-	&:hover {
-		text-decoration: none;
-	}
-`
 export default Login

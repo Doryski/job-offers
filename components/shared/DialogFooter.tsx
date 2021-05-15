@@ -1,31 +1,9 @@
-import CustomButton from './CustomButton'
 import styled from 'styled-components'
+import CustomButton from './CustomButton'
 
 type DialogFooterProps = {
 	handleReset: (e: any) => void
 	handleApplyFilter: (e: any) => void
-}
-
-const DialogFooter = ({
-	handleReset,
-	handleApplyFilter,
-}: DialogFooterProps) => {
-	return (
-		<BottomWrapper>
-			<a onClick={handleReset}>
-				<CustomButton padding='0.5em 1.875em'>Clear filters</CustomButton>
-			</a>
-			<a onClick={handleApplyFilter}>
-				<CustomButton
-					padding='0.5em 1.125em'
-					primary
-					fWeight={600}
-					margin='0 0.625em'>
-					Show offers
-				</CustomButton>
-			</a>
-		</BottomWrapper>
-	)
 }
 
 export const BottomWrapper = styled.div`
@@ -34,5 +12,25 @@ export const BottomWrapper = styled.div`
 	justify-content: space-between;
 	border-top: 1px solid ${({ theme }) => theme.colors.divider};
 `
+
+const DialogFooter = ({
+	handleReset,
+	handleApplyFilter,
+}: DialogFooterProps) => (
+	<BottomWrapper>
+		<button type='button' onClick={handleReset}>
+			<CustomButton padding='0.5em 1.875em'>Clear filters</CustomButton>
+		</button>
+		<button type='button' onClick={handleApplyFilter}>
+			<CustomButton
+				padding='0.5em 1.125em'
+				primary
+				fWeight={600}
+				margin='0 0.625em'>
+				Show offers
+			</CustomButton>
+		</button>
+	</BottomWrapper>
+)
 
 export default DialogFooter

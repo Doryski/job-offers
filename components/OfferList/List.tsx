@@ -7,6 +7,19 @@ import { OfferPageDataType } from '@/types'
 import Center from '@/components/shared/Center'
 import OfferCard from '../OfferCard'
 
+export const ListContainer = styled.section`
+	display: flex;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	flex-direction: column;
+	margin-right: 0.5em;
+
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+		padding: 0;
+	}
+`
+
 const List = ({
 	data,
 	setCurrentOffer,
@@ -29,31 +42,17 @@ const List = ({
 
 	return (
 		<ListContainer>
-			{sortedOffers.map((offerInfo, index) => {
-				return (
-					<OfferCard
-						index={index}
-						setCurrentOffer={setCurrentOffer}
-						setShowFilters={setShowFilters}
-						key={offerInfo.offerId}
-						offerInfo={offerInfo}
-					/>
-				)
-			})}
+			{sortedOffers.map((offerInfo, index) => (
+				<OfferCard
+					index={index}
+					setCurrentOffer={setCurrentOffer}
+					setShowFilters={setShowFilters}
+					key={offerInfo.offerId}
+					offerInfo={offerInfo}
+				/>
+			))}
 		</ListContainer>
 	)
 }
-export const ListContainer = styled.section`
-	display: flex;
-	height: 100%;
-	overflow-y: auto;
-	overflow-x: hidden;
-	flex-direction: column;
-	margin-right: 0.5em;
-
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		padding: 0;
-	}
-`
 
 export default List

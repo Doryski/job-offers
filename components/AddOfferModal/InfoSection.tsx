@@ -1,79 +1,73 @@
 import React, { useContext } from 'react'
-import _ from 'lodash'
-import InputComponent from './CustomInput'
-import SelectComponent from './CustomSelect'
-import { Wrapper, InputsContainer } from './StyledForm'
 import {
 	EXP_LVL_OPTIONS,
 	EMP_TYPE_OPTIONS,
 	TECHNOLOGIES,
 } from '@/helpers/utils'
+import inputProps from '@/helpers/inputProps'
+import InputComponent from './CustomInput'
+import SelectComponent from './CustomSelect'
+import { Wrapper, InputsContainer } from './StyledForm'
 import { AddOfferContext } from './AddOfferContext'
 
 const InfoSection = () => {
 	const { register, errors } = useContext(AddOfferContext)
+	const formProps = { register, errors }
 	const SALARY_STEP = 100
+	function mapOptions(option: string) {
+		return (
+			<option key={option} value={option}>
+				{option}
+			</option>
+		)
+	}
 
 	return (
 		<InputsContainer>
 			<SelectComponent
-				name='tech'
-				label='Technology'
-				register={register}
-				required
-				errors={errors}
-				options={{ array: TECHNOLOGIES }}
+				options={{ array: TECHNOLOGIES, fn: mapOptions }}
+				{...inputProps('Technology', 'tech')}
+				{...formProps}
 			/>
 
 			<InputComponent
 				type='text'
-				name='title'
-				label='Offer title'
-				register={register}
-				required
-				errors={errors}
+				{...inputProps('Offer title', 'title')}
+				{...formProps}
 			/>
 
 			<Wrapper>
 				<InputComponent
 					type='number'
-					name='salaryFrom'
-					label='Salary from'
-					register={register}
-					required
-					errors={errors}
 					step={SALARY_STEP}
+					{...inputProps('Salary from')}
+					{...formProps}
 				/>
 				<InputComponent
 					type='number'
-					name='salaryTo'
-					label='Salary to'
-					register={register}
-					required
-					errors={errors}
 					step={SALARY_STEP}
+					{...inputProps('Salary to')}
+					{...formProps}
 				/>
 			</Wrapper>
 
 			<Wrapper>
 				<SelectComponent
-					name='empType'
-					label='Employment type'
-					register={register}
-					required
-					errors={errors}
-					options={{ array: EMP_TYPE_OPTIONS }}
+					options={{
+						array: EMP_TYPE_OPTIONS,
+						fn: mapOptions,
+					}}
+					{...inputProps('Employment type', 'empType')}
+					{...formProps}
 				/>
 
 				<SelectComponent
-					name='expLvl'
-					label='Experience'
-					register={register}
-					required
-					errors={errors}
 					options={{
-						array: EXP_LVL_OPTIONS.map((lvl) => _.capitalize(lvl)),
+						array: EXP_LVL_OPTIONS.map(lvl => lvl.myCapitalizeFirstLetter()),
+						fn: mapOptions,
 					}}
+					{...inputProps('Experience', 'expLvl')}
+					{...formProps}
 				/>
 			</Wrapper>
 		</InputsContainer>

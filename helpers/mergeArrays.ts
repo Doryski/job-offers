@@ -1,8 +1,8 @@
-export default function mergeArrays(
-	prevArr: Array<any>,
-	newArr: Array<any>,
-	by: string
-): Array<any> {
+export default function mergeArrays<
+	PrevArrType,
+	NewArrType extends PrevArrType,
+	KeyType extends keyof PrevArrType
+>(prevArr: PrevArrType[], newArr: NewArrType[], by: KeyType): PrevArrType[] {
 	return prevArr
 		.filter(prevEl => !newArr.find(newEl => prevEl[by] === newEl[by]))
 		.concat(newArr)

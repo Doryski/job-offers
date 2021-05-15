@@ -3,6 +3,16 @@ import styled from 'styled-components'
 import { TableContext } from '.'
 import Pagination from './Pagination'
 
+const Wrapper = styled.section`
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
+
+	@media only screen and (max-width: 690px) {
+		flex-direction: column;
+		text-align: center;
+	}
+`
 const BottomSection = () => {
 	const { recordsToShow, indexOfFirstRecord, indexOfLastRecord } = useContext(
 		TableContext
@@ -24,15 +34,5 @@ const BottomSection = () => {
 		</Wrapper>
 	)
 }
-const Wrapper = styled.section`
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 1em;
-
-	@media only screen and (max-width: 690px) {
-		flex-direction: column;
-		text-align: center;
-	}
-`
 
 export default BottomSection

@@ -1,4 +1,4 @@
-export type ApplicantType = {
+export type ApplicantType = Readonly<{
 	uuid: string
 	name: string
 	email: string
@@ -7,8 +7,8 @@ export type ApplicantType = {
 	processInFuture: boolean
 	employerId: string
 	offerId: string
-}
-export type EmployerType = {
+}>
+export type EmployerType = Readonly<{
 	uuid: string
 	email: string
 	companyName: string
@@ -17,9 +17,9 @@ export type EmployerType = {
 	city: string
 	dateAdded: number
 	offerId: string
-}
+}>
 
-export type OfferPageDataType = {
+export type OfferPageDataType = Readonly<{
 	offerId: OfferType['uuid']
 	title: OfferType['title']
 	tech: OfferType['tech']
@@ -35,8 +35,8 @@ export type OfferPageDataType = {
 	companySize: EmployerType['companySize']
 	street: EmployerType['street']
 	city: EmployerType['city']
-}
-export type OfferType = {
+}>
+export type OfferType = Readonly<{
 	uuid: string
 	title: string
 	tech: string
@@ -48,7 +48,7 @@ export type OfferType = {
 	dateAdded: string
 	description: string
 	employerId: string
-}
+}>
 export type ParamsType = {
 	location?: string
 	tech?: string
@@ -65,3 +65,16 @@ export type Query = {
 export type Filter = { param: string | number; operation: boolean }
 
 export type SliderType = [number, number]
+
+export type FormErrors = Record<string, any>
+
+export type AbsolutePosType = {
+	left?: string
+	top?: string
+	right?: string
+	bottom?: string
+}
+export type Credentials = Readonly<{
+	email: string
+	password: string
+}>

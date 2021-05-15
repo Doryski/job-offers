@@ -1,19 +1,14 @@
 import styled from 'styled-components'
 import Typography from './Typography'
 
-const InfoLabel = ({ label }) => {
-	return (
-		<Container>
-			<IconWrapper>{label.icon}</IconWrapper>
-			<Typography color='title' fontSize='large' fWeight={400}>
-				{label.value}
-			</Typography>
-			<Typography color='span' fontSize='sm' fWeight={400} margin='0.1875em 0'>
-				{label.feature}
-			</Typography>
-		</Container>
-	)
+type InfoLabelProps = {
+	label: {
+		icon: JSX.Element
+		value: string | number
+		feature: string
+	}
 }
+
 export const Container = styled.div`
 	align-items: center;
 	background: ${({ theme }) => theme.colors.white};
@@ -45,4 +40,17 @@ export const IconWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.white};
 	padding: 0.5em;
 `
+
+const InfoLabel = ({ label }: InfoLabelProps) => (
+	<Container>
+		<IconWrapper>{label.icon}</IconWrapper>
+		<Typography color='title' fontSize='large' fWeight={400}>
+			{label.value}
+		</Typography>
+		<Typography color='span' fontSize='sm' fWeight={400} margin='0.1875em 0'>
+			{label.feature}
+		</Typography>
+	</Container>
+)
+
 export default InfoLabel

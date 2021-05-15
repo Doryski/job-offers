@@ -8,38 +8,6 @@ import { useRouter } from 'next/router'
 import resetFilters from '@/helpers/resetFilters'
 import { ICON_SIZE } from '@/helpers/utils'
 
-const ListHeader = ({
-	showFilters,
-	setShowFilters,
-}: {
-	showFilters: boolean
-	setShowFilters: Dispatch<SetStateAction<boolean>>
-}) => {
-	const router = useRouter()
-	const { query } = router
-	const filtersCount = Object.keys(query).filter((key) => key !== 'sort').length
-
-	return (
-		<OptionsHeader>
-			<SortFiltersWrapper>
-				<InputFilter />
-				<Wrapper>
-					<SortDropdown />
-					{filtersCount > 0 && (
-						<FiltersWrapper onClick={() => resetFilters(router)}>
-							<Typography color='span'>Clear {filtersCount}</Typography>
-						</FiltersWrapper>
-					)}
-					<FiltersWrapper onClick={() => setShowFilters((prev) => !prev)}>
-						<Typography color='span'>Filters</Typography>
-						<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={showFilters} />
-					</FiltersWrapper>
-				</Wrapper>
-			</SortFiltersWrapper>
-		</OptionsHeader>
-	)
-}
-
 export const OptionsHeader = styled.div`
 	background: ${({ theme }) => theme.colors.white};
 	display: flex;
@@ -75,5 +43,37 @@ export const FiltersWrapper = styled.div`
 		margin-top: 0.1em;
 	}
 `
+
+const ListHeader = ({
+	showFilters,
+	setShowFilters,
+}: {
+	showFilters: boolean
+	setShowFilters: Dispatch<SetStateAction<boolean>>
+}) => {
+	const router = useRouter()
+	const { query } = router
+	const filtersCount = Object.keys(query).filter(key => key !== 'sort').length
+
+	return (
+		<OptionsHeader>
+			<SortFiltersWrapper>
+				<InputFilter />
+				<Wrapper>
+					<SortDropdown />
+					{filtersCount > 0 && (
+						<FiltersWrapper onClick={() => resetFilters(router)}>
+							<Typography color='span'>Clear {filtersCount}</Typography>
+						</FiltersWrapper>
+					)}
+					<FiltersWrapper onClick={() => setShowFilters(prev => !prev)}>
+						<Typography color='span'>Filters</Typography>
+						<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={showFilters} />
+					</FiltersWrapper>
+				</Wrapper>
+			</SortFiltersWrapper>
+		</OptionsHeader>
+	)
+}
 
 export default ListHeader

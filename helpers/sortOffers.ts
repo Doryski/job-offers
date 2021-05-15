@@ -1,10 +1,12 @@
+import { ParamsType } from '@/types'
 import { SORT_OPTIONS } from './utils'
-import { ParamsType, OfferPageDataType } from '@/types'
 
-export default function sortOffers(
-	data: OfferPageDataType[],
+type SortProps = { salaryFrom: number; dateAdded: string }
+
+export default function sortOffers<DataType extends SortProps>(
+	data: DataType[],
 	sortParam: ParamsType['sort']
-): OfferPageDataType[] {
+): DataType[] {
 	if (!data) return []
 	if (data.length < 2) return data
 

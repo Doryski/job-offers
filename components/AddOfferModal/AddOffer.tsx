@@ -1,7 +1,8 @@
+import dynamic from 'next/dynamic'
 import CustomButton from '@/components/shared/CustomButton'
 import useDialogHandler from '@/hooks/useDialogHandler'
 import AddOfferContextProvider from './AddOfferContext'
-import dynamic from 'next/dynamic'
+
 const AddOfferModal = dynamic(() => import('@/components/AddOfferModal'))
 
 const AddOffer = () => {

@@ -8,7 +8,7 @@ export default async function ApiAdminOffers(
 	res: NextApiResponse
 ) {
 	const session = await getSession({ req })
-	if (!session?.user.admin)
+	if (!session?.user?.admin)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 
 	if (req.method !== 'DELETE') {
@@ -17,19 +17,16 @@ export default async function ApiAdminOffers(
 			errorMessage: 'Only DELETE method is available',
 		})
 	}
-	if (req.method === 'DELETE') {
-		const sqlDelOffer = `
+	const sqlDelOffer = `
 		DELETE FROM employers 
 		WHERE uuid = ?
 		`
-		db.query(sqlDelOffer, [req.query.id], function (err, result) {
-			if (err) res.json(err)
-			console.log('del api/employers/[id]', result)
-			res.status(200).json({
-				method: req.method,
-				message: `Deleted 1 record with id of ${req.query.id}`,
-			})
+	db.query(sqlDelOffer, [req.query.id], (err, result) => {
+		if (err) res.json(err)
+		console.log('del api/employers/[id]', result)
+		return res.status(200).json({
+			method: req.method,
+			message: `Deleted 1 record with id of ${req.query.id}`,
 		})
-		return
-	}
+	})
 }

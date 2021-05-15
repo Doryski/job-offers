@@ -1,14 +1,10 @@
+import { AbsolutePosType } from '@/types'
 import styled from 'styled-components'
 
 export const DropdownList = styled.div<{
 	isOpen: boolean
 	width?: string
-	position?: {
-		top?: string
-		right?: string
-		bottom?: string
-		left?: string
-	}
+	position?: AbsolutePosType
 }>`
 	display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 	position: absolute;

@@ -1,29 +1,7 @@
-import React, { lazy } from 'react'
 import styled from 'styled-components'
-import Typography from './Typography'
 import BusinessIcon from '@material-ui/icons/Business'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
-import PeopleIcon from '@material-ui/icons/People'
-
-const CustomLabel = ({
-	label,
-	type,
-}: {
-	label: string
-	type: 'business' | 'location'
-}) => {
-	return (
-		<Wrapper>
-			<IconWrapper>
-				{type === 'business' && <BusinessIcon />}
-				{type === 'location' && <LocationOnIcon />}
-			</IconWrapper>
-			<Typography color='span' fontSize='small' fWeight={400}>
-				{label}
-			</Typography>
-		</Wrapper>
-	)
-}
+import Typography from './Typography'
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -40,4 +18,23 @@ export const IconWrapper = styled.div`
 		font-size: 0.9rem;
 	}
 `
+
+const CustomLabel = ({
+	label,
+	type,
+}: {
+	label: string
+	type: 'business' | 'location'
+}) => (
+	<Wrapper>
+		<IconWrapper>
+			{type === 'business' && <BusinessIcon />}
+			{type === 'location' && <LocationOnIcon />}
+		</IconWrapper>
+		<Typography color='span' fontSize='small' fWeight={400}>
+			{label}
+		</Typography>
+	</Wrapper>
+)
+
 export default CustomLabel

@@ -1,39 +1,7 @@
 import styled from 'styled-components'
-import Typography from './Typography'
 import { TECH_LVL_OPTIONS } from '@/helpers/utils'
+import Typography from './Typography'
 
-const TechRange = ({ range, tech }: { range: number; tech: string }) => {
-	const rangeColor =
-		range < 2
-			? 'rgb(92, 207, 92)'
-			: range > 3
-			? 'rgb(240, 175, 56)'
-			: 'rgb(240, 240, 38)'
-
-	return (
-		<Container>
-			<Typography
-				color='title'
-				fWeight={600}
-				fontSize='1.1rem'
-				align='left'
-				hide>
-				{tech}
-			</Typography>
-			<RangeContainer>
-				{[...Array(range)].map((v, index) => (
-					<RangePoint key={index} color={rangeColor} />
-				))}
-				{[...Array(5 - range)].map((v, index) => (
-					<RangePoint key={index} disabled />
-				))}
-			</RangeContainer>
-			<Typography color='span' fWeight={400} align='left' margin='0'>
-				{TECH_LVL_OPTIONS[range - 1].title.toLowerCase()}
-			</Typography>
-		</Container>
-	)
-}
 export const Container = styled.div`
 	display: flex;
 	justify-content: flex-start;
@@ -61,5 +29,38 @@ export const RangePoint = styled.span<{
 	border-radius: 1px;
 	margin: 0 0.05em 0 0;
 `
+
+const TechRange = ({ range, tech }: { range: number; tech: string }) => {
+	const rangeColor =
+		range < 2
+			? 'rgb(92, 207, 92)'
+			: range > 3
+			? 'rgb(240, 175, 56)'
+			: 'rgb(240, 240, 38)'
+
+	return (
+		<Container>
+			<Typography
+				color='title'
+				fWeight={600}
+				fontSize='large'
+				align='left'
+				hide>
+				{tech}
+			</Typography>
+			<RangeContainer>
+				{[...Array(range)].map((_, index) => (
+					<RangePoint key={index} color={rangeColor} />
+				))}
+				{[...Array(5 - range)].map((_, index) => (
+					<RangePoint key={index} disabled />
+				))}
+			</RangeContainer>
+			<Typography color='span' fWeight={400} align='left' margin='0'>
+				{TECH_LVL_OPTIONS[range - 1].title.toLowerCase()}
+			</Typography>
+		</Container>
+	)
+}
 
 export default TechRange

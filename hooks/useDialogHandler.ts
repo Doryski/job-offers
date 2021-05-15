@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export default function useDialogHandler(initialState: boolean) {
-	const [isOpen, setIsOpen] = useState(initialState)
+	const [isOpen, setIsOpen] = useState<boolean>(initialState)
 
 	return {
 		open: () => setIsOpen(true),

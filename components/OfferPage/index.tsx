@@ -3,17 +3,7 @@ import OfferTechStack from '@/components/OfferPage/OfferTechStack'
 import OfferDescription from '@/components/OfferPage/OfferDescription'
 import OfferApplySection from '@/components/OfferPage/OfferApplySection'
 import styled from 'styled-components'
-
-const OfferPage = ({ offer }) => {
-	return (
-		<OfferContainer>
-			<OfferHeader offer={offer} />
-			<OfferTechStack technology={offer.technology} />
-			<OfferDescription description={offer.description} />
-			<OfferApplySection offer={offer} />
-		</OfferContainer>
-	)
-}
+import { OfferPageDataType } from '@/types'
 
 export const OfferContainer = styled.div`
 	background: ${({ theme }) => theme.colors.dark};
@@ -25,5 +15,14 @@ export const OfferContainer = styled.div`
 		padding: 0 0.1875em;
 	}
 `
+
+const OfferPage = ({ offer }: { offer: OfferPageDataType }) => (
+	<OfferContainer>
+		<OfferHeader offer={offer} />
+		<OfferTechStack technology={offer.technology} />
+		<OfferDescription description={offer.description} />
+		<OfferApplySection offer={offer} />
+	</OfferContainer>
+)
 
 export default OfferPage

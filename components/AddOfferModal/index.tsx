@@ -1,16 +1,27 @@
 import { useContext } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import DialogHeader from '@/components/shared/DialogHeader'
+import styled from 'styled-components'
+import CustomButton from '@/components/shared/CustomButton'
+import inputProps from '@/helpers/inputProps'
 import InfoSection from './InfoSection'
 import TechnologySection from './TechnologySection'
-import styled from 'styled-components'
 import { Wrapper } from './StyledForm'
-import CustomButton from '@/components/shared/CustomButton'
 import { AddOfferContext } from './AddOfferContext'
 import InputComponent from './CustomInput'
 
+export const Container = styled.div`
+	height: 100%;
+	width: 100%;
+	background: ${({ theme }) => theme.colors.white};
+	padding-bottom: 0.625em;
+`
+export const StyledCircularProgress = styled(CircularProgress)`
+	margin: 0 1.5625em;
+`
 const AddOfferModal = ({ close }: { close: VoidFunction }) => {
 	const { register, errors, loading } = useContext(AddOfferContext)
+	const formProps = { register, errors }
 
 	return (
 		<Container>
@@ -20,11 +31,8 @@ const AddOfferModal = ({ close }: { close: VoidFunction }) => {
 			<TechnologySection />
 			<InputComponent
 				type='text'
-				name='description'
-				label='Description'
-				register={register}
-				required
-				errors={errors}
+				{...inputProps('Description')}
+				{...formProps}
 			/>
 			<Wrapper>
 				<CustomButton type='submit' padding='0.5em 1.125em' primary>
@@ -38,15 +46,5 @@ const AddOfferModal = ({ close }: { close: VoidFunction }) => {
 		</Container>
 	)
 }
-
-export const Container = styled.div`
-	height: 100%;
-	width: 100%;
-	background: ${({ theme }) => theme.colors.white};
-	padding-bottom: 0.625em;
-`
-export const StyledCircularProgress = styled(CircularProgress)`
-	margin: 0 1.5625em;
-`
 
 export default AddOfferModal

@@ -41,8 +41,8 @@ export const withAuthServerSideProps = <T extends EmptyProps = EmptyProps>(
 		session: Session | null | undefined
 	) => Promise<T>,
 	options: WithAuthServerSidePropsOptions = {}
-) => {
-	return async function getMergedServerSideProps(
+) =>
+	async function getMergedServerSideProps(
 		ctx: GetServerSidePropsContext
 	): Promise<{ props: T['props'] & DefaultWithAuthServerSideProps }> {
 		console.log('trying to get the session')
@@ -79,4 +79,3 @@ export const withAuthServerSideProps = <T extends EmptyProps = EmptyProps>(
 			},
 		}
 	}
-}

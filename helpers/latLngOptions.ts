@@ -1,4 +1,4 @@
-const latLngOptions: { [key: string]: [number, number] } = {
+const latLngOptions: { [key: string]: readonly [number, number] } = {
 	bialystok: [53.132315, 23.16435],
 	bielskobiala: [49.82214, 19.056564],
 	bydgoszcz: [53.122543, 18.007561],

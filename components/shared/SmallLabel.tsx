@@ -1,23 +1,15 @@
 import styled from 'styled-components'
 
-interface SmallLabelProps {
+type SmallLabelProps = {
 	children: React.ReactNode
 	isSpan?: boolean
 	margin?: string
 	isNew?: boolean
 }
 
-const SmallLabel = ({ children, isSpan, margin, isNew }: SmallLabelProps) => (
-	<Container isNew={isNew} isSpan={isSpan} margin={margin}>
-		<Typography isNew={isNew} isSpan={isSpan}>
-			{children}
-		</Typography>
-	</Container>
-)
-
 export const Container = styled.div<SmallLabelProps>`
 	padding: 0.1875em 0.4375em;
-	margin: ${({ margin }) => margin || '0 0.125em'};
+	margin: ${({ margin }) => margin};
 	border: ${({ isSpan, theme }) =>
 		isSpan ? `1px solid ${theme.colors.divider}` : 'none'};
 	background: ${({ theme, isNew, isSpan }) =>
@@ -33,4 +25,18 @@ export const Typography = styled.span<SmallLabelProps>`
 		isNew ? 'rgb(83, 0, 108)' : theme.colors.title};
 	text-align: center;
 `
+
+const SmallLabel = ({ children, isSpan, margin, isNew }: SmallLabelProps) => (
+	<Container isNew={isNew} isSpan={isSpan} margin={margin}>
+		<Typography isNew={isNew} isSpan={isSpan}>
+			{children}
+		</Typography>
+	</Container>
+)
+SmallLabel.defaultProps = {
+	isSpan: false,
+	margin: '0 0.125em',
+	isNew: false,
+}
+
 export default SmallLabel

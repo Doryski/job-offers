@@ -1,5 +1,6 @@
 import Drawer from '@material-ui/core/Drawer'
 import SideBar from '../SideBar'
+
 type HandleCloseFunction = (
 	event: {},
 	reason: 'backdropClick' | 'escapeKeyDown'
@@ -9,7 +10,7 @@ const DrawerComponent = ({
 	handleClose,
 	isOpen,
 }: {
-	handleClose?: HandleCloseFunction
+	handleClose: HandleCloseFunction
 	isOpen: boolean
 }) => (
 	<Drawer anchor='right' open={isOpen} onClose={handleClose}>

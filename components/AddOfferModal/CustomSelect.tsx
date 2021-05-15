@@ -1,52 +1,53 @@
-import { InputWrapper, Label, StyledSelect, ErrorMessage } from './StyledForm'
+import React from 'react'
 import { FIELD_REQUIRED_ERR } from '@/helpers/utils'
+import { FormErrors } from '@/types'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { InputWrapper, Label, StyledSelect, ErrorMessage } from './StyledForm'
+
+type OptionsType<Option = any> = {
+	array: Option[] | readonly Option[]
+	fn: (option: Option) => JSX.IntrinsicElements['option']
+	defaultValue?: string | number
+}
 
 type SelectComponentProps = {
 	name: string
 	label: string
-	register: any
+	register: UseFormRegister<FieldValues>
 	required?: boolean
-	options: { array: any[]; value?: string; label?: string }
-	errors: Record<string, any>
+	options: OptionsType
+	errors: FormErrors
 }
 
-const SelectComponent = ({
+function SelectComponent({
 	name,
-	label: selectLabel,
+	label,
 	register,
 	required,
 	options,
 	errors,
-}: SelectComponentProps) => {
-	const { array, value, label } = options
+}: SelectComponentProps) {
+	const { array, fn, defaultValue } = options
 
 	return (
 		<InputWrapper>
-			<Label htmlFor={name}>{selectLabel}</Label>
+			<Label htmlFor={name}>{label}</Label>
 			<StyledSelect
-				name={name}
-				ref={register({
-					required: required ? selectLabel + FIELD_REQUIRED_ERR : false,
+				id={name}
+				{...register(name, {
+					required: required ? label + FIELD_REQUIRED_ERR : false,
 				})}>
-				<option value={undefined}></option>
-				{array.map((item) =>
-					!!value && !!label ? (
-						<option key={item[value]} value={item[value]}>
-							{item[label]}
-						</option>
-					) : (
-						<option key={item} value={item}>
-							{item}
-						</option>
-					)
-				)}
+				<option value='' disabled selected hidden aria-label='Default option'>
+					{defaultValue || `Select ${name}`}
+				</option>
+				{array.map(fn)}
 			</StyledSelect>
 
-			{errors[name]?.type && (
-				<ErrorMessage>{errors[name].message}</ErrorMessage>
-			)}
+			{errors[name]! && <ErrorMessage>{errors[name]?.message}</ErrorMessage>}
 		</InputWrapper>
 	)
 }
-
+SelectComponent.defaultProps = {
+	required: false,
+}
 export default SelectComponent

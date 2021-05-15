@@ -1,7 +1,6 @@
 export default async function fetcher(
-	url: RequestInfo,
-	init: RequestInit
+	...args: [RequestInfo, RequestInit]
 ): Promise<any> {
-	const res = await fetch(url, init)
+	const res = await fetch(...args)
 	return res.json()
 }

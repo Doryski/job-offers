@@ -1,36 +1,9 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { Search } from '@material-ui/icons'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import useSearch from '@/hooks/useSearch'
 
-const InputFilter = () => {
-	const router = useRouter()
-	const [search, setSearch] = useState('')
-	const inputRef = useRef<HTMLInputElement>(null!)
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearch(e.target.value)
-	}
-	useEffect(() => {
-		router.push(!search ? '/' : `/?search=${search}`, undefined, {
-			shallow: true,
-		})
-	}, [search])
-
-	return (
-		<InputWrapper onClick={() => inputRef?.current?.focus()}>
-			<Button>
-				<Search />
-			</Button>
-			<Input
-				ref={inputRef}
-				type='text'
-				placeholder='Search'
-				value={search}
-				onChange={handleChange}
-			/>
-		</InputWrapper>
-	)
-}
 export const Button = styled.button`
 	display: flex;
 	align-items: center;
@@ -76,4 +49,26 @@ export const Input = styled.input`
 		color: ${({ theme }) => theme.colors.span};
 	}
 `
+
+const InputFilter = () => {
+	const router = useRouter()
+	const inputRef = useRef<HTMLInputElement>(null!)
+	const { handleChange, search } = useSearch(router)
+
+	return (
+		<InputWrapper onClick={() => inputRef?.current?.focus()}>
+			<Button>
+				<Search />
+			</Button>
+			<Input
+				ref={inputRef}
+				type='text'
+				placeholder='Search'
+				value={search}
+				onChange={handleChange}
+			/>
+		</InputWrapper>
+	)
+}
+
 export default InputFilter

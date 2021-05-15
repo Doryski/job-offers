@@ -1,19 +1,18 @@
 import CustomButton from '@/components/shared/CustomButton'
 import { useRouter } from 'next/router'
-import stringFormat from '@/helpers/stringFormat'
 import createQuery from '@/helpers/createQuery'
 
 const LocationButton = ({ location }: { location: string }) => {
 	const { query, push } = useRouter()
-	const locQuery = (location: string) =>
+	const locQuery = (loc: string) =>
 		createQuery(
 			{
 				query: 'location',
-				value: stringFormat(location),
+				value: loc.myNormalize(),
 			},
 			query
 		)
-	const isLocInQuery = query.location === stringFormat(location)
+	const isLocInQuery = query.location === location.myNormalize()
 	return (
 		<CustomButton
 			handleClick={() => {
@@ -21,7 +20,7 @@ const LocationButton = ({ location }: { location: string }) => {
 					shallow: true,
 				})
 			}}
-			active={query.location && isLocInQuery}
+			active={!!query.location && isLocInQuery}
 			padding='0.5em 1.875em'
 			margin='.25em .5em .25em 0'
 			fWeight={query.location && isLocInQuery ? 600 : 400}>

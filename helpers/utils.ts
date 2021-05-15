@@ -3,14 +3,21 @@ export const FIELD_REQUIRED_ERR = ' is a required field.'
 export const VAL_TOO_BIG_ERR = 'Value is too big.'
 export const VAL_IS_ZERO_ERR = 'Value should be more than 0.'
 export const MAX_SLIDER_VALUE = 50000
-export const EMP_TYPE_OPTIONS = ['B2B', 'UoP', 'UZ', 'UoD']
-export const EXP_LVL_OPTIONS = ['Junior', 'Mid', 'Senior']
-export const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+export const EMP_TYPE_OPTIONS = ['B2B', 'UoP', 'UZ', 'UoD'] as const
+export const EXP_LVL_OPTIONS = ['Junior', 'Mid', 'Senior'] as const
+export const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
 export const UNAUTHORIZED_ERROR =
 	'You need to be signed in to have access to this data.'
 export const ICON_SIZE = 'small'
-export const FILTER_NAMES = ['location', 'expLvl', 'from', 'to', 'tech']
+export const FILTER_NAMES = [
+	'search',
+	'location',
+	'expLvl',
+	'from',
+	'to',
+	'tech',
+] as const
 export const isClient = typeof window !== 'undefined'
 
 export const LOCATIONS = [
@@ -30,9 +37,9 @@ export const LOCATIONS = [
 	'Rzeszów',
 	'Szczecin',
 	'Others',
-]
+] as const
 
-export const NAV_LINKS = [{ title: 'Offers', path: '/' }]
+export const NAV_LINKS = [{ title: 'Offers', path: '/' }] as const
 
 export const SORT_OPTIONS = [
 	{
@@ -47,7 +54,7 @@ export const SORT_OPTIONS = [
 		id: '',
 		name: 'latest',
 	},
-]
+] as const
 
 export const TECH_LVL_OPTIONS = [
 	{ id: 1, title: 'Nice to have' },
@@ -55,7 +62,7 @@ export const TECH_LVL_OPTIONS = [
 	{ id: 3, title: 'Regular' },
 	{ id: 4, title: 'Advanced' },
 	{ id: 5, title: 'Expert' },
-]
+] as const
 
 export const TECHNOLOGIES = [
 	'JS',
@@ -78,4 +85,4 @@ export const TECHNOLOGIES = [
 	'Go',
 	'Support',
 	'Other',
-]
+] as const

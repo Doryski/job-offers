@@ -1,14 +1,31 @@
 import React, { useContext } from 'react'
-import TableRow from './TableRow'
-import { TableContext } from '.'
 import styled from 'styled-components'
-import TableHead from './TableHead'
 import { CheveronUp, CheveronDown } from '@styled-icons/zondicons'
+import TableHead from './TableHead'
+import TableRow from './TableRow'
+import { TableContext, TableContextType } from '.'
 import TableSortMobile from './TableSortMobile'
 
-const Table = ({ headers, uniqueKey }) => {
-	const { currentRecords, sortAscending } = useContext(TableContext)
-	// show cheveron depending on sort direction
+type TableProps = {
+	headers: string[]
+	uniqueKey: string
+}
+
+const StyledTable = styled.table`
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+	overflow-x: auto;
+	margin: 1em 0;
+	border: 1px solid #dcdcdc;
+	overflow-x: auto;
+`
+
+const Table = ({ headers, uniqueKey }: TableProps) => {
+	const { currentRecords, sortAscending } = useContext<TableContextType>(
+		TableContext
+	)
+
 	const cheveron = sortAscending ? (
 		<CheveronUp size='20' />
 	) : (
@@ -20,7 +37,7 @@ const Table = ({ headers, uniqueKey }) => {
 			<TableSortMobile headers={headers} />
 			<TableHead cheveron={cheveron} headers={headers} />
 			<tbody>
-				{currentRecords.map((row) => (
+				{currentRecords.map(row => (
 					<TableRow
 						key={row[uniqueKey]}
 						row={row}
@@ -32,14 +49,5 @@ const Table = ({ headers, uniqueKey }) => {
 		</StyledTable>
 	)
 }
-const StyledTable = styled.table`
-	width: 100%;
-	text-align: left;
-	border-collapse: collapse;
-	overflow-x: auto;
-	margin: 1em 0;
-	border: 1px solid #dcdcdc;
-	overflow-x: auto;
-`
 
 export default Table

@@ -1,4 +1,5 @@
-export default function devlog(...args: any) {
-	if (process.env.NODE_ENV !== 'development') return
-	return console.log(...args)
+export default function devlog(...args: any[]): void {
+	if (process.env.NODE_ENV === 'development') {
+		console.log(...args)
+	}
 }

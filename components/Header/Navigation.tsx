@@ -5,6 +5,16 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 
+export const NavList = styled.ul`
+	display: flex;
+	justify-content: flex-end;
+	flex: 1 1 0%;
+`
+export const NavItem = styled.li`
+	display: block;
+	cursor: pointer;
+`
+
 const Navigation = () => {
 	const router = useRouter()
 	const isActive = (
@@ -17,7 +27,7 @@ const Navigation = () => {
 
 	return (
 		<NavList>
-			{session?.user.admin && (
+			{session?.user?.admin && (
 				<Link href='/admin'>
 					<a>
 						<NavItem>
@@ -33,38 +43,26 @@ const Navigation = () => {
 					</a>
 				</Link>
 			)}
-			{NAV_LINKS.map(({ title, path }) => {
-				return (
-					<Link href={path} key={title}>
-						<a>
-							<NavItem>
-								<Typography
-									fWeight={600}
-									color={isActive(path, router.pathname) ? 'primary' : 'span'}
-									margin='0 0.375em'
-									minWidth='64px'
-									hoverColor={
-										isActive(path, router.pathname) ? 'none' : 'primaryLight'
-									}>
-									{title}
-								</Typography>
-							</NavItem>
-						</a>
-					</Link>
-				)
-			})}
+			{NAV_LINKS.map(({ title, path }) => (
+				<Link href={path} key={title}>
+					<a>
+						<NavItem>
+							<Typography
+								fWeight={600}
+								color={isActive(path, router.pathname) ? 'primary' : 'span'}
+								margin='0 0.375em'
+								minWidth='64px'
+								hoverColor={
+									isActive(path, router.pathname) ? 'none' : 'primaryLight'
+								}>
+								{title}
+							</Typography>
+						</NavItem>
+					</a>
+				</Link>
+			))}
 		</NavList>
 	)
 }
-
-export const NavList = styled.ul`
-	display: flex;
-	justify-content: flex-end;
-	flex: 1 1 0%;
-`
-export const NavItem = styled.li`
-	display: block;
-	cursor: pointer;
-`
 
 export default Navigation

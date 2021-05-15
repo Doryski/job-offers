@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 type TypographyProps = {
-	fWeight?: number
+	fWeight?: keyof DefaultTheme['fontWeight']
 	family?: string
-	fontSize?: string
+	fontSize?: keyof DefaultTheme['fontSize']
 	hide?: boolean
-	color?: string
+	color?: keyof DefaultTheme['colors']
 	hoverColor?: string
 }
 
@@ -28,7 +28,7 @@ export const Wrapper = styled.h4<WrapperProps>`
 	`}
 `
 const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
-	as: !!as ? as : 'span',
+	as: as || 'span',
 }))`
 	${({
 		fWeight,
@@ -39,11 +39,11 @@ const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 		hoverColor,
 	}: TypographyProps) => css`
 		font-weight: ${({ theme }) =>
-			theme.fontWeight[fWeight] || theme.fontWeight[600]};
+			theme.fontWeight[fWeight!] || theme.fontWeight[600]};
 		font-family: ${family || "'Open Sans', sans-serif"};
 		font-size: ${({ theme }) =>
-			fontSize in theme.fontSize
-				? theme.fontSize[fontSize]
+			fontSize! in theme.fontSize
+				? theme.fontSize[fontSize!]
 				: fontSize || theme.fontSize.md};
 		transition: color 0.3s;
 		${
@@ -53,7 +53,7 @@ const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 		text-overflow: ellipsis;
 		`
 		}
-		color: ${({ theme }) => theme.colors[color] || theme.colors.title}};
+		color: ${({ theme }) => theme.colors[color!] || theme.colors.title}};
 		&:hover {
 			color: ${({ theme }) =>
 				hoverColor === 'primaryLight' ? theme.colors.primaryLight : hoverColor};

@@ -1,12 +1,13 @@
 import Center from '@/components/shared/Center'
 import { useRouter } from 'next/router'
 import useRedirect from '@/hooks/useRedirect'
+import usePrefetch from '@/hooks/usePrefetch'
 
 const NotFound = () => {
 	const router = useRouter()
-	const { isRedirecting, countdown } = useRedirect(3, router, {
-		prefetch: true,
-	})
+	const { isRedirecting, countdown } = useRedirect(router, 3)
+	usePrefetch('/', router)
+
 	return (
 		<Center height='100vh' direction='column'>
 			<h2>Oops...</h2>

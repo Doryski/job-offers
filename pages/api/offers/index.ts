@@ -42,7 +42,7 @@ export default async function ApiOffers(
 		} = req.body
 		const values = [
 			[
-				session.user.id,
+				session?.user?.id,
 				tech,
 				title,
 				empType,
@@ -55,18 +55,17 @@ export default async function ApiOffers(
 				moment().format('x'),
 			],
 		]
-		db.query(sqlAddOffer, [values], function (err, result) {
+		return db.query(sqlAddOffer, [values], (err, result) => {
 			if (err) return res.json(err)
 			console.log('post api/offers:', result)
-			res.json({
+			return res.json({
 				method: req.method,
 				message: 'Offer was added successfully!',
 				data: req.body,
 			})
 		})
-		return
 	}
-	if (!session.user.admin)
+	if (!session?.user?.admin)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 
 	const sqlGet = `
@@ -76,7 +75,7 @@ export default async function ApiOffers(
 		FROM offers
     `
 
-	db.query(sqlGet, function (err, data) {
+	db.query(sqlGet, (err, data) => {
 		if (err) return res.json(err)
 		console.log('get api/offers', data)
 		return res.json({ method: req.method, data })

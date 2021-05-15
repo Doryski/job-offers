@@ -1,26 +1,8 @@
 import styled from 'styled-components'
 import CloseIcon from '@material-ui/icons/Close'
+import { AbsolutePosType } from '@/types'
 
-export type AbsolutePosType = {
-	left?: string
-	top?: string
-	right?: string
-	bottom?: string
-}
-
-const CloseButton = ({
-	handleClick,
-	absolute,
-}: {
-	handleClick: VoidFunction
-	absolute?: AbsolutePosType
-}) => (
-	<Wrapper onClick={handleClick} absolute={absolute}>
-		<CloseIcon />
-	</Wrapper>
-)
-
-export const Wrapper = styled.div<{ absolute: AbsolutePosType }>`
+export const Wrapper = styled.div<{ absolute?: AbsolutePosType }>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -41,5 +23,20 @@ export const Wrapper = styled.div<{ absolute: AbsolutePosType }>`
 		background: ${({ theme }) => theme.colors.buttonBackgroundHover};
 	}
 `
+
+const CloseButton = ({
+	handleClick,
+	absolute,
+}: {
+	handleClick: VoidFunction
+	absolute?: AbsolutePosType
+}) => (
+	<Wrapper onClick={handleClick} absolute={absolute}>
+		<CloseIcon />
+	</Wrapper>
+)
+CloseButton.defaultProps = {
+	absolute: {},
+}
 
 export default CloseButton

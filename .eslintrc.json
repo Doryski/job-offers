@@ -14,17 +14,7 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
-	"extends": [
-		"airbnb",
-		"airbnb-typescript",
-		"airbnb/hooks",
-		"plugin:@typescript-eslint",
-		"plugin:jest",
-		"prettier",
-		"prettier/react",
-		"prettier/@typescript-eslint",
-		"plugin:prettier"
-	],
+	"extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
 	"plugins": ["prettier", "react", "@typescript-eslint", "jest"],
 	"globals": {
 		"Atomics": "readonly",
@@ -39,7 +29,35 @@
 		],
 		"no-unused-vars": "error",
 		"no-console": "warn",
-		"func-names": "warn",
-		"object-shorthand": "warn"
-	}
+		"func-names": ["warn", "as-needed"],
+		"object-shorthand": "warn",
+		"import/newline-after-import": "warn",
+		"import/no-cycle": "off",
+		"react/jsx-uses-react": "off",
+		"react/react-in-jsx-scope": "off",
+		"no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+		"react/jsx-props-no-spreading": "off",
+		"no-nested-ternary": "warn",
+		"react-hooks/exhaustive-deps": "warn",
+		"react/no-array-index-key": "warn",
+		"no-param-reassign": ["warn", { "props": false }],
+		"no-useless-return": "warn",
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": ["Link"],
+				"specialLink": ["hrefLeft", "hrefRight"],
+				"aspects": ["invalidHref", "preferButton"]
+			}
+		],
+		"no-extend-native": "off"
+	},
+	"ignorePatterns": [
+		"node_modules",
+		"next.config.js",
+		"dumpster",
+		"templates",
+		".vscode",
+		".next"
+	]
 }

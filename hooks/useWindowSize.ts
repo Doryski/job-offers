@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
 import { isClient } from '@/helpers/utils'
 
-export default function useWindowSize() {
+type NumOrFalse = number | false
+
+type WindowSizeType = {
+	width: NumOrFalse
+	height: NumOrFalse
+}
+
+export default function useWindowSize(): WindowSizeType {
 	const [windowSize, setWindowSize] = useState({
 		width: isClient && window.innerWidth,
 		height: isClient && window.innerHeight,

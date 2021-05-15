@@ -7,8 +7,6 @@ export default function fixObject(
 		| OkPacket
 		| OkPacket[]
 		| ResultSetHeader
-		| Object
-		| Array<any>
-): Array<any> {
+): any[] {
 	return JSON.parse(JSON.stringify(object))
 }

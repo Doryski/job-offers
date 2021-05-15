@@ -37,6 +37,7 @@ const theme = {
 		md: '800px',
 	},
 	fontSize: {
+		xxl: '1.5rem',
 		xl: '1.2rem',
 		large: '1rem',
 		md: '.875rem',
@@ -71,22 +72,19 @@ const lightModeProps = {
 		admin: 'rgb(42, 16, 16)',
 		shadow:
 			'rgba(0, 0, 0, 0.05) 0px 2px 2px 0px, rgba(0, 0, 0, 0.04) 0px 1px 5px 0px',
+		error: 'red',
 	},
 }
 
 const darkModeProps = {
 	colors: {
 		text: 'rgba(255, 255, 255, 0.8)',
-		// title: 'rgba(255, 255, 255, 0.8)',
+		title: 'rgba(255, 255, 255, 0.8)',
 		dark: 'rgb(44, 44, 44)',
-		// primary: 'rgb(63, 81, 181)',
 		darker: 'rgb(33, 33, 33)',
-		// secondary: 'rgb(33, 33, 33)',
 		divider: 'rgba(0, 0, 0, 0.12)',
 		primary: 'rgb(255, 103, 156)',
-		// lightPink: 'rgb(244, 143, 177)',
 		primaryLight: 'rgb(244, 143, 177)',
-		// opacityPink: 'rgba(240, 98, 146, 0.05)',
 		primaryOpacity: 'rgba(240, 98, 146, 0.05)',
 		buttonBackground: 'rgb(57, 57, 57)',
 		buttonBackgroundHover: 'rgba(0, 0, 0, 0.04)',
@@ -102,5 +100,6 @@ const darkModeProps = {
 
 export const darkMode = { ...theme, ...darkModeProps }
 export const lightMode = { ...theme, ...lightModeProps }
-export type ThemeType = typeof lightMode
+export type ThemeType = typeof theme & typeof lightMode
+
 export default theme

@@ -7,6 +7,50 @@ import { MAX_SLIDER_VALUE } from '@/helpers/utils'
 import { SliderType } from '@/types'
 import Typography from '@/components/shared/Typography'
 
+export const Wrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+		padding: 0.625em;
+	}
+`
+
+export const SalaryWrapper = styled.section`
+	width: 100%;
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+		padding: 0.625em;
+	}
+`
+
+export const AmountContainer = styled.div`
+	margin-top: 0.25em;
+	width: 100%;
+	display: flex;
+	align-items: center;
+`
+export const AmountWrapper = styled.section`
+	width: 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: ${({ theme }) => theme.colors.white};
+	padding: 0.375em 1em;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: ${({ theme }) => theme.colors.buttonBorder};
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+		padding: 0.3125em 0.625em;
+	}
+`
+
+export const SliderWrapper = styled.section`
+	width: 50%;
+	margin: 0 auto;
+`
+
 const SalaryFilter = () => {
 	const router = useRouter()
 	const { query } = router
@@ -22,8 +66,11 @@ const SalaryFilter = () => {
 		]
 		return createQuery(salaryData, query)
 	}
-	const handleChange = (_: React.ChangeEvent<{}>, newValues: SliderType) => {
-		router.push(createSalaryQuery(newValues), undefined, {
+	const handleChange = (
+		_: React.ChangeEvent<{}>,
+		newValues: number | number[]
+	) => {
+		router.push(createSalaryQuery(newValues as SliderType), undefined, {
 			shallow: true,
 		})
 	}
@@ -71,47 +118,4 @@ const SalaryFilter = () => {
 	)
 }
 
-export const Wrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: flex-start;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-		padding: 0.625em;
-	}
-`
-
-export const SalaryWrapper = styled.section`
-	width: 100%;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-		padding: 0.625em;
-	}
-`
-
-export const AmountContainer = styled.div`
-	margin-top: 0.25em;
-	width: 100%;
-	display: flex;
-	align-items: center;
-`
-export const AmountWrapper = styled.section`
-	width: 20%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background: ${({ theme }) => theme.colors.white};
-	padding: 0.375em 1em;
-	border-radius: 5px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: ${({ theme }) => theme.colors.buttonBorder};
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-		padding: 0.3125em 0.625em;
-	}
-`
-
-export const SliderWrapper = styled.section`
-	width: 50%;
-	margin: 0 auto;
-`
 export default SalaryFilter

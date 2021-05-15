@@ -7,8 +7,7 @@ const Center = styled.div<{
 }>`
 	display: flex;
 	flex-direction: ${({ direction }) => direction || 'row'};
-	justify-content: center;
-	align-items: center;
+	place-items: center;
 	width: ${({ width }) => width || '100%'};
 	height: ${({ height }) => height || '100%'};
 	position: relative;

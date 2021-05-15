@@ -16,7 +16,7 @@ type OfferType = {
 
 const UserOffers = () => {
 	const [session] = useSession()
-	const { data, error, dataLoading } = useApi(
+	const { data, error, loading: dataLoading } = useApi(
 		session ? `/api/offers/employer` : null
 	)
 	const offers: OfferType[] = data?.data?.map((offer: OfferType) => ({
@@ -39,22 +39,20 @@ const UserOffers = () => {
 							<ul>
 								<li>
 									<ul style={{ display: 'flex' }}>
-										{headers.map((h) => {
-											return <li key={h}>{h} |</li>
-										})}
+										{headers.map(h => (
+											<li key={h}>{h} |</li>
+										))}
 									</ul>
 								</li>
-								{offers.map((offer) => {
-									return (
-										<li key={offer.offerId}>
-											<ul>
-												<li>
-													{offer.title}, {offer.expLvl}, {offer.dateAdded}
-												</li>
-											</ul>
-										</li>
-									)
-								})}
+								{offers.map(offer => (
+									<li key={offer.offerId}>
+										<ul>
+											<li>
+												{offer.title}, {offer.expLvl}, {offer.dateAdded}
+											</li>
+										</ul>
+									</li>
+								))}
 							</ul>
 						)}
 					</>

@@ -7,10 +7,22 @@ import Center from '@/components/shared/Center'
 import CustomButton from '@/components/shared/CustomButton'
 import useApi from '@/hooks/useApi'
 
+export const SubContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: 92vh;
+`
+
+export const AccountData = styled.section`
+	display: grid;
+	grid-template-columns: repeat(2, auto);
+	width: 100%;
+`
+
 const Profile = () => {
 	const [session] = useSession()
-	const { data, error, dataLoading } = useApi(
-		session ? `/api/user/${session.user.id}` : null
+	const { data, error, loading: dataLoading } = useApi(
+		session ? `/api/user/${session?.user?.id}` : null
 	)
 	return (
 		<Layout>
@@ -19,17 +31,17 @@ const Profile = () => {
 					<Center height='90vh'>Log in to see this page.</Center>
 				) : (
 					<Center height='90vh' direction='column'>
-						Profile page of user {session?.user.email} <br />
-						{session?.user.admin && 'Welcome Admin!'}
+						Profile page of user {session?.user?.email} <br />
+						{session?.user?.admin && 'Welcome Admin!'}
 						{error && 'Failed to load data.'}
 						{dataLoading && 'Loading data...'}
-						{data && (
+						{data?.data && (
 							<>
 								<AccountData>
 									{Object.entries(data?.data).map(([key, value]) => (
 										<Fragment key={key}>
 											<h3>{key}</h3>
-											<span>{value}</span>
+											<span>{value as string}</span>
 										</Fragment>
 									))}
 								</AccountData>
@@ -46,17 +58,5 @@ const Profile = () => {
 		</Layout>
 	)
 }
-
-export const SubContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	height: 92vh;
-`
-
-export const AccountData = styled.section`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	width: 100%;
-`
 
 export default Profile

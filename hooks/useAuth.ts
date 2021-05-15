@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { NextRouter } from 'next/router'
 import useSWR from 'swr'
 
 export default function useUser({
 	redirectTo = '/',
 	redirectIfFound = false,
 	userApi,
+	router,
 }: {
 	redirectTo: string
 	redirectIfFound: string | false
 	userApi: string
+	router: NextRouter
 }) {
 	const { data: user, mutate: mutateUser } = useSWR(userApi)
 
@@ -24,7 +26,7 @@ export default function useUser({
 			// If redirectIfFound is also set, redirect if the user was found
 			(redirectIfFound && user?.isLoggedIn)
 		) {
-			useRouter().push(redirectTo)
+			router.push(redirectTo)
 		}
 	}, [user, redirectIfFound, redirectTo])
 

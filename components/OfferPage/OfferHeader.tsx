@@ -31,6 +31,37 @@ export const NoteIcon = styled(Note)`
 export const AccessTimeIcon = styled(AccessTime)`
 	color: rgb(68, 138, 255);
 `
+
+export const LabelsRow = styled.div`
+	display: flex;
+	justify-content: space-between;
+`
+
+export const HeaderContainer = styled.section`
+	position: relative;
+`
+
+export const MainInfoContainer = styled.section`
+	margin: 1em 0;
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+	justify-content: center;
+	padding: 0.3125em 1em;
+	box-shadow: ${({ theme }) => theme.colors.shadow};
+	background: ${({ theme }) => theme.colors.white};
+	border-radius: 5px;
+	display: flex;
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-top: 10.625em;
+	}
+`
+export const InfoLabelsContainer = styled.section`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+`
+
 const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 	const {
 		salaryFrom,
@@ -105,13 +136,13 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 			</MainInfoContainer>
 			<InfoLabelsContainer>
 				<LabelsRow>
-					{INFO_LABELS.top.map((label) => (
-						<InfoLabel label={label} />
+					{INFO_LABELS.top.map(label => (
+						<InfoLabel key={label.feature} label={label} />
 					))}
 				</LabelsRow>
 				<LabelsRow>
-					{INFO_LABELS.bottom.map((label) => (
-						<InfoLabel label={label} />
+					{INFO_LABELS.bottom.map(label => (
+						<InfoLabel key={label.feature} label={label} />
 					))}
 				</LabelsRow>
 			</InfoLabelsContainer>
@@ -119,33 +150,4 @@ const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
 	)
 }
 
-export const LabelsRow = styled.div`
-	display: flex;
-	justify-content: space-between;
-`
-
-export const HeaderContainer = styled.section`
-	position: relative;
-`
-
-export const MainInfoContainer = styled.section`
-	margin: 1em 0;
-	display: flex;
-	flex-direction: column;
-	align-items: space-between;
-	justify-content: center;
-	padding: 0.3125em 1em;
-	box-shadow: ${({ theme }) => theme.colors.shadow};
-	background: ${({ theme }) => theme.colors.white};
-	border-radius: 5px;
-	display: flex;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		margin-top: 10.625em;
-	}
-`
-export const InfoLabelsContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-`
 export default OfferHeader

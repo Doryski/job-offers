@@ -8,7 +8,7 @@ export default async function ApiAdminEmployers(
 	res: NextApiResponse
 ) {
 	const session = await getSession({ req })
-	if (!session?.user.admin)
+	if (!session?.user?.admin)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 
 	if (req.method !== 'GET') {
@@ -22,9 +22,9 @@ export default async function ApiAdminEmployers(
 	dateAdded, street, city, isAdmin, accountType 
 	FROM employers`
 
-	db.query(sqlGet, function (err, data) {
+	db.query(sqlGet, (err, data) => {
 		if (err) return res.json(err)
 		console.log('get api/employers', data)
-		res.status(200).json({ method: req.method, data })
+		return res.status(200).json({ method: req.method, data })
 	})
 }

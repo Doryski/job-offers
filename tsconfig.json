@@ -9,13 +9,15 @@
 			"@/pages/*": ["./pages/*"],
 			"@/theme/*": ["./theme/*"],
 			"@/types": ["./types"],
+			"@/prototypes": ["./prototypes"],
 			"@/mysqlSetup": ["./mysqlSetup"]
 		},
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
-		"strict": false,
+		"strict": true,
+		"noImplicitAny": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"esModuleInterop": true,
@@ -26,7 +28,14 @@
 		"jsx": "preserve",
 		"typeRoots": ["./node_modules/@types", "*.d.ts"]
 	},
-	"exclude": ["node_modules", ".next", "dumpster", "build", "**/*.js"],
+	"exclude": [
+		"node_modules",
+		".next",
+		"dumpster",
+		"build",
+		"**/*.js",
+		"templates"
+	],
 	"include": [
 		"next-env.d.ts",
 		"nextauth.d.ts",

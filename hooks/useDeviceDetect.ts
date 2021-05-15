@@ -2,6 +2,12 @@ import { isClient } from '@/helpers/utils'
 import { useState, useEffect, useRef } from 'react'
 import useWindowSize from './useWindowSize'
 
+type DevicesTypes = {
+	isMobile: boolean
+	isDesktop: boolean
+	isTablet: boolean
+}
+
 /**
  *
  * @param mobileBreakpoint defaults to 760
@@ -10,7 +16,7 @@ import useWindowSize from './useWindowSize'
 export default function useDeviceDetect(
 	mobileBreakpoint: number = 760,
 	desktopBreakpoint: number = 900
-) {
+): DevicesTypes {
 	const { width } = useWindowSize()
 	const isMobileWidth = width <= mobileBreakpoint
 	const isDesktopWidth = width >= desktopBreakpoint

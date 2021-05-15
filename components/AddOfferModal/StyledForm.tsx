@@ -9,7 +9,7 @@ export const InputsContainer = styled.section`
 
 export const ErrorMessage = styled.span<{ isSpan?: boolean }>`
 	color: ${({ isSpan, theme }) =>
-		isSpan ? theme.colors.span : theme.colors.primary};
+		isSpan ? theme.colors.span : theme.colors.error};
 	font-size: ${({ theme }) => theme.fontSize.small};
 	margin-left: 0.625em;
 `
@@ -41,6 +41,7 @@ export const StyledInput = styled.input<{
 		height: 25px;
 	}
 `
+
 export const StyledSelect = styled.select<{ padding?: string }>`
 	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;

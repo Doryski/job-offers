@@ -11,7 +11,7 @@ import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
 const ApplicantList = () => {
 	const router = useRouter()
 	const [session, loading] = useSession()
-	const { data, error, dataLoading } = useApi(
+	const { data, error, loading: dataLoading } = useApi(
 		session ? '/api/admin/applicants' : null
 	)
 
@@ -27,7 +27,7 @@ const ApplicantList = () => {
 	]
 
 	const deleteRecord = async (id: string) => {
-		await del('/api/admin/applicants/' + id)
+		await del(`/api/admin/applicants/${id}`)
 		refresh()
 	}
 

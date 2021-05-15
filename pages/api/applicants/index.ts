@@ -42,13 +42,12 @@ export default async function ApiApplicants(
 				moment().format('x'),
 			],
 		]
-		db.query(sql, [values], function (err, result) {
+		return db.query(sql, [values], (err, result) => {
 			if (err) return res.json(err)
 			console.log('Someone just applied:')
 			console.log('post api/applicants', result)
-			res.status(200).json({ method: req.method, data: req.body })
+			return res.status(200).json({ method: req.method, data: req.body })
 		})
-		return
 	}
 
 	const session = await getSession({ req })
@@ -66,9 +65,9 @@ export default async function ApiApplicants(
 		WHERE applicants.employerId = ?
 		`
 
-	db.query(sqlGet, function (err, data) {
+	db.query(sqlGet, (err, data) => {
 		if (err) return res.json(err)
 		console.log('get api/applicants', data)
-		res.status(200).json({ method: req.method, data })
+		return res.status(200).json({ method: req.method, data })
 	})
 }

@@ -1,17 +1,23 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import createQuery from '@/helpers/createQuery'
-import stringFormat from '@/helpers/stringFormat'
 import { EXP_LVL_OPTIONS } from '@/helpers/utils'
 import CustomButton from '@/components/shared/CustomButton'
+
+export const Wrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+`
 
 const ExpLvlFilter = () => {
 	const { query, push } = useRouter()
 	const isExpLvlInQuery = (expLvl: string) =>
-		stringFormat(expLvl) === (query.expLvl as string)
+		expLvl.myNormalize() === (query.expLvl as string)
 
 	const createExpQuery = (expLvl: string) =>
-		createQuery({ query: 'expLvl', value: stringFormat(expLvl) }, query)
+		createQuery({ query: 'expLvl', value: expLvl.myNormalize() }, query)
 
 	const handleExpLvlClick = (lvl: string) => {
 		const expQuery = createExpQuery(
@@ -33,7 +39,7 @@ const ExpLvlFilter = () => {
 				fWeight={!query.expLvl ? 600 : 400}>
 				All
 			</CustomButton>
-			{EXP_LVL_OPTIONS.map((lvl) => (
+			{EXP_LVL_OPTIONS.map(lvl => (
 				<CustomButton
 					handleClick={() => handleExpLvlClick(lvl)}
 					active={isLvlActive(lvl)}
@@ -48,10 +54,4 @@ const ExpLvlFilter = () => {
 	)
 }
 
-export const Wrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: flex-start;
-`
 export default ExpLvlFilter

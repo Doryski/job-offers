@@ -1,13 +1,42 @@
 import styled from 'styled-components'
 import AddOffer from '@/components/AddOfferModal/AddOffer'
 import CustomButton from '@/components/shared/CustomButton'
-import Navigation from './Navigation'
 import useDeviceDetect from '@/hooks/useDeviceDetect'
 import Link from 'next/link'
-import { signIn, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import { signIn, signOut, useSession } from 'next-auth/client'
+import Navigation from './Navigation'
 
-const Header = ({ admin = false }: { admin?: boolean }) => {
+export const Container = styled.header<{ admin?: boolean }>`
+	min-height: 8vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: ${({ theme, admin }) =>
+		admin ? theme.colors.admin : theme.colors.white};
+	border-bottom: 1px solid
+		${({ theme, admin }) => (admin ? theme.colors.admin : theme.colors.divider)};
+	width: 100%;
+`
+
+export const LogoWrapper = styled.div`
+	width: 120px;
+	float: left;
+	margin-left: 1.5em;
+	color: ${({ theme }) => theme.colors.title};
+	font-size: 1.25rem;
+`
+export const Wrapper = styled.nav`
+	display: flex;
+	height: 38px;
+	margin-right: 1.5em;
+	align-items: center;
+	@media (max-width: 600px) {
+		margin: 0;
+	}
+`
+
+const Header = ({ admin }: { admin: boolean }) => {
 	const { isDesktop } = useDeviceDetect(760, 1105)
 	const [session, loading] = useSession()
 	const router = useRouter()
@@ -87,34 +116,5 @@ const Header = ({ admin = false }: { admin?: boolean }) => {
 		</Container>
 	)
 }
-
-export const Container = styled.header<{ admin?: boolean }>`
-	min-height: 8vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background: ${({ theme, admin }) =>
-		admin ? theme.colors.admin : theme.colors.white};
-	border-bottom: 1px solid
-		${({ theme, admin }) => (admin ? theme.colors.admin : theme.colors.divider)};
-	width: 100%;
-`
-
-export const LogoWrapper = styled.div`
-	width: 120px;
-	float: left;
-	margin-left: 1.5em;
-	color: ${({ theme }) => theme.colors.title};
-	font-size: 1.25rem;
-`
-export const Wrapper = styled.nav`
-	display: flex;
-	height: 38px;
-	margin-right: 1.5em;
-	align-items: center;
-	@media (max-width: 600px) {
-		margin: 0;
-	}
-`
 
 export default Header

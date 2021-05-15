@@ -6,22 +6,6 @@ const ADMIN_TABLES_LINKS = [
 	{ path: '/admin/employers', title: 'Employers' },
 	{ path: '/admin/applicants', title: 'Applicants' },
 ]
-
-const LeftNav = () => {
-	return (
-		<Wrapper>
-			<nav>
-				<TableList>
-					{ADMIN_TABLES_LINKS.map(({ path, title }) => (
-						<Link href={path} key={title}>
-							<ListItem>{title}</ListItem>
-						</Link>
-					))}
-				</TableList>
-			</nav>
-		</Wrapper>
-	)
-}
 const Wrapper = styled.aside`
 	background-color: lightgray;
 `
@@ -39,5 +23,21 @@ const ListItem = styled.li`
 		background-color: gray;
 	}
 `
+
+const LeftNav = () => (
+	<Wrapper>
+		<nav>
+			<TableList>
+				{ADMIN_TABLES_LINKS.map(({ path, title }) => (
+					<Link href={path} key={title}>
+						<a>
+							<ListItem>{title}</ListItem>
+						</a>
+					</Link>
+				))}
+			</TableList>
+		</nav>
+	</Wrapper>
+)
 
 export default LeftNav
