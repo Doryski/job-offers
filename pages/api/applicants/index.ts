@@ -42,12 +42,10 @@ export default async function ApiApplicants(
 				moment().format('x'),
 			],
 		]
-		return db.query(sql, [values], (err, result) => {
-			if (err) return res.json(err)
-			console.log('Someone just applied:')
-			console.log('post api/applicants', result)
-			return res.status(200).json({ method: req.method, data: req.body })
-		})
+		const [result] = await db.promise().query(sql, [values])
+		console.log('Someone just applied:')
+		console.log('post api/applicants', result)
+		return res.status(200).json({ method: req.method, data: req.body })
 	}
 
 	const session = await getSession({ req })

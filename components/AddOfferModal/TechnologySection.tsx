@@ -14,7 +14,8 @@ export const IconsWrapper = styled.div`
 	padding: 0.3125em 0.625em;
 	border-radius: 5px;
 	display: flex;
-	place-items: center;
+	align-items: center;
+	justify-content: center;
 	width: 200px;
 	margin: auto;
 `
@@ -23,7 +24,8 @@ export const IconWrapper = styled.div`
 	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;
 	display: flex;
-	place-items: center;
+	align-items: center;
+	justify-content: center;
 	margin: 0 0.1875em;
 	width: 50%;
 	cursor: pointer;

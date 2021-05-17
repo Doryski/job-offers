@@ -171,7 +171,6 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								style={{ fontFamily: 'inherit' }}
 								error={!!errors.name}
 								id='name'
-								name='name'
 								label='Name'
 								helperText={
 									errors.name && (
@@ -182,17 +181,13 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								InputProps={{
 									startAdornment: <InputIcon Icon={PersonOutline} />,
 								}}
-								inputRef={{
-									...register('name', {
-										required: 'Name is a required field',
-									}),
-									current: null,
-								}}
+								{...register('name', {
+									required: 'Name is a required field',
+								})}
 							/>
 							<MyTextField
 								error={!!errors.email}
 								id='email'
-								name='email'
 								label='Email'
 								helperText={
 									errors.email && (
@@ -203,16 +198,13 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 								InputProps={{
 									startAdornment: <InputIcon Icon={Email} />,
 								}}
-								inputRef={{
-									...register('email', {
-										required: 'Email is a required field',
-										pattern: {
-											value: EMAIL_REGEX,
-											message: 'Email is not valid',
-										},
-									}),
-									current: null,
-								}}
+								{...register('email', {
+									required: 'Email is a required field',
+									pattern: {
+										value: EMAIL_REGEX,
+										message: 'Email is not valid',
+									},
+								})}
 							/>
 							<MyTextField
 								id='introduction'

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import AddOffer from '@/components/AddOfferModal/AddOffer'
 import CustomButton from '@/components/shared/CustomButton'
-import useDeviceDetect from '@/hooks/useDeviceDetect'
+// import useDeviceDetect from '@/hooks/useDeviceDetect'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from 'next-auth/client'
@@ -37,7 +37,7 @@ export const Wrapper = styled.nav`
 `
 
 const Header = ({ admin }: { admin: boolean }) => {
-	const { isDesktop } = useDeviceDetect(760, 1105)
+	// const { isDesktop } = useDeviceDetect(760, 1105)
 	const [session, loading] = useSession()
 	const router = useRouter()
 
@@ -65,7 +65,7 @@ const Header = ({ admin }: { admin: boolean }) => {
 					<LogoWrapper>Job offers</LogoWrapper>
 				</a>
 			</Link>
-			{isDesktop && <Navigation />}
+			<Navigation />
 			<Wrapper>
 				{!session && !loading && (
 					<>

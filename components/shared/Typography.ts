@@ -1,23 +1,20 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-type TypographyProps = {
+export type TypographyProps = {
+	display?: string
 	fWeight?: keyof DefaultTheme['fontWeight']
 	family?: string
 	fontSize?: keyof DefaultTheme['fontSize']
 	hide?: boolean
 	color?: keyof DefaultTheme['colors']
 	hoverColor?: string
-}
-
-type WrapperProps = {
-	display?: string
-	margin?: string
 	align?: string
+	margin?: string
 	padding?: string
 	minWidth?: string
 }
 
-export const Wrapper = styled.h4<WrapperProps>`
+export const Wrapper = styled.h4<TypographyProps>`
 	${({ display, margin, align, padding, minWidth }) => css`
 		display: ${display || 'block'};
 		align-items: ${display === 'flex' ? 'center' : 'initial'};
@@ -30,14 +27,7 @@ export const Wrapper = styled.h4<WrapperProps>`
 const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 	as: as || 'span',
 }))`
-	${({
-		fWeight,
-		family,
-		fontSize,
-		hide,
-		color,
-		hoverColor,
-	}: TypographyProps) => css`
+	${({ fWeight, family, fontSize, hide, color, hoverColor }) => css`
 		font-weight: ${({ theme }) =>
 			theme.fontWeight[fWeight!] || theme.fontWeight[600]};
 		font-family: ${family || "'Open Sans', sans-serif"};

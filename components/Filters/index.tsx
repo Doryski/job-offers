@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import resetFilters from '@/helpers/resetFilters'
 import { ICON_SIZE } from '@/helpers/utils'
 import CustomButton from '@/components/shared/CustomButton'
-import Typography from '@/components/shared/Typography'
+import Typography, { TypographyProps } from '@/components/shared/Typography'
 import TechFilters from '../TechFilters'
 import LocationFilters from '../LocationFilters'
 import SalaryFilter from '../SalaryFilter'
@@ -38,6 +38,15 @@ export const FiltersHeader = styled.section`
 const Filters = () => {
 	const router = useRouter()
 
+	const filterTitleProps: TypographyProps = {
+		display: 'block',
+		minWidth: '100%',
+		color: 'text',
+		fWeight: 700,
+		align: 'left',
+		margin: '1.25em 0',
+	}
+
 	return (
 		<Container>
 			<SubContainer>
@@ -57,52 +66,20 @@ const Filters = () => {
 						Clear filters
 					</CustomButton>
 				</FiltersHeader>
-				<Typography
-					display='block'
-					minWidth='100%'
-					color='text'
-					fWeight={700}
-					align='left'
-					margin='1.25em 0'>
-					Locations
-				</Typography>
+				<Typography {...filterTitleProps}>Locations</Typography>
 
 				<FilterContainer>
 					<LocationFilters />
 				</FilterContainer>
-				<Typography
-					display='block'
-					minWidth='100%'
-					color='text'
-					fWeight={700}
-					align='left'
-					margin='1.25em 0'>
-					Technology
-				</Typography>
+				<Typography {...filterTitleProps}>Technology</Typography>
 				<FilterContainer>
 					<TechFilters />
 				</FilterContainer>
-				<Typography
-					display='block'
-					minWidth='100%'
-					color='text'
-					fWeight={700}
-					align='left'
-					margin='1.25em 0'>
-					Salary
-				</Typography>
+				<Typography {...filterTitleProps}>Salary</Typography>
 				<FilterContainer>
 					<SalaryFilter />
 				</FilterContainer>
-				<Typography
-					display='block'
-					minWidth='100%'
-					color='text'
-					fWeight={700}
-					align='left'
-					margin='1.25em 0'>
-					Seniority
-				</Typography>
+				<Typography {...filterTitleProps}>Seniority</Typography>
 				<ExpLvlFilter />
 			</SubContainer>
 		</Container>

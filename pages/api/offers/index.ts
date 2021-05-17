@@ -55,14 +55,12 @@ export default async function ApiOffers(
 				moment().format('x'),
 			],
 		]
-		return db.query(sqlAddOffer, [values], (err, result) => {
-			if (err) return res.json(err)
-			console.log('post api/offers:', result)
-			return res.json({
-				method: req.method,
-				message: 'Offer was added successfully!',
-				data: req.body,
-			})
+		const [result] = await db.promise().query(sqlAddOffer, [values])
+		console.log('post api/offers:', result)
+		return res.json({
+			method: req.method,
+			message: 'Offer was added successfully!',
+			data: req.body,
 		})
 	}
 	if (!session?.user?.admin)

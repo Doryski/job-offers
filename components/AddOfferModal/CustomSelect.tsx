@@ -38,7 +38,7 @@ function SelectComponent({
 					required: required ? label + FIELD_REQUIRED_ERR : false,
 				})}>
 				<option value='' disabled selected hidden aria-label='Default option'>
-					{defaultValue || `Select ${name}`}
+					{defaultValue || `Select ${label}`}
 				</option>
 				{array.map(fn)}
 			</StyledSelect>
