@@ -61,6 +61,7 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 	}, [])
 	const listProps = { data, setCurrentOffer, setShowFilters }
 	const listHeaderProps = { showFilters, setShowFilters }
+	const isOfferSelected = Object.keys(currentOffer).length > 0
 
 	return (
 		<Layout>
@@ -72,8 +73,8 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 					</Container>
 				</ListContainer>
 				{showFilters && <Filters />}
-				{currentOffer && !showFilters && <OfferPage offer={currentOffer} />}
-				{!currentOffer && !showFilters && (
+				{isOfferSelected && !showFilters && <OfferPage offer={currentOffer} />}
+				{!isOfferSelected && !showFilters && (
 					<Center>Click on offer card to show details.</Center>
 				)}
 			</SubContainer>
