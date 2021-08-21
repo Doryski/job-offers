@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
-import { UNAUTHORIZED_ERROR } from '@/helpers/utils'
+import { UNAUTHORIZED_ERROR } from '@/utils/vars'
 import { db } from '@/mysqlSetup'
 import uuid from 'react-uuid'
 import moment from 'moment'

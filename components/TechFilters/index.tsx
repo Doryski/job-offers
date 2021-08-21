@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import CustomButton from '@/components/shared/CustomButton'
+import CustomButton from '@/shared-components/CustomButton'
 import TechList, { TechName } from './TechList'
 
 export const Container = styled.div`

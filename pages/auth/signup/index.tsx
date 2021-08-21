@@ -1,26 +1,26 @@
-import Typography from '@/components/shared/Typography'
+import Typography from '@/shared-components/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
-import CustomButton from '@/components/shared/CustomButton'
+import CustomButton from '@/shared-components/CustomButton'
 import { useForm } from 'react-hook-form'
 import {
 	ApplyButtonWrapper,
 	CheckboxWrapper,
 } from '@/components/OfferPage/OfferApplySection'
-import { LOCATIONS } from '@/helpers/utils'
+import { LOCATIONS } from '@/utils/vars'
 import useCheckbox from '@/hooks/useCheckbox'
 import { useState } from 'react'
 import styled from 'styled-components'
 import InputComponent from '@/components/AddOfferModal/CustomInput'
 import SelectComponent from '@/components/AddOfferModal/CustomSelect'
-import ClientOnly from '@/components/shared/ClientOnly'
+import ClientOnly from '@/shared-components/ClientOnly'
 import { ErrorMessage } from '@/components/AddOfferModal/StyledForm'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
-import Center from '@/components/shared/Center'
-import post from '@/helpers/post'
+import Center from '@/shared-components/Center'
+import post from 'utils/post'
 import usePrefetch from '@/hooks/usePrefetch'
-import inputProps from '@/helpers/inputProps'
+import inputProps from 'utils/inputProps'
 
 export const FormWrapper = styled.section`
 	width: 50vw;

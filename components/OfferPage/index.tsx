@@ -1,9 +1,9 @@
-import OfferHeader from '@/components/OfferPage/OfferHeader'
-import OfferTechStack from '@/components/OfferPage/OfferTechStack'
-import OfferDescription from '@/components/OfferPage/OfferDescription'
-import OfferApplySection from '@/components/OfferPage/OfferApplySection'
 import styled from 'styled-components'
 import { OfferPageDataType } from '@/types'
+import OfferHeader from './OfferHeader'
+import OfferTechStack from './OfferTechStack'
+import OfferApplySection from './OfferApplySection'
+import OfferDescription from './OfferDescription'
 
 export const OfferContainer = styled.div`
 	background: ${({ theme }) => theme.colors.dark};

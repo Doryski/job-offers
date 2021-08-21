@@ -3,9 +3,10 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/components/*": ["./components/*"],
+			"@/shared-components/*": ["./shared-components/*"],
 			"@/hooks/*": ["./hooks/*"],
 			"@/debug/*": ["./debug/*"],
-			"@/helpers/*": ["./helpers/*"],
+			"@/utils/*": ["./utils/*"],
 			"@/pages/*": ["./pages/*"],
 			"@/theme/*": ["./theme/*"],
 			"@/types": ["./types"],

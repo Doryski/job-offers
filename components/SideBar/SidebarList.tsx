@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Typography from '@/components/shared/Typography'
+import Typography from '@/shared-components/Typography'
 
 const sideBarItems = ['There', 'will', 'be', 'some', 'menu', 'list']
 

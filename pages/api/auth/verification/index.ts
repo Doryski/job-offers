@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '@/mysqlSetup'
 import { compare } from 'bcrypt'
 import { getSession } from 'next-auth/client'
-import fixObject from '@/helpers/fixObject'
+import fixObject from 'utils/fixObject'
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
 	const session = await getSession({ req })

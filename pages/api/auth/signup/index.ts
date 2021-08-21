@@ -4,7 +4,7 @@ import uuid from 'react-uuid'
 import bcrypt from 'bcrypt'
 import { getSession } from 'next-auth/client'
 import moment from 'moment'
-import fixObject from '@/helpers/fixObject'
+import fixObject from 'utils/fixObject'
 
 export default async function signup(
 	req: NextApiRequest,

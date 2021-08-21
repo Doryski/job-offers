@@ -1,4 +1,4 @@
-import { isClient } from '@/helpers/utils'
+import { isClient } from '@/utils/vars'
 import { useState, useEffect, useRef } from 'react'
 import useWindowSize from './useWindowSize'
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import getFileName from '@/helpers/getFileName'
+import getFileName from 'utils/getFileName'
 
 export default function useFileUpload(
 	inputFileRef: React.RefObject<HTMLInputElement>

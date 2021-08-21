@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import fetcher from '@/helpers/fetcher'
+import fetcher from 'utils/fetcher'
 
 export default function useApi(url: string | null) {
 	const { data, error } = useSWR(url, fetcher)

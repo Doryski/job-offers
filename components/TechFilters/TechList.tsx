@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import { TECHNOLOGIES } from '@/helpers/utils'
+import { TECHNOLOGIES } from '@/utils/vars'
 import { useRouter } from 'next/router'
-import CustomButton from '@/components/shared/CustomButton'
-import createTechQuery from '@/helpers/createTechQuery'
+import CustomButton from '@/shared-components/CustomButton'
+import createTechQuery from 'utils/createTechQuery'
 
 export const TechName = styled.span<{ all?: boolean }>`
 	font-size: 0.875rem;

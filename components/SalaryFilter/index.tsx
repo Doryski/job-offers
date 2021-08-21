@@ -1,11 +1,11 @@
 import { Slider } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import createQuery from '@/helpers/createQuery'
-import formatThous from '@/helpers/formatThous'
-import { MAX_SLIDER_VALUE } from '@/helpers/utils'
+import createQuery from 'utils/createQuery'
+import formatThous from 'utils/formatThous'
+import { MAX_SLIDER_VALUE } from '@/utils/vars'
 import { SliderType } from '@/types'
-import Typography from '@/components/shared/Typography'
+import Typography from '@/shared-components/Typography'
 
 export const Wrapper = styled.div`
 	display: flex;

@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import createQuery from '@/helpers/createQuery'
-import { EXP_LVL_OPTIONS } from '@/helpers/utils'
-import CustomButton from '@/components/shared/CustomButton'
+import createQuery from 'utils/createQuery'
+import { EXP_LVL_OPTIONS } from '@/utils/vars'
+import CustomButton from '@/shared-components/CustomButton'
 
 export const Wrapper = styled.div`
 	display: flex;

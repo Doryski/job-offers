@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { LOCATIONS } from '@/helpers/utils'
+import { LOCATIONS } from '@/utils/vars'
 import LocationButton from './LocationButton'
 
 export const Wrapper = styled.div`

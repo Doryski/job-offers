@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import AddOffer from '@/components/AddOfferModal/AddOffer'
-import CustomButton from '@/components/shared/CustomButton'
+import CustomButton from '@/shared-components/CustomButton'
 // import useDeviceDetect from '@/hooks/useDeviceDetect'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
