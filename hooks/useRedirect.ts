@@ -17,6 +17,7 @@ export default function useRedirect(
 			setIsRedirecting(true)
 			router.push(redirectUrl)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [countdown])
 
 	return { isRedirecting, countdown }

@@ -8,7 +8,9 @@ import { Container, StyledCircularProgress, Wrapper } from './styled'
 import { AddOfferContext } from './AddOfferContext'
 import InputComponent from './CustomInput'
 
-const AddOfferModal = ({ close }: { close: VoidFunction }) => {
+type AddOfferModalProps = { close: VoidFunction }
+
+const AddOfferModal = ({ close }: AddOfferModalProps) => {
 	const { register, errors, loading } = useContext(AddOfferContext)
 	const formProps = { register, errors }
 

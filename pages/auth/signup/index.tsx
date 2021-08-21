@@ -83,7 +83,7 @@ const Signup = () => {
 					{...inputProps('Company Name')}
 					{...formProps}
 				/>
-				<SelectComponent
+				<SelectComponent<string>
 					options={{
 						array: LOCATIONS,
 						fn: option => (

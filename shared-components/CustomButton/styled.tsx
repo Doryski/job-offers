@@ -20,11 +20,8 @@ const Button = styled.button<StyledButtonProps>`
 			: padding || '0.125em 0.75em'};
 	margin: ${({ margin }) => margin || '0'};
 	background: ${({ theme, active, primary }) =>
-		active
-			? theme.colors.buttonBackgroundActive
-			: primary
-			? theme.colors.primary
-			: theme.colors.buttonBackground};
+		(active && theme.colors.buttonBackgroundActive) ||
+		(primary ? theme.colors.primary : theme.colors.buttonBackground)};
 	display: flex;
 	align-items: center;
 	justify-content: ${({ icon }) => (icon ? 'space-between' : 'center')};

@@ -6,29 +6,29 @@ import { ErrorMessage } from '@/shared-components/ErrorMessage/styled'
 import { Label, InputWrapper } from '../styled'
 import { StyledSelect } from './styled'
 
-type OptionsType<Option = any> = {
-	array: Option[] | readonly Option[]
+type OptionsType<Option> = {
+	array: Option[]
 	fn: (option: Option) => JSX.IntrinsicElements['option']
 	defaultValue?: string | number
 }
 
-type SelectComponentProps = {
+type SelectComponentProps<Option> = {
 	name: string
 	label: string
 	register: UseFormRegister<FieldValues>
 	required?: boolean
-	options: OptionsType
+	options: OptionsType<Option>
 	errors: FormErrors
 }
 
-function SelectComponent({
+function SelectComponent<Option>({
 	name,
 	label,
 	register,
 	required,
 	options,
 	errors,
-}: SelectComponentProps) {
+}: SelectComponentProps<Option>) {
 	const { array, fn, defaultValue } = options
 
 	return (

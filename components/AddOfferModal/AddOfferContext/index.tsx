@@ -5,7 +5,6 @@ import moment from 'moment'
 import { FormErrors, OfferType } from '@/types'
 import Center from '@/shared-components/Center/styled'
 import CloseButton from '@/shared-components/CloseButton'
-import devlog from '@/debug/devlog'
 import post from 'utils/post'
 import { initialSubmit, reducer } from 'utils/submitReducer'
 import { FieldValues, useForm, UseFormRegister } from 'react-hook-form'
@@ -55,7 +54,6 @@ const AddOfferContextProvider = ({
 
 	const onSubmit = handleSubmit(async (data: FormData) => {
 		dispatch({ type: 'LOADING', payload: true })
-		devlog('submitted new offer: ', data)
 		const technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
 			technology.push({

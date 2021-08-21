@@ -5,7 +5,9 @@ import OfferApplySection from './OfferApplySection'
 import OfferDescription from './OfferDescription'
 import { OfferContainer } from './styled'
 
-const OfferPage = ({ offer }: { offer: OfferPageDataType }) => (
+type OfferPageProps = { offer: OfferPageDataType }
+
+const OfferPage = ({ offer }: OfferPageProps) => (
 	<OfferContainer>
 		<OfferHeader offer={offer} />
 		<OfferTechStack technology={offer.technology} />

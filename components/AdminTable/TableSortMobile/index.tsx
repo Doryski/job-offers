@@ -2,7 +2,9 @@ import React, { useContext } from 'react'
 import { TableContext, TableContextType } from '..'
 import { DirSelect, SortSelect, TableCaption } from './styled'
 
-const TableSortMobile = ({ headers }: { headers: string[] }) => {
+type TableSortMobileProps = { headers: string[] }
+
+const TableSortMobile = ({ headers }: TableSortMobileProps) => {
 	const {
 		handleColumnHeaderClick,
 		sortAscending,

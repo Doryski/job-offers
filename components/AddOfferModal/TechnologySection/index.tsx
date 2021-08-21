@@ -3,12 +3,15 @@ import { TECH_LVL_OPTIONS } from '@/utils/vars'
 import RemoveIcon from '@material-ui/icons/Remove'
 import useTechSize from '@/hooks/useTechSize'
 import AddIcon from '@material-ui/icons/Add'
+import createIteration from '@/utils/createIteration'
 import inputProps from 'utils/inputProps'
 import { Wrapper, InputsContainer } from '../styled'
 import { AddOfferContext } from '../AddOfferContext'
 import InputComponent from '../CustomInput'
 import SelectComponent from '../CustomSelect'
 import { IconsWrapper, IconWrapper } from './styled'
+
+type TechLevelOption = { id: number; title: string }
 
 const TechnologySection = () => {
 	const { register, errors } = useContext(AddOfferContext)
@@ -18,7 +21,7 @@ const TechnologySection = () => {
 
 	return (
 		<InputsContainer>
-			{[...Array(techSize)].map((_, index) => (
+			{createIteration(techSize).map(index => (
 				<Wrapper key={index}>
 					<InputComponent
 						max={35}
@@ -26,10 +29,10 @@ const TechnologySection = () => {
 						{...inputProps('Technology', `technology[${index}]`, false)}
 						{...formProps}
 					/>
-					<SelectComponent
+					<SelectComponent<TechLevelOption>
 						options={{
 							array: TECH_LVL_OPTIONS,
-							fn: ({ id, title }: { id: number; title: string }) => (
+							fn: ({ id, title }: TechLevelOption) => (
 								<option key={id} value={id}>
 									{title}
 								</option>

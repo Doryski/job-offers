@@ -2,7 +2,9 @@ import CustomButton from '@/shared-components/CustomButton'
 import { useRouter } from 'next/router'
 import createQuery from 'utils/createQuery'
 
-const LocationButton = ({ location }: { location: string }) => {
+type LocationButtonProps = { location: string }
+
+const LocationButton = ({ location }: LocationButtonProps) => {
 	const { query, push } = useRouter()
 	const locQuery = (loc: string) =>
 		createQuery(

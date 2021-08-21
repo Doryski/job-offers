@@ -1,3 +1,4 @@
+import { ButtonHTMLAttributes } from 'react'
 import { DefaultTheme } from 'styled-components'
 import { Typography } from '../Typography'
 import { Button, IconWrapper } from './styled'
@@ -13,7 +14,7 @@ type CustomButtonProps = {
 	fWeight?: keyof DefaultTheme['fontWeight']
 	minWidth?: string
 	display?: string
-	type?: 'button' | 'submit' | 'reset'
+	type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
 	icon?:
 		| {
 				icon?: JSX.Element
@@ -49,7 +50,7 @@ const CustomButton = ({
 		minWidth={minWidth}
 		type={type}>
 		<Typography
-			color={active ? 'primary' : primary ? 'white' : 'text'}
+			color={(active && 'primary') || (primary ? 'white' : 'text')}
 			fontSize={fontSize}
 			fWeight={fWeight}
 			display={display}

@@ -10,7 +10,6 @@ import { DATE_FORMAT } from '@/utils/vars'
 import moment from 'moment'
 import { db } from '@/mysqlSetup'
 import fixObject from 'utils/fixObject'
-import devlog from '@/debug/devlog'
 import Filters from '@/components/Filters'
 import dynamic from 'next/dynamic'
 import OfferList from '@/components/OfferList'
@@ -19,14 +18,16 @@ const OfferPage = dynamic(() => import('@/components/OfferPage'), {
 	loading: () => <Center>Loading...</Center>,
 })
 
-export const SubContainer = styled.div`
+const SubContainer = styled.div`
 	display: grid;
 	grid-template-columns: 50% auto;
 	height: 92vh;
 	background: ${({ theme }) => theme.colors.dark};
 `
 
-const Homepage = ({ data }: { data: OfferPageDataType[] | string }) => {
+type HomepageProps = { data: OfferPageDataType[] | string }
+
+const Homepage = ({ data }: HomepageProps) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>(
 		{} as OfferPageDataType
 	)
@@ -91,9 +92,10 @@ export const getStaticProps: GetStaticProps = async () => {
 			revalidate: 1,
 		}
 	} catch (error) {
-		devlog(error)
+		console.error(error)
 		return { props: { data: 'Failed to load.' }, revalidate: 1 }
 	}
 }
 
+export { SubContainer }
 export default Homepage

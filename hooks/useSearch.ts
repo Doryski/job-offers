@@ -11,6 +11,7 @@ export default function useSearch(router: NextRouter) {
 		router.push(!search ? '/' : `/?search=${search}`, undefined, {
 			shallow: true,
 		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [search])
 
 	useEffect(() => {

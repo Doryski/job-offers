@@ -4,15 +4,13 @@ import { StyledTableCell, StyledTableRow } from './styled'
 
 type Row = { [key: string]: any }
 
-const TableRow = ({
-	row,
-	headers,
-	uniqueKey,
-}: {
+type TableRowProps = {
 	row: Row
 	headers: string[]
 	uniqueKey: string
-}) => {
+}
+
+const TableRow = ({ row, headers, uniqueKey }: TableRowProps) => {
 	const { deleteRecord } = useContext(TableContext)
 
 	return (

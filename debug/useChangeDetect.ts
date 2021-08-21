@@ -7,6 +7,6 @@ const useChangeDetect = (value: string | number, options: Options) => {
 	const { pre, post } = options
 	useEffect(() => {
 		devlog(`${pre || ''}${value}${post || ''}`)
-	}, [value])
+	}, [post, pre, value])
 }
 export default useChangeDetect

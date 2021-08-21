@@ -46,7 +46,7 @@ const InfoSection = () => {
 			</Wrapper>
 
 			<Wrapper>
-				<SelectComponent
+				<SelectComponent<string>
 					options={{
 						array: EMP_TYPE_OPTIONS,
 						fn: mapOptions,

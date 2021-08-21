@@ -1,3 +1,4 @@
+import createIteration from '@/utils/createIteration'
 import { TECH_LVL_OPTIONS } from '@/utils/vars'
 import { Typography } from '../Typography'
 import { Container, RangeContainer, RangePoint } from './styled'
@@ -6,11 +7,8 @@ type TechRangeProps = { range: number; tech: string }
 
 const TechRange = ({ range, tech }: TechRangeProps) => {
 	const rangeColor =
-		range < 2
-			? 'rgb(92, 207, 92)'
-			: range > 3
-			? 'rgb(240, 175, 56)'
-			: 'rgb(240, 240, 38)'
+		(range < 2 && 'hsl(120, 54%, 59%)') ||
+		(range > 3 ? 'hsl(39, 86%, 58%)' : 'hsl(60, 87%, 54%)')
 
 	return (
 		<Container>
@@ -23,10 +21,10 @@ const TechRange = ({ range, tech }: TechRangeProps) => {
 				{tech}
 			</Typography>
 			<RangeContainer>
-				{[...Array(range)].map((_, index) => (
+				{createIteration(range).map(index => (
 					<RangePoint key={index} color={rangeColor} />
 				))}
-				{[...Array(5 - range)].map((_, index) => (
+				{createIteration(5 - range).map(index => (
 					<RangePoint key={index} disabled />
 				))}
 			</RangeContainer>

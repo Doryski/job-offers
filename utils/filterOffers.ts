@@ -5,7 +5,7 @@ import combine from './combineFilters'
 const includesSearch = (text: string, param: string): boolean =>
 	text.myNormalize().includes(param)
 
-export default function filterOffers(
+function filterOffers(
 	data: OfferPageDataType[],
 	query: ParsedUrlQuery
 ): OfferPageDataType[] {
@@ -34,8 +34,8 @@ export default function filterOffers(
 			String(salaryTo),
 			...technology.map(t => t.tech),
 		]
-		const searchFilter = toSearch.filter(searchElem =>
-			includesSearch(searchElem, searchParams)
+		const searchFilter = toSearch.filter(searchProp =>
+			includesSearch(searchProp, searchParams)
 		)
 		const isFoundBySearch = searchFilter.length > 0
 
@@ -57,3 +57,4 @@ export default function filterOffers(
 		return combine(filters)
 	})
 }
+export default filterOffers

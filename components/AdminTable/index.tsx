@@ -25,6 +25,14 @@ type TableContextType = {
 	deleteRecord?: Function
 	editRecord?: Function
 }
+
+type AdminTableProps = {
+	data: any[]
+	headers: string[]
+	uniqueKey: string
+	deleteRecord?: Function
+	editRecord?: Function
+}
 const TableContext = createContext<TableContextType>({} as TableContextType)
 
 const AdminTable = ({
@@ -33,13 +41,7 @@ const AdminTable = ({
 	uniqueKey,
 	deleteRecord,
 	editRecord,
-}: {
-	data: any[]
-	headers: string[]
-	uniqueKey: string
-	deleteRecord?: Function
-	editRecord?: Function
-}) => {
+}: AdminTableProps) => {
 	// sorting
 	const [sortKey, setSortKey] = useState<string>('')
 	const [sortAscending, setSortAscending] = useState<boolean>(true)

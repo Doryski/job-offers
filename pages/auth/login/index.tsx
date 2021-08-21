@@ -9,7 +9,6 @@ import { signIn, useSession } from 'next-auth/client'
 import Center from '@/shared-components/Center/styled'
 import { HomepageLink } from '@/shared-components/HomepageLink/styled'
 import inputProps from 'utils/inputProps'
-import devlog from '@/debug/devlog'
 import { FormWrapper } from '@/shared-components/FormWrapper'
 
 const Login = () => {
@@ -32,14 +31,12 @@ const Login = () => {
 				message: 'Ups, something went wrong!',
 			})
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [router.query])
 
 	const onSubmit = handleSubmit(async data => {
-		devlog('ran1')
 		setFirstLogIn(true)
-		devlog('ran2')
 		setIsLoggingIn(true)
-		devlog('ran3')
 		reset()
 		await signIn('credentials', {
 			...data,
