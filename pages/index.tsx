@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const result = await db.promise().query(sqlGet)
 		const data = fixObject(result[0])
-		console.log('get api/offers/employers: ', data)
+		console.info('get api/offers/employers: ', data)
 		if (!data) return { props: { data: 'No offers found.' }, revalidate: 1 }
 		const fixed = (data ?? []).map(
 			(el: OfferPageDataType & { technology: string }) => ({

@@ -13,6 +13,12 @@ const db = mysql.createConnection({
 		: process.env.MYSQL_LOCAL_PASSWORD,
 })
 
-db.connect(err => (err ? console.error(err) : console.log('Connected!')))
+db.connect(err =>
+	err
+		? console.error(err)
+		: console.info(
+				`Connected to the ${isEnvProd ? 'production' : 'local'} DB !`
+		  )
+)
 
 module.exports.db = db

@@ -43,8 +43,8 @@ export default async function ApiApplicants(
 			],
 		]
 		const [result] = await db.promise().query(sql, [values])
-		console.log('Someone just applied:')
-		console.log('post api/applicants', result)
+		console.info('Someone just applied:')
+		console.info('post api/applicants', result)
 		return res.status(200).json({ method: req.method, data: req.body })
 	}
 
@@ -65,7 +65,7 @@ export default async function ApiApplicants(
 
 	db.query(sqlGet, (err, data) => {
 		if (err) return res.json(err)
-		console.log('get api/applicants', data)
+		console.info('get api/applicants', data)
 		return res.status(200).json({ method: req.method, data })
 	})
 }

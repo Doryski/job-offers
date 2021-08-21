@@ -23,7 +23,7 @@ export default async function ApiMyOfferId(
 		`
 	db.query(sqlDelOffer, [req.query.id], (err, result) => {
 		if (err) res.json(err)
-		console.log('del api/offers/[id]', result)
+		console.info('del api/offers/[id]', result)
 		return res.status(200).json({
 			method: req.method,
 			message: `Deleted 1 record with id of ${req.query.id}`,

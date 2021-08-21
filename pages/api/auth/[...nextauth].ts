@@ -14,16 +14,16 @@ export const options = {
 			credentials: {},
 			// eslint-disable-next-line consistent-return
 			authorize: async (credentials: Credentials) => {
-				console.log('credentials:', credentials)
+				console.info('credentials:', credentials)
 				const { email, password } = credentials
-				console.log(`${getDomain()}/api/auth/verification`)
+				console.info(`${getDomain()}/api/auth/verification`)
 				try {
 					const user = await post(`${getDomain()}/api/auth/verification`, {
 						email,
 						password,
 					})
 
-					console.log('user checked: ', user)
+					console.info('user checked: ', user)
 					if (user.id) return await Promise.resolve({ ...user, email })
 				} catch (err) {
 					console.error(err)

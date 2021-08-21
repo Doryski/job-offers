@@ -6,7 +6,7 @@ import fixObject from 'utils/fixObject'
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
 	const session = await getSession({ req })
-	console.log('api/auth/login session:', session)
+	console.info('api/auth/login session:', session)
 	if (session) {
 		return res.status(400).json({
 			message: `You are already signed in as ${session?.user?.email}.`,
@@ -30,11 +30,11 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 	const { uuid: userId, password, isAdmin } = resultObj[0]
 
 	return compare(req.body.password, password, (err, isPasswordMatching) => {
-		if (err) return console.log(err)
-		console.log('Is password the same: ', isPasswordMatching)
+		if (err) return console.error(err)
+		console.info('Is password the same: ', isPasswordMatching)
 		if (isPasswordMatching) {
-			console.log(`User ${req.body.email} logged in`)
-			console.log('Is user admin: ', isAdmin === 1)
+			console.info(`User ${req.body.email} logged in`)
+			console.info('Is user admin: ', isAdmin === 1)
 			return res.status(200).json({
 				id: userId,
 				admin: isAdmin === 1,

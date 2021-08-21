@@ -28,7 +28,7 @@ export default async function ApiMyOffers(
 
 	db.query(sqlGet, [session?.user?.id], (err, data) => {
 		if (err) return res.json(err)
-		console.log('api/offers/employer', data)
+		console.info('api/offers/employer', data)
 		return res.status(200).json({ method: req.method, data })
 	})
 }

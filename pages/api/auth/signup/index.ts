@@ -67,8 +67,8 @@ export default async function signup(
                 `
 		const [result] = await db.promise().query(sql, [values])
 		if (result) {
-			console.log('New user was created:')
-			console.log('post api/auth/signup', result)
+			console.info('New user was created:')
+			console.info('post api/auth/signup', result)
 		}
 		return res.status(200).json({
 			method: req.method,

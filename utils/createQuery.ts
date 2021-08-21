@@ -11,12 +11,10 @@ export function reduceToQueryString(data: Query[]): string {
 			const queryInstance = `${query}=${value}`
 			if (!value) return acc
 			if (index + 1 === array.length) {
-				acc += queryInstance
-				return acc
+				return acc + queryInstance
 			}
 			if (index + 1 < array.length) {
-				acc += `${queryInstance}&`
-				return acc
+				return `${acc}${queryInstance}&`
 			}
 			return acc
 		},

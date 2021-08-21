@@ -22,7 +22,7 @@ export default async function ApiAdminApplicants(
 
 	db.query(sqlGet, (err, data) => {
 		if (err) return res.json(err)
-		console.log('get api/applicants', data)
+		console.info('get api/applicants', data)
 		return res.status(200).json({ method: req.method, data })
 	})
 }

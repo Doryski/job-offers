@@ -45,14 +45,14 @@ export const withAuthServerSideProps = <T extends EmptyProps = EmptyProps>(
 	async function getMergedServerSideProps(
 		ctx: GetServerSidePropsContext
 	): Promise<{ props: T['props'] & DefaultWithAuthServerSideProps }> {
-		console.log('trying to get the session')
+		console.info('trying to get the session')
 		let userSession: Session | null
 		try {
 			userSession = await getSession(ctx)
 		} catch {
 			userSession = null
 		}
-		console.log('retrieved session: ', userSession)
+		console.info('retrieved session: ', userSession)
 
 		if (options.authenticatedPage && !userSession) {
 			return ({

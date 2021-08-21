@@ -9,7 +9,7 @@ export default async function ApiUserData(
 	res: NextApiResponse
 ) {
 	const session = await getSession({ req })
-	console.log('session', session)
+	console.info('session', session)
 	if (!session) {
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
 	}
@@ -28,7 +28,7 @@ export default async function ApiUserData(
 		WHERE uuid = ?
 		`
 	const [result] = await db.promise().query(sqlGetUser, [req.query.id])
-	console.log(result)
+	console.info(result)
 	return res.status(200).json({
 		method: req.method,
 		data: fixObject(result)[0],

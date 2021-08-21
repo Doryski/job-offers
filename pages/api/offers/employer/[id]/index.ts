@@ -29,7 +29,7 @@ export default async function ApiMyOfferId(
 
 	db.query(sqlGet, [session?.user?.id, req.query.id], (err, data) => {
 		if (err) return res.json(err)
-		console.log('api/offers/myoffers', data)
+		console.info('api/offers/myoffers', data)
 		return res.status(200).json({ method: req.method, data })
 	})
 }

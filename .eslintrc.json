@@ -28,8 +28,7 @@
 			}
 		],
 		"no-unused-vars": "error",
-		"no-console": "warn",
-		"func-names": ["warn", "as-needed"],
+		"func-names": "off",
 		"object-shorthand": "warn",
 		"import/newline-after-import": "warn",
 		"import/no-cycle": "off",
@@ -51,7 +50,15 @@
 			}
 		],
 		"no-extend-native": "off",
-		"import/prefer-default-export": "off"
+		"import/prefer-default-export": "off",
+		"no-console": "off",
+		"no-restricted-syntax": [
+			"warn",
+			{
+				"selector": "CallExpression[callee.object.name='console'][callee.property.name=/^log$/]",
+				"message": "console.log expression was used"
+			}
+		]
 	},
 	"ignorePatterns": [
 		"node_modules",

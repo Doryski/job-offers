@@ -56,7 +56,7 @@ export default async function ApiOffers(
 			],
 		]
 		const [result] = await db.promise().query(sqlAddOffer, [values])
-		console.log('post api/offers:', result)
+		console.info('post api/offers:', result)
 		return res.json({
 			method: req.method,
 			message: 'Offer was added successfully!',
@@ -75,7 +75,7 @@ export default async function ApiOffers(
 
 	db.query(sqlGet, (err, data) => {
 		if (err) return res.json(err)
-		console.log('get api/offers', data)
+		console.info('get api/offers', data)
 		return res.json({ method: req.method, data })
 	})
 }

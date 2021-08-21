@@ -24,7 +24,7 @@ export default async function ApiAdminOffers(
 		`
 	db.query(sqlDelOffer, [req.query.id], (err, result) => {
 		if (err) res.json(err)
-		console.log('del api/applicants/[id]', result)
+		console.info('del api/applicants/[id]', result)
 		return res.status(200).json({
 			method: req.method,
 			message: `Deleted 1 record with id of ${req.query.id}`,
