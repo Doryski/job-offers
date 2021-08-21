@@ -54,7 +54,6 @@ export default function filterOffers(
 			{ param: expLvl as string, operation: expLvlFilter },
 		]
 
-		const applyFilter = combine(filters)
-		return applyFilter
+		return combine(filters)
 	})
 }
