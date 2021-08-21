@@ -1,36 +1,10 @@
-import styled from 'styled-components'
 import { TECH_LVL_OPTIONS } from '@/utils/vars'
-import Typography from '../Typography'
+import { Typography } from '../Typography'
+import { Container, RangeContainer, RangePoint } from './styled'
 
-export const Container = styled.div`
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: column;
-	max-width: 20%;
-	flex: 0 0 20%;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		max-width: 50%;
-		flex: 1 0 50%;
-	}
-`
-export const RangeContainer = styled.div`
-	display: flex;
-	margin: 0.5em 0 0.25em;
-`
-export const RangePoint = styled.span<{
-	disabled?: boolean
-	color?: string
-}>`
-	background-color: ${({ disabled, color }) =>
-		disabled ? 'rgb(245, 245, 245)' : color};
-	display: block;
-	width: 15px;
-	height: 10px;
-	border-radius: 1px;
-	margin: 0 0.05em 0 0;
-`
+type TechRangeProps = { range: number; tech: string }
 
-const TechRange = ({ range, tech }: { range: number; tech: string }) => {
+const TechRange = ({ range, tech }: TechRangeProps) => {
 	const rangeColor =
 		range < 2
 			? 'rgb(92, 207, 92)'

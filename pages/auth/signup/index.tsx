@@ -1,53 +1,26 @@
-import Typography from '@/shared-components/Typography'
+import { Typography } from '@/shared-components/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import CustomButton from '@/shared-components/CustomButton'
 import { useForm } from 'react-hook-form'
 import {
 	ApplyButtonWrapper,
 	CheckboxWrapper,
-} from '@/components/OfferPage/OfferApplySection'
+	ErrorMessage,
+} from '@/components/OfferPage/OfferApplySection/styled'
 import { LOCATIONS } from '@/utils/vars'
 import useCheckbox from '@/hooks/useCheckbox'
 import { useState } from 'react'
-import styled from 'styled-components'
 import InputComponent from '@/components/AddOfferModal/CustomInput'
 import SelectComponent from '@/components/AddOfferModal/CustomSelect'
 import ClientOnly from '@/shared-components/ClientOnly'
-import { ErrorMessage } from '@/components/AddOfferModal/StyledForm'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSession } from 'next-auth/client'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import post from 'utils/post'
 import usePrefetch from '@/hooks/usePrefetch'
 import inputProps from 'utils/inputProps'
-
-export const FormWrapper = styled.section`
-	width: 50vw;
-	height: 100vh;
-	margin: auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-`
-export const UploadWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-	position: relative;
-	width: 100%;
-	padding: 20px;
-	border: 1px solid;
-	border-color: rgb(224, 224, 224);
-	border-radius: 5px;
-	transition: border-color 300ms ease 0s;
-	cursor: pointer;
-	min-height: 100px;
-	&:hover {
-		border-color: ${({ theme }) => theme.colors.primary};
-	}
-`
+import { FormWrapper } from '@/shared-components/FormWrapper'
 
 const Signup = () => {
 	const { isChecked, handleChange, setIsChecked } = useCheckbox(false)

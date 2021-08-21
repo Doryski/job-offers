@@ -1,4 +1,4 @@
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import { useRouter } from 'next/router'
 import useRedirect from '@/hooks/useRedirect'
 import usePrefetch from '@/hooks/usePrefetch'

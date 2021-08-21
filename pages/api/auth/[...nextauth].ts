@@ -7,7 +7,7 @@ import post from 'utils/post'
 import { Credentials } from '@/types'
 import { JWT } from 'next-auth/jwt'
 
-export const options = {
+const options = {
 	providers: [
 		Providers.Credentials({
 			name: 'Sign in',
@@ -73,5 +73,7 @@ export const options = {
 		secret: process.env.JWT_SECRET,
 	},
 }
+
+export { options }
 export default (req: NextApiRequest, res: NextApiResponse) =>
 	NextAuth(req, res, options)

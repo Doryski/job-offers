@@ -1,28 +1,11 @@
 import Link from 'next/link'
-import styled from 'styled-components'
+import { ListItem, TableList, Wrapper } from './styled'
 
 const ADMIN_TABLES_LINKS = [
 	{ path: '/admin/offers', title: 'Offers' },
 	{ path: '/admin/employers', title: 'Employers' },
 	{ path: '/admin/applicants', title: 'Applicants' },
 ]
-const Wrapper = styled.aside`
-	background-color: lightgray;
-`
-
-const TableList = styled.ul`
-	display: flex;
-	flex-direction: column;
-`
-const ListItem = styled.li`
-	text-align: center;
-	padding: 0.5em;
-	background-color: transparent;
-	transition: background-color 0.3s;
-	&:hover {
-		background-color: gray;
-	}
-`
 
 const LeftNav = () => (
 	<Wrapper>

@@ -1,34 +1,19 @@
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
-import styled from 'styled-components'
 import filterOffers from 'utils/filterOffers'
 import sortOffers from 'utils/sortOffers'
 import { OfferPageDataType } from '@/types'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import OfferCard from '../../OfferCard'
+import { ListContainer } from './styled'
 
-export const ListContainer = styled.section`
-	display: flex;
-	height: 100%;
-	overflow-y: auto;
-	overflow-x: hidden;
-	flex-direction: column;
-	margin-right: 0.5em;
-
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		padding: 0;
-	}
-`
-
-const List = ({
-	data,
-	setCurrentOffer,
-	setShowFilters,
-}: {
+type ListProps = {
 	data: OfferPageDataType[] | string
 	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
 	setShowFilters: Dispatch<SetStateAction<boolean>>
-}) => {
+}
+
+const List = ({ data, setCurrentOffer, setShowFilters }: ListProps) => {
 	const { query } = useRouter()
 	if (typeof data === 'string') {
 		return (

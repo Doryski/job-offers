@@ -4,7 +4,7 @@ import ListHeader from '@/components/OfferList/ListHeader'
 import Layout from '@/components/Layout'
 import { OfferPageDataType } from '@/types'
 import List from '@/components/OfferList/List'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import { useEffect, useState } from 'react'
 import { DATE_FORMAT } from '@/utils/vars'
 import moment from 'moment'
@@ -13,6 +13,7 @@ import fixObject from 'utils/fixObject'
 import devlog from '@/debug/devlog'
 import Filters from '@/components/Filters'
 import dynamic from 'next/dynamic'
+import OfferList from '@/components/OfferList'
 
 const OfferPage = dynamic(() => import('@/components/OfferPage'), {
 	loading: () => <Center>Loading...</Center>,
@@ -24,34 +25,8 @@ export const SubContainer = styled.div`
 	height: 92vh;
 	background: ${({ theme }) => theme.colors.dark};
 `
-export const ListContainer = styled.section`
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	@media (max-width: 1025px) {
-		width: 100%;
-	}
-`
-export const Container = styled.div`
-	width: 100%;
-	height: 92vh;
-	background: ${({ theme }) => theme.colors.dark};
-	display: flex;
-	flex-direction: column;
-`
-export const InfoSpan = styled.span`
-	display: block;
-	color: ${({ theme }) => theme.colors.title};
-	font-size: 1.2rem;
-`
 
-export const ProgressWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	padding-top: 2.5em;
-`
-
-const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
+const Homepage = ({ data }: { data: OfferPageDataType[] | string }) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>(
 		{} as OfferPageDataType
 	)
@@ -64,21 +39,26 @@ const OfferList = ({ data }: { data: OfferPageDataType[] | string }) => {
 	const isOfferSelected = Object.keys(currentOffer).length > 0
 
 	return (
-		<Layout>
-			<SubContainer>
-				<ListContainer>
-					<Container>
+		<Layout
+			subContainer={
+				<SubContainer>
+					{/* <SubContainer> */}
+					<OfferList>
 						<ListHeader {...listHeaderProps} />
 						<List {...listProps} />
-					</Container>
-				</ListContainer>
-				{showFilters && <Filters />}
-				{isOfferSelected && !showFilters && <OfferPage offer={currentOffer} />}
-				{!isOfferSelected && !showFilters && (
-					<Center>Click on offer card to show details.</Center>
-				)}
-			</SubContainer>
-		</Layout>
+					</OfferList>
+
+					{showFilters && <Filters />}
+					{isOfferSelected && !showFilters && (
+						<OfferPage offer={currentOffer} />
+					)}
+					{!isOfferSelected && !showFilters && (
+						<Center>Click on offer card to show details.</Center>
+					)}
+					{/* </SubContainer> */}
+				</SubContainer>
+			}
+		/>
 	)
 }
 
@@ -116,4 +96,4 @@ export const getStaticProps: GetStaticProps = async () => {
 	}
 }
 
-export default OfferList
+export default Homepage

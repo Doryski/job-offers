@@ -1,8 +1,8 @@
+import { ICON_SIZE } from '@/utils/vars'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import styled from 'styled-components'
-import { ICON_SIZE } from '@/utils/vars'
 
-export const StyledExpandMoreIcon = styled(
+const ExpandMoreIcon = styled(
 	({
 		active,
 		primary,
@@ -27,14 +27,4 @@ export const StyledExpandMoreIcon = styled(
 			: theme.colors.text};
 `
 
-const ExpandMoreIcon = ({
-	isOpen,
-	primary,
-	active,
-}: {
-	isOpen: boolean
-	primary: boolean
-	active: boolean
-}) => <StyledExpandMoreIcon primary={primary} active={active} isOpen={isOpen} />
-
-export default ExpandMoreIcon
+export { ExpandMoreIcon }

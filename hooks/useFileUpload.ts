@@ -17,7 +17,7 @@ export default function useFileUpload(
 		element.value = ''
 		if (!element.value) return setFileName('')
 
-		alert("Couldn't delete file")
+		console.warn("Couldn't delete file")
 	}
 	return {
 		fileName,

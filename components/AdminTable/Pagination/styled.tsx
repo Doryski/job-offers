@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const List = styled.ul`
+const List = styled.ul`
 	display: flex;
 	justify-content: center;
 
@@ -8,7 +8,7 @@ export const List = styled.ul`
 		margin-top: 0.45em;
 	}
 `
-export const SwapPageBtn = styled.button<{
+const SwapPageBtn = styled.button<{
 	disabled?: boolean
 	active?: boolean
 }>`
@@ -26,15 +26,17 @@ export const SwapPageBtn = styled.button<{
 		fill: ${({ disabled }) => (disabled ? '#dcdcdc' : '#1f1f1f')};
 	}
 `
-export const CheveronLink = styled(SwapPageBtn)`
+const CheveronLink = styled(SwapPageBtn)`
 	display: flex;
 	padding: 0.45em 0.45em;
 `
 
-export const EdgeLink = styled(SwapPageBtn)`
+const EdgeLink = styled(SwapPageBtn)`
 	display: flex;
 	padding: 0.45em 0.75em;
 	& svg {
 		margin: 0 -0.4em;
 	}
 `
+
+export { CheveronLink, EdgeLink, List, SwapPageBtn }

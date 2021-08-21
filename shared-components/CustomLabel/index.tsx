@@ -1,31 +1,14 @@
-import styled from 'styled-components'
 import BusinessIcon from '@material-ui/icons/Business'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
-import Typography from '../Typography'
+import { Typography } from '../Typography'
+import { IconWrapper, Wrapper } from './styled'
 
-export const Wrapper = styled.div`
-	display: flex;
-	align-items: center;
-	margin-right: 0.3125em;
-`
-
-export const IconWrapper = styled.div`
-	display: flex;
-	color: ${({ theme }) => theme.colors.span};
-	margin-right: 0.25em;
-	margin-top: -0.1em;
-	svg {
-		font-size: 0.9rem;
-	}
-`
-
-const CustomLabel = ({
-	label,
-	type,
-}: {
+type CustomLabelProps = {
 	label: string
 	type: 'business' | 'location'
-}) => (
+}
+
+const CustomLabel = ({ label, type }: CustomLabelProps) => (
 	<Wrapper>
 		<IconWrapper>
 			{type === 'business' && <BusinessIcon />}

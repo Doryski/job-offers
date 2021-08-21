@@ -3,20 +3,18 @@ import { EXP_LVL_OPTIONS, EMP_TYPE_OPTIONS, TECHNOLOGIES } from '@/utils/vars'
 import inputProps from 'utils/inputProps'
 import InputComponent from '../CustomInput'
 import SelectComponent from '../CustomSelect'
-import { Wrapper, InputsContainer } from '../StyledForm'
+import { Wrapper, InputsContainer } from '../styled'
 import { AddOfferContext } from '../AddOfferContext'
 
 const InfoSection = () => {
 	const { register, errors } = useContext(AddOfferContext)
 	const formProps = { register, errors }
 	const SALARY_STEP = 100
-	function mapOptions(option: string) {
-		return (
-			<option key={option} value={option}>
-				{option}
-			</option>
-		)
-	}
+	const mapOptions = (option: string) => (
+		<option key={option} value={option}>
+			{option}
+		</option>
+	)
 
 	return (
 		<InputsContainer>

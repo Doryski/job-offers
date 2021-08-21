@@ -98,8 +98,9 @@ const darkModeProps = {
 	},
 }
 
-export const darkMode = { ...theme, ...darkModeProps }
-export const lightMode = { ...theme, ...lightModeProps }
-export type ThemeType = typeof theme & typeof lightMode
+const darkMode = { ...theme, ...darkModeProps }
+const lightMode = { ...theme, ...lightModeProps }
 
+export type ThemeType = typeof theme & typeof lightMode
+export { darkMode, lightMode }
 export default theme

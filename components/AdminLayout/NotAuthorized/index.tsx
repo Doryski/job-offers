@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 
 const NotAuthorized = () => (
 	<Center height='100vh'>

@@ -1,29 +1,9 @@
-import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import CustomButton from '@/shared-components/CustomButton'
-import TechList, { TechName } from './TechList'
-
-export const Container = styled.div`
-	display: grid;
-	grid-template-columns: repeat(7, auto);
-	width: 100%;
-
-	@media (max-width: 1025px) {
-		padding: 1.875em;
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-`
-
-export const LinkBtn = styled.a`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	text-align: center;
-`
+import TechList from './TechList'
+import { Container, LinkBtn } from './styled'
+import { TechName } from './TechList/styled'
 
 const TechFilters = () => {
 	const { query } = useRouter()

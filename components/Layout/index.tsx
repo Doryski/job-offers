@@ -1,26 +1,23 @@
-import styled from 'styled-components'
 import Header from '../Header'
+import { MainContainer } from './styled'
 
-export const MainContainer = styled.main`
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-`
-
-const Layout = ({
-	children,
-	admin,
-}: {
-	children: React.ReactNode
+type LayoutProps = {
+	children?: React.ReactNode
 	admin?: boolean
-}) => (
+	subContainer?: JSX.Element
+}
+
+const Layout = ({ children, admin, subContainer }: LayoutProps) => (
 	<MainContainer>
 		<Header admin={!!admin} />
+		{subContainer}
 		{children}
 	</MainContainer>
 )
 Layout.defaultProps = {
 	admin: false,
+	subContainer: null,
+	children: null,
 }
 
 export default Layout

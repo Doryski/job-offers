@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export default styled.select<{ padding?: string }>`
+const StyledSelect = styled.select<{ padding?: string }>`
 	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;
 
@@ -21,3 +21,5 @@ export default styled.select<{ padding?: string }>`
 		height: 25px;
 	}
 `
+
+export { StyledSelect }

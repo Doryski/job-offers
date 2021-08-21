@@ -1,19 +1,9 @@
-import styled from 'styled-components'
-import Typography from '@/shared-components/Typography'
+import { Typography } from '@/shared-components/Typography'
 import { NAV_LINKS } from '@/utils/vars'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
-
-export const NavList = styled.ul`
-	display: flex;
-	justify-content: flex-end;
-	flex: 1 1 0%;
-`
-export const NavItem = styled.li`
-	display: block;
-	cursor: pointer;
-`
+import { NavItem, NavList } from './styled'
 
 const Navigation = () => {
 	const router = useRouter()

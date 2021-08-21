@@ -1,25 +1,15 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
 import { CheveronUp, CheveronDown } from '@styled-icons/zondicons'
 import TableHead from '../TableHead'
 import TableRow from '../TableRow'
 import { TableContext, TableContextType } from '..'
 import TableSortMobile from '../TableSortMobile'
+import { StyledTable } from './styled'
 
 type TableProps = {
 	headers: string[]
 	uniqueKey: string
 }
-
-const StyledTable = styled.table`
-	width: 100%;
-	text-align: left;
-	border-collapse: collapse;
-	overflow-x: auto;
-	margin: 1em 0;
-	border: 1px solid #dcdcdc;
-	overflow-x: auto;
-`
 
 const Table = ({ headers, uniqueKey }: TableProps) => {
 	const { currentRecords, sortAscending } = useContext<TableContextType>(

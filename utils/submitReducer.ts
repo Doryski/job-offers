@@ -4,13 +4,13 @@ type SubmitActionType = {
 	payload: boolean
 }
 
-export const initialSubmit: SubmitType = {
+const initialSubmit: SubmitType = {
 	loading: false,
 	success: false,
 	failure: false,
 }
 
-export const reducer = (
+const reducer = (
 	state: typeof initialSubmit,
 	action: SubmitActionType
 ): SubmitType => {
@@ -25,3 +25,5 @@ export const reducer = (
 			throw new Error('Unknown submit action')
 	}
 }
+
+export { initialSubmit, reducer }

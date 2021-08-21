@@ -1,10 +1,10 @@
 import { createContext, Dispatch, SetStateAction, useState } from 'react'
-import styled from 'styled-components'
 import BottomSection from './BottomSection'
+import { TableWrapper } from './styled'
 import Table from './Table'
 import TopSection from './TopSection'
 
-export type TableContextType = {
+type TableContextType = {
 	recordsToShow: number
 	indexOfFirstRecord: number
 	indexOfLastRecord: number
@@ -25,14 +25,7 @@ export type TableContextType = {
 	deleteRecord?: Function
 	editRecord?: Function
 }
-export const TableContext = createContext<TableContextType>(
-	{} as TableContextType
-)
-
-const TableWrapper = styled.section`
-	width: 100%;
-	margin: auto;
-`
+const TableContext = createContext<TableContextType>({} as TableContextType)
 
 const AdminTable = ({
 	data,
@@ -111,4 +104,7 @@ AdminTable.defaultProps = {
 	deleteRecord: () => {},
 	editRecord: () => {},
 }
+
+export type { TableContextType }
+export { TableContext }
 export default AdminTable

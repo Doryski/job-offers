@@ -1,21 +1,11 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
 import { TableContext } from '..'
+import { StyledHead, StyledHeader } from './styled'
 
 type TableHeadProps = {
 	cheveron: JSX.Element
 	headers: string[]
 }
-
-const StyledHead = styled.thead`
-	@media only screen and (max-width: 690px) {
-		display: none;
-	}
-`
-const StyledHeader = styled.th`
-	padding: 1em;
-	border-bottom: 2px solid #dcdcdc;
-`
 
 const TableHead = ({ cheveron, headers }: TableHeadProps) => {
 	const { sortKey, handleColumnHeaderClick, deleteRecord } = useContext(

@@ -1,24 +1,14 @@
 import { useRef } from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
 import useDetectOutsideClick from '@/hooks/useDetectOutsideClick'
 import useDialogHandler from '@/hooks/useDialogHandler'
 import { SORT_OPTIONS } from '@/utils/vars'
 import { useRouter } from 'next/router'
 import createQuery from 'utils/createQuery'
-import { StyledExpandMoreIcon } from '../ExpandMoreIcon'
-import Typography from '../Typography'
-import { DropdownList, DropdownListItem } from '../DropdownList'
-
-export const ButtonWrapper = styled.div`
-	margin-left: 1em;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	cursor: pointer;
-	padding: 0.25em 0.5em;
-	position: relative;
-`
+import { ExpandMoreIcon } from '../ExpandMoreIcon/styled'
+import { Typography } from '../Typography'
+import { DropdownList, DropdownListItem } from '../DropdownList/styled'
+import { ButtonWrapper } from './styled'
 
 const SortDropdown = () => {
 	const { query } = useRouter()
@@ -33,7 +23,7 @@ const SortDropdown = () => {
 			<Typography color='span' margin='0 .25em 0 .5em'>
 				{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
 			</Typography>
-			<StyledExpandMoreIcon isOpen={isOpen} />
+			<ExpandMoreIcon isOpen={isOpen} />
 
 			<DropdownList
 				ref={listRef}

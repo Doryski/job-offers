@@ -8,9 +8,9 @@ import {
 	PASSWORD_REGEX,
 } from '@/utils/vars'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
-import { Label } from '../styled'
-import { InputWrapper, ErrorMessage } from '../StyledForm'
-import StyledInput from './styled'
+import { ErrorMessage } from '@/shared-components/ErrorMessage/styled'
+import { Label, InputWrapper } from '../styled'
+import { StyledInput } from './styled'
 
 type InputComponentProps = {
 	name: string
@@ -22,9 +22,8 @@ type InputComponentProps = {
 	step?: number
 	max?: number
 }
-export const checkMinValue = (value: number) => value > 0 || VAL_IS_ZERO_ERR
-export const checkMaxValue = (value: number) =>
-	value < 100000 || VAL_TOO_BIG_ERR
+const checkMinValue = (value: number) => value > 0 || VAL_IS_ZERO_ERR
+const checkMaxValue = (value: number) => value < 100000 || VAL_TOO_BIG_ERR
 
 const InputComponent = ({
 	name,
@@ -99,4 +98,6 @@ InputComponent.defaultProps = {
 	step: 1,
 	max: 120,
 }
+
+export { checkMaxValue, checkMinValue }
 export default InputComponent

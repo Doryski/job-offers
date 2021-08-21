@@ -13,6 +13,7 @@ const LocationButton = ({ location }: { location: string }) => {
 			query
 		)
 	const isLocInQuery = query.location === location.myNormalize()
+
 	return (
 		<CustomButton
 			handleClick={() => {

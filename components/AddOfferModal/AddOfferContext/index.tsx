@@ -3,7 +3,7 @@ import { Dialog } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import moment from 'moment'
 import { FormErrors, OfferType } from '@/types'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import CloseButton from '@/shared-components/CloseButton'
 import devlog from '@/debug/devlog'
 import post from 'utils/post'
@@ -28,7 +28,13 @@ type FormData = {
 	salaryTo: OfferType['salaryTo']
 }
 
-export const AddOfferContext = createContext<AddOfferContextType>(
+type AddOfferContextProviderProps = {
+	children: React.ReactNode
+	isOpen: boolean
+	close: VoidFunction
+}
+
+const AddOfferContext = createContext<AddOfferContextType>(
 	{} as AddOfferContextType
 )
 
@@ -36,11 +42,7 @@ const AddOfferContextProvider = ({
 	children,
 	isOpen,
 	close,
-}: {
-	children: React.ReactNode
-	isOpen: boolean
-	close: VoidFunction
-}) => {
+}: AddOfferContextProviderProps) => {
 	const {
 		handleSubmit,
 		register,
@@ -118,4 +120,5 @@ const AddOfferContextProvider = ({
 		</AddOfferContext.Provider>
 	)
 }
+export { AddOfferContext }
 export default AddOfferContextProvider

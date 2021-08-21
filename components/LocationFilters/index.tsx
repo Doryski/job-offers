@@ -1,11 +1,7 @@
-import styled from 'styled-components'
 import { LOCATIONS } from '@/utils/vars'
 import LocationButton from './LocationButton'
+import { Wrapper } from './styled'
 
-export const Wrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-`
 const LocationFilters = () => (
 	<Wrapper>
 		{LOCATIONS.map(location => (

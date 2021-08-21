@@ -1,23 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
-import Typography from '@/shared-components/Typography'
+import { Typography } from '@/shared-components/Typography'
 import { Wrapper } from '../styled'
+import { DescriptionContainer, DescriptionContent } from './styled'
 
-export const DescriptionContainer = styled.section`
-	margin-top: 1.875em;
-	padding: 0.3125em 0;
-	box-shadow: ${({ theme }) => theme.colors.shadow};
-	background: ${({ theme }) => theme.colors.white};
-	border-radius: 5px;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		margin: 0.9375em 0;
-	}
-`
-export const DescriptionContent = styled.div`
-	color: ${({ theme }) => theme.colors.title};
-`
+type OfferDescriptionProps = { description: string }
 
-const OfferDescription = ({ description }: { description: string }) => (
+const OfferDescription = ({ description }: OfferDescriptionProps) => (
 	<DescriptionContainer>
 		<Typography
 			color='title'

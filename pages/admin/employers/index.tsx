@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import useRefreshPage from '@/hooks/useRefreshPage'
 import { useSession } from 'next-auth/client'
 import useApi from '@/hooks/useApi'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import del from 'utils/delete'
 import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
 

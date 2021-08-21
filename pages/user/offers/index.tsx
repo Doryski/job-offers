@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { useSession } from 'next-auth/client'
 import Layout from '@/components/Layout'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import { DATE_FORMAT } from '@/utils/vars'
 import useApi from '@/hooks/useApi'
 

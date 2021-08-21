@@ -1,17 +1,10 @@
-import styled from 'styled-components'
 import CustomButton from '../CustomButton'
+import { BottomWrapper } from './styled'
 
 type DialogFooterProps = {
 	handleReset: (e: any) => void
 	handleApplyFilter: (e: any) => void
 }
-
-export const BottomWrapper = styled.div`
-	padding: 0.9375em 1.25em;
-	display: flex;
-	justify-content: space-between;
-	border-top: 1px solid ${({ theme }) => theme.colors.divider};
-`
 
 const DialogFooter = ({
 	handleReset,

@@ -1,68 +1,23 @@
-import styled from 'styled-components'
 import InfoLabel from '@/shared-components/InfoLabel'
-import Typography from '@/shared-components/Typography'
+import { Typography } from '@/shared-components/Typography'
 import formatThous from 'utils/formatThous'
 import { OfferPageDataType } from '@/types'
-import {
-	Business,
-	People,
-	Note,
-	AccessTime,
-	TrendingUp,
-} from '@material-ui/icons'
 import { ICON_SIZE } from '@/utils/vars'
+import {
+	AccessTimeIcon,
+	BusinessIcon,
+	HeaderContainer,
+	InfoLabelsContainer,
+	LabelsRow,
+	MainInfoContainer,
+	NoteIcon,
+	PeopleIcon,
+	TrendingUpIcon,
+} from './styled'
 
-export const BusinessIcon = styled(Business)`
-	color: rgb(124, 44, 44);
-	/* rgb(255, 82, 82); */
-`
-export const TrendingUpIcon = styled(TrendingUp)`
-	color: rgb(102, 187, 106);
-`
-export const PeopleIcon = styled(People)`
-	color: rgb(181, 151, 0);
-	/* rgb(251, 140, 0); */
-`
-export const NoteIcon = styled(Note)`
-	color: rgb(0 134 110);
-	/* rgb(171, 71, 188); */
-	transform: rotate(-90deg);
-`
-export const AccessTimeIcon = styled(AccessTime)`
-	color: rgb(68, 138, 255);
-`
+type OfferHeaderProps = { offer: OfferPageDataType }
 
-export const LabelsRow = styled.div`
-	display: flex;
-	justify-content: space-between;
-`
-
-export const HeaderContainer = styled.section`
-	position: relative;
-`
-
-export const MainInfoContainer = styled.section`
-	margin: 1em 0;
-	display: flex;
-	flex-direction: column;
-	align-items: space-between;
-	justify-content: center;
-	padding: 0.3125em 1em;
-	box-shadow: ${({ theme }) => theme.colors.shadow};
-	background: ${({ theme }) => theme.colors.white};
-	border-radius: 5px;
-	display: flex;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		margin-top: 10.625em;
-	}
-`
-export const InfoLabelsContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-`
-
-const OfferHeader = ({ offer }: { offer: OfferPageDataType }) => {
+const OfferHeader = ({ offer }: OfferHeaderProps) => {
 	const {
 		salaryFrom,
 		salaryTo,

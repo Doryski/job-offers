@@ -1,21 +1,12 @@
-import styled from 'styled-components'
-import Typography from '../Typography'
+import { ChildrenProp } from 'types/childrenProp'
+import { Typography } from '../Typography'
+import { Container } from './styled'
 
-export const Container = styled.div<{ active?: boolean }>`
-	padding: 0.625em 2.1875em;
-	background: ${({ theme, active }) =>
-		active ? theme.colors.dark : theme.colors.white};
-	position: relative;
-	border-radius: 5px 5px 0 0;
-`
-
-const Label = ({
-	children,
-	active,
-}: {
-	children: React.ReactNode
+type LabelProps = {
 	active: boolean
-}) => (
+}
+
+const Label = ({ children, active }: LabelProps & ChildrenProp) => (
 	<Container active={active}>
 		<Typography color='text'>{children}</Typography>
 	</Container>

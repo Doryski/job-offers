@@ -1,27 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
-import Typography from '../Typography'
+import { Typography } from '../Typography'
 import CloseButton from '../CloseButton'
+import { HeaderWrapper } from './styled'
 
-export const HeaderWrapper = styled.section`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
-	padding: 1.25em;
-	border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-		padding: 0.625em;
-	}
-`
-
-const DialogHeader = ({
-	children,
-	close,
-}: {
+type DialogHeaderProps = {
 	children: React.ReactNode
 	close?: VoidFunction
-}) => (
+}
+
+const DialogHeader = ({ children, close }: DialogHeaderProps) => (
 	<HeaderWrapper>
 		<Typography color='text' fWeight={400} fontSize='xl'>
 			{children}

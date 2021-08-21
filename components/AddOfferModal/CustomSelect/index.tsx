@@ -2,9 +2,9 @@ import React from 'react'
 import { FIELD_REQUIRED_ERR } from '@/utils/vars'
 import { FormErrors } from '@/types'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
-import { Label } from '../styled'
-import { InputWrapper, ErrorMessage } from '../StyledForm'
-import StyledSelect from './styled'
+import { ErrorMessage } from '@/shared-components/ErrorMessage/styled'
+import { Label, InputWrapper } from '../styled'
+import { StyledSelect } from './styled'
 
 type OptionsType<Option = any> = {
 	array: Option[] | readonly Option[]
@@ -49,7 +49,9 @@ function SelectComponent({
 		</InputWrapper>
 	)
 }
+
 SelectComponent.defaultProps = {
 	required: false,
 }
+
 export default SelectComponent

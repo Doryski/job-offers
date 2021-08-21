@@ -1,16 +1,16 @@
-export const DATE_FORMAT = 'DD.MM.YYYY'
-export const FIELD_REQUIRED_ERR = ' is a required field.'
-export const VAL_TOO_BIG_ERR = 'Value is too big.'
-export const VAL_IS_ZERO_ERR = 'Value should be more than 0.'
-export const MAX_SLIDER_VALUE = 50000
-export const EMP_TYPE_OPTIONS = ['B2B', 'UoP', 'UZ', 'UoD'] as const
-export const EXP_LVL_OPTIONS = ['Junior', 'Mid', 'Senior'] as const
-export const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
-export const UNAUTHORIZED_ERROR =
+const DATE_FORMAT = 'DD.MM.YYYY'
+const FIELD_REQUIRED_ERR = ' is a required field.'
+const VAL_TOO_BIG_ERR = 'Value is too big.'
+const VAL_IS_ZERO_ERR = 'Value should be more than 0.'
+const MAX_SLIDER_VALUE = 50000
+const EMP_TYPE_OPTIONS = ['B2B', 'UoP', 'UZ', 'UoD'] as const
+const EXP_LVL_OPTIONS = ['Junior', 'Mid', 'Senior'] as const
+const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
+const UNAUTHORIZED_ERROR =
 	'You need to be signed in to have access to this data.'
-export const ICON_SIZE = 'small'
-export const FILTER_NAMES = [
+const ICON_SIZE = 'small'
+const FILTER_NAMES = [
 	'search',
 	'location',
 	'expLvl',
@@ -18,9 +18,9 @@ export const FILTER_NAMES = [
 	'to',
 	'tech',
 ] as const
-export const isClient = typeof window !== 'undefined'
+const isClient = typeof window !== 'undefined'
 
-export const LOCATIONS = [
+const LOCATIONS = [
 	'Warszawa',
 	'Kraków',
 	'Wrocław',
@@ -39,9 +39,9 @@ export const LOCATIONS = [
 	'Others',
 ] as const
 
-export const NAV_LINKS = [{ title: 'Offers', path: '/' }] as const
+const NAV_LINKS = [{ title: 'Offers', path: '/' }] as const
 
-export const SORT_OPTIONS = [
+const SORT_OPTIONS = [
 	{
 		id: 'sal-up',
 		name: 'lowest salary',
@@ -56,7 +56,7 @@ export const SORT_OPTIONS = [
 	},
 ] as const
 
-export const TECH_LVL_OPTIONS = [
+const TECH_LVL_OPTIONS = [
 	{ id: 1, title: 'Nice to have' },
 	{ id: 2, title: 'Junior' },
 	{ id: 3, title: 'Regular' },
@@ -64,7 +64,7 @@ export const TECH_LVL_OPTIONS = [
 	{ id: 5, title: 'Expert' },
 ] as const
 
-export const TECHNOLOGIES = [
+const TECHNOLOGIES = [
 	'JS',
 	'HTML',
 	'PHP',
@@ -86,3 +86,24 @@ export const TECHNOLOGIES = [
 	'Support',
 	'Other',
 ] as const
+
+export {
+	DATE_FORMAT,
+	FIELD_REQUIRED_ERR,
+	VAL_TOO_BIG_ERR,
+	VAL_IS_ZERO_ERR,
+	MAX_SLIDER_VALUE,
+	EMP_TYPE_OPTIONS,
+	EXP_LVL_OPTIONS,
+	EMAIL_REGEX,
+	PASSWORD_REGEX,
+	UNAUTHORIZED_ERROR,
+	ICON_SIZE,
+	FILTER_NAMES,
+	isClient,
+	LOCATIONS,
+	NAV_LINKS,
+	SORT_OPTIONS,
+	TECH_LVL_OPTIONS,
+	TECHNOLOGIES,
+}

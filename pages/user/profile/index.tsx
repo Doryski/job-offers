@@ -1,23 +1,11 @@
 import { useSession } from 'next-auth/client'
 import Link from 'next/link'
-import { Fragment } from 'react'
-import styled from 'styled-components'
 import Layout from '@/components/Layout'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
 import CustomButton from '@/shared-components/CustomButton'
 import useApi from '@/hooks/useApi'
-
-export const SubContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	height: 92vh;
-`
-
-export const AccountData = styled.section`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	width: 100%;
-`
+import AccountInfo from '@/components/AccountInfo'
+import { SubContainer } from '@/shared-components/SubContainer/styled'
 
 const Profile = () => {
 	const [session] = useSession()
@@ -37,14 +25,7 @@ const Profile = () => {
 						{dataLoading && 'Loading data...'}
 						{data?.data && (
 							<>
-								<AccountData>
-									{Object.entries(data?.data).map(([key, value]) => (
-										<Fragment key={key}>
-											<h3>{key}</h3>
-											<span>{value as string}</span>
-										</Fragment>
-									))}
-								</AccountData>
+								<AccountInfo info={data?.data} />
 								<Link href='/user/offers'>
 									<a>
 										<CustomButton>Show my offers</CustomButton>

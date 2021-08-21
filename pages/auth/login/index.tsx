@@ -1,23 +1,16 @@
+import { ApplyButtonWrapper } from '@/components/OfferPage/OfferApplySection/styled'
 import InputComponent from '@/components/AddOfferModal/CustomInput'
-import { ApplyButtonWrapper } from '@/components/OfferPage/OfferApplySection'
 import CustomButton from '@/shared-components/CustomButton'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
-import Center from '@/shared-components/Center'
+import Center from '@/shared-components/Center/styled'
+import { HomepageLink } from '@/shared-components/HomepageLink/styled'
 import inputProps from 'utils/inputProps'
-import styled from 'styled-components'
 import devlog from '@/debug/devlog'
-import { FormWrapper } from '../signup'
-
-export const HomepageLink = styled.a`
-	text-decoration: underline;
-	&:hover {
-		text-decoration: none;
-	}
-`
+import { FormWrapper } from '@/shared-components/FormWrapper'
 
 const Login = () => {
 	const router = useRouter()

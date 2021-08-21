@@ -1,6 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-export type TypographyProps = {
+type TypographyProps = {
 	display?: string
 	fWeight?: keyof DefaultTheme['fontWeight']
 	family?: string
@@ -14,7 +14,7 @@ export type TypographyProps = {
 	minWidth?: string
 }
 
-export const Wrapper = styled.h4<TypographyProps>`
+const Wrapper = styled.h4<TypographyProps>`
 	${({ display, margin, align, padding, minWidth }) => css`
 		display: ${display || 'block'};
 		align-items: ${display === 'flex' ? 'center' : 'initial'};
@@ -51,4 +51,5 @@ const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 	`}
 `
 
-export default Typography
+export type { TypographyProps }
+export { Wrapper, Typography }

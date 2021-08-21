@@ -1,56 +1,24 @@
-import { ExpandLess } from '@material-ui/icons'
-import styled from 'styled-components'
 import SortDropdown from '@/shared-components/SortDropdown'
-import Typography from '@/shared-components/Typography'
+import { Typography } from '@/shared-components/Typography'
 import InputFilter from '@/shared-components/InputFilter'
 import { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
 import resetFilters from 'utils/resetFilters'
 import { ICON_SIZE } from '@/utils/vars'
+import {
+	FiltersWrapper,
+	OptionsHeader,
+	ShowFiltersIcon,
+	SortFiltersWrapper,
+	Wrapper,
+} from './styled'
 
-export const OptionsHeader = styled.div`
-	background: ${({ theme }) => theme.colors.white};
-	display: flex;
-	margin: 0 0.5em 0.5em 0;
-	height: 42px;
-	border-bottom-right-radius: 5px;
-`
-export const SortFiltersWrapper = styled.div`
-	flex: 1;
-	display: flex;
-	justify-content: space-between;
-	padding: 0.1875em;
-`
-
-export const ShowFiltersIcon = styled(({ isOpen, fontSize, ...props }) => (
-	<ExpandLess {...props} fontSize={fontSize} />
-))<{ isOpen: boolean }>`
-	color: ${({ theme }) => theme.colors.text};
-	transform: rotate(${({ isOpen }) => (isOpen ? '-90deg' : '90deg')});
-`
-
-export const Wrapper = styled.div`
-	display: flex;
-	align-items: center;
-`
-
-export const FiltersWrapper = styled.div`
-	display: flex;
-	cursor: pointer;
-	padding: 0.25em 0.75em 0.25em 0.75em;
-	border-left: 1px solid ${({ theme }) => theme.colors.divider};
-	&:last-of-type {
-		margin-top: 0.1em;
-	}
-`
-
-const ListHeader = ({
-	showFilters,
-	setShowFilters,
-}: {
+type ListHeaderProps = {
 	showFilters: boolean
 	setShowFilters: Dispatch<SetStateAction<boolean>>
-}) => {
+}
+
+const ListHeader = ({ showFilters, setShowFilters }: ListHeaderProps) => {
 	const router = useRouter()
 	const { query } = router
 	const filtersCount = Object.keys(query).filter(key => key !== 'sort').length

@@ -1,9 +1,8 @@
 import React, { useReducer, useRef } from 'react'
-import styled from 'styled-components'
 import { PersonOutline, Email, Create, DeleteOutline } from '@material-ui/icons'
 import { useForm } from 'react-hook-form'
-import Typography from '@/shared-components/Typography'
-import { TextField, Checkbox } from '@material-ui/core'
+import { Typography } from '@/shared-components/Typography'
+import { Checkbox } from '@material-ui/core'
 import CustomButton from '@/shared-components/CustomButton'
 import { initialSubmit, reducer } from 'utils/submitReducer'
 import post from 'utils/post'
@@ -15,6 +14,17 @@ import { OfferPageDataType } from '@/types'
 import useRefreshPage from '@/hooks/useRefreshPage'
 import InputIcon from '../InputIcon'
 import { Wrapper } from '../styled'
+import {
+	ApplyButtonWrapper,
+	ApplyContainer,
+	CheckboxWrapper,
+	DeleteFileBtn,
+	ErrorMessage,
+	FormGrid,
+	MyTextField,
+	UploadIconWrapper,
+	UploadWrapper,
+} from './styled'
 
 type FormDataType = {
 	name: string
@@ -25,94 +35,9 @@ type FormDataType = {
 	offerId: string
 }
 
-export const ApplyContainer = styled.section`
-	margin: 1.875em 0;
-	padding: 0.3125em 0;
-	box-shadow: ${({ theme }) => theme.colors.shadow};
-	background: ${({ theme }) => theme.colors.white};
-	border-radius: 5px;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		margin: 0.9375em 0;
-	}
-`
+type OfferApplySectionProps = { offer: OfferPageDataType }
 
-export const FormGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	> div:nth-of-type(odd) {
-		margin-right: 0.875em;
-	}
-	> div:nth-of-type(3),
-	div:nth-of-type(4) {
-		margin-top: 1em;
-	}
-	> div:nth-of-type(3) > div {
-		min-height: 100px;
-	}
-`
-export const ErrorMessage = styled.span`
-	font-size: ${({ theme }) => theme.fontSize.sm};
-`
-export const UploadWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-	height: calc(((100% - 12px) - 6px) - 8px);
-	position: relative;
-	width: 100%;
-	padding: 20px;
-	border: 1px solid;
-	border-color: rgb(224, 224, 224);
-	border-radius: 5px;
-	transition: border-color 300ms ease 0s;
-	cursor: pointer;
-	min-height: 100px;
-	&:hover {
-		border-color: ${({ theme }) => theme.colors.primary};
-	}
-`
-export const UploadIconWrapper = styled.div`
-	> svg {
-		width: 50px;
-		height: 50px;
-	}
-`
-export const CheckboxWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	margin-top: 0.5em;
-	margin-left: -0.75em;
-`
-export const ApplyButtonWrapper = styled.div<{ justify?: string }>`
-	display: flex;
-	justify-content: ${({ justify }) => justify || 'flex-end'};
-`
-export const DeleteFileBtn = styled.button`
-	position: absolute;
-	display: flex;
-	align-items: center;
-	border: none;
-	border-radius: 5px;
-	background: none;
-	right: 0;
-	bottom: 0;
-	padding: 6px 8px;
-	color: ${({ theme }) => theme.colors.span};
-	&:hover {
-		background: ${({ theme }) => theme.colors.buttonBackgroundHover};
-	}
-`
-export const MyTextField = styled(TextField)`
-	div > fieldset {
-		border-color: rgb(224, 224, 224);
-		transition: border-color 300ms ease 0s;
-	}
-	div:hover > fieldset {
-		border-color: ${({ theme }) => theme.colors.primary} !important;
-	}
-`
-
-const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
+const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 	const { employerId, offerId, companyName } = offer
 	const { isChecked, handleChange } = useCheckbox(false)
 	const uploadRef = useRef<HTMLInputElement>(null!)
@@ -218,7 +143,9 @@ const OfferApplySection = ({ offer }: { offer: OfferPageDataType }) => {
 							/>
 							{/* <UploadWrapper onClick={handleFileUpload}> */}
 							<UploadWrapper
-								onClick={() => alert('This function is not available yet!')}>
+								onClick={() =>
+									console.warn('This function is not available yet!')
+								}>
 								{fileName ? (
 									<>
 										<div style={{ maxWidth: '210px' }}>

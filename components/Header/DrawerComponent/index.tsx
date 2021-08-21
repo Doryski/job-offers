@@ -6,13 +6,12 @@ type HandleCloseFunction = (
 	reason: 'backdropClick' | 'escapeKeyDown'
 ) => void
 
-const DrawerComponent = ({
-	handleClose,
-	isOpen,
-}: {
+type DrawerComponentProps = {
 	handleClose: HandleCloseFunction
 	isOpen: boolean
-}) => (
+}
+
+const DrawerComponent = ({ handleClose, isOpen }: DrawerComponentProps) => (
 	<Drawer anchor='right' open={isOpen} onClose={handleClose}>
 		<SideBar />
 	</Drawer>
