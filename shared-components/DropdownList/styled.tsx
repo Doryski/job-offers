@@ -19,8 +19,8 @@ const DropdownList = styled.div<{
 	width: ${({ width }) => width || '150px'};
 	padding: 0.5em 0;
 	border-radius: 4px;
-	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-		rgba(0, 0, 0, 0.12) 0px 2px 1px -1px, rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+	box-shadow: hsla(0, 0%, 0%, 0.137) 0px 1px 1px 0px,
+		hsla(0, 0%, 0%, 0.12) 0px 2px 1px -1px, hsla(0, 0%, 0%, 0.2) 0px 1px 3px 0px;
 `
 const DropdownListItem = styled.div`
 	display: flex;

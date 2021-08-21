@@ -48,10 +48,10 @@ const GlobalStyle = createGlobalStyle`
             border-radius: 10px;
         }
       &-thumb {
-        background: rgba(0, 0, 0, 0.1);
+        background: hsla(0, 0%, 0%, 0.1);
         border-radius: 10px;
         &:hover {
-              background: rgba(0, 0, 0, 0.1);
+              background: hsla(0, 0%, 0%, 0.1);
           }
         }
     }

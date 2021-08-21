@@ -38,7 +38,7 @@ const UploadWrapper = styled.div`
 	width: 100%;
 	padding: 20px;
 	border: 1px solid;
-	border-color: rgb(224, 224, 224);
+	border-color: hsl(0, 0%, 88%);
 	border-radius: 5px;
 	transition: border-color 300ms ease 0s;
 	cursor: pointer;
@@ -80,7 +80,7 @@ const DeleteFileBtn = styled.button`
 `
 const MyTextField = styled(TextField)`
 	div > fieldset {
-		border-color: rgb(224, 224, 224);
+		border-color: hsl(0, 0%, 88%);
 		transition: border-color 300ms ease 0s;
 	}
 	div:hover > fieldset {

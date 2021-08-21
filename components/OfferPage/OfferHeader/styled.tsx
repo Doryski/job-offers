@@ -8,23 +8,23 @@ import {
 import styled from 'styled-components'
 
 const BusinessIcon = styled(Business)`
-	color: rgb(124, 44, 44);
-	/* rgb(255, 82, 82); */
+	color: hsl(0, 47.6%, 32.9%);
+	/* hsl(0, 100%, 66%); */
 `
 const TrendingUpIcon = styled(TrendingUp)`
-	color: rgb(102, 187, 106);
+	color: hsl(122.8, 38.5%, 56.7%);
 `
 const PeopleIcon = styled(People)`
-	color: rgb(181, 151, 0);
-	/* rgb(251, 140, 0); */
+	color: hsl(50, 100%, 35.5%);
+	/* hsl(33.5, 100%, 49%); */
 `
 const NoteIcon = styled(Note)`
-	color: rgb(0 134 110);
-	/* rgb(171, 71, 188); */
+	color: hsl(169.3, 100%, 26.3%);
+	/* hsl(291.3, 46.6%, 50.8%); */
 	transform: rotate(-90deg);
 `
 const AccessTimeIcon = styled(AccessTime)`
-	color: rgb(68, 138, 255);
+	color: hsl(217.5, 100%, 63.3%);
 `
 
 const LabelsRow = styled.div`
