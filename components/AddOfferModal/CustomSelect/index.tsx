@@ -1,10 +1,9 @@
-import React from 'react'
 import { FIELD_REQUIRED_ERR } from '@/utils/vars'
 import { FormErrors } from '@/types'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 import { ErrorMessage } from '@/shared-components/ErrorMessage/styled'
 import { Label, InputWrapper } from '../styled'
-import { StyledSelect } from './styled'
+import { Select } from './styled'
 
 type OptionsType<Option> = {
 	array: Option[]
@@ -34,7 +33,7 @@ function SelectComponent<Option>({
 	return (
 		<InputWrapper>
 			<Label htmlFor={name}>{label}</Label>
-			<StyledSelect
+			<Select
 				id={name}
 				{...register(name, {
 					required: required ? label + FIELD_REQUIRED_ERR : false,
@@ -43,7 +42,7 @@ function SelectComponent<Option>({
 					{defaultValue || `Select ${label}`}
 				</option>
 				{array.map(fn)}
-			</StyledSelect>
+			</Select>
 
 			{errors[name]! && <ErrorMessage>{errors[name]?.message}</ErrorMessage>}
 		</InputWrapper>

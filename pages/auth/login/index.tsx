@@ -55,9 +55,7 @@ const Login = () => {
 			</Center>
 		)
 	}
-	if (isLoggingIn) {
-		return <Center height='100vh'>Logging in...</Center>
-	}
+	if (isLoggingIn) return <Center height='100vh'>Logging in...</Center>
 
 	const formProps = { register, errors }
 

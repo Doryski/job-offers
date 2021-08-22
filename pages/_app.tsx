@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppProps } from 'next/app'
 import ThemeStyleProvider from '@/theme/ThemeStyleProvider'
-import { Provider } from 'next-auth/client'
+import { Provider as NextAuthProvider } from 'next-auth/client'
 import { NextSeo } from 'next-seo'
 import 'utils/string'
 
@@ -11,12 +11,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
 			title='Job offers | IT sector'
 			description='A platform with job offers for IT sector.'
 		/>
-		{/* next-auth provider */}
-		<Provider session={pageProps.session}>
+		<NextAuthProvider session={pageProps.session}>
 			<ThemeStyleProvider>
 				<Component {...pageProps} />
 			</ThemeStyleProvider>
-		</Provider>
+		</NextAuthProvider>
 	</React.StrictMode>
 )
 

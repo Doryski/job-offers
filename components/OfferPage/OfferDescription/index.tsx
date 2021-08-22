@@ -1,4 +1,3 @@
-import React from 'react'
 import { Typography } from '@/shared-components/Typography'
 import { Wrapper } from '../styled'
 import { DescriptionContainer, DescriptionContent } from './styled'

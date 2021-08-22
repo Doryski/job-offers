@@ -8,17 +8,18 @@ import OfferCard from '../../OfferCard'
 import { ListContainer } from './styled'
 
 type ListProps = {
-	data: OfferPageDataType[] | string
+	data: OfferPageDataType[]
+	error: string
 	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
 	setShowFilters: Dispatch<SetStateAction<boolean>>
 }
 
-const List = ({ data, setCurrentOffer, setShowFilters }: ListProps) => {
+const List = ({ data, setCurrentOffer, setShowFilters, error }: ListProps) => {
 	const { query } = useRouter()
-	if (typeof data === 'string') {
+	if (error) {
 		return (
 			<ListContainer>
-				<Center>{data}</Center>
+				<Center>{error}</Center>
 			</ListContainer>
 		)
 	}

@@ -11,7 +11,7 @@ import InputComponent from '../CustomInput'
 import SelectComponent from '../CustomSelect'
 import { IconsWrapper, IconWrapper } from './styled'
 
-type TechLevelOption = { id: number; title: string }
+type TechLevelOption = typeof TECH_LVL_OPTIONS[0]
 
 const TechnologySection = () => {
 	const { register, errors } = useContext(AddOfferContext)

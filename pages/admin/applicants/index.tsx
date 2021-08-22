@@ -31,9 +31,8 @@ const ApplicantList = () => {
 		refresh()
 	}
 
-	if (!session?.user?.admin) {
-		return <NotAuthorized />
-	}
+	if (!session?.user?.admin) return <NotAuthorized />
+
 	return (
 		<AdminLayout>
 			{error && <Center>Failed to load.</Center>}

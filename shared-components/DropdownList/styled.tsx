@@ -1,9 +1,10 @@
 import { AbsolutePosType } from '@/types'
+import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 const DropdownList = styled.div<{
 	isOpen: boolean
-	width?: string
+	width?: CSSProperties['width']
 	position?: AbsolutePosType
 }>`
 	display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};

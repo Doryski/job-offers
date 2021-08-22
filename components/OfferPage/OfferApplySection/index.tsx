@@ -20,9 +20,13 @@ import {
 	CheckboxWrapper,
 	DeleteFileBtn,
 	ErrorMessage,
+	FileName,
+	Form,
 	FormGrid,
 	MyTextField,
 	UploadIconWrapper,
+	UploadInput,
+	UploadLabel,
 	UploadWrapper,
 } from './styled'
 
@@ -90,10 +94,9 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 						{companyName}
 					</div>
 				) : (
-					<form style={{ width: '100%' }} onSubmit={onSubmit}>
+					<Form onSubmit={onSubmit}>
 						<FormGrid>
 							<MyTextField
-								style={{ fontFamily: 'inherit' }}
 								error={!!errors.name}
 								id='name'
 								label='Name'
@@ -148,11 +151,11 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 								}>
 								{fileName ? (
 									<>
-										<div style={{ maxWidth: '210px' }}>
+										<FileName>
 											<Typography color='primary' fWeight={500} fontSize='md'>
 												{fileName}
 											</Typography>
-										</div>
+										</FileName>
 										<DeleteFileBtn onClick={handleFileDelete}>
 											<Typography color='span' fWeight={700}>
 												Delete
@@ -163,12 +166,11 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 								) : (
 									<>
 										<UploadIconWrapper>Upload CV icon</UploadIconWrapper>
-										<label htmlFor='cv' style={{ cursor: 'pointer' }}>
-											<input
+										<UploadLabel htmlFor='cv'>
+											<UploadInput
 												ref={uploadRef}
 												disabled={!!fileName}
 												onChange={handleFileChange}
-												style={{ display: 'none' }}
 												accept='application/pdf'
 												type='file'
 												autoComplete='off'
@@ -182,7 +184,7 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 												margin='0 0 0 .5em'>
 												Upload CV (.pdf)
 											</Typography>
-										</label>
+										</UploadLabel>
 									</>
 								)}
 							</UploadWrapper>
@@ -203,7 +205,7 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 								{loading ? 'Applying...' : 'Apply'}
 							</CustomButton>
 						</ApplyButtonWrapper>
-					</form>
+					</Form>
 				)}
 			</Wrapper>
 		</ApplyContainer>

@@ -5,6 +5,7 @@ import {
 	People,
 	TrendingUp,
 } from '@material-ui/icons'
+import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 const BusinessIcon = styled(Business)`
@@ -56,6 +57,12 @@ const InfoLabelsContainer = styled.section`
 	flex-direction: column;
 	width: 100%;
 `
+const SubWrapper = styled.div<{
+	justifyContent: CSSProperties['justifyContent']
+}>`
+	display: flex;
+	justify-content: ${({ justifyContent }) => justifyContent};
+`
 
 export {
 	InfoLabelsContainer,
@@ -67,4 +74,5 @@ export {
 	AccessTimeIcon,
 	BusinessIcon,
 	HeaderContainer,
+	SubWrapper,
 }

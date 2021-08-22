@@ -4,15 +4,20 @@ import Layout from '@/components/Layout'
 import Center from '@/shared-components/Center/styled'
 import { DATE_FORMAT } from '@/utils/vars'
 import useApi from '@/hooks/useApi'
+import { OfferType } from '@/types'
 
-type OfferType = {
-	offerId: string
-	title: string
-	empType: string
-	expLvl: string
-	technology: string
-	description: string
-	dateAdded: string
+type UserOfferType = {
+	offerId: OfferType['uuid']
+	title: OfferType['title']
+	empType: OfferType['empType']
+	expLvl: OfferType['expLvl']
+	description: OfferType['description']
+	dateAdded: OfferType['dateAdded']
+}
+
+type UserOfferTypeInput = UserOfferType & { technology: string }
+type UserOfferTypeOutput = UserOfferType & {
+	technology: OfferType['technology']
 }
 
 const UserOffers = () => {
@@ -20,11 +25,13 @@ const UserOffers = () => {
 	const { data, error, loading: dataLoading } = useApi(
 		session ? `/api/offers/employer` : null
 	)
-	const offers: OfferType[] = data?.data?.map((offer: OfferType) => ({
-		...offer,
-		dateAdded: moment(+offer.dateAdded).format(DATE_FORMAT),
-		technology: JSON.parse(offer.technology),
-	}))
+	const offers: UserOfferTypeOutput[] = data?.data?.map(
+		(offer: UserOfferTypeInput) => ({
+			...offer,
+			dateAdded: moment(+offer.dateAdded).format(DATE_FORMAT),
+			technology: JSON.parse(offer.technology),
+		})
+	)
 
 	const headers = ['Title', 'Exp. lvl', 'Date created']
 	return (

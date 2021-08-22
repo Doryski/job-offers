@@ -37,6 +37,6 @@ export default function createQuery(
 	if (data instanceof Object && !(data instanceof Array)) {
 		merged = mergeArrays(transformed, [data], 'query')
 	}
-	const reduced = reduceToQueryString(merged)
-	return reduced
+
+	return reduceToQueryString(merged)
 }

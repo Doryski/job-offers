@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic'
 import CustomButton from '@/shared-components/CustomButton'
-import useDialogHandler from '@/hooks/useDialogHandler'
+import useBooleanState from '@/hooks/useBooleanState'
 import AddOfferContextProvider from '../AddOfferContext'
 
 const AddOfferModal = dynamic(() => import('@/components/AddOfferModal'))
 
 const AddOffer = () => {
-	const { open, isOpen, close } = useDialogHandler(false)
+	const [isOpen, open, close] = useBooleanState(false)
 
 	return (
 		<>

@@ -1,14 +1,16 @@
-import React from 'react'
+import { ChildrenProp } from 'types/childrenProp'
 import { Typography } from '../Typography'
 import CloseButton from '../CloseButton'
 import { HeaderWrapper } from './styled'
 
 type DialogHeaderProps = {
-	children: React.ReactNode
 	close?: VoidFunction
 }
 
-const DialogHeader = ({ children, close }: DialogHeaderProps) => (
+const DialogHeader = ({
+	children,
+	close,
+}: DialogHeaderProps & ChildrenProp) => (
 	<HeaderWrapper>
 		<Typography color='text' fWeight={400} fontSize='xl'>
 			{children}

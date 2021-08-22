@@ -5,7 +5,7 @@ import useRegisterInput from '@/hooks/useRegisterInput'
 import { ErrorMessage } from '@/shared-components/ErrorMessage/styled'
 import { InputHTMLAttributes } from 'react'
 import { Label, InputWrapper } from '../styled'
-import { StyledInput } from './styled'
+import { Input } from './styled'
 
 type InputComponentProps = {
 	name: string
@@ -27,13 +27,16 @@ const InputComponent = ({
 	step,
 	max,
 }: InputComponentProps) => {
-	const requiredLabel = label + FIELD_REQUIRED_ERR
-	const registerRef = useRegisterInput(register, !!required, requiredLabel)
+	const registerRef = useRegisterInput(
+		register,
+		!!required,
+		label + FIELD_REQUIRED_ERR
+	)
 
 	return (
 		<InputWrapper>
 			<Label htmlFor={name}>{label}</Label>
-			<StyledInput
+			<Input
 				id={name}
 				max={max}
 				type={type === 'email' ? 'text' : type}

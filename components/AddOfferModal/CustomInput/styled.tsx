@@ -1,12 +1,10 @@
 import styled from 'styled-components'
 
-const StyledInput = styled.input<{
-	padding?: string
-}>`
+const Input = styled.input`
 	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;
 
-	padding: ${({ padding }) => padding || '0.125em 0.9375em'};
+	padding: 0.125em 0.9375em;
 	background: ${({ theme }) => theme.colors.buttonBackground};
 	color: ${({ theme }) => theme.colors.text};
 	width: 100%;
@@ -23,4 +21,4 @@ const StyledInput = styled.input<{
 		height: 25px;
 	}
 `
-export { StyledInput }
+export { Input }

@@ -25,9 +25,9 @@ const SubContainer = styled.div`
 	background: ${({ theme }) => theme.colors.dark};
 `
 
-type HomepageProps = { data: OfferPageDataType[] | string }
+type HomepageProps = { data: OfferPageDataType[]; error: string }
 
-const Homepage = ({ data }: HomepageProps) => {
+const Homepage = ({ data, error }: HomepageProps) => {
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>(
 		{} as OfferPageDataType
 	)
@@ -35,7 +35,7 @@ const Homepage = ({ data }: HomepageProps) => {
 	useEffect(() => {
 		setShowFilters(true)
 	}, [])
-	const listProps = { data, setCurrentOffer, setShowFilters }
+	const listProps = { data, setCurrentOffer, setShowFilters, error }
 	const listHeaderProps = { showFilters, setShowFilters }
 	const isOfferSelected = Object.keys(currentOffer).length > 0
 
@@ -43,7 +43,6 @@ const Homepage = ({ data }: HomepageProps) => {
 		<Layout
 			subContainer={
 				<SubContainer>
-					{/* <SubContainer> */}
 					<OfferList>
 						<ListHeader {...listHeaderProps} />
 						<List {...listProps} />
@@ -56,7 +55,6 @@ const Homepage = ({ data }: HomepageProps) => {
 					{!isOfferSelected && !showFilters && (
 						<Center>Click on offer card to show details.</Center>
 					)}
-					{/* </SubContainer> */}
 				</SubContainer>
 			}
 		/>
@@ -77,8 +75,10 @@ export const getStaticProps: GetStaticProps = async () => {
 		const result = await db.promise().query(sqlGet)
 		const data = fixObject(result[0])
 		console.info('get api/offers/employers: ', data)
-		if (!data) return { props: { data: 'No offers found.' }, revalidate: 1 }
-		const fixed = (data ?? []).map(
+		if (!data.length)
+			return { props: { data: 'No offers found.' }, revalidate: 1 }
+
+		const fixed = data.map(
 			(el: OfferPageDataType & { technology: string }) => ({
 				...el,
 				dateAdded: moment(+el.dateAdded).format(DATE_FORMAT),
@@ -93,7 +93,10 @@ export const getStaticProps: GetStaticProps = async () => {
 		}
 	} catch (error) {
 		console.error(error)
-		return { props: { data: 'Failed to load.' }, revalidate: 1 }
+		return {
+			props: { error: 'Failed to load.' },
+			revalidate: 1,
+		}
 	}
 }
 

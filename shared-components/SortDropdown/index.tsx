@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import useDetectOutsideClick from '@/hooks/useDetectOutsideClick'
-import useDialogHandler from '@/hooks/useDialogHandler'
+import useBooleanState from '@/hooks/useBooleanState'
 import { SORT_OPTIONS } from '@/utils/vars'
 import { useRouter } from 'next/router'
 import createQuery from 'utils/createQuery'
@@ -13,7 +13,7 @@ import { ButtonWrapper } from './styled'
 const SortDropdown = () => {
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
-	const { close, toggle, isOpen } = useDialogHandler(false)
+	const [isOpen, , close, toggle] = useBooleanState(false)
 	useDetectOutsideClick(listRef, close)
 
 	const getCurrentSortOption = SORT_OPTIONS.find(({ id }) => id === query.sort)

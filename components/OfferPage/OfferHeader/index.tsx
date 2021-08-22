@@ -12,6 +12,7 @@ import {
 	MainInfoContainer,
 	NoteIcon,
 	PeopleIcon,
+	SubWrapper,
 	TrendingUpIcon,
 } from './styled'
 
@@ -65,7 +66,7 @@ const OfferHeader = ({ offer }: OfferHeaderProps) => {
 	return (
 		<HeaderContainer>
 			<MainInfoContainer>
-				<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+				<SubWrapper justifyContent='flex-start'>
 					<Typography
 						color='title'
 						align='left'
@@ -73,8 +74,8 @@ const OfferHeader = ({ offer }: OfferHeaderProps) => {
 						margin='0.25em 0'>
 						{title}
 					</Typography>
-				</div>
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				</SubWrapper>
+				<SubWrapper justifyContent='space-between'>
 					<Typography color='text' align='left' margin='0.25em 0' fWeight={400}>
 						Salary:{' '}
 						<strong>
@@ -87,7 +88,7 @@ const OfferHeader = ({ offer }: OfferHeaderProps) => {
 							{street}, {city}
 						</strong>
 					</Typography>
-				</div>
+				</SubWrapper>
 			</MainInfoContainer>
 			<InfoLabelsContainer>
 				<LabelsRow>

@@ -1,11 +1,12 @@
+import { CSSProperties } from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 
 type StyledButtonProps = {
 	primary?: boolean
 	active?: boolean
-	padding?: string
-	margin?: string
-	minWidth?: string
+	padding?: CSSProperties['padding']
+	margin?: CSSProperties['margin']
+	minWidth?: CSSProperties['minWidth']
 	icon?: boolean
 }
 
@@ -39,7 +40,7 @@ const Button = styled.button<StyledButtonProps>`
 `
 const IconWrapper = styled.div<{
 	color?: keyof DefaultTheme['colors']
-	margin?: string
+	margin?: CSSProperties['margin']
 }>`
 	margin: ${({ margin }) => margin || 'unset'};
 	transition: all 0.4s;

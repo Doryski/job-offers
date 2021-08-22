@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const StyledSelect = styled.select<{ padding?: string }>`
+const Select = styled.select`
 	border: 1px solid ${({ theme }) => theme.colors.buttonBorder};
 	border-radius: 5px;
 
-	padding: ${({ padding }) => padding || '0.125em 0.9375em'};
+	padding: 0.125em 0.9375em;
 	background: ${({ theme }) => theme.colors.buttonBackground};
 	color: ${({ theme }) => theme.colors.text};
 	width: 100%;
@@ -22,4 +22,4 @@ const StyledSelect = styled.select<{ padding?: string }>`
 	}
 `
 
-export { StyledSelect }
+export { Select }

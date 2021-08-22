@@ -1,9 +1,10 @@
+import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 const Center = styled.div<{
-	width?: string
-	height?: string
-	direction?: string
+	width?: CSSProperties['width']
+	height?: CSSProperties['height']
+	direction?: CSSProperties['flexDirection']
 }>`
 	display: flex;
 	flex-direction: ${({ direction }) => direction || 'row'};

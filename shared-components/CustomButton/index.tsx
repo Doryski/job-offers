@@ -1,25 +1,25 @@
-import { ButtonHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, CSSProperties } from 'react'
 import { DefaultTheme } from 'styled-components'
+import { ChildrenProp } from 'types/childrenProp'
 import { Typography } from '../Typography'
 import { Button, IconWrapper } from './styled'
 
 type CustomButtonProps = {
-	children: React.ReactNode
 	active?: boolean
 	fontSize?: keyof DefaultTheme['fontSize']
 	handleClick?: VoidFunction
-	padding?: string
-	margin?: string
+	padding?: CSSProperties['padding']
+	margin?: CSSProperties['margin']
 	primary?: boolean
 	fWeight?: keyof DefaultTheme['fontWeight']
-	minWidth?: string
-	display?: string
+	minWidth?: CSSProperties['minWidth']
+	display?: CSSProperties['display']
 	type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
 	icon?:
 		| {
 				icon?: JSX.Element
 				color?: keyof DefaultTheme['colors']
-				margin?: string
+				margin?: CSSProperties['margin']
 		  }
 		| false
 	hoverColor?: keyof DefaultTheme['colors']
@@ -39,7 +39,7 @@ const CustomButton = ({
 	display,
 	type,
 	hoverColor,
-}: CustomButtonProps) => (
+}: CustomButtonProps & ChildrenProp) => (
 	<Button
 		active={active}
 		onClick={handleClick}

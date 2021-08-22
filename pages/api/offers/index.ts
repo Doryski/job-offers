@@ -21,8 +21,6 @@ export default async function ApiOffers(
 	}
 
 	if (req.method === 'POST') {
-		const offerId = uuid()
-
 		const sqlAddOffer = `
         INSERT INTO offers (
 			employerId, tech, title, empType, expLvl, 
@@ -51,7 +49,7 @@ export default async function ApiOffers(
 				salaryTo,
 				technology,
 				description,
-				offerId,
+				uuid(),
 				moment().format('x'),
 			],
 		]

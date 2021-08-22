@@ -1,4 +1,5 @@
 import { TextField } from '@material-ui/core'
+import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 const ApplyContainer = styled.section`
@@ -10,6 +11,9 @@ const ApplyContainer = styled.section`
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
 		margin: 0.9375em 0;
 	}
+`
+const Form = styled.form`
+	width: 100%;
 `
 
 const FormGrid = styled.div`
@@ -59,7 +63,9 @@ const CheckboxWrapper = styled.div`
 	margin-top: 0.5em;
 	margin-left: -0.75em;
 `
-const ApplyButtonWrapper = styled.div<{ justify?: string }>`
+const ApplyButtonWrapper = styled.div<{
+	justify?: CSSProperties['justifyContent']
+}>`
 	display: flex;
 	justify-content: ${({ justify }) => justify || 'flex-end'};
 `
@@ -79,6 +85,7 @@ const DeleteFileBtn = styled.button`
 	}
 `
 const MyTextField = styled(TextField)`
+	font-family: inherit;
 	div > fieldset {
 		border-color: hsl(0, 0%, 88%);
 		transition: border-color 300ms ease 0s;
@@ -87,15 +94,28 @@ const MyTextField = styled(TextField)`
 		border-color: ${({ theme }) => theme.colors.primary} !important;
 	}
 `
+const FileName = styled.div`
+	max-width: 210px;
+`
+const UploadLabel = styled.label`
+	cursor: pointer;
+`
+const UploadInput = styled.input`
+	display: none;
+`
 
 export {
 	ErrorMessage,
 	UploadWrapper,
 	UploadIconWrapper,
 	MyTextField,
+	Form,
 	FormGrid,
 	DeleteFileBtn,
 	ApplyContainer,
 	CheckboxWrapper,
 	ApplyButtonWrapper,
+	FileName,
+	UploadLabel,
+	UploadInput,
 }

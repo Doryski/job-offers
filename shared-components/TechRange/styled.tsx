@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -17,7 +18,7 @@ const RangeContainer = styled.div`
 `
 const RangePoint = styled.span<{
 	disabled?: boolean
-	color?: string
+	color?: CSSProperties['backgroundColor']
 }>`
 	background-color: ${({ disabled, color }) =>
 		disabled ? 'hsl(0, 0%, 96.1%)' : color};

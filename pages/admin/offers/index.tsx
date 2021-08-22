@@ -21,9 +21,7 @@ const OfferList = () => {
 		refresh()
 	}
 	const headers = ['uuid', 'title', 'employerId', 'dateAdded']
-	if (!session?.user?.admin) {
-		return <NotAuthorized />
-	}
+	if (!session?.user?.admin) return <NotAuthorized />
 
 	return (
 		<AdminLayout>

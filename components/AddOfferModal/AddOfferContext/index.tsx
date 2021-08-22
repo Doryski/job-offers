@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import { createContext, useReducer } from 'react'
 import { Dialog } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import moment from 'moment'
@@ -8,6 +8,7 @@ import CloseButton from '@/shared-components/CloseButton'
 import post from 'utils/post'
 import { initialSubmit, reducer } from 'utils/submitReducer'
 import { FieldValues, useForm, UseFormRegister } from 'react-hook-form'
+import { ChildrenProp } from 'types/childrenProp'
 
 type AddOfferContextType = {
 	register: UseFormRegister<FieldValues>
@@ -28,7 +29,6 @@ type FormData = {
 }
 
 type AddOfferContextProviderProps = {
-	children: React.ReactNode
 	isOpen: boolean
 	close: VoidFunction
 }
@@ -41,7 +41,7 @@ const AddOfferContextProvider = ({
 	children,
 	isOpen,
 	close,
-}: AddOfferContextProviderProps) => {
+}: AddOfferContextProviderProps & ChildrenProp) => {
 	const {
 		handleSubmit,
 		register,

@@ -6,9 +6,8 @@ import Center from '@/shared-components/Center/styled'
 const AdminPage = () => {
 	const [session, loading] = useSession()
 	if (loading) return <Center height='100vh'>Loading admin page...</Center>
-	if (!session?.user?.admin) {
-		return <NotAuthorized />
-	}
+	if (!session?.user?.admin) return <NotAuthorized />
+
 	return <AdminLayout>Here will be Admin Dashboard</AdminLayout>
 }
 

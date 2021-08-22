@@ -10,9 +10,8 @@ export default async function ApiUserData(
 ) {
 	const session = await getSession({ req })
 	console.info('session', session)
-	if (!session) {
+	if (!session)
 		return res.status(401).json({ errorMessage: UNAUTHORIZED_ERROR })
-	}
 
 	if (req.method !== 'GET') {
 		return res.status(400).json({
