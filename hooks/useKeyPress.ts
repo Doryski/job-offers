@@ -1,20 +1,19 @@
 import devlog from '@/debug/devlog'
 import { useCallback, useEffect, useState } from 'react'
+import { KeyOptions } from './useBoolKeyEvent'
 
-export default function useKeyPress(
-	input: (string | number)[],
-	inputType: 'key' | 'code'
-) {
+export default function useKeyPress(input: KeyOptions['input']) {
 	const [isPressed, setIsPressed] = useState<string | false>(false)
 	const getKeyOrCode = useCallback(
-		(event: KeyboardEvent) => (inputType === 'key' ? event.key : event.code),
-		[inputType]
+		(event: KeyboardEvent, inputType: KeyOptions['input'][0]['type']) =>
+			inputType === 'key' ? event.key : event.code,
+		[]
 	)
 
 	useEffect(() => {
 		const listener = (e: KeyboardEvent) => {
-			if (input.includes(getKeyOrCode(e))) {
-				e.preventDefault()
+			e.preventDefault()
+			if (input.find(key => key.name === getKeyOrCode(e, key.type))) {
 				devlog(`${e.code} (${e.key}) key was pressed.`)
 				setIsPressed(e.code)
 			}

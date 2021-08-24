@@ -11,13 +11,14 @@ const InputFilter = () => {
 	const { handleChange, search } = useSearch(router)
 
 	const enterKeyOptions: KeyOptions = {
-		input: ['/'],
-		inputType: 'key',
+		input: [{ name: '/', type: 'key' }],
 		action: () => inputRef?.current?.focus(),
 	}
 	const exitKeyOptions: KeyOptions = {
-		input: ['Escape'],
-		inputType: 'key',
+		input: [
+			{ name: 'Escape', type: 'key' },
+			{ name: 'Enter', type: 'code' },
+		],
 		action: () => inputRef?.current?.blur(),
 	}
 

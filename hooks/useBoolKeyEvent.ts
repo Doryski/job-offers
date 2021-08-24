@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import useKeyPress from './useKeyPress'
 
 type KeyOptions = {
-	input: (string | number)[]
-	inputType: 'key' | 'code'
+	input: { name: string | number; type: 'key' | 'code' }[]
 	action: Function
 }
 
@@ -11,8 +10,8 @@ export default function useBoolKeyEvent(
 	enterKeyOptions: KeyOptions,
 	exitKeyOptions: KeyOptions
 ) {
-	const enter = useKeyPress(enterKeyOptions.input, enterKeyOptions.inputType)
-	const exit = useKeyPress(exitKeyOptions.input, exitKeyOptions.inputType)
+	const enter = useKeyPress(enterKeyOptions.input)
+	const exit = useKeyPress(exitKeyOptions.input)
 
 	useEffect(() => {
 		if (enter) {
