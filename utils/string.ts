@@ -3,7 +3,7 @@
 declare global {
 	interface String {
 		myNormalize(): string
-		myCapitalizeFirstLetter(): string
+		myCapitalize(): string
 		myLowerFirstLetter(): string
 		myCamelcase(): string
 	}
@@ -17,7 +17,7 @@ String.prototype.myNormalize = function (): string {
 		.replace(/\u0142/g, 'l')
 }
 
-String.prototype.myCapitalizeFirstLetter = function (): string {
+String.prototype.myCapitalize = function (): string {
 	const value = this.valueOf()
 	return `${value.charAt(0).toUpperCase()}${value.slice(1)}`
 }
@@ -29,7 +29,7 @@ String.prototype.myLowerFirstLetter = function (): string {
 
 String.prototype.myCamelcase = function (): string {
 	const split = this.valueOf().split(' ')
-	const cameled = split.map(word => word.myCapitalizeFirstLetter())
+	const cameled = split.map(word => word.myCapitalize())
 	return cameled.join('')
 }
 export {}

@@ -3,13 +3,14 @@ import { Query } from '@/types'
 import mergeArrays from './mergeArrays'
 import transformQuery from './transformQuery'
 
-export function reduceToQueryString(data: Query[]): string {
+function reduceToQueryString(data: Query[]): string {
 	const INIT: string = '/?'
 	const reduced = data.reduce<string>(
 		(acc, val: Query, index, array: Query[]) => {
 			const { query, value } = val
-			const queryInstance = `${query}=${value}`
 			if (!value) return acc
+
+			const queryInstance = `${query}=${value}`
 			if (index + 1 === array.length) return acc + queryInstance
 			if (index + 1 < array.length) return `${acc}${queryInstance}&`
 			return acc
@@ -18,13 +19,12 @@ export function reduceToQueryString(data: Query[]): string {
 	)
 
 	if (reduced === INIT) return ''
-	if (reduced[reduced.length - 1] === '&')
-		return reduced.slice(0, reduced.length - 1)
+	if (reduced[reduced.length - 1] === '&') return reduced.slice(0, -1)
 
 	return reduced
 }
 
-export default function createQuery(
+function createQuery(
 	data: Query[] | Query,
 	prevQuery?: ParsedUrlQuery
 ): string {
@@ -40,3 +40,6 @@ export default function createQuery(
 
 	return reduceToQueryString(merged)
 }
+
+export { reduceToQueryString }
+export default createQuery

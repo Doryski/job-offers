@@ -57,7 +57,7 @@ const InfoSection = () => {
 
 				<SelectComponent
 					options={{
-						array: EXP_LVL_OPTIONS.map(lvl => lvl.myCapitalizeFirstLetter()),
+						array: EXP_LVL_OPTIONS.map(lvl => lvl.myCapitalize()),
 						fn: mapOptions,
 					}}
 					{...inputProps('Experience', 'expLvl')}

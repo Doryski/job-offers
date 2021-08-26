@@ -6,12 +6,12 @@ const convertToMoment = (
 	format: string
 ): moment.Moment => (typeof date === 'string' ? moment(date, format) : date)
 
-function dateDiff(
+const dateDiff = (
 	date1: string | Moment,
 	date2: string | Moment,
 	format: string = DATE_FORMAT,
 	unit: moment.unitOfTime.Diff = 'days'
-): number {
+): number => {
 	const convertedDate1 = convertToMoment(date1, format)
 	const convertedDate2 = convertToMoment(date2, format)
 

@@ -1,6 +1,5 @@
 import { NextRouter } from 'next/router'
 import { useEffect } from 'react'
-import devlog from '@/debug/devlog'
 import useBooleanState from './useBooleanState'
 
 export default function useRefreshPage(data: any, router: NextRouter) {
@@ -8,7 +7,6 @@ export default function useRefreshPage(data: any, router: NextRouter) {
 
 	const refresh = () => {
 		router.replace(router.asPath)
-		devlog('refreshing page')
 		refreshStart()
 	}
 

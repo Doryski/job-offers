@@ -10,4 +10,5 @@ const resetFilters = (router: NextRouter): void => {
 	const newUrl = createQuery(resetQuery, router.query)
 	router.push(newUrl, undefined, { shallow: true })
 }
+
 export default resetFilters

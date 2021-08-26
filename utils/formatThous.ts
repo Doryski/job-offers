@@ -4,6 +4,5 @@ export default function formatThous(
 	step: number = 3
 ): string {
 	const regex = new RegExp(`\\B(?=(\\d{${step}})+(?!\\d))`, 'g')
-	if (number) return number.toString().replace(regex, separator)
-	return ''
+	return number ? number.toString().replace(regex, separator) : ''
 }
