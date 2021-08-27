@@ -1,8 +1,5 @@
 import { useEffect } from 'react'
 
-// Usage:
-// useDetectOutsideClick(modalRef, closeModal)
-// useDetectOutsideClick(modalRef, () => setIsModalOpen(false))
 export default function useDetectOutsideClick(
 	refs: React.RefObject<any>[],
 	closeHandler: VoidFunction

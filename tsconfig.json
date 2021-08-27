@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@/components/*": ["./components/*"],
+			"@/modules/*": ["./modules/*"],
 			"@/shared-components/*": ["./shared-components/*"],
 			"@/hooks/*": ["./hooks/*"],
 			"@/debug/*": ["./debug/*"],

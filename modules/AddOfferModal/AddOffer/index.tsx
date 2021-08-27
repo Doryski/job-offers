@@ -3,7 +3,7 @@ import CustomButton from '@/shared-components/CustomButton'
 import useBooleanState from '@/hooks/useBooleanState'
 import AddOfferContextProvider from '../AddOfferContext'
 
-const AddOfferModal = dynamic(() => import('@/components/AddOfferModal'))
+const AddOfferModal = dynamic(() => import('@/modules/AddOfferModal'))
 
 const AddOffer = () => {
 	const [isOpen, open, close] = useBooleanState(false)

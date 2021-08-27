@@ -1,10 +1,10 @@
 import { useSession } from 'next-auth/client'
 import Link from 'next/link'
-import Layout from '@/components/Layout'
+import Layout from '@/modules/Layout'
 import Center from '@/shared-components/Center/styled'
 import CustomButton from '@/shared-components/CustomButton'
 import useApi from '@/hooks/useApi'
-import AccountInfo from '@/components/AccountInfo'
+import AccountInfo from '@/modules/AccountInfo'
 import { SubContainer } from '@/shared-components/SubContainer/styled'
 
 const Profile = () => {

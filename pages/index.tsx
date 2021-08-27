@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { GetStaticProps } from 'next'
-import ListHeader from '@/components/OfferList/ListHeader'
-import Layout from '@/components/Layout'
+import ListHeader from '@/modules/OfferList/ListHeader'
+import Layout from '@/modules/Layout'
 import { OfferPageDataType } from '@/types'
-import List from '@/components/OfferList/List'
+import List from '@/modules/OfferList/List'
 import Center from '@/shared-components/Center/styled'
 import { useEffect, useState } from 'react'
 import { DATE_FORMAT } from '@/utils/vars'
 import moment from 'moment'
 import { db } from '@/mysqlSetup'
 import fixObject from 'utils/fixObject'
-import Filters from '@/components/Filters'
+import Filters from '@/modules/Filters'
 import dynamic from 'next/dynamic'
-import OfferList from '@/components/OfferList'
+import OfferList from '@/modules/OfferList'
 
-const OfferPage = dynamic(() => import('@/components/OfferPage'), {
+const OfferPage = dynamic(() => import('@/modules/OfferPage'), {
 	loading: () => <Center>Loading...</Center>,
 })
 

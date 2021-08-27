@@ -1,4 +1,4 @@
-import AddOffer from '@/components/AddOfferModal/AddOffer'
+import AddOffer from '@/modules/AddOfferModal/AddOffer'
 import CustomButton from '@/shared-components/CustomButton'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

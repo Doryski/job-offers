@@ -1,5 +1,5 @@
-import { ApplyButtonWrapper } from '@/components/OfferPage/OfferApplySection/styled'
-import InputComponent from '@/components/AddOfferModal/CustomInput'
+import { ApplyButtonWrapper } from '@/modules/OfferPage/OfferApplySection/styled'
+import InputComponent from '@/modules/AddOfferModal/CustomInput'
 import CustomButton from '@/shared-components/CustomButton'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'

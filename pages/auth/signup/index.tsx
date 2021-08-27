@@ -6,12 +6,12 @@ import {
 	ApplyButtonWrapper,
 	CheckboxWrapper,
 	ErrorMessage,
-} from '@/components/OfferPage/OfferApplySection/styled'
+} from '@/modules/OfferPage/OfferApplySection/styled'
 import { LOCATIONS } from '@/utils/vars'
 import useCheckbox from '@/hooks/useCheckbox'
 import { useState } from 'react'
-import InputComponent from '@/components/AddOfferModal/CustomInput'
-import SelectComponent from '@/components/AddOfferModal/CustomSelect'
+import InputComponent from '@/modules/AddOfferModal/CustomInput'
+import SelectComponent from '@/modules/AddOfferModal/CustomSelect'
 import ClientOnly from '@/shared-components/ClientOnly'
 import { useRouter } from 'next/router'
 import Link from 'next/link'

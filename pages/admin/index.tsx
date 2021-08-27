@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/client'
-import AdminLayout from '@/components/AdminLayout'
-import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
 import Center from '@/shared-components/Center/styled'
+import NotAuthorized from '@/modules/AdminLayout/NotAuthorized'
+import AdminLayout from '@/modules/AdminLayout'
 
 const AdminPage = () => {
 	const [session, loading] = useSession()

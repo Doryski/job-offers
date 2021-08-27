@@ -1,12 +1,12 @@
-import AdminTable from '@/components/AdminTable'
-import AdminLayout from '@/components/AdminLayout'
+import AdminTable from '@/modules/AdminTable'
+import AdminLayout from '@/modules/AdminLayout'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import useApi from '@/hooks/useApi'
 import Center from '@/shared-components/Center/styled'
 import useRefreshPage from '@/hooks/useRefreshPage'
 import del from 'utils/delete'
-import NotAuthorized from '@/components/AdminLayout/NotAuthorized'
+import NotAuthorized from '@/modules/AdminLayout/NotAuthorized'
 
 const OfferList = () => {
 	const router = useRouter()
