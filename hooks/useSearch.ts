@@ -5,18 +5,18 @@ export default function useSearch(router: NextRouter) {
 	const [search, setSearch] = useState<string>('')
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearch(e.target.value)
+		if (search !== e.target.value) {
+			setSearch(e.target.value)
+		}
 	}
 	useEffect(() => {
-		router.push(!search ? '/' : `/?search=${search}`, undefined, {
-			shallow: true,
-		})
+		if (search !== router.query.search) {
+			router.push(!search ? '/' : `/?search=${search}`, undefined, {
+				shallow: true,
+			})
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [search])
-
-	useEffect(() => {
-		setSearch((router?.query?.search ?? '') as string)
-	}, [router?.query?.search])
 
 	return {
 		handleChange,
