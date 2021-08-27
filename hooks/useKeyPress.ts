@@ -12,8 +12,8 @@ export default function useKeyPress(input: KeyOptions['input']) {
 
 	useEffect(() => {
 		const listener = (e: KeyboardEvent) => {
-			e.preventDefault()
 			if (input.find(key => key.name === getKeyOrCode(e, key.type))) {
+				e.preventDefault()
 				devlog(`${e.code} (${e.key}) key was pressed.`)
 				setIsPressed(e.code)
 			}
