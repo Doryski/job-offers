@@ -3,7 +3,6 @@ import { ListItem, TableList, Wrapper } from './styled'
 
 const ADMIN_TABLES_LINKS = [
 	{ path: '/admin/offers', title: 'Offers' },
-	{ path: '/admin/employers', title: 'Employers' },
 	{ path: '/admin/applicants', title: 'Applicants' },
 ]
 
