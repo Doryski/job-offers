@@ -5,9 +5,11 @@ const ButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	cursor: pointer;
 	padding: 0.25em 0.5em;
+	cursor: pointer;
+`
+const DropdownWrapper = styled.div`
 	position: relative;
 `
 
-export { ButtonWrapper }
+export { ButtonWrapper, DropdownWrapper }

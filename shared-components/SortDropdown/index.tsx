@@ -8,7 +8,7 @@ import createQuery from 'utils/createQuery'
 import { ExpandMoreIcon } from '../ExpandMoreIcon/styled'
 import { Typography } from '../Typography'
 import { DropdownList, DropdownListItem } from '../DropdownList/styled'
-import { ButtonWrapper } from './styled'
+import { ButtonWrapper, DropdownWrapper } from './styled'
 
 const SortDropdown = () => {
 	const { query } = useRouter()
@@ -17,13 +17,16 @@ const SortDropdown = () => {
 	useDetectOutsideClick(listRef, close)
 
 	const getCurrentSortOption = SORT_OPTIONS.find(({ id }) => id === query.sort)
+
 	return (
-		<ButtonWrapper ref={listRef} onClick={toggle}>
-			<Typography color='span'>Sort by:</Typography>
-			<Typography color='span' margin='0 .25em 0 .5em'>
-				{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
-			</Typography>
-			<ExpandMoreIcon isOpen={isOpen} />
+		<DropdownWrapper>
+			<ButtonWrapper onClick={toggle}>
+				<Typography color='span'>Sort by:</Typography>
+				<Typography color='span' margin='0 .25em 0 .5em'>
+					{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
+				</Typography>
+				<ExpandMoreIcon isOpen={isOpen} />
+			</ButtonWrapper>
 
 			<DropdownList
 				ref={listRef}
@@ -45,7 +48,7 @@ const SortDropdown = () => {
 					</Link>
 				))}
 			</DropdownList>
-		</ButtonWrapper>
+		</DropdownWrapper>
 	)
 }
 
