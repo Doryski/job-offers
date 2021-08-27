@@ -13,14 +13,15 @@ import { ButtonWrapper, DropdownWrapper } from './styled'
 const SortDropdown = () => {
 	const { query } = useRouter()
 	const listRef = useRef<HTMLDivElement>(null!)
+	const btnRef = useRef<HTMLDivElement>(null!)
 	const [isOpen, , close, toggle] = useBooleanState(false)
-	useDetectOutsideClick(listRef, close)
+	useDetectOutsideClick([listRef, btnRef], close)
 
 	const getCurrentSortOption = SORT_OPTIONS.find(({ id }) => id === query.sort)
 
 	return (
 		<DropdownWrapper>
-			<ButtonWrapper onClick={toggle}>
+			<ButtonWrapper ref={btnRef} onClick={toggle}>
 				<Typography color='span'>Sort by:</Typography>
 				<Typography color='span' margin='0 .25em 0 .5em'>
 					{getCurrentSortOption?.name || SORT_OPTIONS[2].name}
