@@ -3,13 +3,14 @@ import InputComponent from '@/modules/AddOfferModal/CustomInput'
 import CustomButton from '@/shared-components/CustomButton'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { signIn, useSession } from 'next-auth/client'
 import Center from '@/shared-components/Center/styled'
 import { HomepageLink } from '@/shared-components/HomepageLink/styled'
 import inputProps from 'utils/inputProps'
 import { FormWrapper } from '@/shared-components/FormWrapper'
+import useBooleanState from '@/hooks/useBooleanState'
 
 const Login = () => {
 	const router = useRouter()
@@ -22,26 +23,24 @@ const Login = () => {
 	} = useForm()
 	const [session] = useSession()
 	const [firstLogIn, setFirstLogIn] = useState(false)
-	const [isLoggingIn, setIsLoggingIn] = useState(false)
+	const [isLoggingIn, startLogginIn, stopLogginIn] = useBooleanState(false)
 
-	useEffect(() => {
-		if (router.query.error) {
+	const onSubmit = handleSubmit(async data => {
+		setFirstLogIn(true)
+		startLogginIn()
+		reset()
+		const res = await signIn('credentials', {
+			...data,
+			redirect: false,
+		})
+		if (res?.error) {
+			stopLogginIn()
 			setError('password', {
 				type: 'manual',
 				message: 'Ups, something went wrong!',
 			})
+			return
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [router.query])
-
-	const onSubmit = handleSubmit(async data => {
-		setFirstLogIn(true)
-		setIsLoggingIn(true)
-		reset()
-		await signIn('credentials', {
-			...data,
-			redirect: false,
-		})
 		router.push('/user/profile')
 	})
 
