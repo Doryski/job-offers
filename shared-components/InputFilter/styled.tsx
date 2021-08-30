@@ -3,12 +3,10 @@ import styled from 'styled-components'
 const Button = styled.button`
 	display: flex;
 	align-items: center;
-	background: transparent;
 	padding: 0.1875em;
 	font-size: 1.125rem;
 	text-align: center;
 	border-radius: 50%;
-	border: none;
 	display: inline-flex;
 	margin: 0;
 	position: relative;
@@ -39,8 +37,6 @@ const Input = styled.input`
 	font-family: 'Open Sans', 'sans serif';
 	flex-grow: 1;
 	padding-left: 0.3125em;
-	background: none;
-	border: none;
 	&::placeholder {
 		color: ${({ theme }) => theme.colors.span};
 	}

@@ -73,9 +73,7 @@ const DeleteFileBtn = styled.button`
 	position: absolute;
 	display: flex;
 	align-items: center;
-	border: none;
 	border-radius: 5px;
-	background: none;
 	right: 0;
 	bottom: 0;
 	padding: 6px 8px;

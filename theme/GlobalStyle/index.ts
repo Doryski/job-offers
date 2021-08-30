@@ -29,6 +29,13 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+  }
+
+  input {
+    border: none;
+    background-color: transparent;
   }
 
   ul {

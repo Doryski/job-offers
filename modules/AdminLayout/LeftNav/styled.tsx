@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.aside`
-	background-color: lightgray;
+	background-color: hsl(0, 0%, 83%);
 `
 
 const TableList = styled.ul`
@@ -14,7 +14,7 @@ const ListItem = styled.li`
 	background-color: transparent;
 	transition: background-color 0.3s;
 	&:hover {
-		background-color: gray;
+		background-color: hsl(0, 0%, 50%);
 	}
 `
 
