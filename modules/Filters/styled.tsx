@@ -12,7 +12,10 @@ const Container = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	border-left: 1px solid ${({ theme }) => theme.colors.divider};
+	overflow-y: auto;
+	overflow-x: hidden;
 `
+
 const SubContainer = styled.div`
 	width: 100%;
 	height: 100%;

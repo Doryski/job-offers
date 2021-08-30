@@ -5,16 +5,10 @@ const Wrapper = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: flex-start;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-		padding: 0.625em;
-	}
 `
 
 const SalaryWrapper = styled.section`
 	width: 100%;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-		padding: 0.625em;
-	}
 `
 
 const AmountContainer = styled.div`
@@ -35,6 +29,7 @@ const AmountWrapper = styled.section`
 	border-style: solid;
 	border-color: ${({ theme }) => theme.colors.buttonBorder};
 	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+		width: 25%;
 		padding: 0.3125em 0.625em;
 	}
 `
@@ -42,6 +37,9 @@ const AmountWrapper = styled.section`
 const SliderWrapper = styled.section`
 	width: 50%;
 	margin: 0 auto;
+	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+		width: 40%;
+	}
 `
 
 export { SliderWrapper, AmountContainer, AmountWrapper, Wrapper, SalaryWrapper }

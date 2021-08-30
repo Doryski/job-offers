@@ -48,11 +48,16 @@ const SalaryFilter = () => {
 			<SalaryWrapper>
 				<AmountContainer>
 					<AmountWrapper>
-						<Typography color='text' fWeight={400} align='left'>
+						<Typography nowrap color='text' fWeight={400} align='left'>
 							{minAmount}
 						</Typography>
 
-						<Typography color='text' fWeight={600} fontSize='sm' align='left'>
+						<Typography
+							nowrap
+							color='text'
+							fWeight={600}
+							fontSize='sm'
+							align='left'>
 							Min. amount
 						</Typography>
 					</AmountWrapper>
@@ -66,11 +71,16 @@ const SalaryFilter = () => {
 						/>
 					</SliderWrapper>
 					<AmountWrapper>
-						<Typography color='text' fWeight={400} align='left'>
+						<Typography nowrap color='text' fWeight={400} align='left'>
 							{maxAmount}
 						</Typography>
 
-						<Typography color='text' fWeight={600} fontSize='sm' align='left'>
+						<Typography
+							nowrap
+							color='text'
+							fWeight={600}
+							fontSize='sm'
+							align='left'>
 							Max. amount
 						</Typography>
 					</AmountWrapper>

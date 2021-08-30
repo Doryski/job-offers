@@ -17,7 +17,7 @@ const TechList = () => {
 							active={query.tech === tech.myNormalize()}
 							minWidth='60px'
 							padding='.7em 3.15em'
-							margin='.25em 0'
+							margin='.25em .5em .25em 0'
 							fWeight={query.tech === tech.myNormalize() ? 600 : 400}>
 							<TechName>{tech}</TechName>
 						</CustomButton>

@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 type StyledButtonProps = {
 	primary?: boolean
@@ -8,13 +8,16 @@ type StyledButtonProps = {
 	margin?: CSSProperties['margin']
 	minWidth?: CSSProperties['minWidth']
 	icon?: boolean
+	bordered?: boolean
+	round?: boolean
+	height: CSSProperties['height']
 }
 
 const Button = styled.button<StyledButtonProps>`
 	border: 1px solid
 		${({ theme, active, primary }) =>
 			active || primary ? theme.colors.primary : theme.colors.buttonBorder};
-	border-radius: 5px;
+	border-radius: ${({ round }) => (round ? '999px' : '5px')};
 	padding: ${({ padding, icon }) =>
 		icon
 			? padding || '0.125em 0.5em 0.125em 0.75em'
@@ -26,9 +29,15 @@ const Button = styled.button<StyledButtonProps>`
 	display: flex;
 	align-items: center;
 	justify-content: ${({ icon }) => (icon ? 'space-between' : 'center')};
+	height: ${({ height }) => height || 'auto'};
 	width: ${({ minWidth }) => minWidth || 'auto'};
 	min-width: ${({ minWidth }) => minWidth || 'none'};
 	transition: all 0.4s;
+	${({ bordered }) =>
+		!bordered &&
+		css`
+			border: none;
+		`}
 	&:hover {
 		background: ${({ theme, primary }) =>
 			primary
@@ -41,7 +50,9 @@ const Button = styled.button<StyledButtonProps>`
 const IconWrapper = styled.div<{
 	color?: keyof DefaultTheme['colors']
 	margin?: CSSProperties['margin']
+	display?: CSSProperties['display']
 }>`
+	display: ${({ display }) => display || 'initial'};
 	margin: ${({ margin }) => margin || 'unset'};
 	transition: all 0.4s;
 	color: ${({ color, theme }) => theme.colors[color!] || 'inherit'};

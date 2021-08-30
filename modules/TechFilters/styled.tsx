@@ -5,11 +5,11 @@ const Container = styled.div`
 	grid-template-columns: repeat(7, auto);
 	width: 100%;
 
-	@media (max-width: 1025px) {
-		padding: 1.875em;
+	@media (max-width: 760px) {
+		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: space-between;
 	}
 `
 

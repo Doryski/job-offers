@@ -13,6 +13,7 @@ type TypographyProps = {
 	margin?: CSSProperties['margin']
 	padding?: CSSProperties['padding']
 	minWidth?: CSSProperties['minWidth']
+	nowrap?: boolean
 }
 
 const Wrapper = styled.div<TypographyProps>`
@@ -29,7 +30,7 @@ const Wrapper = styled.div<TypographyProps>`
 const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 	as: as || 'span',
 }))`
-	${({ fWeight, family, fontSize, hide, color, hoverColor }) => css`
+	${({ fWeight, family, fontSize, hide, color, hoverColor, nowrap }) => css`
 		font-weight: ${({ theme }) =>
 			theme.fontWeight[fWeight!] || theme.fontWeight[600]};
 
@@ -41,8 +42,9 @@ const Typography = styled(Wrapper).attrs(({ as }: { as: string }) => ({
 				: fontSize || theme.fontSize.md};
 
 		transition: color 0.3s;
-
+		
 		color: ${({ theme }) => theme.colors[color!] || theme.colors.title}};
+		white-space: ${nowrap ? 'nowrap' : 'unset'};
 		
 		${
 			hide &&

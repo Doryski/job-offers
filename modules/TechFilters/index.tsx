@@ -14,7 +14,7 @@ const TechFilters = () => {
 					<CustomButton
 						padding='.7em 3.15em'
 						minWidth='60px'
-						margin='.25em 0'
+						margin='.25em .5em .25em 0'
 						active={!query.tech}
 						fWeight={!query.tech ? 600 : 400}>
 						<TechName all>All</TechName>
