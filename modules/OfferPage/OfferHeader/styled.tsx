@@ -48,9 +48,6 @@ const MainInfoContainer = styled.section`
 	background: ${({ theme }) => theme.colors.white};
 	border-radius: 5px;
 	display: flex;
-	@media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-		margin-top: 10.625em;
-	}
 `
 const InfoLabelsContainer = styled.section`
 	display: flex;

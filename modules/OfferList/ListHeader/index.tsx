@@ -1,10 +1,10 @@
 import SortDropdown from '@/shared-components/SortDropdown'
 import { Typography } from '@/shared-components/Typography'
 import InputFilter from '@/shared-components/InputFilter'
-import { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
 import resetFilters from 'utils/resetFilters'
 import { ICON_SIZE } from '@/utils/vars'
+import useDeviceDetect from '@/hooks/useDeviceDetect'
 import {
 	FiltersWrapper,
 	OptionsHeader,
@@ -13,15 +13,24 @@ import {
 	Wrapper,
 } from './styled'
 
-type ListHeaderProps = {
-	showFilters: boolean
-	setShowFilters: Dispatch<SetStateAction<boolean>>
+type HandleFiltersClickType = {
+	mobile: () => void
+	desktop: () => void
 }
 
-const ListHeader = ({ showFilters, setShowFilters }: ListHeaderProps) => {
+type ListHeaderProps = {
+	areFiltersVisible: boolean
+	handleFiltersClick: HandleFiltersClickType
+}
+
+const ListHeader = ({
+	areFiltersVisible,
+	handleFiltersClick,
+}: ListHeaderProps) => {
 	const router = useRouter()
-	const { query } = router
-	const filtersCount = Object.keys(query).filter(key => key !== 'sort').length
+	const { isMobile } = useDeviceDetect()
+	const filtersCount = Object.keys(router.query).filter(key => key !== 'sort')
+		.length
 
 	return (
 		<OptionsHeader>
@@ -34,9 +43,12 @@ const ListHeader = ({ showFilters, setShowFilters }: ListHeaderProps) => {
 							<Typography color='span'>Clear {filtersCount}</Typography>
 						</FiltersWrapper>
 					)}
-					<FiltersWrapper onClick={() => setShowFilters(prev => !prev)}>
+					<FiltersWrapper
+						onClick={
+							isMobile ? handleFiltersClick.mobile : handleFiltersClick.desktop
+						}>
 						<Typography color='span'>Filters</Typography>
-						<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={showFilters} />
+						<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={areFiltersVisible} />
 					</FiltersWrapper>
 				</Wrapper>
 			</SortFiltersWrapper>

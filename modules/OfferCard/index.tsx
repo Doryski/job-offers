@@ -6,7 +6,6 @@ import formatThous from 'utils/formatThous'
 import useDeviceDetect from '@/hooks/useDeviceDetect'
 import moment from 'moment'
 import { OfferPageDataType } from '@/types'
-import { Dispatch, SetStateAction } from 'react'
 import {
 	Container,
 	InfoContainer,
@@ -19,18 +18,12 @@ import {
 } from './styled'
 
 type OfferCardProps = {
-	offerInfo: OfferPageDataType
-	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
-	setShowFilters: Dispatch<SetStateAction<boolean>>
+	offer: OfferPageDataType
+	handleOfferCardClick: () => void
 	index: number
 }
 
-const OfferCard = ({
-	offerInfo,
-	setCurrentOffer,
-	setShowFilters,
-	index,
-}: OfferCardProps) => {
+const OfferCard = ({ offer, handleOfferCardClick, index }: OfferCardProps) => {
 	const {
 		title,
 		salaryFrom,
@@ -39,7 +32,7 @@ const OfferCard = ({
 		companyName,
 		city,
 		technology,
-	} = offerInfo
+	} = offer
 	const days = dateDiff(moment(), dateAdded)
 	const isNew = days < 1
 
@@ -74,11 +67,7 @@ const OfferCard = ({
 	)
 
 	return (
-		<Container
-			onClick={() => {
-				setCurrentOffer(offerInfo)
-				setShowFilters(false)
-			}}>
+		<Container onClick={handleOfferCardClick}>
 			<TechColor index={index} />
 			<InfoContainer>
 				{isMobile ? (

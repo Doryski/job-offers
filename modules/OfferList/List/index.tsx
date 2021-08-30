@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { Dispatch, SetStateAction } from 'react'
 import filterOffers from 'utils/filterOffers'
 import sortOffers from 'utils/sortOffers'
 import { OfferPageDataType } from '@/types'
@@ -10,11 +9,10 @@ import { ListContainer } from './styled'
 type ListProps = {
 	data: OfferPageDataType[]
 	error: string
-	setCurrentOffer: Dispatch<SetStateAction<OfferPageDataType>>
-	setShowFilters: Dispatch<SetStateAction<boolean>>
+	handleOfferCardClick: (offer: OfferPageDataType) => void
 }
 
-const List = ({ data, setCurrentOffer, setShowFilters, error }: ListProps) => {
+const List = ({ data, handleOfferCardClick, error }: ListProps) => {
 	const { query } = useRouter()
 	if (error) {
 		return (
@@ -28,13 +26,12 @@ const List = ({ data, setCurrentOffer, setShowFilters, error }: ListProps) => {
 
 	return (
 		<ListContainer>
-			{sortedOffers.map((offerInfo, index) => (
+			{sortedOffers.map((offer, index) => (
 				<OfferCard
 					index={index}
-					setCurrentOffer={setCurrentOffer}
-					setShowFilters={setShowFilters}
-					key={offerInfo.offerId}
-					offerInfo={offerInfo}
+					handleOfferCardClick={() => handleOfferCardClick(offer)}
+					key={offer.offerId}
+					offer={offer}
 				/>
 			))}
 		</ListContainer>

@@ -5,7 +5,6 @@ import Layout from '@/modules/Layout'
 import { OfferPageDataType } from '@/types'
 import List from '@/modules/OfferList/List'
 import Center from '@/shared-components/Center/styled'
-import { useEffect, useState } from 'react'
 import { DATE_FORMAT } from '@/utils/vars'
 import moment from 'moment'
 import { db } from '@/mysqlSetup'
@@ -13,49 +12,77 @@ import fixObject from 'utils/fixObject'
 import Filters from '@/modules/Filters'
 import dynamic from 'next/dynamic'
 import OfferList from '@/modules/OfferList'
+import ArrowButton from '@/shared-components/ArrowButton'
+import useDeviceDetect from '@/hooks/useDeviceDetect'
+import useHomepageViewManager from '@/hooks/useHomepageViewManager'
 
 const OfferPage = dynamic(() => import('@/modules/OfferPage'), {
 	loading: () => <Center>Loading...</Center>,
 })
 
-const SubContainer = styled.div`
+const SubContainer = styled.div<{ isListView: boolean }>`
 	display: grid;
 	grid-template-columns: 50% auto;
 	height: 92vh;
 	background: ${({ theme }) => theme.colors.dark};
+
+	@media only screen and (max-width: 760px) {
+		transition: transform 0.3s ease;
+		width: 200vw;
+		transform: ${({ isListView }) =>
+			isListView ? 'unset' : 'translateX(-100vw)'};
+	}
 `
 
 type HomepageProps = { data: OfferPageDataType[]; error: string }
 
 const Homepage = ({ data, error }: HomepageProps) => {
-	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>(
-		{} as OfferPageDataType
-	)
-	const [showFilters, setShowFilters] = useState(false)
-	useEffect(() => {
-		setShowFilters(true)
-	}, [])
-	const listProps = { data, setCurrentOffer, setShowFilters, error }
-	const listHeaderProps = { showFilters, setShowFilters }
+	const { isMobile } = useDeviceDetect()
+	const {
+		currentOffer,
+		areFiltersVisible,
+		handleOfferCardClick,
+		handleFiltersClick,
+		handleArrowButtonClick,
+		isListView,
+		openListView,
+	} = useHomepageViewManager()
+
 	const isOfferSelected = Object.keys(currentOffer).length > 0
 
 	return (
 		<Layout
+			handleLogoClick={() => openListView()}
 			subContainer={
-				<SubContainer>
-					<OfferList>
-						<ListHeader {...listHeaderProps} />
-						<List {...listProps} />
-					</OfferList>
+				<>
+					{isMobile && (
+						<ArrowButton
+							direction={isListView ? 'right' : 'left'}
+							handleClick={handleArrowButtonClick}
+						/>
+					)}
+					<SubContainer isListView={isMobile && isListView}>
+						<OfferList>
+							<ListHeader
+								areFiltersVisible={areFiltersVisible}
+								handleFiltersClick={handleFiltersClick}
+							/>
+							<List
+								data={data}
+								error={error}
+								handleOfferCardClick={handleOfferCardClick}
+							/>
+						</OfferList>
 
-					{showFilters && <Filters />}
-					{isOfferSelected && !showFilters && (
-						<OfferPage offer={currentOffer} />
-					)}
-					{!isOfferSelected && !showFilters && (
-						<Center>Click on offer card to show details.</Center>
-					)}
-				</SubContainer>
+						{areFiltersVisible && <Filters />}
+						{isOfferSelected && !areFiltersVisible && (
+							<OfferPage offer={currentOffer} />
+						)}
+						{!isOfferSelected && !areFiltersVisible && (
+							<Center>Click on offer card to show details.</Center>
+						)}
+					</SubContainer>
+				</>
 			}
 		/>
 	)
