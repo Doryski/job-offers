@@ -1,5 +1,5 @@
+import isClient from '@/utils/isClient'
 import { useEffect, useState } from 'react'
-import { isClient } from '@/utils/vars'
 
 type NumOrFalse = number | false
 

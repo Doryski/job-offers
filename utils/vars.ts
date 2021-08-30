@@ -11,7 +11,6 @@ const UNAUTHORIZED_ERROR =
 	'You need to be signed in to have access to this data.'
 const ICON_SIZE = 'small'
 const FILTER_NAMES = ['search', 'location', 'expLvl', 'from', 'to', 'tech']
-const isClient = typeof window !== 'undefined'
 
 const LOCATIONS = [
 	'Warszawa',

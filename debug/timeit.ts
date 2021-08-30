@@ -1,4 +1,4 @@
-import { isClient } from '@/utils/vars'
+import isClient from '@/utils/isClient'
 
 /** returns -1 on server side */
 export default function timeit(fn: Function): number {
