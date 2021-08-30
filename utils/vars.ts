@@ -31,8 +31,6 @@ const LOCATIONS = [
 	'Others',
 ]
 
-const NAV_LINKS = [{ title: 'Offers', path: '/' }]
-
 const SORT_OPTIONS = [
 	{
 		id: 'sal-up',
@@ -92,9 +90,7 @@ export {
 	UNAUTHORIZED_ERROR,
 	ICON_SIZE,
 	FILTER_NAMES,
-	isClient,
 	LOCATIONS,
-	NAV_LINKS,
 	SORT_OPTIONS,
 	TECH_LVL_OPTIONS,
 	TECHNOLOGIES,

@@ -18,7 +18,7 @@ function reduceToQueryString(data: Query[]): string {
 		INIT
 	)
 
-	if (reduced === INIT) return ''
+	if (reduced === INIT) return '/'
 	if (reduced[reduced.length - 1] === '&') return reduced.slice(0, -1)
 
 	return reduced
