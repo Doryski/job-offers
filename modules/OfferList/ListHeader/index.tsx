@@ -4,7 +4,6 @@ import InputFilter from '@/shared-components/InputFilter'
 import { useRouter } from 'next/router'
 import resetFilters from 'utils/resetFilters'
 import { ICON_SIZE } from '@/utils/vars'
-import useDeviceDetect from '@/hooks/useDeviceDetect'
 import {
 	FiltersWrapper,
 	OptionsHeader,
@@ -13,14 +12,9 @@ import {
 	Wrapper,
 } from './styled'
 
-type HandleFiltersClickType = {
-	mobile: () => void
-	desktop: () => void
-}
-
 type ListHeaderProps = {
 	areFiltersVisible: boolean
-	handleFiltersClick: HandleFiltersClickType
+	handleFiltersClick: VoidFunction
 }
 
 const ListHeader = ({
@@ -28,7 +22,6 @@ const ListHeader = ({
 	handleFiltersClick,
 }: ListHeaderProps) => {
 	const router = useRouter()
-	const { isMobile } = useDeviceDetect()
 	const filtersCount = Object.keys(router.query).filter(key => key !== 'sort')
 		.length
 
@@ -43,10 +36,7 @@ const ListHeader = ({
 							<Typography color='span'>Clear {filtersCount}</Typography>
 						</FiltersWrapper>
 					)}
-					<FiltersWrapper
-						onClick={
-							isMobile ? handleFiltersClick.mobile : handleFiltersClick.desktop
-						}>
+					<FiltersWrapper onClick={handleFiltersClick}>
 						<Typography color='span'>Filters</Typography>
 						<ShowFiltersIcon fontSize={ICON_SIZE} isOpen={areFiltersVisible} />
 					</FiltersWrapper>

@@ -19,7 +19,7 @@ import {
 
 type OfferCardProps = {
 	offer: OfferPageDataType
-	handleOfferCardClick: () => void
+	handleOfferCardClick: VoidFunction
 	index: number
 }
 

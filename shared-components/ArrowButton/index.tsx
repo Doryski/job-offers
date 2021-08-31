@@ -4,7 +4,7 @@ type ArrowDirectionType = 'right' | 'left'
 
 type ArrowButtonProps = {
 	direction: ArrowDirectionType
-	handleClick: VoidFunction
+	handleClick?: VoidFunction
 }
 
 const ArrowButton = ({ direction, handleClick }: ArrowButtonProps) => (
@@ -13,6 +13,10 @@ const ArrowButton = ({ direction, handleClick }: ArrowButtonProps) => (
 		{direction === 'left' && <ArrowButtonIcon direction='left' />}
 	</ArrowButtonWrapper>
 )
+
+ArrowButton.defaultProps = {
+	handleClick: undefined,
+}
 
 export type { ArrowDirectionType }
 export default ArrowButton

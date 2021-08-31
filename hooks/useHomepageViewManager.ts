@@ -4,14 +4,14 @@ import useBooleanState from '@/hooks/useBooleanState'
 import { OfferPageDataType } from '@/types'
 
 export default function useHomepageViewManager() {
-	const { isDesktop } = useDeviceDetect()
+	const { isMobile, isDesktop } = useDeviceDetect()
 	const [
 		areFiltersVisible,
 		showFilters,
 		hideFilters,
 		toggleFilters,
 	] = useBooleanState(false)
-	const [isListView, openListView, closeListView, ,] = useBooleanState(true)
+	const [isListView, openListView, closeListView] = useBooleanState(true)
 
 	const [currentOffer, setCurrentOffer] = useState<OfferPageDataType>(
 		{} as OfferPageDataType
@@ -23,10 +23,16 @@ export default function useHomepageViewManager() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isDesktop])
 
-	const handleOfferCardClick = (offer: OfferPageDataType) => {
-		setCurrentOffer(offer)
-		hideFilters()
-		closeListView()
+	const handleOfferCardClick = {
+		mobile: (offer: OfferPageDataType) => {
+			setCurrentOffer(offer)
+			hideFilters()
+			closeListView()
+		},
+		desktop: (offer: OfferPageDataType) => {
+			setCurrentOffer(offer)
+			hideFilters()
+		},
 	}
 
 	const handleFiltersClick = {
@@ -41,17 +47,23 @@ export default function useHomepageViewManager() {
 	const handleArrowButtonClick = () => {
 		if (isListView) {
 			closeListView()
-		} else {
-			openListView()
+			return
 		}
+		openListView()
 	}
 	return {
 		currentOffer,
 		areFiltersVisible,
-		handleOfferCardClick,
-		handleFiltersClick,
-		handleArrowButtonClick,
-		isListView,
-		openListView,
+		isListView: isMobile ? isListView : undefined,
+		handleOfferCardClick: isMobile
+			? handleOfferCardClick.mobile
+			: handleOfferCardClick.desktop,
+
+		handleFiltersClick: isMobile
+			? handleFiltersClick.mobile
+			: handleFiltersClick.desktop,
+
+		handleArrowButtonClick: isMobile ? handleArrowButtonClick : undefined,
+		openListView: isMobile ? openListView : undefined,
 	}
 }

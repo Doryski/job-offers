@@ -24,7 +24,7 @@ Layout.defaultProps = {
 	admin: false,
 	subContainer: null,
 	children: null,
-	handleLogoClick: null,
+	handleLogoClick: undefined,
 }
 
 export default Layout

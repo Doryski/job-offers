@@ -1,6 +1,11 @@
 import { useState } from 'react'
 
-type UseBooleanStateReturnType = [boolean, () => void, () => void, () => void]
+type UseBooleanStateReturnType = [
+	boolean,
+	VoidFunction,
+	VoidFunction,
+	VoidFunction
+]
 
 export default function useBooleanState(
 	initialState: boolean

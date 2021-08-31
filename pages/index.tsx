@@ -20,7 +20,7 @@ const OfferPage = dynamic(() => import('@/modules/OfferPage'), {
 	loading: () => <Center>Loading...</Center>,
 })
 
-const SubContainer = styled.div<{ isListView: boolean }>`
+const SubContainer = styled.div<{ isListView?: boolean }>`
 	display: grid;
 	grid-template-columns: 50% auto;
 	height: 92vh;
@@ -41,18 +41,23 @@ const Homepage = ({ data, error }: HomepageProps) => {
 	const {
 		currentOffer,
 		areFiltersVisible,
+		isListView,
 		handleOfferCardClick,
 		handleFiltersClick,
 		handleArrowButtonClick,
-		isListView,
 		openListView,
 	} = useHomepageViewManager()
 
 	const isOfferSelected = Object.keys(currentOffer).length > 0
 
+	const handleLogoClick = () => {
+		if (!openListView) return
+		openListView()
+	}
+
 	return (
 		<Layout
-			handleLogoClick={() => openListView()}
+			handleLogoClick={handleLogoClick}
 			subContainer={
 				<>
 					{isMobile && (
@@ -61,7 +66,7 @@ const Homepage = ({ data, error }: HomepageProps) => {
 							handleClick={handleArrowButtonClick}
 						/>
 					)}
-					<SubContainer isListView={isMobile && isListView}>
+					<SubContainer isListView={isListView}>
 						<OfferList>
 							<ListHeader
 								areFiltersVisible={areFiltersVisible}

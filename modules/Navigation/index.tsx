@@ -18,15 +18,15 @@ import {
 } from './styled'
 
 type NavigationProps = {
-	handleClick?: () => void
+	handleClick?: VoidFunction
 }
 
 const Navigation = ({ handleClick }: NavigationProps) => {
-	const { isMobile } = useDeviceDetect()
+	const [session] = useSession()
 	const router = useRouter()
+	const { isMobile } = useDeviceDetect()
 	const isActive = (linkPath: string, currentPath: string, matchAll: boolean) =>
 		matchAll ? currentPath.startsWith(linkPath) : linkPath === currentPath
-	const [session] = useSession()
 
 	const allMobileNavLinks = session?.user
 		? [...MOBILE_NAV_LINKS_PRIVATE, ...MOBILE_NAV_LINKS_PUBLIC]
