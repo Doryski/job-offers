@@ -1,10 +1,9 @@
-import React, { useReducer, useRef } from 'react'
+import React, { useRef } from 'react'
 import { PersonOutline, Email, Create, DeleteOutline } from '@material-ui/icons'
 import { useForm } from 'react-hook-form'
 import { Typography } from '@/shared-components/Typography'
 import { Checkbox } from '@material-ui/core'
 import CustomButton from '@/shared-components/CustomButton'
-import { initialSubmit, reducer } from 'utils/submitReducer'
 import post from 'utils/post'
 import { useRouter } from 'next/router'
 import useCheckbox from '@/hooks/useCheckbox'
@@ -12,6 +11,7 @@ import useFileUpload from '@/hooks/useFileUpload'
 import { EMAIL_REGEX } from '@/utils/vars'
 import { OfferPageDataType } from '@/types'
 import useRefreshPage from '@/hooks/useRefreshPage'
+import useFormSubmit from '@/hooks/useFormSubmit'
 import InputIcon from '../InputIcon'
 import { Wrapper } from '../styled'
 import {
@@ -53,13 +53,18 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
-	const [submit, dispatch] = useReducer(reducer, initialSubmit)
-	const { success, loading } = submit
+	const {
+		success,
+		loading,
+		setLoading,
+		setSuccess,
+		setFailure,
+	} = useFormSubmit()
 	const router = useRouter()
 	const { refresh } = useRefreshPage(offer, router)
 
 	const onSubmit = handleSubmit(async (data: FormDataType) => {
-		dispatch({ type: 'LOADING', payload: true })
+		setLoading(true)
 		const formData: FormDataType = {
 			...data,
 			processInFuture: isChecked ? 1 : 0,
@@ -69,10 +74,10 @@ const OfferApplySection = ({ offer }: OfferApplySectionProps) => {
 		try {
 			await post('/api/applicants', formData)
 			refresh()
-			dispatch({ type: 'SUCCESS', payload: true })
-			dispatch({ type: 'LOADING', payload: false })
+			setSuccess(true)
+			setLoading(false)
 		} catch (err) {
-			dispatch({ type: 'FAILURE', payload: true })
+			setFailure(true)
 		}
 	})
 

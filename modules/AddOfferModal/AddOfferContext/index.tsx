@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext } from 'react'
 import { Dialog } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import moment from 'moment'
@@ -6,9 +6,9 @@ import { FormErrors, OfferType } from '@/types'
 import Center from '@/shared-components/Center/styled'
 import CloseButton from '@/shared-components/CloseButton'
 import post from 'utils/post'
-import { initialSubmit, reducer } from 'utils/submitReducer'
 import { FieldValues, useForm, UseFormRegister } from 'react-hook-form'
 import { ChildrenProp } from 'types/childrenProp'
+import useFormSubmit from '@/hooks/useFormSubmit'
 
 type AddOfferContextType = {
 	register: UseFormRegister<FieldValues>
@@ -48,12 +48,18 @@ const AddOfferContextProvider = ({
 		formState: { errors },
 	} = useForm()
 
-	const [submit, dispatch] = useReducer(reducer, initialSubmit)
-	const { failure: error, success, loading } = submit
+	const {
+		failure: error,
+		success,
+		loading,
+		setLoading,
+		setSuccess,
+		setFailure,
+	} = useFormSubmit()
 	const fullScreen = useMediaQuery('(max-width:800px)')
 
 	const onSubmit = handleSubmit(async (data: FormData) => {
-		dispatch({ type: 'LOADING', payload: true })
+		setLoading(true)
 		const technology: { tech: string; techLvl: number }[] = []
 		for (let i = 0; i < data.technology.length; i++) {
 			technology.push({
@@ -71,12 +77,12 @@ const AddOfferContextProvider = ({
 
 		await post('/api/offers', formData)
 
-		dispatch({ type: 'LOADING', payload: false })
-		dispatch({ type: 'SUCCESS', payload: true })
+		setLoading(false)
+		setSuccess(true)
 	})
 	const closeModal = () => {
-		dispatch({ type: 'SUCCESS', payload: false })
-		dispatch({ type: 'FAILURE', payload: false })
+		setSuccess(false)
+		setFailure(false)
 		close()
 	}
 
