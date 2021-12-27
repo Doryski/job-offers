@@ -12,10 +12,16 @@
 		},
 		"ecmaVersion": 2021,
 		"sourceType": "module",
-		"project": "./tsconfig.json"
+		"project": "./tsconfig.json" //
 	},
 	"extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
-	"plugins": ["prettier", "react", "@typescript-eslint", "jest"],
+	"plugins": [
+		"prettier",
+		"react",
+		"@typescript-eslint",
+		"jest",
+		"@next/next/recommended"
+	],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly"
@@ -62,7 +68,7 @@
 	},
 	"ignorePatterns": [
 		"node_modules",
-		"next.config.js",
+		"*.config.js",
 		"dumpster",
 		"templates",
 		".vscode",

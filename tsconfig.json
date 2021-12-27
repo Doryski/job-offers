@@ -1,47 +1,75 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@/modules/*": ["./modules/*"],
-			"@/shared-components/*": ["./shared-components/*"],
-			"@/hooks/*": ["./hooks/*"],
-			"@/debug/*": ["./debug/*"],
-			"@/utils/*": ["./utils/*"],
-			"@/pages/*": ["./pages/*"],
-			"@/theme/*": ["./theme/*"],
-			"@/types": ["./types"],
-			"@/prototypes": ["./prototypes"],
-			"@/mysqlSetup": ["./mysqlSetup"]
-		},
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"noImplicitAny": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"typeRoots": ["./node_modules/@types", "*.d.ts"]
-	},
-	"exclude": [
-		"node_modules",
-		".next",
-		"dumpster",
-		"build",
-		"**/*.js",
-		"templates"
-	],
-	"include": [
-		"next-env.d.ts",
-		"nextauth.d.ts",
-		"styled.d.ts",
-		"**/*.ts",
-		"**/*.tsx"
-	]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/modules/*": [
+        "./modules/*"
+      ],
+      "@/shared-components/*": [
+        "./shared-components/*"
+      ],
+      "@/hooks/*": [
+        "./hooks/*"
+      ],
+      "@/debug/*": [
+        "./debug/*"
+      ],
+      "@/utils/*": [
+        "./utils/*"
+      ],
+      "@/pages/*": [
+        "./pages/*"
+      ],
+      "@/theme/*": [
+        "./theme/*"
+      ],
+      "@/types": [
+        "./types"
+      ],
+      "@/prototypes": [
+        "./prototypes"
+      ],
+      "@/mysqlSetup": [
+        "./mysqlSetup"
+      ]
+    },
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "typeRoots": [
+      "./node_modules/@types",
+      "*.d.ts"
+    ],
+    "incremental": true
+  },
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dumpster",
+    "build",
+    "**/*.js",
+    "templates"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "nextauth.d.ts",
+    "styled.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
